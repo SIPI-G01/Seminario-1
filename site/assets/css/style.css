@@ -3,8 +3,19 @@ ul {
   margin: 0;
   padding: 0;
   overflow: hidden;
-  background-color:rgba(14, 190, 243, 0.822);
-  border-radius: 5px;
+  background-color:rgba(255, 255, 255, 0.47);
+}
+
+.texto-inicio
+{
+	color: white;
+	margin-top: 50px !important;
+	text-align: center;
+}
+
+.imagen-inicio
+{
+	max-height: 80px;
 }
 
 #headerDer {
@@ -19,12 +30,12 @@ body{
 
 h1{
   font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
-  font-size: 40px;
+  font-size: 80px !important;
   color: rgb(255, 255, 255);
   text-shadow: 2px 2px rgba(123, 198, 248, 0.466);
 }
 
-h3{
+h3, h5{
   font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
   color: rgb(255, 255, 255);
 }
@@ -32,34 +43,29 @@ h3{
 #selectObjetivos{
   font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
   font-size: 20px;
-  margin-top: 140px; 
-  margin-left: 450px;
+  margin-top: 40px; 
+  text-align: center;
 }
 
 #buscar{
   border: none;
   color: white;
-  padding: 10px;
   text-align: center;
   text-decoration: none;
   display: inline-block;
   font-size: 16px;
-  margin: 4px 2px;
   cursor: pointer;
   background-color: rgba(85, 241, 155, 0.774);
   font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
-  font-size: 20px;
-  border-radius: 10px;
+  font-size: 16px;
 }
 
 #botonBuscar{
-  margin-left: 890px;
 }
 
 #objetivosList{
   text-align: center;
-  margin-top: 40px; 
-
+  width: 90%;
 }
 
 #nombrePag{
@@ -72,7 +78,7 @@ h3{
 
 li a {
   display: block;
-  color: #390a74;
+  color: #5a595a;
   text-align: center;
   font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
   font-size: 20px;
@@ -81,7 +87,7 @@ li a {
 }
 
 li a:hover {
-  background-color: #FADA80;
+  background-color: #80d3fa;
   text-decoration: none;
 }
 
