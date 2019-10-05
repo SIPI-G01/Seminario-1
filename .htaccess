@@ -1,0 +1,13 @@
+<IfModule mod_rewrite.c>
+
+RewriteEngine on
+
+RewriteCond %{SCRIPT_FILENAME} !-d  
+RewriteCond %{SCRIPT_FILENAME} !-f 
+
+RewriteRule ^([a-zA-Z0-9_-]+)/?$ /site/index.php?controller=$1
+RewriteRule ^([a-zA-Z0-9_-]+)/([a-zA-Z0-9ñÑ%áéíóú+_-]+)/?$ /site/index.php?controller=$1&accion=$2
+RewriteRule ^([a-zA-Z0-9_-]+)/([a-zA-Z0-9ñÑ%áéíóú+_-]+)/([a-zA-Z0-9ñÑ%áéíóú+_-]+)/?$ /site/index.php?controller=$1&accion=$2&params=$3
+RewriteRule ^admin/?$ /admin/index.php
+
+</IfModule>
