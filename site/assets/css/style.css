@@ -1,34 +1,90 @@
 ul {
-    list-style-type: none;
-    margin: 0;
-    padding: 0;
-    overflow: hidden;
-	background-color: #ffffff7a;	
-  }
-  
-li {
-    float: right;
-  }
-  
-li a {
-    display: block;
-    color: #675a5a;
-    text-align: center;
-    padding: 14px 16px;
-    text-decoration: none;
-  }
-  
-li a:hover {
-	background-color: #d2cccc45;
-	text-decoration: none;
-  }
-
- datalist{
-     align-content:center;
- } 
-body
-{
-	background-image: linear-gradient(to bottom right, #FCCF31, #F55555);
-    background-attachment: fixed;
-	
+  list-style-type: none;
+  margin: 0;
+  padding: 0;
+  overflow: hidden;
+  background-color:rgba(14, 190, 243, 0.822);
+  border-radius: 5px;
 }
+
+#headerDer {
+  float: right;
+}
+
+body{
+  margin: 0px;
+  background-image: linear-gradient(to bottom right, rgb(49, 103, 252), rgb(6, 211, 160));
+  background-attachment: fixed;
+}
+
+h1{
+  font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+  font-size: 40px;
+  color: rgb(255, 255, 255);
+  text-shadow: 2px 2px rgba(123, 198, 248, 0.466);
+}
+
+h3{
+  font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+  color: rgb(255, 255, 255);
+}
+
+#selectObjetivos{
+  font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+  font-size: 20px;
+  margin-top: 140px; 
+  margin-left: 450px;
+}
+
+#buscar{
+  border: none;
+  color: white;
+  padding: 10px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 16px;
+  margin: 4px 2px;
+  cursor: pointer;
+  background-color: rgba(85, 241, 155, 0.774);
+  font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+  font-size: 20px;
+  border-radius: 10px;
+}
+
+#botonBuscar{
+  margin-left: 890px;
+}
+
+#objetivosList{
+  text-align: center;
+  margin-top: 40px; 
+
+}
+
+#nombrePag{
+  text-align: center;
+}
+
+#headerIzq{
+  float: left;  
+}
+
+li a {
+  display: block;
+  color: #390a74;
+  text-align: center;
+  font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+  font-size: 20px;
+  padding: 14px 16px;
+  text-decoration: none;
+}
+
+li a:hover {
+  background-color: #FADA80;
+  text-decoration: none;
+}
+
+datalist{
+   align-content:center;
+} 
