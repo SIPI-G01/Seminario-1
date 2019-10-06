@@ -44,8 +44,10 @@ $view = new home_view();
 <script>
 var tiempos = [];
 tiempos = <?php echo json_encode($view->tiempos);?>;
-console.log(tiempos);
+var objetivos = <?php echo json_encode($view->objetivos);?>;
+var alias_objetivo = "";
 var tiemposMostrar = [];
+
 function cambiarTiempos()
 {
 	 var objetivo = $('#objetivos').val();
@@ -63,6 +65,13 @@ function cambiarTiempos()
 	});
 	resultado += '</div></div>';
 	$('#tiempos').append(resultado);	
+	objetivos.forEach(function(objs) {
+		if(objs.id == objetivo)
+		{
+			alias_objetivo = objs.alias;		
+		}
+	});
+
 
 	 
 }
@@ -74,16 +83,16 @@ function buscar()
 		tiemposMostrar.forEach(function(tiempo) {
 			if($('#tiempo_'+ tiempo.id).is(":checked"))
 			{
-				tiempos += "_" + tiempo.id;
+				tiempos += "_" + tiempo.alias;
 			}
 		});
 		
 		if(tiempos != "")
 		{
-			tiempos = "_tiempos_" + tiempos;
+			tiempos = "_tiempos" + tiempos;
 		}
 
-		window.location.href = "/publicaciones/index/objetivo_" + $('#objetivos').val() + tiempos;	
+		window.location.href = "/publicaciones/index/objetivo_" + alias_objetivo + tiempos;	
 	}
 }
 </script>

@@ -1,3 +1,30 @@
+.card-horizontal {
+    display: flex;
+    flex: 1 1 auto;
+}
+
+p
+{
+	color: white;
+}
+
+.ordenar
+{
+	color: white;
+	text-align: right;	
+}
+
+
+.descripcion
+{
+	color: black;
+}
+
+.card-footer
+{
+	text-align: right;
+}
+
 ul {
   list-style-type: none;
   margin: 0;

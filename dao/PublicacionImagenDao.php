@@ -1,25 +1,21 @@
 <?php
 include_once ($_SERVER["DOCUMENT_ROOT"] . '/dao/GenericDao.php');
-include_once ($_SERVER["DOCUMENT_ROOT"] . '/model/objetivo.php');
+include_once ($_SERVER["DOCUMENT_ROOT"] . '/model/publicacion_imagen.php');
 
-class ObjetivoDao {
+class PublicacionImagenDao {
 
 	public static function get($id) {
-		return GenericDao::get("objetivo", array("id" => $id));
+		return GenericDao::get("publicacion_imagen", array("id" => $id));
 	}// get
 
 	public static function listActivos() {
-		return GenericDao::find("objetivo", array(array("activo", "=", "1")));
+		return GenericDao::find("publicacion_imagen", array(array("activo", "=", "1")));
 	}
 
-	public static function getXnombre($nombre) {
-		return GenericDao::find("objetivo", array(array("nombre", "=", $nombre), array("activo", "=", "1")));
+	public static function getXpublicacion($id_publicacion) {
+		return GenericDao::find("publicacion_imagen", array(array("id_publicacion", "=", $id_publicacion), array("activo", "=", "1")));
 	}
 	
-	public static function getXalias($alias) {
-		return GenericDao::find("objetivo", array(array("alias", "=", $alias), array("activo", "=", "1")));
-	}
-
 	public static function nuevo($item) {
 		$item->activo = 1;
 
@@ -32,7 +28,7 @@ class ObjetivoDao {
 	}// modificar
 
 	public static function eliminar($id) {
-		$query = "UPDATE objetivo SET
+		$query = "UPDATE id_publicacion SET
 									activo = false,
 					WHERE id = :id";
 
