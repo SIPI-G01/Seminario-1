@@ -8,10 +8,21 @@ p
 	color: white;
 }
 
+.pagination
+{
+    background-color: transparent !important;
+
+}
+
 .ordenar
 {
 	color: white;
 	text-align: right;	
+}
+
+.publicaciones
+{
+	margin-bottom: 20px;
 }
 
 

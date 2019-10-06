@@ -10,6 +10,10 @@
 		public $tiempos;
 		public $pags;
 		public $orden;
+		public $siguiente;
+		public $anterior;
+		public $totPags;
+		public $pagActual;
 		
         function __construct($params) {
 			$parametros = explode("_", $params);
@@ -73,9 +77,12 @@
 			}
 			
 			$cant = PublicacionDao::cantPublicacionesFiltradas($objs, $t);
-			$cantPags = (int) (($cant + 1) / 20);  
-			
-			$this->pags = "Página " . $pagina . " de " . ($cantPags + 1);
+			$cantPags = ceil(($cant) / 20);  
+			$this->siguiente = ($pagina + 1 <= $cantPags) ? $pagina + 1 : $cantPags;
+			$this->anterior = ($pagina > 1) ? $pagina - 1 : 1;
+			$this->totPags = $cantPags;
+			$this->pagActual = $pagina;
+			$this->pags = "Página " . $pagina . " de " . $cantPags;
 			//$this->publicaciones = PublicacionDao::listActivos();
 			$this->publicaciones = PublicacionDao::filtrar($objs, $t, $pagina, $orden);
 		}

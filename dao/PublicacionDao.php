@@ -64,10 +64,10 @@ class PublicacionDao {
 	
 	public static function cantPublicacionesFiltradas($objetivos = array(), $tiempos = array()) {
 
-		$query =   "SELECT DISTINCT COUNT(p.id) AS cantidad FROM publicacion p
+		$query =   "SELECT COUNT(tabla.id) AS cantidad FROM (SELECT DISTINCT p.id AS id FROM publicacion p
 					LEFT JOIN publicacion_objetivo po ON po.id_publicacion = p.id
 					LEFT JOIN publicacion_tiempo pt ON pt.id_publicacion = p.id
-					WHERE p.activo = 1";
+					WHERE p.activo = 1) AS tabla";
 
 		if (sizeof($objetivos) > 0) {
 			$in = "(";

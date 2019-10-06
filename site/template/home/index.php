@@ -4,14 +4,7 @@ $view = new home_view();
 ?>
 
 <div class= "container-fluid">
-	<div class="row">
-		<div class="col-md-1">
-			<img class="imagen-inicio" src="/site/images/logo.png">
-		</div>
-		<div class="col-md-11">
-			<h1>Desafio Saludable</h1>
-		</div>
-	</div>
+	
 	<div class="row texto-inicio">
 		<div class="col-md-12">
 			<h3>¿Cuántas veces le dijiste a tu elefante que tenía que bajar de peso?<br>Nosotros nunca lo hicimos, pero si necesitáramos un consejo... ¡entraríamos a esta página!<br>¡Publicá, puntuá, opiná y mucho más!</h3>

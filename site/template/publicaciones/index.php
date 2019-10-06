@@ -15,14 +15,7 @@ else
 ?>
 
 <div class= "container-fluid">
-	<div class="row">
-		<div class="col-md-1">
-			<img class="imagen-inicio" src="/site/images/logo.png">
-		</div>
-		<div class="col-md-11">
-			<h1>Desafio Saludable</h1>
-		</div>
-	</div>
+
 	<div class="col-md-12">
 		<h3><?php echo $titulo;?></h3>
 	</div>
@@ -43,11 +36,12 @@ else
 							<option value="1" <?php echo ($view->orden == '1' ? 'selected' : ''); ?> >Valoración</option>
 						</select>					
 					</div>					
+				</div>
 			</div>
 		</div>
 	</div>
-	
-	<div class="row">
+
+	<div class="row publicaciones">
 	<?php foreach($view->publicaciones as $publicacion){ ?>	
 		<div class="col-12 mt-3">
 			<div class="card">
@@ -83,8 +77,28 @@ else
 				</div>
 			</div>
 		</div>
-	<?php } ?>		
+	<?php } ?>	
 	</div>
+	
+	<nav aria-label="Page navigation example">
+	  <ul class="pagination justify-content-center">
+		<li class="page-item <?php echo ($view->pagActual == 1 ? 'disabled' : ''); ?>">
+		  <a class="page-link" href="#" tabindex="-1"  onClick="cambiarPagina('<?php echo $view->pagActual - 1; ?>')">Anterior</a>
+		</li>
+		<?php $i = 1;
+		while($i <= $view->totPags){
+		?>
+		<li class="page-item <?php echo ($view->pagActual == $i ? 'active' : ''); ?>" onClick="cambiarPagina('<?php echo $i; ?>')" ><a class="page-link" href="#"><?php echo $i;?></a></li>
+		<?php $i++;
+		}
+		?>
+		<li class="page-item <?php echo ($view->pagActual == $view->totPags ? 'disabled' : ''); ?>">
+		  <a class="page-link" href="#"  onClick="cambiarPagina('<?php echo $view->pagActual + 1; ?>')">Siguiente</a>
+		</li>
+	  </ul>
+	</nav>
+
+	
 </div>
 
 <script>
@@ -139,6 +153,50 @@ function reOrdenar()
 	window.location.href = '/publicaciones/index/' + filtros;
 }
 
+function cambiarPagina(nuevaPag)
+{
+	
+	var filtrosActuales = '<?php echo $params; ?>';
+	var filtros = '';
+	var res = filtrosActuales.split("_");
+	var filtroAnterior = '';
+	var aparecio = false;
+	res.forEach(function(filtro) {
+		if(filtroAnterior == 'pagina')
+		{
+			aparecio = true;
+			filtros += "_" + nuevaPag;
+		}
+		else{
+			if(filtroAnterior == '')
+			{
+				filtros += filtro;
+			}
+			else
+			{
+				filtros += "_" + filtro;
+			}
+			  
+		}
+		filtroAnterior = filtro;
+	});
+	
+	if(aparecio == false)
+	{
+		if(filtros == '')
+		{
+			filtros += "pagina_" + nuevaPag;			
+		}
+		else
+		{
+			filtros += "_pagina_" + nuevaPag;
+		}
+		
+	}	
+	
+	window.location.href = '/publicaciones/index/' + filtros;
 
+	
+}
 
 </script>
