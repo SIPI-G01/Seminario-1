@@ -1,4 +1,4 @@
-<<?php
+<?php
   include_once $_SERVER['DOCUMENT_ROOT'] . '/dao/PublicacionDao.php';
 
   class ver_view  {
