@@ -7,7 +7,7 @@ class PublicacionDao {
 	public static function get($id) {
 		return GenericDao::get("publicacion", array("id" => $id));
 	}// get
-	
+
 	public static function filtrar($objetivos = array(), $tiempos = array(), $pagina = 1, $orden=0) {
 
 		$cantidad = 20;
@@ -45,7 +45,7 @@ class PublicacionDao {
 
 			$query .= ($coma ? " AND pt.id_tiempo IN " . $in : '');
 		}
-		
+
 		switch ($orden) {
 			case 0:
 				// ORDEN POR FECHA
@@ -54,14 +54,14 @@ class PublicacionDao {
 			case 1:
 				//ORDEN POR VALORACION
 				$query .= ' ORDER BY p.valoracion DESC';
-				
+
 				break;
 		}
 		$query .=  ($pagina >= 0 && $cantidad >= 0 ? " LIMIT " . $inicio . ", " . $cantidad : '');
 		return GenericDao::executeQuery($query, null, 'publicacion', true);
 
 	}
-	
+
 	public static function cantPublicacionesFiltradas($objetivos = array(), $tiempos = array()) {
 
 		$query =   "SELECT COUNT(tabla.id) AS cantidad FROM (SELECT DISTINCT p.id AS id FROM publicacion p
@@ -99,13 +99,17 @@ class PublicacionDao {
 		$res = GenericDao::executeQuery($query, null, 'publicacion', true);
 		return $res[0]->cantidad;
 	}
-	
+
 	public static function listActivos() {
 		return GenericDao::find("publicacion", array(array("activo", "=", "1")));
 	}
 
 	public static function getXnombre($nombre) {
 		return GenericDao::find("publicacion", array(array("nombre", "=", $nombre), array("activo", "=", "1")));
+	}
+
+	public static function getXalias($alias) {
+		return GenericDao::find("publicacion", array(array("alias", "=", $alias), array("activo", "=", "1")));
 	}
 
 	public static function nuevo($item) {
