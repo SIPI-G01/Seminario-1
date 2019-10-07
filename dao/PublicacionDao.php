@@ -64,10 +64,10 @@ class PublicacionDao {
 
 	public static function cantPublicacionesFiltradas($objetivos = array(), $tiempos = array()) {
 
-		$query =   "SELECT COUNT(tabla.id) AS cantidad FROM (SELECT DISTINCT p.id AS id FROM publicacion p
+		$query =   "SELECT DISTINCT p.* FROM publicacion p
 					LEFT JOIN publicacion_objetivo po ON po.id_publicacion = p.id
 					LEFT JOIN publicacion_tiempo pt ON pt.id_publicacion = p.id
-					WHERE p.activo = 1) AS tabla";
+					WHERE p.activo = 1";
 
 		if (sizeof($objetivos) > 0) {
 			$in = "(";
@@ -96,8 +96,9 @@ class PublicacionDao {
 
 			$query .= ($coma ? " AND pt.id_tiempo IN " . $in : '');
 		}
-		$res = GenericDao::executeQuery($query, null, 'publicacion', true);
-		return $res[0]->cantidad;
+
+		$res = GenericDao::executeQuery($query, null, "publicacion", true);
+		return count($res);
 	}
 
 	public static function listActivos() {

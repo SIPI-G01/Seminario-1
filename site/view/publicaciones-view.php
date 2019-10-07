@@ -76,6 +76,8 @@
 				}
 			}
 			
+			$this->publicaciones = PublicacionDao::filtrar($objs, $t, $pagina, $orden);
+			
 			$cant = PublicacionDao::cantPublicacionesFiltradas($objs, $t);
 			$cantPags = ceil(($cant) / 20);  
 			$this->siguiente = ($pagina + 1 <= $cantPags) ? $pagina + 1 : $cantPags;
@@ -84,7 +86,6 @@
 			$this->pagActual = $pagina;
 			$this->pags = "Página " . $pagina . " de " . $cantPags;
 			//$this->publicaciones = PublicacionDao::listActivos();
-			$this->publicaciones = PublicacionDao::filtrar($objs, $t, $pagina, $orden);
 		}
     }
 ?>
