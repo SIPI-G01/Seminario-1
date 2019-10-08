@@ -41,15 +41,23 @@
 						switch ($tipoTexto) {
 							case 'objetivo':
 								$obj = ObjetivoDao::getXalias($filtro);
-								$this->objetivo = $obj[0];
-								array_push($objs, $obj[0]->id);								
+								if($obj != null)
+								{
+									$this->objetivo = $obj[0];
+									array_push($objs, $obj[0]->id);								
+								}
 								break;
 								
 							case 'tiempos':
-								$tiempo = ObjetivoTiempoDao::getXaliasYObjetivo($filtro, $this->objetivo->id);
-								array_push($this->tiempos, $tiempo[0]);
-								array_push($t, $tiempo[0]->id);
-								
+								if($this->objetivo != null)
+								{
+									$tiempo = ObjetivoTiempoDao::getXaliasYObjetivo($filtro, $this->objetivo->id);
+									if($tiempo != null)
+									{
+										array_push($this->tiempos, $tiempo[0]);
+										array_push($t, $tiempo[0]->id);
+									}
+								}
 								break;
 
 							case 'pagina':
