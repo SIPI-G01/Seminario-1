@@ -132,3 +132,85 @@ li a:hover {
 datalist{
    align-content:center;
 } 
+
+.carousel-indicators{
+  align-content: center;
+  margin: auto;
+}
+
+.carousel-img:hover{
+  transform:scale(0.9);
+}
+
+.carousel-img{
+  display: block;
+  align-content: center;
+  margin: auto;
+  height: 300px;
+  width: 700px;
+  border-radius: 20px;
+  transition: all 0.5s ease;
+  border-style: solid;
+  border-color: black;
+  border-width: 5px;
+}
+
+.verContainer{
+  text-align: center;
+  padding-bottom: 10px;
+}
+
+.verContainer div{
+  /*border: 5px solid black;*/
+  width: auto;
+  height: auto;
+  display: inline-block;
+  font-size: 40px;
+  font-family: Arial, Helvetica, sans-serif;
+}
+
+.row{
+  text-align: center;
+}
+
+.col-md-11 h1{
+  /*border: 5px solid black;*/
+  width: auto;
+  height: auto;
+  display: inline-block;
+  font-family: Arial, Helvetica, sans-serif;
+}
+
+.col-md-1{
+  /*border: 5px solid black;*/
+  width: auto;
+  height: auto;
+  display: block;
+  align-content: center;
+}
+
+.divLine{
+  text-align: center;
+}
+
+.line{
+  display: inline-block;
+  position: relative;
+}
+
+.line::after, .line::before{
+  content: "";
+  position: absolute;
+  width: 600px;
+  height: 3px;
+  background-color: black;
+  top: 0.6em;
+}
+
+.line::before{
+  left:-650px;
+}
+
+.line::after{
+  right:-650px;
+}
