@@ -8,12 +8,65 @@
  $view = new ver_view($params);
 
  $publi = $view->publi;
-
+  var_dump($publi->getObjetivos());
  ?>
   <div class="verContainer">
-    <div class="namePubli">NOMBRE PUBLICACION</div>
-    <div class="tags">[TAGS]</div>
+    <div class="namePubli"><?php echo $publi->titulo;?></div> <!--cambiar a nombre de la publicacion dinamico-->
+    <!--foreach objetivo -->
+    <div class="tags"><?php $publi->getObjetivos()?></div> <!--cambiar a tags dinamico-->
   </div>
+
+  <div class="row" style="margin:0px 5px">
+    <div class="col-md-2" style="border: 5px solid black;">
+    <!--ACA VAN LOS DATOS DEL USUARIO-->
+
+<!--- Include the above in your HEAD tag ---------->
+    <div class="container">
+    <div class="span3 well">
+        <div style="text-align:center;">
+        <a href="#aboutModal" data-toggle="modal" data-target="#myModal"><img src="https://encrypted-tbn2.gstatic.com/images?q=tbn:ANd9GcRbezqZpEuwGSvitKy3wrwnth5kysKdRqBW54cAszm_wiutku3R" name="aboutme" width="140" height="140" class="img-circle"></a>
+        <h3>Joe Sixpack</h3>
+        <em>click my face for more</em>
+        </div>
+    </div>
+    <!-- Modal -->
+    <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true"></button>
+                    <h4 class="modal-title" id="myModalLabel">More About Joe</h4>
+                    </div>
+                <div class="modal-body">
+                    <div style="text-align:center;">
+                    <img src="https://encrypted-tbn2.gstatic.com/images?q=tbn:ANd9GcRbezqZpEuwGSvitKy3wrwnth5kysKdRqBW54cAszm_wiutku3R" name="aboutme" width="140" height="140" border="0" class="img-circle"></a>
+                    <h3 class="media-heading">Joe Sixpack <small>USA</small></h3>
+                    <span><strong>Skills: </strong></span>
+                        <span class="label label-warning">HTML5/CSS</span>
+                        <span class="label label-info">Adobe CS 5.5</span>
+                        <span class="label label-info">Microsoft Office</span>
+                        <span class="label label-success">Windows XP, Vista, 7</span>
+                    </div>
+                    <hr>
+                    <div style="text-align:center;">
+                    <p class="text-left"><strong>Bio: </strong><br>
+                        Lorem ipsum dolor sit amet, consectetur adipiscing elit. Ut sem dui, tempor sit amet commodo a, vulputate vel tellus.</p>
+                    <br>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <div style="text-align:center;">
+                    <button type="button" class="btn btn-default" data-dismiss="modal">I've heard enough about Joe</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+    </div>
+
+
+<div class="col-md-10">
   <div id="carouselIndicators" class="carousel slide" data-ride="carousel">
    <ol class="carousel-indicators">
      <?php
@@ -43,9 +96,9 @@
      <span class="carousel-control-next-icon" aria-hidden="true"></span>
      <span class="sr-only">Next</span>
    </a>
- </div>
-
-
+   </div>
  <?php
   echo $publi->texto;
   ?>
+  </div>
+</div>
