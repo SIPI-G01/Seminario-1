@@ -6,29 +6,44 @@
 <?php
  include_once  ($_SERVER["DOCUMENT_ROOT"] . '/site/view/ver-view.php');
  $view = new ver_view($params);
-
  $publi = $view->publi;
-  var_dump($publi->getObjetivos());
  ?>
-  <div class="verContainer">
-    <div class="namePubli"><?php echo $publi->titulo;?></div> <!--cambiar a nombre de la publicacion dinamico-->
-    <!--foreach objetivo -->
-    <div class="tags"><?php $publi->getObjetivos()?></div> <!--cambiar a tags dinamico-->
-  </div>
 
-  <div class="row" style="margin:0px 5px">
-    <div class="col-md-2" style="border: 5px solid black;">
+<div class="verContainer">
+<?php
+$objetivos = '';
+foreach($publi->getObjetivos() as $objetivo){
+  $tiemposObj = $objetivo->getObjetivo()->getTiempos();
+  $tiempoTexto = '';
+  foreach($tiemposObj as $tO)
+  {
+    foreach($publi->getTiempos() as $tiempo)
+    {
+      if($tiempo->id_tiempo == $tO->id)
+      {
+        $tiempoTexto .= " - " . $tO->tiempo;
+      }
+    }
+  }
+  $objetivos .= '[' . $objetivo->getObjetivo()->nombre . $tiempoTexto . '] ';
+}
+echo $publi->titulo . $objetivos;
+?>
+</div>
+
+<div class="row" style="margin:0px 5px">
+    <!--<div class="col-md-2" style="border: 5px solid black;">-->
     <!--ACA VAN LOS DATOS DEL USUARIO-->
 
 <!--- Include the above in your HEAD tag ---------->
-    <div class="container">
-    <div class="span3 well">
-        <div style="text-align:center;">
-        <a href="#aboutModal" data-toggle="modal" data-target="#myModal"><img src="https://encrypted-tbn2.gstatic.com/images?q=tbn:ANd9GcRbezqZpEuwGSvitKy3wrwnth5kysKdRqBW54cAszm_wiutku3R" name="aboutme" width="140" height="140" class="img-circle"></a>
-        <h3>Joe Sixpack</h3>
-        <em>click my face for more</em>
-        </div>
-    </div>
+<div class="col-md-3" style="width: 15rem; ">
+<a href="#aboutModal" data-toggle="modal" data-target="#myModal"><img src="\archivos\avatar-set\boy.png" name="aboutme" width="70" height="70"></a>
+  <div class="card-body">
+    <h5 class="card-title">Username</h5>
+    <em class="card-text">Resumen de informacion del usuario</em><br>
+    <a href="#aboutModal" data-toggle="modal" data-target="#myModal" class="btn btn-dark">Mas sobre Usuario</a>
+  </div>
+</div>
     <!-- Modal -->
     <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
         <div class="modal-dialog">
@@ -62,11 +77,10 @@
             </div>
         </div>
     </div>
-</div>
-    </div>
+    <!--</div>-->
 
 
-<div class="col-md-10">
+<div class="col-md-9">
   <div id="carouselIndicators" class="carousel slide" data-ride="carousel">
    <ol class="carousel-indicators">
      <?php
@@ -98,7 +112,7 @@
    </a>
    </div>
  <?php
-  echo $publi->texto;
+  echo '<h5 class="descPub">'.$publi->texto.'</h5>';
   ?>
   </div>
 </div>

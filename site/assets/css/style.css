@@ -5,7 +5,7 @@
 
 p
 {
-	color: white;
+  color: white;
 }
 
 .pagination
@@ -16,24 +16,24 @@ p
 
 .ordenar
 {
-	color: white;
-	text-align: right;	
+  color: white;
+  text-align: right;
 }
 
 .publicaciones
 {
-	margin-bottom: 20px;
+  margin-bottom: 20px;
 }
 
 
 .descripcion
 {
-	color: black;
+  color: black;
 }
 
 .card-footer
 {
-	text-align: right;
+  text-align: right;
 }
 
 ul {
@@ -46,14 +46,14 @@ ul {
 
 .texto-inicio
 {
-	color: white;
-	margin-top: 50px !important;
-	text-align: center;
+  color: white;
+  margin-top: 50px !important;
+  text-align: center;
 }
 
 .imagen-inicio
 {
-	max-height: 80px;
+  max-height: 80px;
 }
 
 #headerDer {
@@ -81,7 +81,7 @@ h3, h5{
 #selectObjetivos{
   font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
   font-size: 20px;
-  margin-top: 40px; 
+  margin-top: 40px;
   text-align: center;
 }
 
@@ -98,9 +98,6 @@ h3, h5{
   font-size: 16px;
 }
 
-#botonBuscar{
-}
-
 #objetivosList{
   text-align: center;
   width: 90%;
@@ -111,7 +108,7 @@ h3, h5{
 }
 
 #headerIzq{
-  float: left;  
+  float: left;
 }
 
 li a {
@@ -131,7 +128,7 @@ li a:hover {
 
 datalist{
    align-content:center;
-} 
+}
 
 .carousel-indicators{
   align-content: center;
@@ -173,22 +170,6 @@ datalist{
   text-align: center;
 }
 
-.col-md-11 h1{
-  /*border: 5px solid black;*/
-  width: auto;
-  height: auto;
-  display: inline-block;
-  font-family: Arial, Helvetica, sans-serif;
-}
-
-.col-md-1{
-  /*border: 5px solid black;*/
-  width: auto;
-  height: auto;
-  display: block;
-  align-content: center;
-}
-
 .divLine{
   text-align: center;
 }
@@ -213,4 +194,35 @@ datalist{
 
 .line::after{
   right:-650px;
+}
+
+.descPub{
+  margin-top: 20px;
+}
+
+.headContainer{
+  text-align: center;
+  padding-bottom: 10px;
+}
+
+.headContainer div{
+  /*border: 5px solid black;*/
+  width: auto;
+  height: auto;
+  display: inline-block;
+  font-size: 40px;
+  font-family: Arial, Helvetica, sans-serif;
+}
+
+.imagen-inicio{
+  height: 250px;
+  width: 100px;
+}
+
+.card-body{
+  background-color: rgba(0,0,0) transparent;
+}
+
+#userCardTitle, #userCardText{
+  color:white;
 }
