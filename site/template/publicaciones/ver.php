@@ -8,6 +8,7 @@
  $view = new ver_view($params);
 
  $publi = $view->publi;
+
  ?>
   <div class="verContainer">
     <div class="namePubli">NOMBRE PUBLICACION</div>
@@ -15,20 +16,24 @@
   </div>
   <div id="carouselIndicators" class="carousel slide" data-ride="carousel">
    <ol class="carousel-indicators">
-     <li data-target="#carouselIndicators" data-slide-to="0" class="active"></li>
-     <li data-target="#carouselIndicators" data-slide-to="1"></li>
-     <li data-target="#carouselIndicators" data-slide-to="2"></li>
-   </ol>
+     <?php
+     $i=0;
+     foreach ($publi->getImagenes() as $imagen) {?>
+
+     <li data-target="#carouselIndicators" data-slide-to="<?php echo $i; ?>" class="<?php echo ($i == 0 ? 'active' : ''); ?>"></li>
+     <?php
+     $i++;
+      }?>   </ol>
    <div class="carousel-inner">
-     <div class="carousel-item active">
-       <img class="carousel-img" src="\archivos\recortes\1.jpg" class="d-block w-100" alt="Card image cap">
-     </div>
-     <div class="carousel-item">
-       <img class="carousel-img" src="\archivos\recortes\2.jpg" class="d-block w-100" alt="Card image cap">
-     </div>
-     <div class="carousel-item">
-       <img class="carousel-img" src="\archivos\recortes\3.jpg" class="d-block w-100" alt="Card image cap">
-     </div>
+     <?php
+     $i=0;
+     foreach ($publi->getImagenes() as $imagen) {?>
+       <div class="carousel-item  <?php echo ($i == 0 ? 'active' : ''); ?>">
+         <img class="carousel-img" src="\archivos\recortes\<?php echo $imagen->archivo; ?>" class="d-block w-100" alt="Card image cap">
+       </div>
+     <?php
+     $i++;
+   }?>
    </div>
    <a class="carousel-control-prev" href="#carouselIndicators" role="button" data-slide="prev">
      <span class="carousel-control-prev-icon" aria-hidden="true"></span>
@@ -39,7 +44,8 @@
      <span class="sr-only">Next</span>
    </a>
  </div>
- 
+
+
  <?php
   echo $publi->texto;
   ?>
