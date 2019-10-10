@@ -39,8 +39,9 @@ echo $publi->titulo . $objetivos;
 <div class="col-md-3" style="width: 15rem; ">
 <a href="#aboutModal" data-toggle="modal" data-target="#myModal"><img src="\archivos\avatar-set\boy.png" name="aboutme" width="70" height="70"></a>
   <div class="card-body">
-    <h5 class="card-title">Username</h5>
-    <em class="card-text">Resumen de informacion del usuario</em><br>
+    <h5 class="card-title"><?php $usuario = $publi->getUsuario();
+                            echo $usuario->nombre . " " . $usuario->apellido;?></h5>
+    <em class="card-text"><?php echo "Miembro desde el " . $usuario->creado_fecha;?></em><br><br>
     <a href="#aboutModal" data-toggle="modal" data-target="#myModal" class="btn btn-dark">Mas sobre Usuario</a>
   </div>
 </div>
@@ -50,28 +51,21 @@ echo $publi->titulo . $objetivos;
             <div class="modal-content">
                 <div class="modal-header">
                     <button type="button" class="close" data-dismiss="modal" aria-hidden="true"></button>
-                    <h4 class="modal-title" id="myModalLabel">More About Joe</h4>
+                    <h4 class="modal-title" id="myModalLabel"><?php echo $usuario->nombre . " " . $usuario->apellido;?></h4>
                     </div>
                 <div class="modal-body">
                     <div style="text-align:center;">
+                      <!--Cambiar foto por foto de usuario-->
                     <img src="https://encrypted-tbn2.gstatic.com/images?q=tbn:ANd9GcRbezqZpEuwGSvitKy3wrwnth5kysKdRqBW54cAszm_wiutku3R" name="aboutme" width="140" height="140" border="0" class="img-circle"></a>
-                    <h3 class="media-heading">Joe Sixpack <small>USA</small></h3>
-                    <span><strong>Skills: </strong></span>
-                        <span class="label label-warning">HTML5/CSS</span>
-                        <span class="label label-info">Adobe CS 5.5</span>
-                        <span class="label label-info">Microsoft Office</span>
-                        <span class="label label-success">Windows XP, Vista, 7</span>
+                    <h3 class="media-heading"><?php echo $usuario->nombre . " " . $usuario->apellido;?><small>USA</small></h3>
+                    <span><strong>Fecha de nacimiento: </strong></span><span class="label label-info"><?php echo $usuario->fecha_nacimiento;?></span><br>
+                    <span><strong>Mail: </strong></span><span class="label label-info"><?php echo $usuario->mail;?></span>
                     </div>
                     <hr>
-                    <div style="text-align:center;">
-                    <p class="text-left"><strong>Bio: </strong><br>
-                        Lorem ipsum dolor sit amet, consectetur adipiscing elit. Ut sem dui, tempor sit amet commodo a, vulputate vel tellus.</p>
-                    <br>
-                    </div>
                 </div>
                 <div class="modal-footer">
                     <div style="text-align:center;">
-                    <button type="button" class="btn btn-default" data-dismiss="modal">I've heard enough about Joe</button>
+                    <button type="button" class="button1" data-dismiss="modal">Ok</button>
                     </div>
                 </div>
             </div>
