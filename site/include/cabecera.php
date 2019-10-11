@@ -11,6 +11,6 @@
         <div class="headTitle"><h1>Desafio Saludable</h1></div>
     </div>
     <div class="divLine">
-        <h1 class="line">⚜</h1>
+        <h2 class="line">⚜</h2>
     </div>
 </header>

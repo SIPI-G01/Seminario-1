@@ -21,7 +21,7 @@ else
 <div class= "container-fluid">
 
 	<div class="col-md-12">
-		<h3 class="titleObj" style="border:5px solid black; text-align:center; color: white"><?php echo $titulo;?></h3>
+		<h3><?php echo $titulo;?></h3>
 	</div>
 	<?php if(count($view->publicaciones) == 0)
 	{
@@ -33,7 +33,7 @@ else
 	}else { ?>
 		<div class="col-md-12">
 			<div class="row">
-				<div class="col-md-6" style="border:5px solid black; text-align:left;">
+				<div class="col-md-6">
 					<p><?php echo $view->pags;?></p>
 				</div>
 					

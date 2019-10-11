@@ -36,13 +36,13 @@ echo $publi->titulo . $objetivos;
     <!--ACA VAN LOS DATOS DEL USUARIO-->
 
 <!--- Include the above in your HEAD tag ---------->
-<div class="col-md-3" style="width: 15rem;">
-<a href="#aboutModal" data-toggle="modal" data-target="#myModal"><img class="userImg" src="\archivos\avatar-set\boy.png" name="aboutme" width="80" height="80"></a>
-  <div class="card-body" id="userCardBody">
-    <h5 class="card-title" id="userCardTitle"><?php $usuario = $publi->getUsuario();
+<div class="col-md-3" style="width: 15rem; ">
+<a href="#aboutModal" data-toggle="modal" data-target="#myModal"><img src="\archivos\avatar-set\boy.png" name="aboutme" width="70" height="70"></a>
+  <div class="card-body">
+    <h5 class="card-title"><?php $usuario = $publi->getUsuario();
                             echo $usuario->nombre . " " . $usuario->apellido;?></h5>
-    <em class="card-text" id="userCardText"><?php echo "Miembro desde el " . $usuario->creado_fecha;?></em><br><br>
-    <a href="#aboutModal" data-toggle="modal" data-target="#myModal" class="btn btn-dark">Acerca de mi</a>
+    <em class="card-text"><?php echo "Miembro desde el " . $usuario->creado_fecha;?></em><br><br>
+    <a href="#aboutModal" data-toggle="modal" data-target="#myModal" class="btn btn-dark">Mas sobre Usuario</a>
   </div>
 </div>
     <!-- Modal -->
