@@ -13,20 +13,21 @@
 	</head>
 	<body>
 
+		
+		
 		<!-- start main-->
 	    <main>
+				<?php include_once ($_SERVER["DOCUMENT_ROOT"] . '/site/include/cabecera.php'); ?>
 
-			<?php include_once ($_SERVER["DOCUMENT_ROOT"] . '/site/include/cabecera.php'); ?>
+				<?php
 
-			<?php
+				if(file_exists($_SERVER["DOCUMENT_ROOT"] . '/site/template/' . $_GET['controller'] . '/' . $accion . '.php')) {
+					include_once ($_SERVER["DOCUMENT_ROOT"] . '/site/template/' . $_GET['controller'] . '/' . $accion . '.php');
+				} else {
+					include_once ($_SERVER["DOCUMENT_ROOT"] . '/site/template/404/index.php');
+				}
 
-			if(file_exists($_SERVER["DOCUMENT_ROOT"] . '/site/template/' . $_GET['controller'] . '/' . $accion . '.php')) {
-				include_once ($_SERVER["DOCUMENT_ROOT"] . '/site/template/' . $_GET['controller'] . '/' . $accion . '.php');
-			} else {
-				include_once ($_SERVER["DOCUMENT_ROOT"] . '/site/template/404/index.php');
-			}
-
-			?>
+				?>
 		</main>
     	<!-- end main-->
 

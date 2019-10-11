@@ -2,16 +2,15 @@
 include_once  ($_SERVER["DOCUMENT_ROOT"] . '/site/view/home-view.php');
 $view = new home_view();
 ?>
-
 <div class= "container-fluid">
 	
 	<div class="row texto-inicio">
 		<div class="col-md-12">
-			<h3>¿Cuántas veces le dijiste a tu elefante que tenía que bajar de peso?<br>Nosotros nunca lo hicimos, pero si necesitáramos un consejo... ¡entraríamos a esta página!<br>¡Publicá, puntuá, opiná y mucho más!</h3>
+			<h3 class="descHome">¿Cuántas veces le dijiste a tu elefante que tenía que bajar de peso?<br>Nosotros nunca lo hicimos, pero si necesitáramos un consejo... ¡entraríamos a esta página!<br>¡Publicá, puntuá, opiná y mucho más!</h3>
 		</div>
 	</div>
 	<div id="selectObjetivos">
-		<h5>¿Qué estás esperando?, ¡Empezá tu búsqueda ahora!</h5>
+		<h5 class="descHome">¿Qué estás esperando?, ¡Empezá tu búsqueda ahora!</h5>
 	</div>
 	<div class="row">
 		<div class="col-md-10" id="objetivosList">
