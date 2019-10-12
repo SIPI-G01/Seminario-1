@@ -48,14 +48,18 @@ class PublicacionDao {
 
 		switch ($orden) {
 			case 0:
-				// ORDEN POR FECHA
+				// ORDEN POR FECHA RECIENTE
 				$query .= ' ORDER BY p.fecha DESC';
 				break;
 			case 1:
 				//ORDEN POR VALORACION
 				$query .= ' ORDER BY p.valoracion DESC';
-
 				break;
+			case 2:
+				// ORDEN POR FECHA ANTIGUOS
+				$query .= ' ORDER BY p.fecha ASC';
+				break;
+				
 		}
 		$query .=  ($pagina >= 0 && $cantidad >= 0 ? " LIMIT " . $inicio . ", " . $cantidad : '');
 		return GenericDao::executeQuery($query, null, 'publicacion', true);

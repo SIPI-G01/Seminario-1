@@ -10,3 +10,6 @@
 
 		<!-- Jquery -->
 		<script src="https://code.jquery.com/jquery-3.4.1.min.js" type="text/javascript"></script>
+		
+		<!-- FontAwesome -->
+		<script src="https://kit.fontawesome.com/76596c4599.js" crossorigin="anonymous"></script>

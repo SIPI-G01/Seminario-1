@@ -3,6 +3,28 @@
     flex: 1 1 auto;
 }
 
+.buscador 
+{
+	margin-bottom: 50px;
+}
+
+html
+{
+	background-color: #acd8c4;
+  background-attachment: fixed;
+}
+main
+{
+	background-color: #acd8c4;
+  background-attachment: fixed;
+}
+
+h1 a
+{
+	color: rgb(18, 209, 114) !important;
+	text-decoration: none !important;
+}
+
 p
 {
   color: white;
@@ -77,8 +99,8 @@ h1{
 .descHome{
   font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
   color: rgb(0, 0, 0);
-  -webkit-text-fill-color: transparent;
-  -webkit-text-stroke-width: 2px;
+  /*-webkit-text-fill-color: transparent;
+  -webkit-text-stroke-width: 2px;*/
   letter-spacing: 2px;
   text-transform: uppercase;
 }
@@ -127,7 +149,8 @@ li a {
 }
 
 li a:hover {
-  background-color: #80d3fa;
+  background-color: #98fa80;
+  color: #1cb300;
   text-decoration: none;
 }
 

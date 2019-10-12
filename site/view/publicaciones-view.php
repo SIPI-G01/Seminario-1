@@ -67,12 +67,15 @@
 							case 'orden':
 								switch ($filtro) {
 									default:                                
-									case 'fecha':
+									case 'fecha-recientes':
 										$orden = 0;
 										break;
 
 									case 'valoracion':
 										$orden = 1;
+										break;
+									case 'fecha-antiguos':
+										$orden = 2;
 										break;
 								}
 								$this->orden = $orden;								

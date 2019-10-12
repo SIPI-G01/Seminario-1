@@ -21,7 +21,7 @@ else
 <div class= "container-fluid">
 
 	<div class="col-md-12">
-		<h3 class="titleObj" style="border:5px solid black; text-align:center; color: white"><?php echo $titulo;?></h3>
+		<h3 class="titleObj" style="/*border:5px solid black;*/ text-align:center; color: white"><?php echo $titulo;?></h3>
 	</div>
 	<?php if(count($view->publicaciones) == 0)
 	{
@@ -33,18 +33,19 @@ else
 	}else { ?>
 		<div class="col-md-12">
 			<div class="row">
-				<div class="col-md-6" style="border:5px solid black; text-align:left;">
+				<div class="col-md-6" style="/*border:5px solid black;*/ text-align:left;">
 					<p><?php echo $view->pags;?></p>
 				</div>
 					
 				<div class="col-md-6 ordenar">
 					<div class="row">
-						<div class="col-md-6">
+						<div class="col-md-6" style="text-align: right;">
 							<span>Ordenar por: </span>
 						</div>					
 						<div class="col-md-6">
 							<select class="form-control" id="ordenar" onChange="reOrdenar();">
-								<option value="0" selected>Fecha</option>
+								<option value="0" selected>Más recientes</option>
+								<option value="2">Más antiguos</option>								
 								<option value="1" <?php echo ($view->orden == '1' ? 'selected' : ''); ?> >Valoración</option>
 							</select>					
 						</div>					
@@ -124,10 +125,15 @@ else
 function reOrdenar()
 {
 	var orden = $('#ordenar').val();
-	var ordenFiltro = 'fecha';
+	var ordenFiltro = 'fecha-recientes';
 	if(orden == 1)
 	{
 		ordenFiltro = 'valoracion';		
+	}
+	else if(orden == 2)
+	{
+		ordenFiltro = 'fecha-antiguos';		
+		
 	}
 	
 	

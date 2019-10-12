@@ -12,7 +12,7 @@ $view = new home_view();
 	<div id="selectObjetivos">
 		<h5 class="descHome">¿Qué estás esperando?, ¡Empezá tu búsqueda ahora!</h5>
 	</div>
-	<div class="row">
+	<div class="row buscador">
 		<div class="col-md-10" id="objetivosList">
 			<div class="form-group">
 					<select class="form-control" id="objetivos" name="objetivos" onChange="cambiarTiempos();">
@@ -24,7 +24,7 @@ $view = new home_view();
 			</div>
 		</div>
 		<div class="col-md-2" id="botonBuscar">
-			<button id="buscar" class="form-control" onclick="buscar();">Buscar</button>
+			<button id="buscar" class="form-control" onclick="buscar();"><i class="fas fa-search"></i> Buscar</button>
 		</div>
 		<div class="col-md-10" id="tiempos">
 		</div>

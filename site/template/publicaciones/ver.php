@@ -57,7 +57,7 @@ echo $publi->titulo . $objetivos;
                     <div style="text-align:center;">
                       <!--Cambiar foto por foto de usuario-->
                     <img src="https://encrypted-tbn2.gstatic.com/images?q=tbn:ANd9GcRbezqZpEuwGSvitKy3wrwnth5kysKdRqBW54cAszm_wiutku3R" name="aboutme" width="140" height="140" border="0" class="img-circle"></a>
-                    <h3 class="media-heading"><?php echo $usuario->nombre . " " . $usuario->apellido;?><small>USA</small></h3>
+                    <h3 class="media-heading"><?php echo $usuario->nombre . " " . $usuario->apellido;?></h3>
                     <span><strong>Fecha de nacimiento: </strong></span><span class="label label-info"><?php echo $usuario->fecha_nacimiento;?></span><br>
                     <span><strong>Mail: </strong></span><span class="label label-info"><?php echo $usuario->mail;?></span>
                     </div>
