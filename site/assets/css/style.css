@@ -1,3 +1,19 @@
+/*body {
+	margin: 0;
+	padding: 0;
+	background: #262626;
+}
+.slewedBox {
+	background: #edff57;
+	padding: 100px 0;
+	transform: skew(0deg, -10deg) translateY(-190px);
+}
+.container {
+	padding: 150px 200px;
+	transform: skew(0deg, 10deg);
+	font-family: arial;
+}
+*/
 .card-horizontal {
     display: flex;
     flex: 1 1 auto;
@@ -6,17 +22,6 @@
 .buscador 
 {
 	margin-bottom: 50px;
-}
-
-html
-{
-	background-color: #acd8c4;
-  background-attachment: fixed;
-}
-main
-{
-	background-color: #acd8c4;
-  background-attachment: fixed;
 }
 
 h1 a
@@ -86,7 +91,7 @@ body{
   margin: 0px;
   /*background-image: linear-gradient(to bottom, rgb(36, 36, 36), rgba(255, 255, 255, 0.267));*/
   background-attachment: fixed;
-  background-color: white;
+	background-color: #acd8c4 !important;
 }
 
 h1{
@@ -281,3 +286,6 @@ datalist{
   font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
   font-size: 12px;
 }
+
+
+
