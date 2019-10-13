@@ -14,6 +14,17 @@
 	font-family: arial;
 }
 */
+
+.panel-body
+{
+	color: black;
+	background-color: #f3f3f3;
+	border: 1px solid #bfb9b9;
+    border-radius: 8px;
+    padding: 20px;
+	
+}
+
 .card-horizontal {
     display: flex;
     flex: 1 1 auto;
@@ -91,7 +102,7 @@ body{
   margin: 0px;
   /*background-image: linear-gradient(to bottom, rgb(36, 36, 36), rgba(255, 255, 255, 0.267));*/
   background-attachment: fixed;
-	background-color: #acd8c4 !important;
+	background-color: #bcdccd !important;
 }
 
 h1{
