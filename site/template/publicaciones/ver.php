@@ -105,8 +105,92 @@ echo $publi->titulo . $objetivos;
      <span class="sr-only">Next</span>
    </a>
    </div>
- <?php
-  echo '<h5 class="descPub">'.$publi->texto.'</h5>';
-  ?>
   </div>
+  <div class="col-md-12">
+    <?php
+    echo '<h5 class="descPub">'.$publi->texto.'</h5>';
+    ?>
+  </div>
+
+   <div id="L" class="col-md-12">
+
+    <h2 id="h2-cmmnt">SISTEMA DE COMENTARIOS <a href="/home">(SALIR)</a></h2>
+
+    <form name="form1" method="post" action="">
+      <label for="textarea"></label>
+      <p id="p-cmmnt">
+        <textarea name="comentario" cols="80" rows="5" id="textarea"><?php if(isset($_GET['user'])) { ?>@<?php echo $_GET['user']; ?><?php } ?> </textarea>
+      </p>
+      <p id="p-cmmnt">
+        <input type="submit" <?php if (isset($_GET['id'])) { ?>name="reply"<?php } else { ?>name="comentar"<?php } ?>value="Comentar">
+      </p>
+    </form>
+
+    <?php
+      if (isset($_POST['comentar'])){
+
+        $query = mysql_query("INSERT INTO publicacion_comentario (texto, id_usuario, fecha) value ('".$_POST['comentario']."', '".$SESSION['usuario-logueado']."', NOW())");
+        
+        if($query) {header ("Location: \site\template\publicaciones\ver.php");}
+
+      }
+    ?>
+
+    <?php
+      if (isset($_POST['reply'])){
+
+        $query = mysql_query("INSERT INTO publicacion_comentario (texto, id_usuario, fecha, reply) value ('".$_POST['comentario']."', '".$SESSION['usuario-logueado']."', NOW()), '".$GET['usuario-logueado']."'");
+        
+        if($query) {header ("Location: \site\template\publicaciones\ver.php");}
+
+      }
+    ?>
+
+    <br>
+
+    <div id="container-comentarios">
+      <ul id="comments">
+
+      <?php
+
+      /*$comentarios = mysql_query("SELECT * FROM publicacion_comentario WHERE reply = 0 ORDER BY id DESC");
+      while($row = mysql_fetc_array($comentarios)){
+
+        $usuario_c = mysql_query("SELECT * FROM usuario WHERE id = '".$row['usuario']."'");
+        $user = mysql_fetc_array($usuario_c);
+
+      } */ 
+      ?>
+
+        <li class="cmmnt">
+          <div class="avatar">
+            <!--<img src="<?php /*echo $user['imagen']; */ ?>" alt="NOT IMAGE LOADED" height="55" width="55">-->
+            <img src="\archivos\avatar-set\boy-1.png" alt="" height="55" width="55">
+          </div>
+          <div class="cmmnt-content">
+            <header>
+              <a id="a-cmmnt" href="#" class="userlink"><?php /*echo $user['usuario']; */ ?>Usuario 1</a> - <span class="pubdate"> 13/10/2019 17:24<?php /*echo $row['fecha'];*/ ?></span>
+            </header>
+            <p id="p-cmmnt">
+            <?php /*echo $row['comentario']; */?>
+            asdasdasdsadsadsadsadasdsadsadsadsadsad
+            </p>
+            <span>
+
+            </span>
+          </div>
+        </li>
+
+
+
+
+      </ul>
+
+
+    </div>
+
+
+   </div>
+
+
 </div>

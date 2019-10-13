@@ -92,6 +92,8 @@ CREATE TABLE `publicacion_comentario` (
   `id_publicacion` int(11) DEFAULT NULL,
   `id_usuario` int(11) DEFAULT NULL,
   `texto` text,
+  `fecha` datetime NOT NULL,
+  `reply` int(11) NOT NULL,
   KEY `id` (`id`)
 ) ENGINE=MyISAM DEFAULT CHARSET=latin1;
 
