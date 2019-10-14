@@ -6,6 +6,7 @@
     class publicaciones_view {
 
 		public $publicaciones;
+		public $categoria;	
 		public $objetivo;
 		public $tiempos;
 		public $pags;
@@ -22,6 +23,7 @@
 			$this->tiempos = array();
 			$pagina = 1;
 			$orden = '';
+			$this->categoria = '';
 			$t = array();
 			$objs = array();
 			foreach ($parametros as $filtro) {
@@ -29,7 +31,7 @@
 				$filtro = trim($filtro);
 				if ($filtro && $filtro != '') {
 					
-					if($tipoTexto == 'tiempos' && $filtro != 'objetivo' && $filtro != 'pagina' && $filtro != 'orden')
+					if($tipoTexto == 'tiempos' && $filtro != 'categoria' && $filtro != 'objetivo' && $filtro != 'pagina' && $filtro != 'orden')
 					{
 						$tipo = 0;
 					}
@@ -39,6 +41,17 @@
 						$tipo = 0;
 					} else {
 						switch ($tipoTexto) {
+							case 'categoria':
+								if($filtro == 'receta')
+								{
+									$this->categoria = 1;
+								}
+								else
+								{
+									$this->categoria = 2;								
+								}
+								break;
+
 							case 'objetivo':
 								$obj = ObjetivoDao::getXalias($filtro);
 								if($obj != null)
@@ -87,9 +100,9 @@
 				}
 			}
 			
-			$this->publicaciones = PublicacionDao::filtrar($objs, $t, $pagina, $orden);
+			$this->publicaciones = PublicacionDao::filtrar($objs, $t, $pagina, $orden, $this->categoria);
 			
-			$cant = PublicacionDao::cantPublicacionesFiltradas($objs, $t);
+			$cant = PublicacionDao::cantPublicacionesFiltradas($objs, $t, $this->categoria);
 			$cantPags = ceil(($cant) / 20);  
 			$this->siguiente = ($pagina + 1 <= $cantPags) ? $pagina + 1 : $cantPags;
 			$this->anterior = ($pagina > 1) ? $pagina - 1 : 1;

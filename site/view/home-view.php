@@ -4,12 +4,17 @@
 
     class home_view {
 
-		public $objetivos;
-		public $tiempos;
+		public $objetivosReceta;
+		public $objetivosActividad;
+		public $tiemposReceta;		
+		public $tiemposActividad;
 
         function __construct() {
-			$this->objetivos = ObjetivoDao::listActivos();
-			$this->tiempos = ObjetivoTiempoDao::listActivos();
+			$this->objetivosReceta = ObjetivoDao::listXcategoria(1);
+			$this->objetivosActividad = ObjetivoDao::listXcategoria(2);
+			
+			$this->tiemposReceta = ObjetivoTiempoDao::listXcategoria(1);
+			$this->tiemposActividad = ObjetivoTiempoDao::listXcategoria(2);
 			
 		}
     }

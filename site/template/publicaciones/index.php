@@ -7,10 +7,40 @@ if($view->objetivo == null)
 {
 	$titulo = "Todas las publicaciones";
 
+	if($view->categoria == 1)
+	{
+		$titulo = "Recetas: Todas las publicaciones";
+		
+	}
+	else if($view->categoria == 2)
+	{
+		$titulo = "Actividades físicas: Todas las publicaciones";
+		
+	}
+	else
+	{
+		$titulo = "Todas las publicaciones";
+		
+	}
+
 }
 else
 {
-	$titulo = $view->objetivo->nombre;
+	if($view->categoria == 1)
+	{
+		$titulo = "Recetas: " . $view->objetivo->nombre;
+		
+	}
+	else if($view->categoria == 2)
+	{
+		$titulo = "Actividades físicas: " . $view->objetivo->nombre;
+		
+	}
+	else
+	{
+		$titulo = $view->objetivo->nombre;
+		
+	}
 }
 
 
@@ -100,7 +130,7 @@ else
 		<?php } ?>	
 		</div>
 		
-		<nav aria-label="Page navigation example">
+		<nav aria-label="Page navigation example" class="text-center">
 		  <ul class="pagination justify-content-center">
 			<li class="page-item <?php echo ($view->pagActual == 1 ? 'disabled' : ''); ?>">
 			  <a class="page-link" href="#" tabindex="-1"  onClick="cambiarPagina('<?php echo $view->pagActual - 1; ?>')">Anterior</a>

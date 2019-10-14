@@ -8,7 +8,7 @@ class PublicacionDao {
 		return GenericDao::get("publicacion", array("id" => $id));
 	}// get
 
-	public static function filtrar($objetivos = array(), $tiempos = array(), $pagina = 1, $orden=0) {
+	public static function filtrar($objetivos = array(), $tiempos = array(), $pagina = 1, $orden=0, $categoria = '') {
 
 		$cantidad = 20;
 		$inicio = ($pagina - 1) * $cantidad;
@@ -45,6 +45,11 @@ class PublicacionDao {
 
 			$query .= ($coma ? " AND pt.id_tiempo IN " . $in : '');
 		}
+		
+		if($categoria != '')
+		{
+			$query .= " AND p.categoria = " . $categoria;
+		}
 
 		switch ($orden) {
 			case 0:
@@ -66,7 +71,7 @@ class PublicacionDao {
 
 	}
 
-	public static function cantPublicacionesFiltradas($objetivos = array(), $tiempos = array()) {
+	public static function cantPublicacionesFiltradas($objetivos = array(), $tiempos = array(), $categoria = '') {
 
 		$query =   "SELECT DISTINCT p.* FROM publicacion p
 					LEFT JOIN publicacion_objetivo po ON po.id_publicacion = p.id
@@ -100,6 +105,12 @@ class PublicacionDao {
 
 			$query .= ($coma ? " AND pt.id_tiempo IN " . $in : '');
 		}
+		
+		if($categoria != '')
+		{
+			$query .= " AND p.categoria = " . $categoria;
+		}
+
 
 		$res = GenericDao::executeQuery($query, null, "publicacion", true);
 		return count($res);
