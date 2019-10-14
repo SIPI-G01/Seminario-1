@@ -18,6 +18,9 @@ class ObjetivoTiempoDao {
 	public static function getXaliasYObjetivo($alias, $id_objetivo) {
 		return GenericDao::find("objetivo_tiempo", array(array("alias", "=", $alias), array("id_objetivo", "=", $id_objetivo), array("activo", "=", "1")));
 	}
+	public static function listXcategoria($idCategoria) {
+		return GenericDao::find("objetivo_tiempo", array(array("categoria", "=", $idCategoria), array("activo", "=", "1")));
+	}
 
 	public static function nuevo($item) {
 		$item->activo = 1;

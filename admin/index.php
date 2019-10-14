@@ -9,7 +9,6 @@ $view = new simulacion_logueo_view();
 	<button id="desloguear" class="form-control" onclick="desloguear();"><i class="fas fa-search"></i> Desloguear usuario</button>
 	<br>
 	<p id="estado">Estado del usuario: <?php echo $view->estado; ?></p>
-	<?php var_dump($_SESSION); ?>
 </div>
 
 <script src="https://code.jquery.com/jquery-3.4.1.min.js" type="text/javascript"></script>

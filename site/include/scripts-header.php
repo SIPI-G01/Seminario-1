@@ -13,3 +13,15 @@
 		
 		<!-- FontAwesome -->
 		<script src="https://kit.fontawesome.com/76596c4599.js" crossorigin="anonymous"></script>
+
+		<!-- Summernote -->
+  <link href="http://netdna.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.css" rel="stylesheet">
+  <script src="http://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.js"></script> 
+  <script src="http://netdna.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.js"></script> 
+  <link href="http://cdnjs.cloudflare.com/ajax/libs/summernote/0.8.12/summernote.css" rel="stylesheet">
+  <script src="http://cdnjs.cloudflare.com/ajax/libs/summernote/0.8.12/summernote.js"></script>
+
+		<!-- Fileupload -->
+  <script src="/site/assets/js/plugins/upload/jquery.ui.widget.js"></script>
+  <script src="/site/assets/js/plugins/upload/jquery.iframe-transport.js"></script>
+  <script src="/site/assets/js/plugins/upload/jquery.fileupload.js"></script>

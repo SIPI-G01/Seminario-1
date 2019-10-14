@@ -15,6 +15,27 @@ class ObjetivoDao {
 	public static function getXnombre($nombre) {
 		return GenericDao::find("objetivo", array(array("nombre", "=", $nombre), array("activo", "=", "1")));
 	}
+	public static function listXcategoria($idCategoria) {
+		$query =   "SELECT * FROM objetivo WHERE activo = 1 AND categoria IN (:categoria, 3)";
+
+		$params = array(
+						":categoria" => $idCategoria
+		);
+
+		return GenericDao::executeQuery($query, $params, 'objetivo', true);
+	}
+	
+		public static function listXcategoriaYusuario($idCategoria, $idUsuario) {
+		$query =   "SELECT o.* FROM objetivo AS o INNER JOIN usuario_objetivo AS uo ON uo.id_objetivo = o.id WHERE o.activo = 1 AND o.categoria IN (:categoria, 3) AND uo.id_usuario = :usuario";
+
+		$params = array(
+						":categoria" => $idCategoria,
+						":usuario" => $idUsuario
+		);
+
+		return GenericDao::executeQuery($query, $params, 'objetivo', true);
+	}
+
 	
 	public static function getXalias($alias) {
 		return GenericDao::find("objetivo", array(array("alias", "=", $alias), array("activo", "=", "1")));
