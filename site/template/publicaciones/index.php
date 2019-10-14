@@ -62,7 +62,7 @@ else
 						<div class="img-square-wrapper col-md-3">
 							<a href="/publicaciones/ver/<?php echo $publicacion->alias; ?>">
 								<?php if($publicacion->getImagenes() != null) {?>
-									<img src="/archivos/recortes/<?php echo $publicacion->getImagenes()[0]->archivo;?>" alt="Foto de la publicacion">
+									<img style="width: 300px; height: 180px;" src="/archivos/recortes/<?php echo $publicacion->getImagenes()[0]->archivo;?>" alt="Foto de la publicacion">
 								<?php } else { ?>
 									<img style="width: 300px; height: 180px;" src="/site/images/no-image.png" alt="Sin foto">								
 								<?php } ?>

@@ -2,23 +2,23 @@
 
 function subirArchivo($archivo, $bajar_calidad = true) {
 
-	if(file_exists($_SERVER["DOCUMENT_ROOT"] . "/admin/temp/" . $archivo)) {
+	if(file_exists($_SERVER["DOCUMENT_ROOT"] . "/site/temp/" . $archivo)) {
 		if($bajar_calidad){
-			subirBaja($_SERVER["DOCUMENT_ROOT"] . "/admin/temp/" . $archivo, $_SERVER["DOCUMENT_ROOT"] . "/archivos/" . $archivo);
+			subirBaja($_SERVER["DOCUMENT_ROOT"] . "/site/temp/" . $archivo, $_SERVER["DOCUMENT_ROOT"] . "/archivos/" . $archivo);
 		}else{
-			 copy($_SERVER["DOCUMENT_ROOT"] . "/admin/temp/" . $archivo, $_SERVER["DOCUMENT_ROOT"] . "/archivos/" . $archivo);
+			 copy($_SERVER["DOCUMENT_ROOT"] . "/site/temp/" . $archivo, $_SERVER["DOCUMENT_ROOT"] . "/archivos/" . $archivo);
 		}
-		unlink($_SERVER["DOCUMENT_ROOT"] . "/admin/temp/" . $archivo);
+		unlink($_SERVER["DOCUMENT_ROOT"] . "/site/temp/" . $archivo);
 	}
 
 
-	if(file_exists($_SERVER["DOCUMENT_ROOT"] . "/admin/temp/recortes/" . $archivo)) {
+	if(file_exists($_SERVER["DOCUMENT_ROOT"] . "/site/temp/recortes/" . $archivo)) {
 		if($bajar_calidad){
-			subirBaja($_SERVER["DOCUMENT_ROOT"] . "/admin/temp/recortes/" . $archivo, $_SERVER["DOCUMENT_ROOT"] . "/archivos/recortes/" . $archivo);
+			subirBaja($_SERVER["DOCUMENT_ROOT"] . "/site/temp/recortes/" . $archivo, $_SERVER["DOCUMENT_ROOT"] . "/archivos/recortes/" . $archivo);
 		}else{
-			copy($_SERVER["DOCUMENT_ROOT"] . "/admin/temp/recortes/" . $archivo, $_SERVER["DOCUMENT_ROOT"] . "/archivos/recortes/" . $archivo);			
+			copy($_SERVER["DOCUMENT_ROOT"] . "/site/temp/recortes/" . $archivo, $_SERVER["DOCUMENT_ROOT"] . "/archivos/recortes/" . $archivo);			
 		}
-		unlink($_SERVER["DOCUMENT_ROOT"] . "/admin/temp/recortes/" . $archivo);
+		unlink($_SERVER["DOCUMENT_ROOT"] . "/site/temp/recortes/" . $archivo);
 	}
 }
 

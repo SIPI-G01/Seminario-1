@@ -118,7 +118,7 @@ class PublicacionDao {
 	}
 
 	public static function nuevo($item) {
-		$item->creado_fecha = date("Y-m-d H:i:s", time());
+		$item->fecha = date("Y-m-d H:i:s", time());
 		$item->activo = 1;
 
 		return GenericDao::insert($item);

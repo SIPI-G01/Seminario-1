@@ -57,7 +57,7 @@
 										<label class="col-sm-2 control-label">Objetivo/s *</label>
 										<div class="col-md-10 row">
 											<div class="col-sm-10">
-												<select class="form-control" id="selector_objetivo" name="selector_objetivo">	
+												<select class="form-control" id="selector_objetivo_receta" name="selector_objetivo_receta">	
 													<option value="0" selected disabled>Seleccione un objetivo...</option>																				
 													<?php foreach($view->objetivosReceta as $objetivo){ ?>
 													<option value="<?php echo $objetivo->id; ?>"><?php echo $objetivo->nombre; ?></option>									
@@ -71,8 +71,8 @@
 											</div>
 											<div class="col-md-12" style="margin-top:25px;">
 												<!--TABLA-->
-												<div id="mensajes-error-tabla"></div>												
-												<table id="tabla"></table>
+												<div id="mensajes-error-tabla-receta"></div>												
+												<table id="tabla-receta"></table>
 											</div>
 
 										</div>
@@ -88,7 +88,7 @@
 										<label class="col-sm-2 control-label">Objetivo/s *</label>
 										<div class="col-md-10 row">
 											<div class="col-sm-10">
-												<select class="form-control" id="selector_objetivo" name="selector_objetivo">	
+												<select class="form-control" id="selector_objetivo_actividad" name="selector_objetivo_actividad">	
 													<option value="0" selected disabled>Seleccione un objetivo...</option>																				
 													<?php foreach($view->objetivosActividadFisica as $objetivo){ ?>
 													<option value="<?php echo $objetivo->id; ?>"><?php echo $objetivo->nombre; ?></option>									
@@ -102,8 +102,8 @@
 											</div>
 											<div class="col-md-12" style="margin-top:25px;">
 												<!--TABLA-->
-												<div id="mensajes-error-tabla"></div>																								
-												<table id="tabla"></table>
+												<div id="mensajes-error-tabla-actividad"></div>																								
+												<table id="tabla-actividad"></table>
 
 											</div>
 										</div>
@@ -124,13 +124,13 @@
 								<div class="form-group row">
 									<label class="col-sm-2 control-label">Descripción *<br><small>(max. 400 caracteres)</small></label>
 									<div class="col-sm-10">
-										<textarea id="descripcion" class="form-control" maxlength="400" rows="5"></textarea>
+										<textarea id="descripcion" name="descripcion" class="form-control" maxlength="400" rows="5"></textarea>
 									</div>
 								</div>								
 								<div class="form-group row">
 									<label class="col-sm-2 control-label">Contenido *</label>
 									<div class="col-sm-10">
-										<textarea id="texto" name="editordata"></textarea>
+										<textarea id="texto" name="texto"></textarea>
 									</div>
 								</div>
 								
@@ -143,13 +143,15 @@
 									<div class="col-sm-10">
 										<input id="fileupload" type="file" name="fileupload" class="form-control" />
 									</div>
-								</div>
+								</div>								
 								<div class="form-group">
 									<label class="col-sm-2 control-label">&nbsp;</label>
 									<div id="progress" class="col-sm-9 progress">
 										<div class="progress-bar progress-bar-success" id="fileupload-progres"></div>
 									</div>
 								</div>
+								<div id="mensajes-error-imagenes"></div>												
+								
 								<div class="form-group">
 									<label class="col-sm-2 control-label">&nbsp;</label>
 									<div class="col-sm-10">
@@ -244,9 +246,13 @@ function seleccionarObjetivos()
 		tabla = [];
 		idTabla = [];		
 		tiempoCheck = [];	
-		$('#tabla').html('');
+		$('#tabla-actividad').html('');
 		$('#actividad_fisica').fadeOut();		
 		$('#recetas').fadeIn();
+		$('#mensajes-error-tabla-actividad').html('');
+		$('#mensajes-error-tabla-actividad').fadeOut();	
+		$('#selector_objetivo_actividad').val(0);	
+
 	}
 	else
 	{
@@ -256,9 +262,13 @@ function seleccionarObjetivos()
 		tabla = [];
 		idTabla = [];				
 		tiempoCheck = [];
-		$('#tabla').html('');
+		$('#tabla-receta').html('');
 		$('#recetas').fadeOut();		
 		$('#actividad_fisica').fadeIn();
+		$('#mensajes-error-tabla-receta').html('');
+		$('#mensajes-error-tabla-receta').fadeOut();	
+		$('#selector_objetivo_receta').val(0);	
+		
 		
 	}
 }
@@ -266,53 +276,109 @@ function seleccionarObjetivos()
 
 function agregarObjetivo()
 {
-	$('#mensajes-error-tabla').html('');
-	$('#mensajes-error-tabla').fadeOut();	
-	if($('#selector_objetivo').val() == 0 || $('#selector_objetivo').val() == null)
+	if($('#categoria').val() == 1)
 	{
-		$('#mensajes-error-tabla').html("<p><b>Ocurrieron los siguientes errores:</b><br> - Debe seleccionar un objetivo</p>");
-		$('#mensajes-error-tabla').fadeIn();			
-	}
-	else
-	{
-		var aparecio = false;
-		objetivosSeleccionados.forEach(function(objetivo) {
-			if(objetivo.id == $('#selector_objetivo').val())
-			{
-				aparecio = true;
-			}
-		});
+		//Recetas
+		$('#mensajes-error-tabla-receta').html('');
+		$('#mensajes-error-tabla-receta').fadeOut();	
 		
-		if(aparecio == false)
+		if($('#selector_objetivo_receta').val() == 0 || $('#selector_objetivo_receta').val() == null)
 		{
-			var lineas = '';
-			objetivos.forEach(function(objetivo) {
-				if(objetivo.id == $('#selector_objetivo').val())
-				{
-					objetivosSeleccionados.push(objetivo);
-					lineas += "<tr><th>" + objetivo.nombre + "</th><td class='text-right'><button onclick='javascript:eliminarObjetivo("+ objetivo.id + ");' type='button' class='btn btn-danger btn-sm mr5'><i class='fa fa-trash'></i> Eliminar</button></td></tr>";
-					var tiempos = traerTiempos(objetivo.id);
-					if(tiempos != null)
-					{
-						lineas += "<tr><td>" + tiempos + "</td><td></td></tr>";
-					}
-				}
-			});
-			
-			tabla.push(lineas);
-			idTabla.push($('#selector_objetivo').val());
-			
-			$('#tabla').append(lineas);
-			$('#selector_objetivo').val(0);	
+			$('#mensajes-error-tabla-receta').html("<p><b>Ocurrieron los siguientes errores:</b><br> - Debe seleccionar un objetivo</p>");
+			$('#mensajes-error-tabla-receta').fadeIn();			
 		}
 		else
 		{
-			$('#mensajes-error-tabla').html("<p><b>Ocurrieron los siguientes errores:</b><br> - El objetivo ya se había agregado previamente.</p>");
-			$('#mensajes-error-tabla').fadeIn();			
+			var aparecio = false;
+			objetivosSeleccionados.forEach(function(objetivo) {
+				if(objetivo.id == $('#selector_objetivo_receta').val())
+				{
+					aparecio = true;
+				}
+			});
 			
-		}		
+			if(aparecio == false)
+			{
+				var lineas = '';
+				objetivos.forEach(function(objetivo) {
+					if(objetivo.id == $('#selector_objetivo_receta').val())
+					{
+						objetivosSeleccionados.push(objetivo);
+						lineas += "<tr><th>" + objetivo.nombre + "</th><td class='text-right'><button onclick='javascript:eliminarObjetivo("+ objetivo.id + ");' type='button' class='btn btn-danger btn-sm mr5'><i class='fa fa-trash'></i> Eliminar</button></td></tr>";
+						var tiempos = traerTiempos(objetivo.id);
+						if(tiempos != null)
+						{
+							lineas += "<tr><td>" + tiempos + "</td><td></td></tr>";
+						}
+					}
+				});
+				
+				tabla.push(lineas);
+				idTabla.push($('#selector_objetivo_receta').val());
+				
+				$('#tabla-receta').append(lineas);
+				$('#selector_objetivo_receta').val(0);	
+			}
+			else
+			{
+				$('#mensajes-error-tabla-receta').html("<p><b>Ocurrieron los siguientes errores:</b><br> - El objetivo ya se había agregado previamente.</p>");
+				$('#mensajes-error-tabla-receta').fadeIn();			
+				
+			}		
+		}
+		
 	}
-	
+	else
+	{
+		//Actividad Fisica
+		$('#mensajes-error-tabla-actividad').html('');
+		$('#mensajes-error-tabla-actividad').fadeOut();	
+		if($('#selector_objetivo_actividad').val() == 0 || $('#selector_objetivo_actividad').val() == null)
+		{
+			$('#mensajes-error-tabla-actividad').html("<p><b>Ocurrieron los siguientes errores:</b><br> - Debe seleccionar un objetivo</p>");
+			$('#mensajes-error-tabla-actividad').fadeIn();			
+		}
+		else
+		{
+			var aparecio = false;
+			objetivosSeleccionados.forEach(function(objetivo) {
+				if(objetivo.id == $('#selector_objetivo_actividad').val())
+				{
+					aparecio = true;
+				}
+			});
+			
+			if(aparecio == false)
+			{
+				var lineas = '';
+				objetivos.forEach(function(objetivo) {
+					if(objetivo.id == $('#selector_objetivo_actividad').val())
+					{
+						objetivosSeleccionados.push(objetivo);
+						lineas += "<tr><th>" + objetivo.nombre + "</th><td class='text-right'><button onclick='javascript:eliminarObjetivo("+ objetivo.id + ");' type='button' class='btn btn-danger btn-sm mr5'><i class='fa fa-trash'></i> Eliminar</button></td></tr>";
+						var tiempos = traerTiempos(objetivo.id);
+						if(tiempos != null)
+						{
+							lineas += "<tr><td>" + tiempos + "</td><td></td></tr>";
+						}
+					}
+				});
+				
+				tabla.push(lineas);
+				idTabla.push($('#selector_objetivo_actividad').val());
+				
+				$('#tabla-actividad').append(lineas);
+				$('#selector_objetivo').val(0);	
+			}
+			else
+			{
+				$('#mensajes-error-tabla-actividad').html("<p><b>Ocurrieron los siguientes errores:</b><br> - El objetivo ya se había agregado previamente.</p>");
+				$('#mensajes-error-tabla-actividad').fadeIn();			
+				
+			}		
+		}
+		
+	}
 
 }
 
@@ -363,8 +429,18 @@ function cambioCheck(idTiempo)
 
 function eliminarObjetivo(id)
 {
-	$('#mensajes-error-tabla').html('');
-	$('#mensajes-error-tabla').fadeOut();	
+	if($('#categoria').val() == 1)
+	{
+		$('#mensajes-error-tabla-receta').html('');
+		$('#mensajes-error-tabla-receta').fadeOut();	
+		
+	}
+	else
+	{
+		$('#mensajes-error-tabla-actividad').html('');
+		$('#mensajes-error-tabla-actividad').fadeOut();	
+		
+	}
 
 	var i = 0;
 	idTabla.forEach(function(t) {
@@ -390,17 +466,68 @@ function eliminarObjetivo(id)
 
 function rearmarTabla()
 {
-	$('#tabla').html('');
-	tabla.forEach(function(t) {
-		$('#tabla').append(t);
-	});
 	
+	if($('#categoria').val() == 1)
+	{
+		$('#tabla-receta').html('');
+		tabla.forEach(function(t) {
+			$('#tabla-receta').append(t);
+		});
+
+	}
+	else
+	{
+		$('#tabla-actividad').html('');
+		tabla.forEach(function(t) {
+			$('#tabla-actividad').append(t);
+		});
+		
+	}
+	
+
 	tiempoCheck.forEach(function(t) {
 		$('#tiempo_'+t).prop('checked', true);
 	});
 
 
 }
+
+
+function volver()
+{
+	history.back();
+}
+
+function guardar() {
+
+	$.ajax({
+		async:true,
+		type: "POST",
+		url: "/site/controller/publicacion-controller.php",
+		data: $('#frm').serialize() + "&imagenes=" + JSON.stringify(imagenes) + "&objetivos=" + JSON.stringify(objetivosSeleccionados) + "&tiempos=" + tiempoCheck,
+		beforeSend:function(){
+		},
+		success:function(datos) {
+			datos = datos.split("|");
+			
+			if (datos[0] == 'OK') {
+				window.location = "/publicaciones/ver/" + datos[1];
+				
+			} else {
+				location.hash = '';
+				$('#mensajes-error').html(datos[1]);
+				location.hash = 'mensajes-error';
+			}
+			return true;
+		},
+		timeout:8000,
+		error:function(){
+			return false;
+		}
+	});
+	
+}
+
 </script>
 
     <!-- UPLOAD FOTO -->
@@ -423,7 +550,6 @@ function rearmarTabla()
                 url: '/site/utiles/upload/files.php?nombre_input=fileupload',
                 dataType: 'json',
                 done: function (e, data) {
-					console.log("Pasa");
 
                     $.ajax({
                         async:true,
@@ -431,10 +557,13 @@ function rearmarTabla()
                         url: "/site/utiles/upload/obtener-foto.php",
                         data: 'foto=fileupload&repo=files&recorte=' + propRecorte,
                         beforeSend:function(xhr){
-							console.log("pasa");
+							$('#mensajes-error-imagenes').html('');
+							$('#mensajes-error-imagenes').fadeOut();	
+
                             if(data.originalFiles[0].name.split('.')[1].toLowerCase() != 'png' && data.originalFiles[0].name.split('.')[1].toLowerCase() != 'jpg' && data.originalFiles[0].name.split('.')[1].toLowerCase() != 'jpeg' && data.originalFiles[0].name.split('.')[1].toLowerCase() != 'gif'){
-                                xhr.abort();
-                                msgbox('La imagen seleccionada no es de un tipo admitido', "error");
+								xhr.abort();
+								$('#mensajes-error-imagenes').html("<p><b>Ocurrieron los siguientes errores:</b><br> - La imagen seleccionada no es de un tipo admitido.</p>");
+								$('#mensajes-error-imagenes').fadeIn();	
                                 $('#progress .progress-bar').css('width','0%');
                             }
                         },
@@ -466,7 +595,8 @@ function rearmarTabla()
                         },
                         timeout:8000,
                         error:function(){
-                            msgbox('Error al adjuntar el archivo', "error");
+								$('#mensajes-error-imagenes').html("<p><b>Ocurrieron los siguientes errores:</b><br> - Error al subir la imagen.</p>");
+								$('#mensajes-error-imagenes').fadeIn();	
                             return false;
                         }
                     });
@@ -487,6 +617,8 @@ function rearmarTabla()
 
 
         function eliminarimg(ref) {
+			$('#mensajes-error-imagenes').html("");
+			$('#mensajes-error-imagenes').fadeOut();	
 
             $("#" + ref).remove();
             $("#" + ref + "-pie").remove();
@@ -507,7 +639,8 @@ function rearmarTabla()
                                 },
                                 timeout:8000,
                                 error:function(){
-                                    msgbox('Error al eliminar la imagen', "error");
+								$('#mensajes-error-imagenes').html("<p><b>Ocurrieron los siguientes errores:</b><br> - Error al eliminar la imagen.</p>");
+								$('#mensajes-error-imagenes').fadeIn();	
                                     return false;
                                 }
                             });
