@@ -5,7 +5,7 @@
 
   class crear_publicacion_view  {
     
-	public $objetivosReceta;
+  	public $objetivosReceta;
     public $objetivosActividadFisica;
     public $usuario;
 

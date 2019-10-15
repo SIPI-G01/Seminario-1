@@ -346,7 +346,8 @@ datalist{
 
 #container-comentarios { 
   display: block; 
-  width: 100%; 
+  margin:auto;
+  width:70%; 
   background: #fff; 
   padding: 14px 20px; 
   -webkit-border-radius: 4px; 
@@ -354,13 +355,13 @@ datalist{
   border-radius: 4px; 
   -webkit-box-shadow: 1px 1px 1px rgba(0,0,0,0.3);
   -moz-box-shadow: 1px 1px 1px rgba(0,0,0,0.3);
-  box-shadow: 1px 1px 1px rgba(0,0,0,0.3);
+  box-shadow: 3px 3px 3px rgba(0,0,0,0.3);
 }
 
 /* comments area */
 #comments { display: block; }
 
-#comments .cmmnt, ul .cmmnt, ul ul .cmmnt { display: block; position: relative; padding-left: 65px; border-top: 1px solid #ddd; }
+#comments .cmmnt, ul .cmmnt, ul ul .cmmnt { display: block; position: relative; padding-left: 65px;}
 
 #comments .cmmnt .avatar  { position: absolute; top: 8px; left: 0; }
 #comments .cmmnt .avatar img { 

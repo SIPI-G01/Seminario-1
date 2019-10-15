@@ -4,6 +4,7 @@ include_once ($_SERVER["DOCUMENT_ROOT"] . '/dao/UsuarioDao.php');
 include_once ($_SERVER["DOCUMENT_ROOT"] . '/dao/PublicacionObjetivoDao.php');
 include_once ($_SERVER["DOCUMENT_ROOT"] . '/dao/PublicacionImagenDao.php');
 include_once ($_SERVER["DOCUMENT_ROOT"] . '/dao/PublicacionTiempoDao.php');
+include_once ($_SERVER["DOCUMENT_ROOT"] . '/dao/PublicacionComentarioDao.php');
 
 final class publicacion extends GenericEntity{
 
@@ -22,6 +23,7 @@ final class publicacion extends GenericEntity{
 	private $objetivos = null;
 	private $imagenes = null;
 	private $tiempos = null;
+	private $comentarios = null;
 
 	public function __construct() {
 		$this->setPk(array("id"));
@@ -46,6 +48,12 @@ final class publicacion extends GenericEntity{
 		//Metodo para obtener cuales son los tiempos de la publicacion
 	}
 	public function getComentarios() {
+		if($this->comentarios==null)
+		{
+			$this->comentarios = PublicacionComentarioDao::getXpublicacion($this->id);
+		}
+		return $this->comentarios;	
+		
 		//Metodo para obtener cuales son los comentarios de la publicacion
 	}
 	public function getLikes() {

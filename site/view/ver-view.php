@@ -1,5 +1,6 @@
 <?php
   include_once $_SERVER['DOCUMENT_ROOT'] . '/dao/PublicacionDao.php';
+  include_once $_SERVER['DOCUMENT_ROOT'] . '/dao/PublicacionComentarioDao.php';
 
   class ver_view  {
 

@@ -6,7 +6,9 @@
 <?php
  include_once  ($_SERVER["DOCUMENT_ROOT"] . '/site/view/ver-view.php');
  $view = new ver_view($params);
+ //$comentario = new comentario_view();
  $publi = $view->publi;
+ //$coment = $comentario->coment;
  ?>
 
 <div class="verContainer">
@@ -107,14 +109,21 @@ echo $publi->titulo . $objetivos;
    </div>
   </div>
   </div>
+
+  <?php  $tienePermiso = (Utiles::obtenerUsuarioLogueado() == null ? false : true); ?>
+  <?php if($tienePermiso){?>
   <div class="row">
-   <div class="col-md-3" >
-   </div>
-   <div class="col-md-9">
-      <button id="like" class="btn btn-success" onclick="alert('Te gusta esta publicacion')">Like</button>
-      <button id="dislike" class="btn btn-danger" onclick="alert('No te gusta esta publicacion')">Dislike</button>
-   </div>
-  </div>  
+  
+    <div class="col-md-3" >
+    </div>
+    <div class="col-md-9">
+      <button id="like" class="btn btn-success" onclick="likePub()">Like</button>
+      <button id="dislike" class="btn btn-danger" onclick="dislikePub()">Dislike</button>
+    </div>
+  </div>
+  <?php 
+    } 
+  ?>
 
   <div class="col-md-12" style="text-align:left; margin-top: 10px; border: 2px solid black; border-radius:10px">
     <?php
@@ -122,7 +131,10 @@ echo $publi->titulo . $objetivos;
     ?>
   </div>
 
-<!--<div id="L" class="col-md-12">
+<?php  $tienePermiso = (Utiles::obtenerUsuarioLogueado() == null ? false : true); ?>
+<?php if($tienePermiso){?>
+  <div class="row">
+    <div id="L" class="col-md-12">
 
     <h2 id="h2-cmmnt">SISTEMA DE COMENTARIOS <a href="/home">(SALIR)</a></h2>
 
@@ -137,22 +149,15 @@ echo $publi->titulo . $objetivos;
     </form>
 
     <?php
+
       if (isset($_POST['comentar'])){
 
-        $query = mysql_query("INSERT INTO publicacion_comentario (texto, id_usuario, fecha) value ('".$_POST['comentario']."', '".$SESSION['usuario-logueado']."', NOW())");
+        
+
+        /*$query = mysql_query("INSERT INTO publicacion_comentario (texto, id_usuario, fecha) value ('".$_POST['comentario']."', '".$SESSION['usuario-logueado']."', NOW())");
         
         if($query) {header ("Location: \site\template\publicaciones\ver.php");}
-
-      }
-    ?>
-
-    <?php
-      if (isset($_POST['reply'])){
-
-        $query = mysql_query("INSERT INTO publicacion_comentario (texto, id_usuario, fecha, reply) value ('".$_POST['comentario']."', '".$SESSION['usuario-logueado']."', NOW()), '".$GET['usuario-logueado']."'");
-        
-        if($query) {header ("Location: \site\template\publicaciones\ver.php");}
-
+*/
       }
     ?>
 
@@ -160,45 +165,64 @@ echo $publi->titulo . $objetivos;
 
     <div id="container-comentarios">
       <ul id="comments">
-
       <?php
-
-      /*$comentarios = mysql_query("SELECT * FROM publicacion_comentario WHERE reply = 0 ORDER BY id DESC");
-      while($row = mysql_fetc_array($comentarios)){
-
-        $usuario_c = mysql_query("SELECT * FROM usuario WHERE id = '".$row['usuario']."'");
-        $user = mysql_fetc_array($usuario_c);
-
-      } */ 
+        $i=0;
+        foreach ($publi->getComentarios() as $comentario) {
       ?>
-
         <li class="cmmnt">
           <div class="avatar">
-            <img src="<?php /*echo $user['imagen']; */ ?>" alt="NOT IMAGE LOADED" height="55" width="55">
-            <img src="\archivos\avatar-set\boy-1.png" alt="" height="55" width="55">
+            <img src="<?php echo($comentario->getUsuario()->imagen);  ?>" height="55" width="55">
           </div>
+
           <div class="cmmnt-content">
             <header>
-              <a id="a-cmmnt" href="#" class="userlink"><?php /*echo $user['usuario']; */ ?>Usuario 1</a> - <span class="pubdate"> 13/10/2019 17:24<?php /*echo $row['fecha'];*/ ?></span>
+              <a id="a-cmmnt"><?php echo($comentario->getusuario()->usuario); ?></a>
+              <span class="pubdate"><?php echo $comentario->fecha; ?></span>
             </header>
-            <p id="p-cmmnt">
-            <?php /*echo $row['comentario']; */?>
-            asdasdasdsadsadsadsadasdsadsadsadsadsad
+            <p id="p-cmmnt"> 
+              <?php echo $comentario->texto; ?>
             </p>
             <span>
-
+              <button type="button" class="btn btn-info">Responder</button>
             </span>
-          </div>
+
+            <?php
+              $i++;
+              }
+            ?>
+        </div>
         </li>
+        </ul>
+      </div>
+  
 
 
+   </div>
 
+   </div>
 
-      </ul>
+   <?php 
+    } 
+  ?>
 
+  </div>
 
-    </div>
+<script>
 
+  function likePub(){
 
-   </div>-->
+    <?php 
 
+      $item = new publicacion_like();
+
+    ?>
+
+  }
+
+  function dislikePub(){
+
+    alert("Funcion para sumar dislikes")
+
+  }
+
+</script>
