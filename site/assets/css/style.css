@@ -213,10 +213,6 @@ datalist{
   margin: auto;
 }
 
-.carousel-img:hover{
-  transform:scale(0.9);
-}
-
 .carousel-img{
   display: block;
   align-content: center;
@@ -224,15 +220,17 @@ datalist{
   height: 300px;
   width: 700px;
   border-radius: 20px;
-  transition: all 0.5s ease;
-  border-style: solid;
+  box-shadow: 8px 8px 8px rgba(0,0,0,0.548);
+  /*border-style: solid;
   border-color: black;
-  border-width: 5px;
+  border-width: 5px;*/
 }
 
 .verContainer{
   text-align: center;
-  padding-bottom: 10px;
+  padding-bottom: 20px;
+  font-family: Arial, Helvetica, sans-serif;
+  font-size: 25px;
 }
 
 .verContainer div{

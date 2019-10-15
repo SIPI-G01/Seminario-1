@@ -85,7 +85,7 @@ echo $publi->titulo . $objetivos;
      <?php
      $i++;
       }?>   </ol>
-   <div class="carousel-inner">
+   <div class="carousel-inner" style="padding-bottom:15px">
      <?php
      $i=0;
      foreach ($publi->getImagenes() as $imagen) {?>
@@ -106,13 +106,23 @@ echo $publi->titulo . $objetivos;
    </a>
    </div>
   </div>
-  <div class="col-md-12">
+  </div>
+  <div class="row">
+   <div class="col-md-3" >
+   </div>
+   <div class="col-md-9">
+      <button id="like" class="btn btn-success" onclick="alert('Te gusta esta publicacion')">Like</button>
+      <button id="dislike" class="btn btn-danger" onclick="alert('No te gusta esta publicacion')">Dislike</button>
+   </div>
+  </div>  
+
+  <div class="col-md-12" style="text-align:left; margin-top: 10px; border: 2px solid black; border-radius:10px">
     <?php
-    echo '<h5 class="descPub">'.$publi->texto.'</h5>';
+    echo '<h5>'.$publi->texto.'</h5>';
     ?>
   </div>
 
-   <div id="L" class="col-md-12">
+<!--<div id="L" class="col-md-12">
 
     <h2 id="h2-cmmnt">SISTEMA DE COMENTARIOS <a href="/home">(SALIR)</a></h2>
 
@@ -164,7 +174,7 @@ echo $publi->titulo . $objetivos;
 
         <li class="cmmnt">
           <div class="avatar">
-            <!--<img src="<?php /*echo $user['imagen']; */ ?>" alt="NOT IMAGE LOADED" height="55" width="55">-->
+            <img src="<?php /*echo $user['imagen']; */ ?>" alt="NOT IMAGE LOADED" height="55" width="55">
             <img src="\archivos\avatar-set\boy-1.png" alt="" height="55" width="55">
           </div>
           <div class="cmmnt-content">
@@ -190,7 +200,5 @@ echo $publi->titulo . $objetivos;
     </div>
 
 
-   </div>
+   </div>-->
 
-
-</div>
