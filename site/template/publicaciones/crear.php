@@ -538,9 +538,6 @@ function guardar() {
        /* var jsonImagenes = '<?php echo $view->jsonImagenes; ?>';
         imagenes = JSON.parse(jsonImagenes);*/
 
-        if (imagenes.length > 0 && imagenes.length == 5) {
-            $('#fileupload').attr('disabled', true);
-        }
 
         $(function () {
             'use strict';
@@ -566,6 +563,7 @@ function guardar() {
 								$('#mensajes-error-imagenes').fadeIn();	
                                 $('#progress .progress-bar').css('width','0%');
                             }
+							
                         },
 
                         success:function(datos) {
@@ -575,6 +573,10 @@ function guardar() {
                             var imagen = JSON.parse(datos);
                             imagen.orden=imagenes.length+1;
                             imagenes.push(imagen);
+							
+							if (imagenes.length > 0 && imagenes.length == 5) {
+								$('#fileupload').attr('disabled', true);
+							}
 
                             $('#imagen-modificada').val('1');
 

@@ -16,7 +16,7 @@ class PublicacionDao {
 		$query =   "SELECT DISTINCT p.* FROM publicacion p
 					LEFT JOIN publicacion_objetivo po ON po.id_publicacion = p.id
 					LEFT JOIN publicacion_tiempo pt ON pt.id_publicacion = p.id
-					WHERE p.activo = 1";
+					WHERE p.activo = 1 AND p.estado = 1";
 
 		if (sizeof($objetivos) > 0) {
 			$in = "(";
@@ -76,7 +76,7 @@ class PublicacionDao {
 		$query =   "SELECT DISTINCT p.* FROM publicacion p
 					LEFT JOIN publicacion_objetivo po ON po.id_publicacion = p.id
 					LEFT JOIN publicacion_tiempo pt ON pt.id_publicacion = p.id
-					WHERE p.activo = 1";
+					WHERE p.activo = 1 AND p.estado = 1";
 
 		if (sizeof($objetivos) > 0) {
 			$in = "(";
