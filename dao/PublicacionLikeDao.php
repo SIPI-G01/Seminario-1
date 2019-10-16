@@ -12,8 +12,8 @@ class PublicacionLikeDao {
 		return GenericDao::find("publicacion_like", array(array("activo", "=", "1")));
 	}
 
-	public static function getXpublicacion($id_publicacion) {
-		return GenericDao::find("publicacion_like", array(array("id_publicacion", "=", $id_publicacion), array("activo", "=", "1")));
+	public static function getXtipo($id_publicacion,$tipo) {
+		return GenericDao::find("publicacion_like", array(array("id_publicacion", "=", $id_publicacion), array("activo", "=", "1"),array("tipo", "=", $tipo)));
 	}
 	
 	public static function getValoracionXpublicacion($id_publicacion) {
@@ -38,7 +38,7 @@ class PublicacionLikeDao {
 
 	public static function eliminar($id) {
 		$query = "UPDATE publicacion_like SET
-									activo = false,
+									activo = 0
 					WHERE id = :id";
 
 		$params = array(

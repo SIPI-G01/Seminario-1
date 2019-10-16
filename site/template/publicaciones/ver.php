@@ -243,4 +243,45 @@ $(document).ready(function() {
     });
   }
 
+function likePub(){
+
+    $.ajax({
+      async:true,
+      type: "POST",
+      url: "/site/controller/like-controller.php",
+      data: "id_publicacion=" + <?php echo $publi->id; ?> + "&accion=like&token=" + <?php echo Utiles::obtenerToken(); ?>,
+      beforeSend:function(){
+      },
+      success:function(datos) {
+         window.location.reload();
+
+        return true;
+      },
+      timeout:8000,
+      error:function(){
+        return false;
+      }
+    });
+  }
+
+  function dislikePub(){
+
+    $.ajax({
+      async:true,
+      type: "POST",
+      url: "/site/controller/like-controller.php",
+      data: "id_publicacion=" + <?php echo $publi->id; ?> + "&accion=dislike&token=" + <?php echo Utiles::obtenerToken(); ?>,
+      beforeSend:function(){
+      },
+      success:function(datos) {
+         window.location.reload();
+
+        return true;
+      },
+      timeout:8000,
+      error:function(){
+        return false;
+      }
+    });
+  }
 </script>

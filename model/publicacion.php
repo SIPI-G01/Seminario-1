@@ -24,6 +24,8 @@ final class publicacion extends GenericEntity{
 	private $imagenes = null;
 	private $tiempos = null;
 	private $comentarios = null;
+	private $likes =null;
+	private $dislikes =null;
 
 	public function __construct() {
 		$this->setPk(array("id"));
@@ -57,7 +59,21 @@ final class publicacion extends GenericEntity{
 		//Metodo para obtener cuales son los comentarios de la publicacion
 	}
 	public function getLikes() {
-		//Metodo para obtener cuales son los likes de la publicacion
+			if($this->likes==null)
+		{
+			$this->likes = PublicacionLikeDao::getXtipo($this->id,1);
+
+		}
+		return $this->likes;	
+		
+	}
+	public function getDislikes() {
+				if($this->dislikes==null)
+		{
+			$this->dislikes = PublicacionLikeDao::getXtipo($this->id,-1);
+
+		}
+		return $this->dislikes;	
 	}
 	public function getObjetivos() {
 		if($this->objetivos == null)
