@@ -11,10 +11,14 @@
 	<head>
 		<?php include_once ($_SERVER["DOCUMENT_ROOT"] . '/site/include/scripts-header.php'); ?>
 	</head>
-	<body>
+	<?php if($_GET['controller'] == 'home')
+	{
+		$id = "index-home";
+	}
+	?>
+	<body  id="<?php echo $id;	?>">
 
-		
-		
+
 		<!-- start main-->
 	    <main>
 				<?php include_once ($_SERVER["DOCUMENT_ROOT"] . '/site/include/cabecera.php'); ?>

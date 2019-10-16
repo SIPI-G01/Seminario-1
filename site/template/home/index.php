@@ -3,7 +3,7 @@ include_once  ($_SERVER["DOCUMENT_ROOT"] . '/site/view/home-view.php');
 $view = new home_view();
 ?>
 <div class= "container-fluid">
-	
+
 	<div class="row texto-inicio">
 		<div class="col-md-12">
 			<h3 class="descHome">¿Cuántas veces le dijiste a tu elefante que tenía que bajar de peso?<br>Nosotros nunca lo hicimos, pero si necesitáramos un consejo... ¡entraríamos a esta página!<br>¡Publicá, puntuá, opiná y mucho más!</h3>
@@ -15,8 +15,8 @@ $view = new home_view();
 	<div class="row buscador">
 		<div class="col-md-12" id="objetivosList">
 			<div class="form-group">
-				<select class="form-control" id="categoria" name="categoria" onChange="seleccionarObjetivos();">	
-					<option value="0" selected disabled>Seleccione una categoría...</option>									
+				<select class="form-control" id="categoria" name="categoria" onChange="seleccionarObjetivos();">
+					<option value="0" selected disabled>Seleccione una categoría...</option>
 					<option value="1">Recetas</option>
 					<option value="2">Actividad física</option>
 				</select>
@@ -39,7 +39,7 @@ $view = new home_view();
 			</div>
 			<div class="col-md-10" id="tiempos-receta">
 			</div>
-		</div>	
+		</div>
 		<div id="buscador-objetivos-actividad" class="col-md-12" style="display: none;">
 			<div class="col-md-10" id="objetivosList">
 				<div class="form-group">
@@ -56,10 +56,10 @@ $view = new home_view();
 			</div>
 			<div class="col-md-10" id="tiempos-actividad">
 			</div>
-		</div>	
-		
-		
-	</div>	
+		</div>
+
+
+	</div>
 
 </div>
 
@@ -77,7 +77,7 @@ function seleccionarObjetivos()
 		$('#buscador-objetivos-receta').fadeIn();
 		$('#buscador-objetivos-actividad').fadeOut();
 		$('#tiempos-receta').html('');
-		$('#objetivos-receta').val(0);		
+		$('#objetivos-receta').val(0);
 		tiempos = <?php echo json_encode($view->tiemposReceta);?>;
 		objetivos = <?php echo json_encode($view->objetivosReceta);?>;
 		categoria = "receta";
@@ -87,7 +87,7 @@ function seleccionarObjetivos()
 		$('#buscador-objetivos-actividad').fadeIn();
 		$('#buscador-objetivos-receta').fadeOut();
 		$('#tiempos-actividad').html('');
-		$('#objetivos-actividad').val(0);		
+		$('#objetivos-actividad').val(0);
 		tiempos = <?php echo json_encode($view->tiemposActividad);?>;
 		objetivos = <?php echo json_encode($view->objetivosActividad);?>;
 		categoria = "actividad-fisica";
@@ -100,8 +100,8 @@ function cambiarTiempos()
 	{
 		var objetivo = $('#objetivos-receta').val();
 		$('#tiempos-receta').html('');
-		tiemposMostrar = [];	
-		var resultado = '<div class="col-md-12"><div class="row">';	
+		tiemposMostrar = [];
+		var resultado = '<div class="col-md-12"><div class="row">';
 		var i = 0;
 		tiempos.forEach(function(tiempo) {
 			if(tiempo.id_objetivo == objetivo)
@@ -112,11 +112,11 @@ function cambiarTiempos()
 			}
 		});
 		resultado += '</div></div>';
-		$('#tiempos-receta').append(resultado);	
+		$('#tiempos-receta').append(resultado);
 		objetivos.forEach(function(objs) {
 			if(objs.id == objetivo)
 			{
-				alias_objetivo = objs.alias;		
+				alias_objetivo = objs.alias;
 			}
 		});
 	}
@@ -124,8 +124,8 @@ function cambiarTiempos()
 	{
 		var objetivo = $('#objetivos-actividad').val();
 		$('#tiempos-actividad').html('');
-		tiemposMostrar = [];	
-		var resultado = '<div class="col-md-12"><div class="row">';	
+		tiemposMostrar = [];
+		var resultado = '<div class="col-md-12"><div class="row">';
 		var i = 0;
 		tiempos.forEach(function(tiempo) {
 			if(tiempo.id_objetivo == objetivo)
@@ -136,16 +136,16 @@ function cambiarTiempos()
 			}
 		});
 		resultado += '</div></div>';
-		$('#tiempos-actividad').append(resultado);	
+		$('#tiempos-actividad').append(resultado);
 		objetivos.forEach(function(objs) {
 			if(objs.id == objetivo)
 			{
-				alias_objetivo = objs.alias;		
+				alias_objetivo = objs.alias;
 			}
 		});
-		
+
 	}
-	 
+
 }
 function buscar()
 {
@@ -160,13 +160,13 @@ function buscar()
 					tiempos += "_" + tiempo.alias;
 				}
 			});
-			
+
 			if(tiempos != "")
 			{
 				tiempos = "_tiempos" + tiempos;
 			}
 
-			window.location.href = "/publicaciones/index/categoria_" + categoria + "_objetivo_" + alias_objetivo + tiempos;	
+			window.location.href = "/publicaciones/index/categoria_" + categoria + "_objetivo_" + alias_objetivo + tiempos;
 		}
 
 	}
@@ -181,16 +181,16 @@ function buscar()
 					tiempos += "_" + tiempo.alias;
 				}
 			});
-			
+
 			if(tiempos != "")
 			{
 				tiempos = "_tiempos" + tiempos;
 			}
 
-			window.location.href = "/publicaciones/index/categoria_" + categoria + "_objetivo_" + alias_objetivo + tiempos;	
+			window.location.href = "/publicaciones/index/categoria_" + categoria + "_objetivo_" + alias_objetivo + tiempos;
 		}
-		
-	}	
-	
+
+	}
+
 }
 </script>
