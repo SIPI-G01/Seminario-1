@@ -246,6 +246,7 @@ function seleccionarObjetivos()
 		tabla = [];
 		idTabla = [];		
 		tiempoCheck = [];	
+		objetivosSeleccionados = [];
 		$('#tabla-actividad').html('');
 		$('#actividad_fisica').fadeOut();		
 		$('#recetas').fadeIn();
@@ -262,6 +263,7 @@ function seleccionarObjetivos()
 		tabla = [];
 		idTabla = [];				
 		tiempoCheck = [];
+		objetivosSeleccionados = [];
 		$('#tabla-receta').html('');
 		$('#recetas').fadeOut();		
 		$('#actividad_fisica').fadeIn();

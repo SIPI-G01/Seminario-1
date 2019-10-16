@@ -13,6 +13,7 @@ class PublicacionComentarioDao {
 	}
 
 	public static function nuevo($item) {
+		$item->fecha = date("Y-m-d H:i:s", time());
 
 		return GenericDao::insert($item);
 	}// nuevo

@@ -138,28 +138,23 @@ echo $publi->titulo . $objetivos;
 
     <h2 id="h2-cmmnt">SISTEMA DE COMENTARIOS <a href="/home">(SALIR)</a></h2>
 
-    <form name="form1" method="post" action="">
-      <label for="textarea"></label>
+    <div id="msj-error">
+
+    </div>
+
+    <form name="form1" id="frm" action="javascript:void(1);">
+    <input type="hidden" name="accion" id="accion" value="nuevo"/>
+		<input type="hidden" name="token" id="token" value="<?php echo Utiles::obtenerToken(); ?>"/>
+    <input type="hidden" name="id_publicacion" id="id_publicacion" value="<?php echo $publi->id; ?>"/>
+
+      <label for="comentario"></label>
       <p id="p-cmmnt">
-        <textarea name="comentario" cols="80" rows="5" id="textarea"><?php if(isset($_GET['user'])) { ?>@<?php echo $_GET['user']; ?><?php } ?> </textarea>
+        <textarea name="comentario" cols="80" rows="5" id="comentario"><?php if(isset($_GET['user'])) { ?>@<?php echo $_GET['user']; ?><?php } ?> </textarea>
       </p>
       <p id="p-cmmnt">
-        <input type="submit" <?php if (isset($_GET['id'])) { ?>name="reply"<?php } else { ?>name="comentar"<?php } ?>value="Comentar">
+        <input type="submit" <?php if (isset($_GET['id'])) { ?>name="reply"<?php } else { ?>name="comentar"<?php } ?> onClick="agregarComentario();" value="Comentar">
       </p>
     </form>
-
-    <?php
-
-      if (isset($_POST['comentar'])){
-
-        
-
-        /*$query = mysql_query("INSERT INTO publicacion_comentario (texto, id_usuario, fecha) value ('".$_POST['comentario']."', '".$SESSION['usuario-logueado']."', NOW())");
-        
-        if($query) {header ("Location: \site\template\publicaciones\ver.php");}
-*/
-      }
-    ?>
 
     <br>
 
@@ -171,7 +166,7 @@ echo $publi->titulo . $objetivos;
       ?>
         <li class="cmmnt">
           <div class="avatar">
-            <img src="<?php echo($comentario->getUsuario()->imagen);  ?>" height="55" width="55">
+            <img src="/archivos/recortes/<?php echo($comentario->getUsuario()->imagen);  ?>" height="55" width="55">
           </div>
 
           <div class="cmmnt-content">
@@ -209,20 +204,43 @@ echo $publi->titulo . $objetivos;
 
 <script>
 
-  function likePub(){
+$(document).ready(function() {
+      $('#comentario').summernote({
+		  height: 300, 
+		  minHeight: null,  
+		  maxHeight: null,
+		  focus: false 
+		});
+  });
 
-    <?php 
 
-      $item = new publicacion_like();
-
-    ?>
-
-  }
-
-  function dislikePub(){
-
-    alert("Funcion para sumar dislikes")
-
+  function agregarComentario()
+  {
+    $.ajax({
+      async:true,
+      type: "POST",
+      url: "/site/controller/comentario-controller.php",
+      data: $('#frm').serialize(),
+      beforeSend:function(){
+      },
+      success:function(datos) {
+        datos = datos.split("|");
+        console.log(datos[1]);
+        if (datos[0] == 'OK') {
+         window.location.reload();
+          
+        } else {
+          location.hash = '';
+          $('#msj-error').html(datos[1]);
+          location.hash = 'msj-error';
+        }
+        return true;
+      },
+      timeout:8000,
+      error:function(){
+        return false;
+      }
+    });
   }
 
 </script>
