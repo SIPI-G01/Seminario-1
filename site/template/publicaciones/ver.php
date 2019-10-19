@@ -136,7 +136,7 @@ echo $publi->titulo . $objetivos;
   <div class="row">
     <div id="L" class="col-md-12">
 
-    <h2 id="h2-cmmnt">SISTEMA DE COMENTARIOS <a href="/home">(SALIR)</a></h2>
+    <h2 id="h2-cmmnt">SISTEMA DE COMENTARIOS</h2>
 
     <div id="msj-error">
 
@@ -148,47 +148,104 @@ echo $publi->titulo . $objetivos;
     <input type="hidden" name="id_publicacion" id="id_publicacion" value="<?php echo $publi->id; ?>"/>
 
       <label for="comentario"></label>
-      <p id="p-cmmnt">
+      <p style="color:black">
         <textarea name="comentario" cols="80" rows="5" id="comentario"><?php if(isset($_GET['user'])) { ?>@<?php echo $_GET['user']; ?><?php } ?> </textarea>
       </p>
-      <p id="p-cmmnt">
-        <input type="submit" <?php if (isset($_GET['id'])) { ?>name="reply"<?php } else { ?>name="comentar"<?php } ?> onClick="agregarComentario();" value="Comentar">
+      <p style="color:black">
+        <input class="btn btn-warning btn-lg" type="submit" name="comentar" onClick="agregarComentario();" value="Comentar">
       </p>
     </form>
 
     <br>
-
-    <div id="container-comentarios">
-      <ul id="comments">
-      <?php
+    <h2 class="text-center">Comentarios</h2>
+    <?php
         $i=0;
         foreach ($publi->getComentarios() as $comentario) {
-      ?>
-        <li class="cmmnt">
-          <div class="avatar">
-            <img src="/archivos/recortes/<?php echo($comentario->getUsuario()->imagen);  ?>" height="55" width="55">
+
+          if($comentario->reply==0){
+    ?>
+
+    <div class="container">
+
+	
+	<div class="card">
+	    <div class="card-body" style="color:black">
+	        <div class="row">
+        	    <div class="col-md-2">
+        	        <img src="/archivos/recortes/<?php echo($comentario->getUsuario()->imagen);  ?>" alt="" width="60" height="60" class="img img-rounded img-fluid"/>
+        	        <p class="text-secondary text-center"><?php echo($comentario->fecha);  ?></p>
+        	    </div>
+        	    <div class="col-md-10">
+        	        <p>
+                      <a class="float-left" href="#"><strong><?php echo($comentario->getusuario()->usuario); ?></strong></a>
+                      <!-- Valoracion del comentario 
+        	            <span class="float-right"><i class="text-warning fa fa-star"></i></span>
+                      <span class="float-right"><i class="text-warning fa fa-star"></i></span>
+        	            <span class="float-right"><i class="text-warning fa fa-star"></i></span>
+        	            <span class="float-right"><i class="text-warning fa fa-star"></i></span>-->
+
+        	       </p>
+        	       <div class="clearfix"></div>
+        	        <p style="color:black;text-align:left"><?php echo $comentario->texto; ?></p>
+        	        <p>
+        	            <button class="float-right btn btn-info ml-2" onclick="responder(<?php echo $comentario->id ?>);"> <i class="fa fa-reply"></i> Responder</button>
+        	            <!--<button class="float-right btn text-white btn-danger"> <i class="fa fa-heart"></i> Like</button>-->
+        	       </p>
+        	    </div>
           </div>
+          <div id="<?php echo 'div-resp'.$comentario->id; ?>" style="display:none">
+            <form name="<?php echo 'form'.$comentario->id; ?>" id="<?php echo 'formResp'.$comentario->id; ?>" action="javascript:void(1);">
+              <input type="hidden" name="accion" id="accion" value="nuevoResp"/>
+              <input type="hidden" name="token" id="token" value="<?php echo Utiles::obtenerToken(); ?>"/>
+              <input type="hidden" name="id_publicacion" id="id_publicacion" value="<?php echo $publi->id; ?>"/>
 
-          <div class="cmmnt-content">
-            <header>
-              <a id="a-cmmnt"><?php echo($comentario->getusuario()->usuario); ?></a>
-              <span class="pubdate"><?php echo $comentario->fecha; ?></span>
-            </header>
-            <p id="p-cmmnt"> 
-              <?php echo $comentario->texto; ?>
-            </p>
-            <span>
-              <button type="button" class="btn btn-info">Responder</button>
-            </span>
+              <label for="<?php echo 'respuesta'.$comentario->id; ?>"></label>
+                <p style="color:black">
+                  <textarea name="<?php echo 'respuesta'.$comentario->id; ?>" cols="60" rows="5" id="<?php echo 'respuesta'.$comentario->id; ?>" style="text-align:left"></textarea>
+                </p>
+                <p>
+                  <input class="btn btn-warning btn-lg" type="submit" name="<?php echo 'responder'.$comentario->id; ?>" onclick="agregarRespuesta(<?php echo $comentario->id ?>);" value="Responder">
+                </p>
+            </form>
+          </div>
+          <!-- Esta parte corresponde a las respuestas del comentario -->
+          <?php
+            $j=0;
+            foreach($publi->getRespuestas($comentario->id) as $respuesta){
 
+              if($comentario->id == $respuesta->reply){
+          ?>
+	        	<div class="card card-inner">
+            	    <div class="card-body">
+            	        <div class="row">
+                    	    <div class="col-md-2">
+                    	        <img src="/archivos/recortes/<?php echo($respuesta->getUsuario()->imagen);  ?>" width="60" height="60" class="img img-rounded img-fluid"/>
+                    	        <p class="text-secondary text-center"><?php echo($respuesta->fecha);  ?></p>
+                    	    </div>
+                    	    <div class="col-md-10 text-left">
+                    	        <p><a href="#"><strong><?php echo($respuesta->getusuario()->usuario); ?></strong></a></p>
+                    	        <p style="color:black"><?php echo $respuesta->texto; ?></p>
+                    	        <p>
+                    	            <!--<a class="float-right btn btn-info ml-2">  <i class="fa fa-reply"></i> Responder</a>
+                    	            <a class="float-right btn text-white btn-danger"> <i class="fa fa-heart"></i> Like</a>-->
+                    	       </p>
+                    	    </div>
+            	        </div>
+            	    </div>
+            </div>
             <?php
+                }
+              $j++;
+              }
+            ?>
+	    </div>
+	</div>
+</div>
+          <?php
+                } 
               $i++;
               }
             ?>
-        </div>
-        </li>
-        </ul>
-      </div>
   
 
 
@@ -200,8 +257,6 @@ echo $publi->titulo . $objetivos;
     } 
   ?>
 
-  </div>
-
 <script>
 
 $(document).ready(function() {
@@ -212,7 +267,6 @@ $(document).ready(function() {
 		  focus: false 
 		});
   });
-
 
   function agregarComentario()
   {
@@ -241,6 +295,56 @@ $(document).ready(function() {
         return false;
       }
     });
+  }
+
+  $(document).ready(function() {
+      $('#respuesta' ).summernote({
+		  height: 300, 
+		  minHeight: null,  
+		  maxHeight: null,
+		  focus: false 
+		});
+  });
+
+  function responder(id){
+
+    var x = document.getElementById('div-resp'+id);
+    if (x.style.display === 'none') {
+      x.style.display = 'block';
+    } else {
+      x.style.display = 'none';
+    }
+
+  }
+
+  function agregarRespuesta(id){
+
+    $.ajax({
+      async:true,
+      type: "POST",
+      url: "/site/controller/comentario-controller.php",
+      data: $('#formResp' + id).serialize() + "&id_comentario=" + id,
+      beforeSend:function(){
+      },
+      success:function(datos) {
+        datos = datos.split("|");
+        console.log(datos[1]);
+        if (datos[0] == 'OK') {
+         window.location.reload();
+          
+        } else {
+          location.hash = '';
+          $('#msj-error').html(datos[1]);
+          location.hash = 'msj-error';
+        }
+        return true;
+      },
+      timeout:8000,
+      error:function(){
+        return false;
+      }
+    });
+
   }
 
 function likePub(){

@@ -12,6 +12,10 @@ class PublicacionComentarioDao {
 		return GenericDao::find("publicacion_comentario", array(array("id_publicacion", "=", $id_publicacion)));
 	}
 
+	public static function getXcomentario($id_publicacion,$id_comentario) {
+		return GenericDao::find("publicacion_comentario", array(array("id_publicacion", "=", $id_publicacion),array("reply", "=", $id_comentario)));
+	}
+
 	public static function nuevo($item) {
 		$item->fecha = date("Y-m-d H:i:s", time());
 

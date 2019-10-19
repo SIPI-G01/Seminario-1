@@ -24,6 +24,7 @@ final class publicacion extends GenericEntity{
 	private $imagenes = null;
 	private $tiempos = null;
 	private $comentarios = null;
+	private $respuestas = null;
 	private $likes =null;
 	private $dislikes =null;
 
@@ -58,6 +59,16 @@ final class publicacion extends GenericEntity{
 		
 		//Metodo para obtener cuales son los comentarios de la publicacion
 	}
+
+	public function getRespuestas($id_comentario) {
+
+		$this->respuestas = PublicacionComentarioDao::getXcomentario($this->id,$id_comentario);
+		return $this->respuestas;
+		
+		
+		//Metodo para obtener cuales son los comentarios de la publicacion
+	}
+
 	public function getLikes() {
 			if($this->likes==null)
 		{
