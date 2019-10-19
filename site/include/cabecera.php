@@ -10,7 +10,18 @@
 			<li id="headerDer"><a href="#registro">Registrarse</a></li>
 			<li id="headerDer"><a href="#inicio_sesion">Iniciar sesion</a></li>
 		<?php } else { ?>
-			<li id="headerDer"><a href="#perfil">Hola <?php echo Utiles::obtenerUsuarioLogueado()->usuario; ?></a></li>
+			<li id="headerDer">
+				<a href="#">
+					Hola <?php echo Utiles::obtenerUsuarioLogueado()->usuario; ?> 
+					<span class="avatar avatar-online">
+						<?php if(Utiles::obtenerUsuarioLogueado()->archivo != null){?>
+							<img src="/archivos/recortes/<?php echo Utiles::obtenerUsuarioLogueado()->archivo; ?>" alt="...">
+						<?php } else { ?>
+							<img src="/site/images/faceless.jpg" alt="...">
+						<?php } ?>
+					</span>
+				</a>
+			</li>
 		<?php } ?>
 		
     </ul>

@@ -15,6 +15,11 @@
 }
 */
 
+a
+{
+	text-decoration: none !important;
+}
+
 .note-toolbar .panel-heading
 {
     position: inherit !important;
@@ -48,6 +53,11 @@ tr
 table
 {
 	width: 100%;
+}
+
+.avatar img
+{
+	max-height: 25px;
 }
 .panel-body
 {

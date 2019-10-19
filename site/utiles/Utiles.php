@@ -32,7 +32,15 @@ class Utiles {
 
 	public static function obtenerIdUsuarioLogueado() {
 		$logueado = Utiles::obtenerUsuarioLogueado();
-		return $logueado->id;
+		if($logueado != null)
+		{
+			return $logueado->id;
+			
+		}	
+		else
+		{
+			return null;
+		}
 	}// obtenerIdUsuarioLogueado
 
 	public static function obtenerToken() {

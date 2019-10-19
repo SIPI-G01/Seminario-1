@@ -33,6 +33,12 @@ echo $publi->titulo . $objetivos;
 ?>
 </div>
 
+<?php if(Utiles::obtenerIdUsuarioLogueado() ==  $publi->getUsuario()->id){ ?>
+		<div class="row text-center">
+		<button style="margin-left: 45%;" id="editarPublicacion" onClick="editarPublicacion('<?php echo $publi->alias; ?>')" class="btn btn-info"><i class="fa fa-pencil"></i> Editar publicación</button>
+		</div>
+<?php } ?>
+
 <div class="row" style="margin:0px 5px">
     <!--<div class="col-md-2" style="border: 5px solid black;">-->
     <!--ACA VAN LOS DATOS DEL USUARIO-->
@@ -269,6 +275,10 @@ $(document).ready(function() {
 		});
   });
   
+  function editarPublicacion(alias)
+  {
+	  window.location = '/publicaciones/editar/' + alias;
+  }
 
   function agregarComentario()
   {
