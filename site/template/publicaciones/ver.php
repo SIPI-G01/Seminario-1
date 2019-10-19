@@ -136,26 +136,27 @@ echo $publi->titulo . $objetivos;
   <div class="row">
     <div id="L" class="col-md-12">
 
-    <h2 id="h2-cmmnt">SISTEMA DE COMENTARIOS</h2>
+    <!--<h2 id="h2-cmmnt">SISTEMA DE COMENTARIOS</h2>-->
 
-    <div id="msj-error">
+	<div class="row text-center">
+		<div id="msj-error">
 
-    </div>
+		</div>
 
-    <form name="form1" id="frm" action="javascript:void(1);">
-    <input type="hidden" name="accion" id="accion" value="nuevo"/>
-		<input type="hidden" name="token" id="token" value="<?php echo Utiles::obtenerToken(); ?>"/>
-    <input type="hidden" name="id_publicacion" id="id_publicacion" value="<?php echo $publi->id; ?>"/>
+		<form name="form1" id="frm"  style="margin-left: 23.5%;" action="javascript:void(1);">
+		<input type="hidden" name="accion" id="accion" value="nuevo"/>
+			<input type="hidden" name="token" id="token" value="<?php echo Utiles::obtenerToken(); ?>"/>
+		<input type="hidden" name="id_publicacion" id="id_publicacion" value="<?php echo $publi->id; ?>"/>
 
-      <label for="comentario"></label>
-      <p style="color:black">
-        <textarea name="comentario" cols="80" rows="5" id="comentario"><?php if(isset($_GET['user'])) { ?>@<?php echo $_GET['user']; ?><?php } ?> </textarea>
-      </p>
-      <p style="color:black">
-        <input class="btn btn-warning btn-lg" type="submit" name="comentar" onClick="agregarComentario();" value="Comentar">
-      </p>
-    </form>
-
+		  <label for="comentario"></label>
+		  <p style="color:black;">
+			<textarea name="comentario" cols="80" rows="5" id="comentario"><?php if(isset($_GET['user'])) { ?>@<?php echo $_GET['user']; ?><?php } ?> </textarea>
+		  </p>
+		  <p style="color:black">
+			<input class="btn btn-warning btn-lg" type="submit" name="comentar" onClick="agregarComentario();" value="Comentar">
+		  </p>
+		</form>
+	</div>
     <br>
     <h2 class="text-center">Comentarios</h2>
     <?php
@@ -194,14 +195,14 @@ echo $publi->titulo . $objetivos;
         	    </div>
           </div>
           <div id="<?php echo 'div-resp'.$comentario->id; ?>" style="display:none">
-            <form name="<?php echo 'form'.$comentario->id; ?>" id="<?php echo 'formResp'.$comentario->id; ?>" action="javascript:void(1);">
+            <form name="<?php echo 'form'.$comentario->id; ?>" id="<?php echo 'formResp'.$comentario->id; ?>"action="javascript:void(1);">
               <input type="hidden" name="accion" id="accion" value="nuevoResp"/>
               <input type="hidden" name="token" id="token" value="<?php echo Utiles::obtenerToken(); ?>"/>
               <input type="hidden" name="id_publicacion" id="id_publicacion" value="<?php echo $publi->id; ?>"/>
 
               <label for="<?php echo 'respuesta'.$comentario->id; ?>"></label>
-                <p style="color:black">
-                  <textarea name="<?php echo 'respuesta'.$comentario->id; ?>" cols="60" rows="5" id="<?php echo 'respuesta'.$comentario->id; ?>" style="text-align:left"></textarea>
+				<p style="color:black;">
+                  <textarea name="<?php echo 'respuesta'.$comentario->id; ?>" cols="60" rows="3" id="<?php echo 'respuesta'.$comentario->id; ?>" style="text-align:left"></textarea>
                 </p>
                 <p>
                   <input class="btn btn-warning btn-lg" type="submit" name="<?php echo 'responder'.$comentario->id; ?>" onclick="agregarRespuesta(<?php echo $comentario->id ?>);" value="Responder">
@@ -222,9 +223,9 @@ echo $publi->titulo . $objetivos;
                     	        <img src="/archivos/recortes/<?php echo($respuesta->getUsuario()->imagen);  ?>" width="60" height="60" class="img img-rounded img-fluid"/>
                     	        <p class="text-secondary text-center"><?php echo($respuesta->fecha);  ?></p>
                     	    </div>
-                    	    <div class="col-md-10 text-left">
+                    	    <div class="col-md-10 text-left respuestaComentario" style="color:black;">
                     	        <p><a href="#"><strong><?php echo($respuesta->getusuario()->usuario); ?></strong></a></p>
-                    	        <p style="color:black"><?php echo $respuesta->texto; ?></p>
+                    	        <p><?php echo $respuesta->texto; ?></p>
                     	        <p>
                     	            <!--<a class="float-right btn btn-info ml-2">  <i class="fa fa-reply"></i> Responder</a>
                     	            <a class="float-right btn text-white btn-danger"> <i class="fa fa-heart"></i> Like</a>-->
@@ -261,12 +262,13 @@ echo $publi->titulo . $objetivos;
 
 $(document).ready(function() {
       $('#comentario').summernote({
-		  height: 300, 
+		  height: 150, 
 		  minHeight: null,  
 		  maxHeight: null,
 		  focus: false 
 		});
   });
+  
 
   function agregarComentario()
   {
@@ -296,20 +298,17 @@ $(document).ready(function() {
       }
     });
   }
-
-  $(document).ready(function() {
-      $('#respuesta' ).summernote({
-		  height: 300, 
-		  minHeight: null,  
-		  maxHeight: null,
-		  focus: false 
-		});
-  });
-
   function responder(id){
 
     var x = document.getElementById('div-resp'+id);
     if (x.style.display === 'none') {
+	  $('#respuesta' + id).summernote({
+		  height: 150, 
+		  minHeight: null,  
+		  maxHeight: null,
+		  focus: false 
+		});
+		
       x.style.display = 'block';
     } else {
       x.style.display = 'none';

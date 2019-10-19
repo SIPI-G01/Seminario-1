@@ -132,6 +132,11 @@ ul {
   float: right;
 }
 
+.respuestaComentario p
+{
+	color: black;
+}
+
 body{
   margin: 0px;
   /*background-image: linear-gradient(to bottom, rgb(36, 36, 36), rgba(255, 255, 255, 0.267));*/
@@ -140,6 +145,15 @@ body{
   /*background-image: url("/archivos/Fondos/1.jpg");
   background-size: cover;
   background-repeat: no-repeat;*/
+}
+
+#index-default
+{
+	background-color: #bcdccd !important;
+  /*background-image: url("/archivos/Fondos/1.jpg");
+  background-size: cover;
+  background-repeat: no-repeat;*/
+	
 }
 
 #index-home{

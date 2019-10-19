@@ -15,6 +15,10 @@
 	{
 		$id = "index-home";
 	}
+	else
+	{
+		$id = "index-default";
+	}
 	?>
 	<body  id="<?php echo $id;	?>">
 
