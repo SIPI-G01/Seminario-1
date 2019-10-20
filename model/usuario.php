@@ -6,6 +6,7 @@ final class usuario extends GenericEntity{
 
 	public $id;
 	public $mail;
+	public $alias;
 	public $usuario;
 	public $password;
 	public $nombre;
