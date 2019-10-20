@@ -2,6 +2,7 @@
   include_once $_SERVER['DOCUMENT_ROOT'] . '/site/utiles/Utiles.php';
   include_once $_SERVER['DOCUMENT_ROOT'] . '/dao/UsuarioDao.php';
   include_once $_SERVER['DOCUMENT_ROOT'] . '/dao/ObjetivoDao.php';
+  include_once $_SERVER['DOCUMENT_ROOT'] . '/dao/PublicacionDao.php';
 
   class editar_publicacion_view  {
     
@@ -10,7 +11,8 @@
     public $usuario;
 
     function __construct($params) {
-		
+		$this->publicacion = PublicacionDao::getXalias($params);
+		$this->publicacion = $this->publicacion[0];
 		$this->usuario = UsuarioDao::get(Utiles::obtenerIdUsuarioLogueado());
 		//$this->objetivosReceta = ObjetivoDao::listXcategoria(1);
 		//$this->objetivosActividadFisica = ObjetivoDao::listXcategoria(2);

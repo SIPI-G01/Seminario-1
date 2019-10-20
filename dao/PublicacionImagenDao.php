@@ -28,14 +28,13 @@ class PublicacionImagenDao {
 	}// modificar
 
 	public static function eliminar($id) {
-		$query = "UPDATE id_publicacion SET
-									activo = false,
+		$query = "UPDATE publicacion_imagen SET
+									activo = false
 					WHERE id = :id";
 
 		$params = array(
 						":id" => $id
 		);
-
 		GenericDao::executeQuery($query, $params);
 	}// eliminar
 }

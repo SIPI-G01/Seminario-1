@@ -2,11 +2,30 @@
  include_once  ($_SERVER["DOCUMENT_ROOT"] . '/site/view/editar-publicacion-view.php');
  
  $tienePermiso = (Utiles::obtenerUsuarioLogueado() == null ? false : true);
+ $mensajeError = 'Para editar una publicación, es necesario iniciar sesión.';
+ 
  
  if($tienePermiso)
  {
 	$view = new editar_publicacion_view($params); 
+	$objetivosNum = $view->publicacion->getObjetivos();
+		
+	$objetivosSeleccionados = array();
+	
+	foreach($objetivosNum as $obj)
+	{
+		$objetivo = $obj->getObjetivo();
+		array_push($objetivosSeleccionados, $objetivo);
+	}	
  }
+ 
+ if($tienePermiso)
+ {
+	$tienePermiso = (Utiles::obtenerIdUsuarioLogueado() == $view->publicacion->id_usuario ? true : false);
+	$mensajeError = 'No puede editar una publicación que no fue creada por usted.';
+
+ }
+
  
  $propRecorte = "0";
 
@@ -18,7 +37,7 @@
 	<div class="container">
 		<div class="row">
 			<div class="col-md-12">
-				<h3>Nueva publicación</h3>
+				<h3>Editar publicación</h3>
 			</div>
 		</div>
 		<div class="row">
@@ -31,12 +50,14 @@
 							</div>
 								<input type="hidden" name="accion" id="accion" value="editar"/>
 								<input type="hidden" name="token" id="token" value="<?php echo Utiles::obtenerToken(); ?>"/>
+								<input type="hidden" name="id" id="id" value="<?php echo $view->publicacion->id; ?>"/>
+								
 								<div class="form-group row">
 									<label class="col-sm-2 control-label">Visualización *</label>
 									<div class="col-sm-10">
 										<select class="form-control" id="estado" name="estado">
-											<option value="1" selected>Público</option>
-											<option value="2">Privado</option>
+											<option value="1" <?php echo ($view->publicacion->estado == 1 ? 'selected' : ''); ?> >Público</option>
+											<option value="2" <?php echo ($view->publicacion->estado == 2 ? 'selected' : ''); ?> >Privado</option>
 										</select>
 									</div>
 								</div>
@@ -46,8 +67,8 @@
 									<div class="col-sm-10">
 										<select class="form-control" id="categoria" name="categoria" onChange="seleccionarObjetivos();">	
 											<option value="0" selected disabled>Seleccione una categoría...</option>									
-											<?php echo ($view->objetivosReceta != null ? '<option value="1">Recetas</option>': '');?>
-											<?php echo ($view->objetivosActividadFisica != null ? '<option value="2">Actividad física</option>': '');?>
+											<?php echo ($view->objetivosReceta != null ? '<option value="1" ' . ($view->publicacion->categoria == 1 ? 'selected' : '') . '>Recetas</option>': '');?>
+											<?php echo ($view->objetivosActividadFisica != null ? '<option value="2" ' . ($view->publicacion->categoria == 2 ? 'selected' : '') . '>Actividad física</option>': '');?>
 										</select>
 									</div>
 								</div>
@@ -118,19 +139,19 @@
 								<div class="form-group row">
 									<label class="col-sm-2 control-label">Título *</label>
 									<div class="col-sm-10">
-										<input type="text" class="form-control" id="titulo" name="titulo" value=""/>
+										<input type="text" class="form-control" id="titulo" name="titulo" value="<?php echo $view->publicacion->titulo; ?>"/>
 									</div>
 								</div>
 								<div class="form-group row">
 									<label class="col-sm-2 control-label">Descripción *<br><small>(max. 400 caracteres)</small></label>
 									<div class="col-sm-10">
-										<textarea id="descripcion" name="descripcion" class="form-control" maxlength="400" rows="5"></textarea>
+										<textarea id="descripcion" name="descripcion" class="form-control" maxlength="400" rows="5"><?php echo $view->publicacion->descripcion; ?></textarea>
 									</div>
 								</div>								
 								<div class="form-group row">
 									<label class="col-sm-2 control-label">Contenido *</label>
 									<div class="col-sm-10">
-										<textarea id="texto" name="texto"></textarea>
+										<textarea id="texto" name="texto"><?php echo $view->publicacion->texto; ?></textarea>
 									</div>
 								</div>
 								
@@ -157,7 +178,30 @@
 									<div class="col-sm-10">
 										<table id="tabla-imagenes" class="table table-hover no-m">
 											<tbody>
-												
+												   <?php
+														if ($view->publicacion->getImagenes() != null)
+														{
+															foreach($view->publicacion->getImagenes() as $img)
+															{
+																$ext = explode(".", $img->archivo);
+
+																echo '
+																<tr id="' . $ext[0] . '">
+																	<td>
+																		<img id="img-recorte" src="/archivos/recortes/' . $img->archivo . '" width="70px"/></td>
+																	</td>
+																	<td>
+																		' . $img->imagen . '
+																	</td>
+																	<td>
+																		<button onclick="javascript:recortar(\'' . $img->archivo . '\',\'archivos\',\'img-recorte\', ' . $propRecorte . ', \'imagenPrincipalRecorte\');" type="button" class="btn btn-info btn-sm mr5" title="Recortar foto"><i class="fa fa-scissors"></i> </button>
+																		<button onclick="javascript:eliminarimg(\'' . $ext[0] . '\');" type="button" class="btn btn-danger btn-sm mr5" title="Ordenar"><i class="fa fa-trash"></i> </button>
+																	</td>
+																</tr>
+																';															
+															}
+														}
+                                                    ?>
 											</tbody>
 										</table>
 									</div>
@@ -211,7 +255,7 @@
 
 	<?php } else { ?>
 		<div class="text-center">
-			<h3 class="sub-title">Para crear una publicación, es necesario iniciar sesión.</h3><!-- /.sub-title -->
+			<h3 class="sub-title"><?php echo $mensajeError; ?></h3><!-- /.sub-title -->
 			<a href="/" class="btn">Ir a la home</a><!-- /.btn -->
 		</div>
 	<?php } ?>
@@ -228,7 +272,6 @@
     });
 
 
-
 var categoria = 0;
 var tiempos = [];
 var objetivos = [];
@@ -236,6 +279,42 @@ var tabla = [];
 var idTabla = [];
 var tiempoCheck = [];
 var objetivosSeleccionados = [];
+
+seleccionarObjetivos();
+precargarObjetivosYTiempos();
+
+function precargarObjetivosYTiempos()
+{
+	var objetivos = <?php echo json_encode($objetivosSeleccionados); ?>;
+	var tiempos = <?php echo json_encode($view->publicacion->getTiempos()); ?>;
+	
+	objetivos.forEach(function(objetivo) {
+		objetivosSeleccionados.push(objetivo);
+		var lineas = "<tr><th>" + objetivo.nombre + "</th><td class='text-right'><button onclick='javascript:eliminarObjetivo("+ objetivo.id + ");' type='button' class='btn btn-danger btn-sm mr5'><i class='fa fa-trash'></i> Eliminar</button></td></tr>";
+		var tiempos = traerTiempos(objetivo.id);
+		if(tiempos != null)
+		{
+			lineas += "<tr><td>" + tiempos + "</td><td></td></tr>";
+		}
+		tabla.push(lineas);
+		idTabla.push(objetivo.id);
+		
+		if($('#categoria').val() == 1)
+		{
+			$('#tabla-receta').append(lineas);						
+		}
+		else
+		{
+			$('#tabla-actividad').append(lineas);			
+		}		
+	});
+	
+	tiempos.forEach(function(t) {
+		$('#tiempo_'+t.id_tiempo).prop('checked', true);
+		tiempoCheck.push(t.id_tiempo);
+	});
+}
+
 function seleccionarObjetivos()
 {
 	if($('#categoria').val() == 1)
@@ -370,7 +449,7 @@ function agregarObjetivo()
 				idTabla.push($('#selector_objetivo_actividad').val());
 				
 				$('#tabla-actividad').append(lineas);
-				$('#selector_objetivo').val(0);	
+				$('#selector_objetivo_actividad').val(0);	
 			}
 			else
 			{
@@ -516,7 +595,6 @@ function guardar() {
 				window.location = "/publicaciones/ver/" + datos[1];
 				
 			} else {
-				location.hash = '';
 				$('#mensajes-error').html(datos[1]);
 				location.hash = 'mensajes-error';
 			}
@@ -537,9 +615,8 @@ function guardar() {
         var propRecorte = <?php echo $propRecorte; ?>;
         var imagenes = [];
 
-       /* var jsonImagenes = '<?php echo $view->jsonImagenes; ?>';
-        imagenes = JSON.parse(jsonImagenes);*/
-
+       var jsonImagenes = '<?php echo json_encode($view->publicacion->getImagenes()); ?>';
+       imagenes = JSON.parse(jsonImagenes);
 
         $(function () {
             'use strict';

@@ -370,7 +370,7 @@ function agregarObjetivo()
 				idTabla.push($('#selector_objetivo_actividad').val());
 				
 				$('#tabla-actividad').append(lineas);
-				$('#selector_objetivo').val(0);	
+				$('#selector_objetivo_actividad').val(0);	
 			}
 			else
 			{

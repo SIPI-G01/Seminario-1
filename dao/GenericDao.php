@@ -319,7 +319,7 @@ class GenericDao {
 
 		$DBH = getConnection();
 		$STH = $DBH->prepare($query);
-
+		
 		if (!$STH->execute($params)) {
 			echo "ERROR: ";
 			print_r($STH->errorInfo());
@@ -352,7 +352,7 @@ class GenericDao {
 		}// foreach pk field
 
 		$query = "DELETE FROM " . get_class($obj) . $where;
-		echo $query;
+		
 		$DBH = getConnection();
 		$STH = $DBH->prepare($query);
 
