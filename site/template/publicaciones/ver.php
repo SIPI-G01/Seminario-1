@@ -121,10 +121,11 @@ echo $publi->titulo . $objetivos;
     <div class="col-md-3" >
     </div>
     <div class="col-md-9">
-      <button class="btn btn-success">Likes: <?php echo sizeof($publi->getLikes());?></button>
-      <button class="btn btn-danger">DisLikes: <?php echo sizeof($publi->getDislikes());?></button>
-      <button id="like" class="btn btn-success" onclick="likePub()" <?php $publi->votoLike();?>>Like</button>
-      <button id="dislike" class="btn btn-danger" onclick="dislikePub()" <?php $publi->votoDisLike();?>>Dislike</button>
+      <span class="label label-success">Likes: <?php echo sizeof($publi->getLikes());?></span>
+
+      <button id="like" class="btn btn-primary btn-sm" onclick="likePub()" <?php $publi->votoLike();?>>Like</button>
+      <button id="dislike" class="btn btn-danger btn-sm" onclick="dislikePub()" <?php $publi->votoDisLike();?>>Dislike</button>
+            <span class="label label-warning">DisLikes: <?php echo sizeof($publi->getDislikes());?></span>
     </div>
   </div>
   <?php 
