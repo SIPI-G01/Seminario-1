@@ -5,6 +5,7 @@ include_once ($_SERVER["DOCUMENT_ROOT"] . '/dao/PublicacionObjetivoDao.php');
 include_once ($_SERVER["DOCUMENT_ROOT"] . '/dao/PublicacionImagenDao.php');
 include_once ($_SERVER["DOCUMENT_ROOT"] . '/dao/PublicacionTiempoDao.php');
 include_once ($_SERVER["DOCUMENT_ROOT"] . '/dao/PublicacionComentarioDao.php');
+include_once ($_SERVER["DOCUMENT_ROOT"] . '/dao/PublicacionLikeDao.php');
 
 final class publicacion extends GenericEntity{
 
@@ -27,6 +28,8 @@ final class publicacion extends GenericEntity{
 	private $respuestas = null;
 	private $likes =null;
 	private $dislikes =null;
+	private $votoLike = false;
+	private $votoDislike = false;
 
 	public function __construct() {
 		$this->setPk(array("id"));
@@ -68,6 +71,9 @@ final class publicacion extends GenericEntity{
 		
 		//Metodo para obtener cuales son los comentarios de la publicacion
 	}
+public function getReacciones() {
+		return PublicacionLikeDao::getReacciones($this->id);
+	}
 
 	public function getLikes() {
 			if($this->likes==null)
@@ -104,7 +110,23 @@ final class publicacion extends GenericEntity{
 
 		//Metodo para obtener cuales son las imagenes de la publicacion
 	}
+	
+	public function votoLike(){		
+		$voto = PublicacionLikeDao::chequearSiYaReacciono($this->id, Utiles::obtenerIdUsuarioLogueado(), 1);
 
+		if($voto > 0){
+			echo "disabled";
+		}
+	}
+
+
+	public function votoDisLike(){
+		$voto = PublicacionLikeDao::chequearSiYaReacciono($this->id, Utiles::obtenerIdUsuarioLogueado(), -1);
+
+		if($voto > 0){
+			echo "disabled";
+		}
+	}
 
 };
 ?>

@@ -16,13 +16,22 @@ if (isset($token) && $token == Utiles::obtenerToken()) {
 			$valido = true;
 			$errores = '<strong>Ocurrieron los siguientes errores:</strong>';
 			$publi= PublicacionDao::get($_POST['id_publicacion']);
-			$likes= $publi->getLikes();
+			$likes= $publi->getReacciones();
 			foreach ($likes as $like ) {
 				if($like ->id_usuario==Utiles::obtenerIdUsuarioLogueado())
 				{
 					//$idLike = (int) $like->id;
 					//var_dump($idLike);
-					PublicacionLikeDao::eliminar($like->id);
+					if($like ->tipo == 1) {
+						if($like ->activo == 1 ){
+							PublicacionLikeDao::eliminar($like->id,Utiles::obtenerIdUsuarioLogueado());
+						}else{
+							PublicacionLikeDao::activar($like->id,Utiles::obtenerIdUsuarioLogueado());
+						}
+					} else {
+							PublicacionLikeDao::cambiarTipo($like->id, 1, Utiles::obtenerIdUsuarioLogueado());
+					}
+
 					$valido=false;
 				}
 				
@@ -51,16 +60,21 @@ if (isset($token) && $token == Utiles::obtenerToken()) {
 				$valido = true;
 				$errores = '<strong>Ocurrieron los siguientes errores:</strong>';
 				$publi= PublicacionDao::get($_POST['id_publicacion']);
-				$likes= $publi->getDislikes();
+				$dislikes= $publi->getReacciones();
 				foreach ($dislikes as $dislike ) {
-					if($dislike ->id_usuario==Utiles::obtenerIdUsuarioLogueado())
-					{
-						//$idLike = (int) $like->id;
-						//var_dump($idLike);
-						PublicacionLikeDao::eliminar($dislike->id);
-						$valido=false;
+					if($dislike ->id_usuario==Utiles::obtenerIdUsuarioLogueado()){
+						if($dislike ->tipo == -1) {
+						if($dislike ->activo == 1 ){
+							PublicacionLikeDao::eliminar($dislike->id,Utiles::obtenerIdUsuarioLogueado());
+						}else{
+							PublicacionLikeDao::activar($dislike->id,Utiles::obtenerIdUsuarioLogueado());
+						}
+					} else {
+							PublicacionLikeDao::cambiarTipo($dislike->id, -1, Utiles::obtenerIdUsuarioLogueado());
 					}
-					
+
+					$valido=false;
+					}
 
 				}
 				if ($valido) {
