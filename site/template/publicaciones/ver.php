@@ -6,9 +6,7 @@
 <?php
  include_once  ($_SERVER["DOCUMENT_ROOT"] . '/site/view/ver-view.php');
  $view = new ver_view($params);
- //$comentario = new comentario_view();
  $publi = $view->publi;
- //$coment = $comentario->coment;
  ?>
 
 <div class="verContainer">
