@@ -30,6 +30,7 @@ if (isset($token) && $token == Utiles::obtenerToken()) {
 						}
 					} else {
 							PublicacionLikeDao::cambiarTipo($like->id, 1, Utiles::obtenerIdUsuarioLogueado());
+							PublicacionLikeDao::cambiarActivo($like->id,0, Utiles::obtenerIdUsuarioLogueado());
 					}
 
 					$valido=false;
@@ -71,6 +72,7 @@ if (isset($token) && $token == Utiles::obtenerToken()) {
 						}
 					} else {
 							PublicacionLikeDao::cambiarTipo($dislike->id, -1, Utiles::obtenerIdUsuarioLogueado());
+								PublicacionLikeDao::cambiarActivo($dislike->id,0, Utiles::obtenerIdUsuarioLogueado());
 					}
 
 					$valido=false;

@@ -89,6 +89,19 @@ class PublicacionLikeDao {
 
 	}
 
+	public static function cambiarActivo($id,$id_usuario){
+		$query = "UPDATE publicacion_like SET
+									activo = 0
+					WHERE id = :id AND id_usuario = :id_usuario";
+
+		$params = array(
+						":id" => $id,
+						":id_usuario" => $id_usuario
+		);
+
+		GenericDao::executeQuery($query, $params);
+
+	}
 	public static function chequearSiYaReacciono($id_publicacion, $id_usuario, $tipo) {
 
 		$query = "SELECT COUNT(id) as cantidad FROM publicacion_like 

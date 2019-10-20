@@ -114,18 +114,18 @@ public function getReacciones() {
 	public function votoLike(){		
 		$voto = PublicacionLikeDao::chequearSiYaReacciono($this->id, Utiles::obtenerIdUsuarioLogueado(), 1);
 
-		if($voto > 0){
-			echo "disabled";
-		}
+	//	if($voto > 0){
+			//echo "disabled";
+	//	}
 	}
 
 
 	public function votoDisLike(){
 		$voto = PublicacionLikeDao::chequearSiYaReacciono($this->id, Utiles::obtenerIdUsuarioLogueado(), -1);
 
-		if($voto > 0){
-			echo "disabled";
-		}
+		//if($voto > 0){
+		//	echo "disabled";
+	//	}
 	}
 
 };
