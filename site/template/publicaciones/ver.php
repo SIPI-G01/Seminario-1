@@ -61,11 +61,17 @@ echo $publi->titulo . $objetivos;
                     </div>
                 <div class="modal-body">
                     <div style="text-align:center;">
-                      <!--Cambiar foto por foto de usuario-->
                     <img src="\archivos\usuarios\<?php echo $usuario->archivo; ?>" name="aboutme" width="140" height="140" border="0" class="img-circle"></a>
                     <h3 class="media-heading"><?php echo $usuario->nombre . " " . $usuario->apellido;?></h3>
                     <span><strong>Fecha de nacimiento: </strong></span><span class="label label-info"><?php echo $usuario->fecha_nacimiento;?></span><br>
-                    <span><strong>Mail: </strong></span><span class="label label-info"><?php echo $usuario->mail;?></span>
+                    <span><strong>Mail: </strong></span><span class="label label-info"><?php echo $usuario->mail;?></span><br>
+                    <span><strong>Objetivos del usuario</strong></span><br>
+                    <?php
+                    foreach($usuario->getObjetivos() as $objetivoUsuario){
+                      ?>
+                      <span><?php echo $objetivoUsuario->nombre; ?></span><br>
+                    <?php } ?>
+
                     </div>
                     <hr>
                 </div>
