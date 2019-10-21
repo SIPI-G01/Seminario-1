@@ -43,7 +43,7 @@ echo $publi->titulo . $objetivos;
 
 <!--- Include the above in your HEAD tag ---------->
 <div class="col-md-3" style="width: 15rem;">
-<a href="#aboutModal" data-toggle="modal" data-target="#myModal"><img class="userImg" src="\archivos\avatar-set\boy.png" name="aboutme" width="80" height="80"></a>
+  <a href="\usuario\perfil\<?php echo $publi->getUsuario()->alias; ?>" ><img class="userImg" src="\archivos\avatar-set\boy.png" name="aboutme" width="80" height="80"></a>
   <div class="card-body" id="userCardBody">
     <h5 class="card-title" id="userCardTitle"><?php $usuario = $publi->getUsuario();
                             echo $usuario->nombre . " " . $usuario->apellido;?></h5>
