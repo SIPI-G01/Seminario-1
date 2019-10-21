@@ -62,7 +62,7 @@ echo $publi->titulo . $objetivos;
                 <div class="modal-body">
                     <div style="text-align:center;">
                       <!--Cambiar foto por foto de usuario-->
-                    <img src="https://encrypted-tbn2.gstatic.com/images?q=tbn:ANd9GcRbezqZpEuwGSvitKy3wrwnth5kysKdRqBW54cAszm_wiutku3R" name="aboutme" width="140" height="140" border="0" class="img-circle"></a>
+                    <img src="\archivos\usuarios\<?php echo $usuario->archivo; ?>" name="aboutme" width="140" height="140" border="0" class="img-circle"></a>
                     <h3 class="media-heading"><?php echo $usuario->nombre . " " . $usuario->apellido;?></h3>
                     <span><strong>Fecha de nacimiento: </strong></span><span class="label label-info"><?php echo $usuario->fecha_nacimiento;?></span><br>
                     <span><strong>Mail: </strong></span><span class="label label-info"><?php echo $usuario->mail;?></span>
@@ -117,7 +117,7 @@ echo $publi->titulo . $objetivos;
   <?php  $tienePermiso = (Utiles::obtenerUsuarioLogueado() == null ? false : true); ?>
   <?php if($tienePermiso){?>
   <div class="row">
-  
+
     <div class="col-md-3" >
     </div>
     <div class="col-md-9">
@@ -128,8 +128,8 @@ echo $publi->titulo . $objetivos;
             <span class="label label-warning">DisLikes: <?php echo sizeof($publi->getDislikes());?></span>
     </div>
   </div>
-  <?php 
-    } 
+  <?php
+    }
   ?>
 
   <div class="col-md-12" style="text-align:left; margin-top: 10px; border: 2px solid black; border-radius:10px">
@@ -175,7 +175,7 @@ echo $publi->titulo . $objetivos;
 
     <div class="container">
 
-	
+
 	<div class="card">
 	    <div class="card-body" style="color:black">
 	        <div class="row">
@@ -186,7 +186,7 @@ echo $publi->titulo . $objetivos;
         	    <div class="col-md-10">
         	        <p>
                       <a class="float-left" href="#"><strong><?php echo($comentario->getusuario()->usuario); ?></strong></a>
-                      <!-- Valoracion del comentario 
+                      <!-- Valoracion del comentario
         	            <span class="float-right"><i class="text-warning fa fa-star"></i></span>
                       <span class="float-right"><i class="text-warning fa fa-star"></i></span>
         	            <span class="float-right"><i class="text-warning fa fa-star"></i></span>
@@ -250,32 +250,32 @@ echo $publi->titulo . $objetivos;
 	</div>
 </div>
           <?php
-                } 
+                }
               $i++;
               }
             ?>
-  
 
 
-   </div>
 
    </div>
 
-   <?php 
-    } 
+   </div>
+
+   <?php
+    }
   ?>
 
 <script>
 
 $(document).ready(function() {
       $('#comentario').summernote({
-		  height: 150, 
-		  minHeight: null,  
+		  height: 150,
+		  minHeight: null,
 		  maxHeight: null,
-		  focus: false 
+		  focus: false
 		});
   });
-  
+
   function editarPublicacion(alias)
   {
 	  window.location = '/publicaciones/editar/' + alias;
@@ -295,7 +295,7 @@ $(document).ready(function() {
         console.log(datos[1]);
         if (datos[0] == 'OK') {
          window.location.reload();
-          
+
         } else {
           location.hash = '';
           $('#msj-error').html(datos[1]);
@@ -314,12 +314,12 @@ $(document).ready(function() {
     var x = document.getElementById('div-resp'+id);
     if (x.style.display === 'none') {
 	  $('#respuesta' + id).summernote({
-		  height: 150, 
-		  minHeight: null,  
+		  height: 150,
+		  minHeight: null,
 		  maxHeight: null,
-		  focus: false 
+		  focus: false
 		});
-		
+
       x.style.display = 'block';
     } else {
       x.style.display = 'none';
@@ -341,7 +341,7 @@ $(document).ready(function() {
         console.log(datos[1]);
         if (datos[0] == 'OK') {
          window.location.reload();
-          
+
         } else {
           location.hash = '';
           $('#msj-error').html(datos[1]);
