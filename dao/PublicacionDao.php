@@ -128,6 +128,10 @@ class PublicacionDao {
 		return GenericDao::find("publicacion", array(array("alias", "=", $alias), array("activo", "=", "1")));
 	}
 
+	public static function getXusuario($id_usuario) {
+		return GenericDao::find("publicacion", array(array("id_usuario", "=", $id_usuario), array("activo", "=", "1")));
+	}
+
 	public static function nuevo($item) {
 		$item->fecha = date("Y-m-d H:i:s", time());
 		$item->activo = 1;
