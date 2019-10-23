@@ -37,16 +37,31 @@
   <!-- Page Content -->
   <div class="container">
 
+      <!-- Jumbotron Header -->
+      <header class="jumbotron my-4">
+      <h1 class="display-3">¡Bienvenido al perfil de <?php echo $usuario->nombre;?> <?php echo $usuario->apellido; ?>!</h1>
+      <p class="lead">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ipsa, ipsam, eligendi, in quo sunt possimus non incidunt odit vero aliquid similique quaerat nam nobis illo aspernatur vitae fugiat numquam repellat.</p>
+      <?php if(Utiles::obtenerIdUsuarioLogueado() ==  $usuario->id){ ?>
+      <button class="btn btn-primary btn-lg">Editar Perfil</button>
+      <?php } ?>
+      </header>
+
     <div class="row">
 
       <div class="col-lg-3">
 
-        <h1 class="my-4"><?php echo $usuario->nombre;?><br><?php echo $usuario->apellido; ?></h1>
+      <?php if(Utiles::obtenerIdUsuarioLogueado() ==  $usuario->id){ ?>
+        <h2 class="my-4">Mis Publicaciones</h2>
+      <?php }
+          else{ 
+      ?>
+        <h2 class="my-4">Publicaciones del Usuario</h2>
+      <?php } ?>
         <div class="list-group">
           <p><strong>CATEGORIAS</strong></p>
-          <a href="#" class="list-group-item">Recetas</a>
-          <a href="#" class="list-group-item">Actividades Fisicas</a>
-          <a href="#" class="list-group-item">Ambas</a>
+          <button href="#" class="list-group-item" onclick="verRecetas();">Recetas</button>
+          <button href="#" class="list-group-item" onclick="verActFis();">Actividades Fisicas</button>
+          <button href="#" class="list-group-item" onclick="verAmbas();">Ambas</button>
         </div>
 
       </div>
@@ -81,7 +96,7 @@
           </a>
         </div>-->
 
-        <div class="row">
+        <div class="row" id="ambas">
         <?php 
           $publicaciones = $usuario->getPublicaciones();
           foreach($publicaciones as $publicacion){
@@ -122,7 +137,14 @@
                 <p style="color:black" class="card-text"><?php echo $publicacion->descripcion ?></p>
               </div>
               <div class="card-footer">
-                <small class="text-muted"><?php echo $publicacion->valoracion ?></small>
+                <small class="text-muted float-left"><i class="fas fa-thumbs-up"></i> Likes: <?php echo sizeof($publicacion->getLikes());?></small>
+                <small class="text-muted float-right"><i class="fas fa-thumbs-down"></i> Dislikes: <?php echo sizeof($publicacion->getDislikes());?></small>
+                <?php if(Utiles::obtenerIdUsuarioLogueado() ==  $usuario->id){ ?>
+                  <div class="row-center" style="text-align:center;">
+                    <button id="editarPublicacion" style="margin-top:10px;" onClick="editarPublicacion('<?php echo $publicacion->alias; ?>')" class="btn btn-info"><i class="fa fa-pencil"></i> Editar publicación</button>
+                    <button id="eliminarPublicacion" style="margin-top:5px" onclick="" class="btn btn-danger"><i class="fa fa-trash"></i> Eliminar publicacion</button>
+		              </div>
+                <?php } ?>
               </div>
             </div>
           </div>
@@ -134,7 +156,137 @@
           ?>
 
         </div>
-        <!-- /.row -->
+        <!-- /.row ambas -->
+        
+        <div class="row" id="recetas" style="display:none">
+        <?php 
+          $publicaciones = $usuario->getPublicaciones();
+          foreach($publicaciones as $publicacion){
+            if($publicacion->categoria == 1){
+            $i=0;
+            foreach($publicacion->getImagenes() as $imagen){
+        ?>
+          <div class="col-lg-4 col-md-6 mb-4">
+            <div class="card h-100">
+              <a href="#">
+                <div id="carouselExampleIndicators" class="carousel slide my-4" data-ride="carousel">
+                    <ol class="carousel-indicators">
+                      <li data-target="#carouselIndicators" data-slide-to="<?php echo $i; ?>" class="<?php echo ($i == 0 ? 'active' : ''); ?>"></li>
+                    </ol>
+                    <div class="carousel-inner" role="listbox">
+                      <div class="carousel-item  <?php echo ($i == 0 ? 'active' : ''); ?>">
+                        <img class="d-block img-fluid" src="\archivos\recortes\<?php echo $imagen->archivo; ?>" alt="First slide">
+                      </div>
+                    </div>
+                    <a class="carousel-control-prev" href="#carouselExampleIndicators" role="button" data-slide="prev">
+                      <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                      <span class="sr-only">Previous</span>
+                    </a>
+                    <a class="carousel-control-next" href="#carouselExampleIndicators" role="button" data-slide="next">
+                      <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                      <span class="sr-only">Next</span>
+                    </a>
+                </div>
+              </a>
+              <div class="card-body">
+                <h3 class="card-title">
+                  <a href="#"><?php echo $publicacion->titulo?></a>
+                </h3>
+                <?php 
+                  foreach($publicacion->getObjetivos() as $objetivo){
+                ?>
+                <h5><?php echo $objetivo->getObjetivo()->nombre ?></h5>
+               <?php } ?>
+                <p style="color:black" class="card-text"><?php echo $publicacion->descripcion ?></p>
+              </div>
+              <div class="card-footer">
+                <small class="text-muted float-left"><i class="fas fa-thumbs-up"></i> Likes: <?php echo sizeof($publicacion->getLikes());?></small>
+                <small class="text-muted float-right"><i class="fas fa-thumbs-down"></i> Dislikes: <?php echo sizeof($publicacion->getDislikes());?></small>
+                <?php if(Utiles::obtenerIdUsuarioLogueado() ==  $usuario->id){ ?>
+                  <div class="row-center" style="text-align:center">
+		                <button id="editarPublicacion" onClick="editarPublicacion('<?php echo $publicacion->alias; ?>')" class="btn btn-info"><i class="fa fa-pencil"></i> Editar publicación</button>
+                    <button id="eliminarPublicacion" style="margin-top:5px" onclick="" class="btn btn-danger"><i class="fa fa-trash"></i> Eliminar publicacion</button>
+                  </div>
+                <?php } ?>
+              </div>
+            </div>
+          </div>
+
+          <?php
+            }
+            $i++;
+          }
+          }
+          ?>
+
+        </div>
+
+        <!-- /.row recetas -->
+        
+        <div class="row" id="act-fis" style="display:none">
+        <?php 
+          $publicaciones = $usuario->getPublicaciones();
+          foreach($publicaciones as $publicacion){
+            if($publicacion->categoria == 2){
+            $i=0;
+            foreach($publicacion->getImagenes() as $imagen){
+        ?>
+          <div class="col-lg-4 col-md-6 mb-4">
+            <div class="card h-100">
+              <a href="#">
+                <div id="carouselExampleIndicators" class="carousel slide my-4" data-ride="carousel">
+                    <ol class="carousel-indicators">
+                      <li data-target="#carouselIndicators" data-slide-to="<?php echo $i; ?>" class="<?php echo ($i == 0 ? 'active' : ''); ?>"></li>
+                    </ol>
+                    <div class="carousel-inner" role="listbox">
+                      <div class="carousel-item  <?php echo ($i == 0 ? 'active' : ''); ?>">
+                        <img class="d-block img-fluid" src="\archivos\recortes\<?php echo $imagen->archivo; ?>" alt="First slide">
+                      </div>
+                    </div>
+                    <a class="carousel-control-prev" href="#carouselExampleIndicators" role="button" data-slide="prev">
+                      <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                      <span class="sr-only">Previous</span>
+                    </a>
+                    <a class="carousel-control-next" href="#carouselExampleIndicators" role="button" data-slide="next">
+                      <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                      <span class="sr-only">Next</span>
+                    </a>
+                </div>
+              </a>
+              <div class="card-body">
+                <h3 class="card-title">
+                  <a href="#"><?php echo $publicacion->titulo?></a>
+                </h3>
+                <?php 
+                  foreach($publicacion->getObjetivos() as $objetivo){
+                ?>
+                <h5><?php echo $objetivo->getObjetivo()->nombre ?></h5>
+               <?php } ?>
+                <p style="color:black" class="card-text"><?php echo $publicacion->descripcion ?></p>
+              </div>
+              <div class="card-footer">
+                <small class="text-muted float-left"><i class="fas fa-thumbs-up"></i> Likes: <?php echo sizeof($publicacion->getLikes());?></small>
+                <small class="text-muted float-right"><i class="fas fa-thumbs-down"></i> Dislikes: <?php echo sizeof($publicacion->getDislikes());?></small>
+                <?php if(Utiles::obtenerIdUsuarioLogueado() ==  $usuario->id){ ?>
+                  <div class="row-center" style="text-align:center">
+		                <button id="editarPublicacion" onClick="editarPublicacion('<?php echo $publicacion->alias; ?>')" class="btn btn-info"><i class="fa fa-pencil"></i> Editar publicación</button>
+                    <button id="eliminarPublicacion" style="margin-top:5px" onclick="" class="btn btn-danger"><i class="fa fa-trash"></i> Eliminar publicacion</button>
+                  </div>
+                <?php } ?>
+              </div>
+            </div>
+          </div>
+
+          <?php
+            }
+            $i++;
+          }
+          }
+          ?>
+
+        </div>
+
+        <!-- /.row actividades fisicas-->
 
       </div>
       <!-- /.col-lg-9 -->
@@ -158,3 +310,61 @@
   <script src="vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
 
 </body>
+
+
+<script>
+
+function verRecetas(){
+
+  x = document.getElementById("ambas");
+  if(x.style.display != 'none'){
+    x.style.display = 'none';
+  }
+  else {
+    x = document.getElementById("act-fis");
+    x.style.display = 'none';
+  }
+
+  x = document.getElementById("recetas");
+  x.style.display = 'block';
+
+}
+
+function verActFis(){
+
+x = document.getElementById("ambas");
+if(x.style.display != 'none'){
+  x.style.display = 'none';
+}
+else {
+  x = document.getElementById("recetas");
+  x.style.display = 'none';
+}
+
+x = document.getElementById("act-fis");
+x.style.display = 'block';
+
+}
+
+function verAmbas(){
+
+x = document.getElementById("recetas");
+if(x.style.display != 'none'){
+  x.style.display = 'none';
+}
+else {
+  x = document.getElementById("act-fis");
+  x.style.display = 'none';
+}
+
+x = document.getElementById("ambas");
+x.style.display = 'block';
+
+}
+
+function editarPublicacion(alias)
+  {
+	  window.location = '/publicaciones/editar/' + alias;
+  }
+
+</script>
