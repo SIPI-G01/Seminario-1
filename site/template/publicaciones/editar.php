@@ -46,7 +46,7 @@
 				<form class="form-horizontal" action="javascript:void(1);" id="frm">
 					<div class="col-md-12">
 						<div class="panel-body">
-							<div id="mensajes-error">
+							<div id="error">
 							</div>
 								<input type="hidden" name="accion" id="accion" value="editar"/>
 								<input type="hidden" name="token" id="token" value="<?php echo Utiles::obtenerToken(); ?>"/>
@@ -160,7 +160,7 @@
 								<div class="form-group">
 									<input type="hidden" name="imagen-modificada" id="imagen-modificada" value="0" />
 									<input type="hidden" id="imagenRecorte" name="imagenRecorte" value="0"/>
-									<label class="col-sm-2 control-label">Imágenes *<br><small>(hasta 1.5MB)</small><br><small>(máximo 5)</small></label>
+									<label class="col-sm-2 control-label">Imágenes <br><small>(hasta 1.5MB)</small><br><small>(máximo 5)</small></label>
 									<div class="col-sm-10">
 										<input id="fileupload" type="file" name="fileupload" class="form-control" />
 									</div>
@@ -595,8 +595,8 @@ function guardar() {
 				window.location = "/publicaciones/ver/" + datos[1];
 				
 			} else {
-				$('#mensajes-error').html(datos[1]);
-				location.hash = 'mensajes-error';
+				$('#error').html(datos[1]);
+				location.hash = 'error';
 			}
 			return true;
 		},
