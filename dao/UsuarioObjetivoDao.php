@@ -16,6 +16,12 @@ class UsuarioObjetivoDao {
 	public static function listXusuario($id_usuario) {
 		return GenericDao::find("usuario_objetivo", array(array("activo", "=", "1"), array("id_usuario", "=", $id_usuario)));
 	}
+	public static function objetivosUsuario($id_usuario) {
+		
+		$query = "SELECT o.id AS id, o.nombre AS nombre, uo.fecha_inicio, uo.fecha_fin FROM usuario_objetivo AS uo LEFT JOIN objetivo AS o ON uo.id_objetivo = o.id WHERE uo.activo = 1 AND uo.id_usuario = " . $id_usuario;
+		
+		return GenericDao::executeQuery($query, null, new stdClass(), true);
+	}
 
 	public static function nuevo($item) {
 		$item->activo = 1;
