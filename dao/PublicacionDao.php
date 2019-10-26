@@ -140,7 +140,7 @@ class PublicacionDao {
 	}// nuevo
 
 	public static function modificar($item) {
-
+		$item->fecha_modificado = date("Y-m-d H:i:s", time());
 		GenericDao::update($item);
 	}// modificar
 

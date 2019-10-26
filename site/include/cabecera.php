@@ -27,7 +27,7 @@
     </ul>
     <div class="headContainer">
 			<div class="headImg"><h1><a href="/home"><img class="imagen-inicio" src="/site/images/logo.png"></a></h1></div>
-			<div class="headTitle"><h1><a href="/home">Desafio Saludable</a></h1></div>		
+			<div class="headTitle"><h1><a href="/home">Vita</a></h1></div>		
     </div>
     <!--<div class="divLine">
 			<h1 class="line">⚜</h1>

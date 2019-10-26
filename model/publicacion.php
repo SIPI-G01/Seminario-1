@@ -19,6 +19,7 @@ final class publicacion extends GenericEntity{
 	public $alias;	
 	public $activo;
 	public $valoracion;
+	public $fecha_modificado;
 	
 	private $usuario = null;
 	private $objetivos = null;
