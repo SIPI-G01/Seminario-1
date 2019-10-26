@@ -13,21 +13,15 @@
 <?php
 $objetivos = '';
 foreach($publi->getObjetivos() as $objetivo){
-  $tiemposObj = $objetivo->getObjetivo()->getTiempos();
-  $tiempoTexto = '';
-  foreach($tiemposObj as $tO)
-  {
-    foreach($publi->getTiempos() as $tiempo)
-    {
-      if($tiempo->id_tiempo == $tO->id)
-      {
-        $tiempoTexto .= " - " . $tO->tiempo;
-      }
-    }
-  }
-  $objetivos .= '[' . $objetivo->getObjetivo()->nombre . $tiempoTexto . '] ';
+  $objetivos .= '[' . $objetivo->getObjetivo()->nombre . '] ';
 }
-echo $publi->titulo . $objetivos;
+$duracion = '';
+if($publi->tiempo != null)
+{
+	$duracion .= ' (Duración: ' . $publi->tiempo . ' ' . $publi->getUnidadTiempo() . ')';
+	
+}
+echo $publi->titulo . $objetivos . $duracion;
 ?>
 </div>
 

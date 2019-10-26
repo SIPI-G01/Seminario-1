@@ -16,8 +16,8 @@
 		$this->objetivosReceta = ObjetivoDao::listXcategoriaYusuario(1, Utiles::obtenerIdUsuarioLogueado());
 		$this->objetivosActividadFisica = ObjetivoDao::listXcategoriaYusuario(2, Utiles::obtenerIdUsuarioLogueado());
 		
-		$this->tiemposReceta = ObjetivoTiempoDao::listXcategoria(1);
-		$this->tiemposActividadFisica = ObjetivoTiempoDao::listXcategoria(2);
+		/*$this->tiemposReceta = ObjetivoTiempoDao::listXcategoria(1);
+		$this->tiemposActividadFisica = ObjetivoTiempoDao::listXcategoria(2);*/
 		
     }
   }

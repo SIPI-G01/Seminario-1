@@ -24,7 +24,7 @@
 			$pagina = 1;
 			$orden = '';
 			$this->categoria = '';
-			$t = array();
+			//$t = array();
 			$objs = array();
 			foreach ($parametros as $filtro) {
 
@@ -68,7 +68,7 @@
 									if($tiempo != null)
 									{
 										array_push($this->tiempos, $tiempo[0]);
-										array_push($t, $tiempo[0]->id);
+										//array_push($t, $tiempo[0]->id);
 									}
 								}
 								break;
@@ -100,9 +100,9 @@
 				}
 			}
 			
-			$this->publicaciones = PublicacionDao::filtrar($objs, $t, $pagina, $orden, $this->categoria);
+			$this->publicaciones = PublicacionDao::filtrar($objs, $this->tiempos, $pagina, $orden, $this->categoria);
 			
-			$cant = PublicacionDao::cantPublicacionesFiltradas($objs, $t, $this->categoria);
+			$cant = PublicacionDao::cantPublicacionesFiltradas($objs, $this->tiempos, $this->categoria);
 			$cantPags = ceil(($cant) / 20);  
 			$this->siguiente = ($pagina + 1 <= $cantPags) ? $pagina + 1 : $cantPags;
 			$this->anterior = ($pagina > 1) ? $pagina - 1 : 1;

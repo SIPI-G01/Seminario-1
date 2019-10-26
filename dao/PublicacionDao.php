@@ -9,13 +9,11 @@ class PublicacionDao {
 	}// get
 
 	public static function filtrar($objetivos = array(), $tiempos = array(), $pagina = 1, $orden=0, $categoria = '') {
-
 		$cantidad = 20;
 		$inicio = ($pagina - 1) * $cantidad;
 
 		$query =   "SELECT DISTINCT p.* FROM publicacion p
 					LEFT JOIN publicacion_objetivo po ON po.id_publicacion = p.id
-					LEFT JOIN publicacion_tiempo pt ON pt.id_publicacion = p.id
 					WHERE p.activo = 1 AND p.estado = 1";
 
 		if (sizeof($objetivos) > 0) {
@@ -33,8 +31,38 @@ class PublicacionDao {
 		}
 
 		if (sizeof($tiempos) > 0) {
-			$in = "(";
-			$coma = false;
+			$t = " AND (";
+			$entro = false;
+			for ($i=0; $i < sizeof($tiempos); $i++) {
+				
+				if($entro)
+				{
+					$t .= " OR";
+				}
+				
+				$t .= " (";
+				$entro = true;
+				if($tiempos[$i]->desde != null)
+				{ 
+					if($tiempos[$i]->hasta != null)
+					{
+						$t .= " p.tiempo_minutos >= " . $tiempos[$i]->desde . " AND";									
+					}
+					else
+					{
+						$t .= " p.tiempo_minutos >= " . $tiempos[$i]->desde;			
+					}
+				}
+				if($tiempos[$i]->hasta != null)
+				{
+					$t .= " p.tiempo_minutos <= " . $tiempos[$i]->hasta;
+				}
+				$t .= ")";
+			}
+			
+			$t .= ")";
+			$query .= $t;
+			/*$coma = false;
 			for ($i=0; $i < sizeof($tiempos); $i++) {
 				if ($tiempos[$i] && trim($tiempos[$i]) != '') {
 					$in .= ($coma ? ', ' : '') . '"' . $tiempos[$i] . '"';
@@ -43,7 +71,7 @@ class PublicacionDao {
 			}
 			$in .= ")";
 
-			$query .= ($coma ? " AND pt.id_tiempo IN " . $in : '');
+			$query .= ($coma ? " AND pt.id_tiempo IN " . $in : '');*/
 		}
 		
 		if($categoria != '')
@@ -67,6 +95,7 @@ class PublicacionDao {
 				
 		}
 		$query .=  ($pagina >= 0 && $cantidad >= 0 ? " LIMIT " . $inicio . ", " . $cantidad : '');
+				
 		return GenericDao::executeQuery($query, null, 'publicacion', true);
 
 	}
@@ -75,7 +104,6 @@ class PublicacionDao {
 
 		$query =   "SELECT DISTINCT p.* FROM publicacion p
 					LEFT JOIN publicacion_objetivo po ON po.id_publicacion = p.id
-					LEFT JOIN publicacion_tiempo pt ON pt.id_publicacion = p.id
 					WHERE p.activo = 1 AND p.estado = 1";
 
 		if (sizeof($objetivos) > 0) {
@@ -93,7 +121,40 @@ class PublicacionDao {
 		}
 
 		if (sizeof($tiempos) > 0) {
-			$in = "(";
+			
+			$t = " AND (";
+			$entro = false;
+			for ($i=0; $i < sizeof($tiempos); $i++) {
+				
+				if($entro)
+				{
+					$t .= " OR";
+				}
+				
+				$t .= " (";
+				$entro = true;
+				if($tiempos[$i]->desde != null)
+				{ 
+					if($tiempos[$i]->hasta != null)
+					{
+						$t .= " p.tiempo_minutos >= " . $tiempos[$i]->desde . " AND";									
+					}
+					else
+					{
+						$t .= " p.tiempo_minutos >= " . $tiempos[$i]->desde;			
+					}
+				}
+				if($tiempos[$i]->hasta != null)
+				{
+					$t .= " p.tiempo_minutos <= " . $tiempos[$i]->hasta;
+				}
+				$t .= ")";
+			}
+			
+			$t .= ")";
+			$query .= $t;
+			
+			/*$in = "(";
 			$coma = false;
 			for ($i=0; $i < sizeof($tiempos); $i++) {
 				if ($tiempos[$i] && trim($tiempos[$i]) != '') {
@@ -103,7 +164,7 @@ class PublicacionDao {
 			}
 			$in .= ")";
 
-			$query .= ($coma ? " AND pt.id_tiempo IN " . $in : '');
+			$query .= ($coma ? " AND pt.id_tiempo IN " . $in : '');*/
 		}
 		
 		if($categoria != '')

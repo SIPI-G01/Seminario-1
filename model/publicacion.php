@@ -3,7 +3,6 @@ include_once ($_SERVER["DOCUMENT_ROOT"] . '/model/GenericEntity.php');
 include_once ($_SERVER["DOCUMENT_ROOT"] . '/dao/UsuarioDao.php');
 include_once ($_SERVER["DOCUMENT_ROOT"] . '/dao/PublicacionObjetivoDao.php');
 include_once ($_SERVER["DOCUMENT_ROOT"] . '/dao/PublicacionImagenDao.php');
-include_once ($_SERVER["DOCUMENT_ROOT"] . '/dao/PublicacionTiempoDao.php');
 include_once ($_SERVER["DOCUMENT_ROOT"] . '/dao/PublicacionComentarioDao.php');
 include_once ($_SERVER["DOCUMENT_ROOT"] . '/dao/PublicacionLikeDao.php');
 
@@ -20,18 +19,21 @@ final class publicacion extends GenericEntity{
 	public $activo;
 	public $valoracion;
 	public $fecha_modificado;
+	public $tiempo;
+	public $unidad_tiempo; //1: Minutos, 2: Horas, 3: Dias, 4: Semanas, 5: Meses
+	public $tiempo_minutos;
 	
 	private $usuario = null;
 	private $objetivos = null;
 	private $imagenes = null;
-	private $tiempos = null;
 	private $comentarios = null;
 	private $respuestas = null;
 	private $likes =null;
 	private $dislikes =null;
 	private $votoLike = false;
 	private $votoDislike = false;
-
+	private $unidad = null;
+	
 	public function __construct() {
 		$this->setPk(array("id"));
 	}
@@ -44,15 +46,6 @@ final class publicacion extends GenericEntity{
 		}
 		return $this->usuario;
 		//Metodo para obtener que usuario creó publicacion
-	}
-	public function getTiempos() {
-		if($this->tiempos == null)
-		{
-			$this->tiempos = PublicacionTiempoDao::getXpublicacion($this->id);
-		}
-		return $this->tiempos;
-
-		//Metodo para obtener cuales son los tiempos de la publicacion
 	}
 	public function getComentarios() {
 		if($this->comentarios==null)
@@ -127,6 +120,39 @@ public function getReacciones() {
 		//if($voto > 0){
 		//	echo "disabled";
 	//	}
+	}
+	
+	public function getUnidadTiempo()
+	{
+		if($this->unidad == null)
+		{
+			if($this->unidad_tiempo == 1)
+			{
+				$this->unidad = 'minutos';
+			}
+			if($this->unidad_tiempo == 2)
+			{
+				$this->unidad = 'días';
+				
+			}
+			if($this->unidad_tiempo == 3)
+			{
+				$this->unidad = 'horas';
+				
+			}
+			if($this->unidad_tiempo == 4)
+			{
+				$this->unidad = 'semanas';
+				
+			}
+			else
+			{
+				$this->unidad = 'meses';
+				
+			}					
+		}
+		
+		return $this->unidad;
 	}
 
 };

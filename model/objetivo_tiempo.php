@@ -8,6 +8,8 @@ final class objetivo_tiempo extends GenericEntity{
 	public $tiempo;
 	public $alias;
 	public $categoria; //1: Recetas, 2: Actividad fisica
+	public $desde; //En minutos
+	public $hasta; //En minutos
 
 	public $activo;
 	

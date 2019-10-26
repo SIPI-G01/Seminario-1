@@ -61,7 +61,21 @@
 										</select>
 									</div>
 								</div>
-								
+								<div class="form-group row">
+									<label class="col-sm-2 control-label">Tiempo que insume</label>
+									<div class="col-sm-5">
+										<input type="text" class="form-control" id="tiempo" name="tiempo" value="<?php echo $view->publicacion->tiempo; ?>"/>
+									</div>								
+									<div class="col-sm-5">
+										<select class="form-control" id="unidad_tiempo" name="unidad_tiempo">	
+											<option value="1" selected >Minutos</option>
+											<option value="2" <?php echo ($view->publicacion->unidad_tiempo == 2 ? 'selected' : ''); ?> >Horas</option>									
+											<option value="3" <?php echo ($view->publicacion->unidad_tiempo == 3 ? 'selected' : ''); ?> >Dias</option>									
+											<option value="4" <?php echo ($view->publicacion->unidad_tiempo == 4 ? 'selected' : ''); ?> >Semanas</option>									
+											<option value="5" <?php echo ($view->publicacion->unidad_tiempo == 5 ? 'selected' : ''); ?> >Meses</option>																			
+										</select>
+									</div>
+								</div>								
 								<div class="form-group row">
 									<label class="col-sm-2 control-label">Categoria *</label>
 									<div class="col-sm-10">
@@ -273,11 +287,11 @@
 
 
 var categoria = 0;
-var tiempos = [];
+//var tiempos = [];
 var objetivos = [];
 var tabla = [];
 var idTabla = [];
-var tiempoCheck = [];
+//var tiempoCheck = [];
 var objetivosSeleccionados = [];
 
 seleccionarObjetivos();
@@ -286,16 +300,16 @@ precargarObjetivosYTiempos();
 function precargarObjetivosYTiempos()
 {
 	var objetivos = <?php echo json_encode($objetivosSeleccionados); ?>;
-	var tiempos = <?php echo json_encode($view->publicacion->getTiempos()); ?>;
+	//var tiempos = <?php echo json_encode($view->publicacion->getTiempos()); ?>;
 	
 	objetivos.forEach(function(objetivo) {
 		objetivosSeleccionados.push(objetivo);
 		var lineas = "<tr><th>" + objetivo.nombre + "</th><td class='text-right'><button onclick='javascript:eliminarObjetivo("+ objetivo.id + ");' type='button' class='btn btn-danger btn-sm mr5'><i class='fa fa-trash'></i> Eliminar</button></td></tr>";
-		var tiempos = traerTiempos(objetivo.id);
-		if(tiempos != null)
+		//var tiempos = traerTiempos(objetivo.id);
+		/*if(tiempos != null)
 		{
 			lineas += "<tr><td>" + tiempos + "</td><td></td></tr>";
-		}
+		}*/
 		tabla.push(lineas);
 		idTabla.push(objetivo.id);
 		
@@ -309,10 +323,10 @@ function precargarObjetivosYTiempos()
 		}		
 	});
 	
-	tiempos.forEach(function(t) {
+	/*tiempos.forEach(function(t) {
 		$('#tiempo_'+t.id_tiempo).prop('checked', true);
 		tiempoCheck.push(t.id_tiempo);
-	});
+	});*/
 }
 
 function seleccionarObjetivos()
@@ -321,10 +335,10 @@ function seleccionarObjetivos()
 	{
 		categoria = 1;
 		objetivos = <?php echo json_encode($view->objetivosReceta);?>;
-		tiempos = <?php echo json_encode($view->tiemposReceta);?>;
+		//tiempos = <?php //echo json_encode($view->tiemposReceta);?>;
 		tabla = [];
 		idTabla = [];		
-		tiempoCheck = [];	
+		//tiempoCheck = [];	
 		objetivosSeleccionados = [];
 		$('#tabla-actividad').html('');
 		$('#actividad_fisica').fadeOut();		
@@ -338,10 +352,10 @@ function seleccionarObjetivos()
 	{
 		categoria = 2;
 		objetivos = <?php echo json_encode($view->objetivosActividadFisica);?>;	
-		tiempos = <?php echo json_encode($view->tiemposActividadFisica);?>;
+		//tiempos = <?php //echo json_encode($view->tiemposActividadFisica);?>;
 		tabla = [];
 		idTabla = [];				
-		tiempoCheck = [];
+		//tiempoCheck = [];
 		objetivosSeleccionados = [];
 		$('#tabla-receta').html('');
 		$('#recetas').fadeOut();		
@@ -386,11 +400,11 @@ function agregarObjetivo()
 					{
 						objetivosSeleccionados.push(objetivo);
 						lineas += "<tr><th>" + objetivo.nombre + "</th><td class='text-right'><button onclick='javascript:eliminarObjetivo("+ objetivo.id + ");' type='button' class='btn btn-danger btn-sm mr5'><i class='fa fa-trash'></i> Eliminar</button></td></tr>";
-						var tiempos = traerTiempos(objetivo.id);
+						/*var tiempos = traerTiempos(objetivo.id);
 						if(tiempos != null)
 						{
 							lineas += "<tr><td>" + tiempos + "</td><td></td></tr>";
-						}
+						}*/
 					}
 				});
 				
@@ -437,11 +451,11 @@ function agregarObjetivo()
 					{
 						objetivosSeleccionados.push(objetivo);
 						lineas += "<tr><th>" + objetivo.nombre + "</th><td class='text-right'><button onclick='javascript:eliminarObjetivo("+ objetivo.id + ");' type='button' class='btn btn-danger btn-sm mr5'><i class='fa fa-trash'></i> Eliminar</button></td></tr>";
-						var tiempos = traerTiempos(objetivo.id);
+						/*var tiempos = traerTiempos(objetivo.id);
 						if(tiempos != null)
 						{
 							lineas += "<tr><td>" + tiempos + "</td><td></td></tr>";
-						}
+						}*/
 					}
 				});
 				
@@ -463,7 +477,7 @@ function agregarObjetivo()
 
 }
 
-var tiemposMostrar = [];
+/*var tiemposMostrar = [];
 
 function traerTiempos(objetivo)
 {
@@ -506,7 +520,7 @@ function cambioCheck(idTiempo)
 	{
 		tiempoCheck.push(idTiempo);
 	}
-}
+}*/
 
 function eliminarObjetivo(id)
 {
@@ -566,9 +580,9 @@ function rearmarTabla()
 	}
 	
 
-	tiempoCheck.forEach(function(t) {
+	/*tiempoCheck.forEach(function(t) {
 		$('#tiempo_'+t).prop('checked', true);
-	});
+	});*/
 
 
 }
@@ -580,12 +594,12 @@ function volver()
 }
 
 function guardar() {
-
+	// + "&tiempos=" + tiempoCheck
 	$.ajax({
 		async:true,
 		type: "POST",
 		url: "/site/controller/publicacion-controller.php",
-		data: $('#frm').serialize() + "&imagenes=" + JSON.stringify(imagenes) + "&objetivos=" + JSON.stringify(objetivosSeleccionados) + "&tiempos=" + tiempoCheck,
+		data: $('#frm').serialize() + "&imagenes=" + JSON.stringify(imagenes) + "&objetivos=" + JSON.stringify(objetivosSeleccionados),
 		beforeSend:function(){
 		},
 		success:function(datos) {

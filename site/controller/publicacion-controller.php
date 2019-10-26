@@ -19,7 +19,6 @@ if (isset($token) && $token == Utiles::obtenerToken()) {
 		case 'nuevo':
 			$valido = true;
 			$errores = '<strong>Ocurrieron los siguientes errores:</strong>';
-			
 			if (!isset($_POST['categoria']) || $_POST['categoria'] == ''  || $_POST['categoria'] <= 0) {
 				$errores .= '<p>- Debe seleccionar una categoría.</p>';
 				$valido = false;
@@ -40,7 +39,14 @@ if (isset($token) && $token == Utiles::obtenerToken()) {
 				$errores .= '<p>- Debe completar el contenido de la publicación.</p>';
 				$valido = false;
 			}
-			
+			if (isset($_POST['tiempo']) && $_POST['tiempo'] != '') {
+				if(!is_numeric($_POST['tiempo']) || $_POST['tiempo'] <= 0)
+				{
+					$errores .= '<p>- El tiempo debe ser un número mayor o igual a 0.</p>';
+					$valido = false;
+					
+				}
+			}			
 
 			if ($valido) {
 				$item = new publicacion();
@@ -51,6 +57,39 @@ if (isset($token) && $token == Utiles::obtenerToken()) {
 				$item->categoria = $_POST['categoria'];				
 				$item->texto = $_POST['texto'];
 				$item->estado = $_POST['estado'];
+				$item->tiempo = $_POST['tiempo'];
+				$item->unidad_tiempo = $_POST['unidad_tiempo'];
+				
+				if($_POST['tiempo'] != null || $_POST['tiempo'] != '')
+				{
+					if($item->unidad_tiempo == 1)
+					{
+						$item->tiempo_minutos = $_POST['tiempo'];						
+					}
+					else if($item->unidad_tiempo == 2)
+					{
+						$item->tiempo_minutos = $_POST['tiempo'] * 60;						
+						
+					}
+					else if($item->unidad_tiempo == 3)
+					{
+						$item->tiempo_minutos = $_POST['tiempo'] * 60 * 24;						
+						
+					}		
+					else if($item->unidad_tiempo == 4)
+					{
+						$item->tiempo_minutos = $_POST['tiempo'] * 60 * 24 * 7;						
+						
+					}					
+					else if($item->unidad_tiempo == 5)
+					{
+						$item->tiempo_minutos = $_POST['tiempo'] * 60 * 24 * 7 * 30;											
+					}										
+				}
+				else
+				{
+					$item->tiempo_minutos = null;				
+				}
 
 				$id = PublicacionDao::nuevo($item);
 				
@@ -65,7 +104,7 @@ if (isset($token) && $token == Utiles::obtenerToken()) {
 					PublicacionObjetivoDao::nuevo($obj);
 				}
 				
-				$tiempos = explode(",",$_POST['tiempos']);
+				/*$tiempos = explode(",",$_POST['tiempos']);
 				if ($tiempos[0] != '' && $tiempos != null && count($tiempos) > 0) 
 				{
 				
@@ -78,7 +117,7 @@ if (isset($token) && $token == Utiles::obtenerToken()) {
 						PublicacionTiempoDao::nuevo($t);
 						
 					}
-				}
+				}*/
 				
 				$imagenes = json_decode($_POST['imagenes']);
 				if ($imagenes != null && count($imagenes) > 0) {
@@ -107,7 +146,7 @@ if (isset($token) && $token == Utiles::obtenerToken()) {
 			case 'editar':
 			$valido = true;
 			$errores = '<strong>Ocurrieron los siguientes errores:</strong>';
-			
+
 			if (!isset($_POST['categoria']) || $_POST['categoria'] == ''  || $_POST['categoria'] <= 0) {
 				$errores .= '<p>- Debe seleccionar una categoría.</p>';
 				$valido = false;
@@ -128,6 +167,14 @@ if (isset($token) && $token == Utiles::obtenerToken()) {
 				$errores .= '<p>- Debe completar el contenido de la publicación.</p>';
 				$valido = false;
 			}
+			if (isset($_POST['tiempo']) && $_POST['tiempo'] != '') {
+				if(!is_numeric($_POST['tiempo']) || $_POST['tiempo'] <= 0)
+				{
+					$errores .= '<p>- El tiempo debe ser un número mayor o igual a 0.</p>';
+					$valido = false;
+					
+				}
+			}			
 			
 
 			if ($valido) {
@@ -137,6 +184,40 @@ if (isset($token) && $token == Utiles::obtenerToken()) {
 				$item->categoria = $_POST['categoria'];				
 				$item->texto = $_POST['texto'];
 				$item->estado = $_POST['estado'];
+				$item->tiempo = $_POST['tiempo'];
+				$item->unidad_tiempo = $_POST['unidad_tiempo'];
+				
+				if($_POST['tiempo'] != null || $_POST['tiempo'] != '')
+				{
+					if($item->unidad_tiempo == 1)
+					{
+						$item->tiempo_minutos = $_POST['tiempo'];						
+					}
+					else if($item->unidad_tiempo == 2)
+					{
+						$item->tiempo_minutos = $_POST['tiempo'] * 60;						
+						
+					}
+					else if($item->unidad_tiempo == 3)
+					{
+						$item->tiempo_minutos = $_POST['tiempo'] * 60 * 24;						
+						
+					}		
+					else if($item->unidad_tiempo == 4)
+					{
+						$item->tiempo_minutos = $_POST['tiempo'] * 60 * 24 * 7;						
+						
+					}					
+					else if($item->unidad_tiempo == 5)
+					{
+						$item->tiempo_minutos = $_POST['tiempo'] * 60 * 24 * 7 * 30;											
+					}										
+				}
+				else
+				{
+					$item->tiempo_minutos = null;				
+				}
+				
 
 				PublicacionDao::modificar($item);
 				
@@ -173,7 +254,7 @@ if (isset($token) && $token == Utiles::obtenerToken()) {
 
 				
 				
-				$tiempos = explode(",",$_POST['tiempos']);
+				/*$tiempos = explode(",",$_POST['tiempos']);
 				if ($tiempos[0] != '' && $tiempos != null && count($tiempos) > 0) 
 				{
 				
@@ -213,7 +294,7 @@ if (isset($token) && $token == Utiles::obtenerToken()) {
 					foreach ($item->getTiempos() as $tiemposActuales) {
 						PublicacionTiempoDao::eliminar($tiemposActuales);
 					}					
-				}
+				}*/
 				
 				
 				//Edito las imagenes

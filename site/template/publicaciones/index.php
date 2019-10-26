@@ -102,23 +102,19 @@ else
 						<div class="card-body col-md-9">
 							<?php 
 							$objetivos = '';
-							foreach($publicacion->getObjetivos() as $objetivo){
-								$tiemposObj = $objetivo->getObjetivo()->getTiempos();
-								$tiempoTexto = '';
-								foreach($tiemposObj as $tO)
-								{
-									foreach($publicacion->getTiempos() as $tiempo)
-									{
-										if($tiempo->id_tiempo == $tO->id)
-										{
-											$tiempoTexto .= " - " . $tO->tiempo;
-										}
-									}
-								}
+							foreach($publicacion->getObjetivos() as $objetivo){							
+								$objetivos .= '[' . $objetivo->getObjetivo()->nombre . '] ';
+							}
+							
+							$duracion = '';
+							if($publicacion->tiempo != null)
+							{
+								$duracion .= ' (Duración: ' . $publicacion->tiempo . ' ' . $publicacion->getUnidadTiempo() . ')';
 								
-								$objetivos .= '[' . $objetivo->getObjetivo()->nombre . $tiempoTexto . '] ';
-							}?>
-							<a href="/publicaciones/ver/<?php echo $publicacion->alias; ?>"><h4 class="card-title"><?php echo $publicacion->titulo; ?> <?php echo $objetivos; ?></h4></a>
+							}
+							
+							?>
+							<a href="/publicaciones/ver/<?php echo $publicacion->alias; ?>"><h4 class="card-title"><?php echo $publicacion->titulo; ?> <?php echo $objetivos; ?> <?php echo $duracion; ?> </h4></a>
 							<p class="card-text descripcion"><?php echo $publicacion->descripcion; ?></p>
 						</div>
 					</div>
