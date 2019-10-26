@@ -1,6 +1,6 @@
 <?php
 include_once ($_SERVER["DOCUMENT_ROOT"] . '/dao/GenericDao.php');
-include_once ($_SERVER["DOCUMENT_ROOT"] . '/model/usuario.php');
+include_once ($_SERVER["DOCUMENT_ROOT"] . '/model/usuario_objetivo.php');
 
 class UsuarioObjetivoDao {
 

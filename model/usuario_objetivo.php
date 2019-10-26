@@ -20,12 +20,12 @@ final class usuario_objetivo extends GenericEntity{
 	
 	public function getObjetivo()
 	{
-		if($objetivo == null)
+		if($this->objetivo == null)
 		{
-			$objetivo = ObjetivoDao::get($id_objetivo);
+			$this->objetivo = ObjetivoDao::get($this->id_objetivo);
 		}
 		
-		return $objetivo;
+		return $this->objetivo;
 		//Para obtener cuales son los objetivos del usuario
 	}
 
