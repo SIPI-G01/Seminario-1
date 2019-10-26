@@ -300,7 +300,7 @@ precargarObjetivosYTiempos();
 function precargarObjetivosYTiempos()
 {
 	var objetivos = <?php echo json_encode($objetivosSeleccionados); ?>;
-	//var tiempos = <?php echo json_encode($view->publicacion->getTiempos()); ?>;
+	//var tiempos = <?php //echo json_encode($view->publicacion->getTiempos()); ?>;
 	
 	objetivos.forEach(function(objetivo) {
 		objetivosSeleccionados.push(objetivo);
