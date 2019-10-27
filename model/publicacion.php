@@ -126,21 +126,21 @@ public function getReacciones() {
 	{
 		if($this->unidad == null)
 		{
-			if($this->unidad_tiempo == 1)
+			if($this->unidad_tiempo == 1 || $this->unidad_tiempo == '1')
 			{
 				$this->unidad = 'minutos';
 			}
-			if($this->unidad_tiempo == 2)
-			{
-				$this->unidad = 'días';
-				
-			}
-			if($this->unidad_tiempo == 3)
+			else if($this->unidad_tiempo == 2 || $this->unidad_tiempo == '2')
 			{
 				$this->unidad = 'horas';
 				
 			}
-			if($this->unidad_tiempo == 4)
+			else if($this->unidad_tiempo == 3 || $this->unidad_tiempo == '3')
+			{
+				$this->unidad = 'dias';
+				
+			}
+			else if($this->unidad_tiempo == 4 || $this->unidad_tiempo == '4')
 			{
 				$this->unidad = 'semanas';
 				
