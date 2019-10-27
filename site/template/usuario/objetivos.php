@@ -27,7 +27,7 @@
 						<div class="panel-body">
 							<div id="error">
 							</div>
-								<input type="hidden" name="accion" id="accion" value="nuevo"/>
+								<input type="hidden" name="accion" id="accion" value="modificar-objetivos"/>
 								<input type="hidden" name="token" id="token" value="<?php echo Utiles::obtenerToken(); ?>"/>
 							
 								<div class="form-group row">
@@ -81,27 +81,55 @@
 <script>
 
 
-var objetivos = [];
+var objetivos = <?php echo json_encode($view->objetivos); ?>;
 var tabla = [];
 var idTabla = [];
-//var tiempoCheck = [];
 var objetivosSeleccionados = [];
+var datosGuardados = [];
 
 precargarObjetivos();
 
 function precargarObjetivos()
-{
-	objetivos = <?php echo json_encode($view->objetivosUsuario); ?>;
-	
-	objetivos.forEach(function(objetivo) {
-		objetivosSeleccionados.push(objetivo);
-		var lineas = "<tr><th>" + objetivo.nombre + "</th><td class='text-right'><button onclick='javascript:eliminarObjetivo("+ objetivo.id + ");' type='button' class='btn btn-danger btn-sm mr5'><i class='fa fa-trash'></i> Eliminar</button></td></tr>";
+{								
+
+	objetivosSeleccionados = <?php echo json_encode($view->objetivosUsuario); ?>;
+	tabla.push("<tr><th>Objetivo</th><th>Fecha de inicio</th><th>Fecha de finalización</th><th></th></tr>");
+	$('#tabla').append("<tr><th class='text-center'>Objetivo</th><th class='text-center'>Fecha de inicio</th><th class='text-center'>Fecha de finalización</th><th></th></tr>");						
+
+	objetivosSeleccionados.forEach(function(objetivo) {
+		//objetivosSeleccionados.push(objetivo);
+		var lineas = "<tr><th class='text-center'>" + objetivo.nombre + "</th><td><input onchange='actualizarGuardarDatos(" + objetivo.id + ", 1)' type='date' name='fecha_inicio_"+ objetivo.id +"' id='fecha_inicio_"+ objetivo.id +"' value='" + objetivo.fecha_inicio + "'/></td><td><input onchange='actualizarGuardarDatos(" + objetivo.id + ", 2)' type='date' name='fecha_fin_"+ objetivo.id +"' id='fecha_fin_"+ objetivo.id +"' value='" + objetivo.fecha_fin + "'/></td><td class='text-right'><button onclick='javascript:eliminarObjetivo("+ objetivo.id + ");' type='button' class='btn btn-danger btn-sm mr5'><i class='fa fa-trash'></i> Eliminar</button></td></tr>";
 		tabla.push(lineas);
 		idTabla.push(objetivo.id);
-		
+		datosGuardados.push(objetivo);
 		$('#tabla').append(lineas);						
 
 	});
+}
+
+function actualizarGuardarDatos(id, tipo)
+{
+	if(tipo == 1)
+	{
+		//Fecha inicio
+		datosGuardados.forEach(function(dato) {
+			if(dato.id == id)
+			{
+				dato.fecha_inicio = $('#fecha_inicio_' + id).val();
+			}
+		});
+		
+	}
+	else if(tipo == 2)
+	{
+		//Fecha fin
+		datosGuardados.forEach(function(dato) {
+			if(dato.id == id)
+			{
+				dato.fecha_fin = $('#fecha_fin_' + id).val();
+			}
+		});		
+	}
 }
 
 function agregarObjetivo()
@@ -128,10 +156,13 @@ function agregarObjetivo()
 			{
 				var lineas = '';
 				objetivos.forEach(function(objetivo) {
+					console.log(objetivo.id);
+					console.log($('#selector_objetivo').val());
 					if(objetivo.id == $('#selector_objetivo').val())
 					{
+						datosGuardados.push({id: objetivo.id, nombre: objetivo.nombre, fecha_inicio: null, fecha_fin: null});
 						objetivosSeleccionados.push(objetivo);
-						lineas += "<tr><th>" + objetivo.nombre + "</th><td class='text-right'><button onclick='javascript:eliminarObjetivo("+ objetivo.id + ");' type='button' class='btn btn-danger btn-sm mr5'><i class='fa fa-trash'></i> Eliminar</button></td></tr>";
+						lineas = "<tr><th class='text-center'>" + objetivo.nombre + "</th><td><input onchange='actualizarGuardarDatos(" + objetivo.id + ", 1)' type='date' name='fecha_inicio_"+ objetivo.id +"' id='fecha_inicio_"+ objetivo.id +"' value='" + objetivo.fecha_inicio + "'/></td><td><input onchange='actualizarGuardarDatos(" + objetivo.id + ", 2)' type='date' name='fecha_fin_"+ objetivo.id +"' id='fecha_fin_"+ objetivo.id +"' value='" + objetivo.fecha_fin + "'/></td><td class='text-right'><button onclick='javascript:eliminarObjetivo("+ objetivo.id + ");' type='button' class='btn btn-danger btn-sm mr5'><i class='fa fa-trash'></i> Eliminar</button></td></tr>";
 					}
 				});
 				
@@ -161,7 +192,9 @@ function eliminarObjetivo(id)
 		if(t == id)
 		{
 			idTabla.splice(i, 1);
-			tabla.splice(i, 1);
+			tabla.splice(i+1, 1);
+			datosGuardados.splice(i, 1);
+			
 		}
 		i++;
 	});
@@ -193,18 +226,18 @@ function volver()
 }
 
 function guardar() {
-/*	$.ajax({
+	$.ajax({
 		async:true,
 		type: "POST",
-		url: "/site/controller/publicacion-controller.php",
-		data: $('#frm').serialize() + "&imagenes=" + JSON.stringify(imagenes) + "&objetivos=" + JSON.stringify(objetivosSeleccionados),
+		url: "/site/controller/usuario-controller.php",
+		data: $('#frm').serialize() + "&objetivos=" + JSON.stringify(datosGuardados),
 		beforeSend:function(){
 		},
 		success:function(datos) {
 			datos = datos.split("|");
 			
 			if (datos[0] == 'OK') {
-				window.location = "/publicaciones/ver/" + datos[1];
+				location.reload();
 				
 			} else {
 				$('#error').html(datos[1]);
@@ -216,7 +249,7 @@ function guardar() {
 		error:function(){
 			return false;
 		}
-	});*/
+	});
 	
 }
 

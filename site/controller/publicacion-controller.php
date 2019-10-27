@@ -11,7 +11,6 @@ if (isset($token) && $token == Utiles::obtenerToken()) {
 	include_once ($_SERVER["DOCUMENT_ROOT"] . '/dao/PublicacionDao.php');
 	include_once ($_SERVER["DOCUMENT_ROOT"] . '/dao/PublicacionObjetivoDao.php');
 	include_once ($_SERVER["DOCUMENT_ROOT"] . '/dao/PublicacionImagenDao.php');
-	include_once ($_SERVER["DOCUMENT_ROOT"] . '/dao/PublicacionTiempoDao.php');
 
 	include_once ($_SERVER["DOCUMENT_ROOT"] . '/site/utiles/upload/UtilesImagenes.php');
 

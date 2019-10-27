@@ -36,7 +36,7 @@ class UsuarioObjetivoDao {
 
 	public static function eliminar($id) {
 		$query = "UPDATE usuario_objetivo SET
-									activo = false,
+									activo = false
 					WHERE id = :id";
 
 		$params = array(
