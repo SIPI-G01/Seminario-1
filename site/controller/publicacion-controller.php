@@ -183,7 +183,7 @@ if (isset($token) && $token == Utiles::obtenerToken()) {
 				$item->categoria = $_POST['categoria'];				
 				$item->texto = $_POST['texto'];
 				$item->estado = $_POST['estado'];
-				$item->tiempo = $_POST['tiempo'];
+				$item->tiempo = ($_POST['tiempo'] == '' || $_POST['tiempo'] == null ? null : $_POST['tiempo']);
 				$item->unidad_tiempo = $_POST['unidad_tiempo'];
 				
 				if($_POST['tiempo'] != null || $_POST['tiempo'] != '')
@@ -300,7 +300,6 @@ if (isset($token) && $token == Utiles::obtenerToken()) {
 				$imagenes = json_decode($_POST['imagenes']);
 
 				// ELIMINO IMAGENES
-				
 				foreach ($item->getImagenes() as $imagen) {
 					$borrar = true;
 					$i = 0;

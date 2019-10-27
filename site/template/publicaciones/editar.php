@@ -8,7 +8,18 @@
  if($tienePermiso)
  {
 	$view = new editar_publicacion_view($params); 
-	$objetivosNum = $view->publicacion->getObjetivos();
+	$objetivosNum = array();
+	
+	if($view->publicacion != null)
+	{
+		$objetivosNum = $view->publicacion->getObjetivos();	
+	}
+	else
+	{
+		$tienePermiso = false;
+		$mensajeError = 'Página inexistente.';
+		
+	}
 		
 	$objetivosSeleccionados = array();
 	
@@ -746,6 +757,14 @@ function guardar() {
                         imagenes.splice(pos, 1);
                         $('#fileupload').attr('disabled', false);
                     }
+					else if(imagen.id == ref)
+					{
+                        $('#imagen-modificada').val('1');
+                        var pos = imagenes.indexOf(imagen);
+                        imagenes.splice(pos, 1);
+                        $('#fileupload').attr('disabled', false);
+						
+					}
                 }
             );
 

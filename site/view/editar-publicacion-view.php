@@ -12,7 +12,10 @@
 
     function __construct($params) {
 		$this->publicacion = PublicacionDao::getXalias($params);
-		$this->publicacion = $this->publicacion[0];
+		if($this->publicacion != null)
+		{
+			$this->publicacion = $this->publicacion[0];			
+		}
 		$this->usuario = UsuarioDao::get(Utiles::obtenerIdUsuarioLogueado());
 		//$this->objetivosReceta = ObjetivoDao::listXcategoria(1);
 		//$this->objetivosActividadFisica = ObjetivoDao::listXcategoria(2);
