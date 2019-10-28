@@ -73,20 +73,39 @@
         <?php 
           $publicaciones = $usuario->getPublicaciones();
           foreach($publicaciones as $publicacion){
-            $i=0;
-            foreach($publicacion->getImagenes() as $imagen){
+            $duracion = '';
+            if($publicacion->tiempo != null)
+            {
+              $duracion .= ' (Duración: ' . $publicacion->tiempo . ' ' . $publicacion->getUnidadTiempo() . ')';
+            }
         ?>
           <div class="col-lg-4 col-md-6 mb-4">
             <div class="card h-100">
               <a href="#">
                 <div id="carouselExampleIndicators" class="carousel slide my-4" data-ride="carousel">
                     <ol class="carousel-indicators">
+                      <?php  
+                        $i=0;
+                        foreach($publicacion->getImagenes() as $imagen){
+                      ?>
                       <li data-target="#carouselIndicators" data-slide-to="<?php echo $i; ?>" class="<?php echo ($i == 0 ? 'active' : ''); ?>"></li>
+                      <?php
+                        $i++;
+                        }
+                      ?>
                     </ol>
                     <div class="carousel-inner" role="listbox">
+                      <?php  
+                        $i=0;
+                        foreach($publicacion->getImagenes() as $imagen){
+                      ?>
                       <div class="carousel-item  <?php echo ($i == 0 ? 'active' : ''); ?>">
                         <img class="d-block img-fluid" src="\archivos\recortes\<?php echo $imagen->archivo; ?>" alt="First slide">
                       </div>
+                      <?php
+                        $i++;
+                        }
+                      ?>
                     </div>
                     <a class="carousel-control-prev" href="#carouselExampleIndicators" role="button" data-slide="prev">
                       <span class="carousel-control-prev-icon" aria-hidden="true"></span>
@@ -100,7 +119,7 @@
               </a>
               <div class="card-body">
                 <h3 class="card-title">
-                  <a href="#"><?php echo $publicacion->titulo?></a>
+                  <a href="/publicaciones/ver/<?php echo $publicacion->alias; ?>"><?php echo $publicacion->titulo . $duracion; ?></a>
                 </h3>
                 <?php 
                   foreach($publicacion->getObjetivos() as $objetivo){
@@ -124,8 +143,6 @@
 
           <?php
             }
-            $i++;
-          }
           ?>
 
         </div>
@@ -135,21 +152,40 @@
         <?php 
           $publicaciones = $usuario->getPublicaciones();
           foreach($publicaciones as $publicacion){
+            $duracion = '';
             if($publicacion->categoria == 1){
-            $i=0;
-            foreach($publicacion->getImagenes() as $imagen){
+              if($publicacion->tiempo != null)
+              {
+                $duracion .= ' (Duración: ' . $publicacion->tiempo . ' ' . $publicacion->getUnidadTiempo() . ')';
+              }
         ?>
           <div class="col-lg-4 col-md-6 mb-4">
             <div class="card h-100">
               <a href="#">
                 <div id="carouselExampleIndicators" class="carousel slide my-4" data-ride="carousel">
-                    <ol class="carousel-indicators">
+                <ol class="carousel-indicators">
+                      <?php  
+                        $i=0;
+                        foreach($publicacion->getImagenes() as $imagen){
+                      ?>
                       <li data-target="#carouselIndicators" data-slide-to="<?php echo $i; ?>" class="<?php echo ($i == 0 ? 'active' : ''); ?>"></li>
+                      <?php
+                        $i++;
+                        }
+                      ?>
                     </ol>
                     <div class="carousel-inner" role="listbox">
+                      <?php  
+                        $i=0;
+                        foreach($publicacion->getImagenes() as $imagen){
+                      ?>
                       <div class="carousel-item  <?php echo ($i == 0 ? 'active' : ''); ?>">
                         <img class="d-block img-fluid" src="\archivos\recortes\<?php echo $imagen->archivo; ?>" alt="First slide">
                       </div>
+                      <?php
+                        $i++;
+                        }
+                      ?>
                     </div>
                     <a class="carousel-control-prev" href="#carouselExampleIndicators" role="button" data-slide="prev">
                       <span class="carousel-control-prev-icon" aria-hidden="true"></span>
@@ -163,7 +199,7 @@
               </a>
               <div class="card-body">
                 <h3 class="card-title">
-                  <a href="#"><?php echo $publicacion->titulo?></a>
+                  <a href="#"><?php echo $publicacion->titulo . $duracion; ?></a>
                 </h3>
                 <?php 
                   foreach($publicacion->getObjetivos() as $objetivo){
@@ -187,8 +223,6 @@
 
           <?php
             }
-            $i++;
-          }
           }
           ?>
 
@@ -200,21 +234,40 @@
         <?php 
           $publicaciones = $usuario->getPublicaciones();
           foreach($publicaciones as $publicacion){
+            $duracion = '';
             if($publicacion->categoria == 2){
-            $i=0;
-            foreach($publicacion->getImagenes() as $imagen){
+              if($publicacion->tiempo != null)
+              {
+                $duracion .= ' (Duración: ' . $publicacion->tiempo . ' ' . $publicacion->getUnidadTiempo() . ')';
+              }
         ?>
           <div class="col-lg-4 col-md-6 mb-4">
             <div class="card h-100">
               <a href="#">
                 <div id="carouselExampleIndicators" class="carousel slide my-4" data-ride="carousel">
-                    <ol class="carousel-indicators">
+                <ol class="carousel-indicators">
+                      <?php  
+                        $i=0;
+                        foreach($publicacion->getImagenes() as $imagen){
+                      ?>
                       <li data-target="#carouselIndicators" data-slide-to="<?php echo $i; ?>" class="<?php echo ($i == 0 ? 'active' : ''); ?>"></li>
+                      <?php
+                        $i++;
+                        }
+                      ?>
                     </ol>
                     <div class="carousel-inner" role="listbox">
+                      <?php  
+                        $i=0;
+                        foreach($publicacion->getImagenes() as $imagen){
+                      ?>
                       <div class="carousel-item  <?php echo ($i == 0 ? 'active' : ''); ?>">
                         <img class="d-block img-fluid" src="\archivos\recortes\<?php echo $imagen->archivo; ?>" alt="First slide">
                       </div>
+                      <?php
+                        $i++;
+                        }
+                      ?>
                     </div>
                     <a class="carousel-control-prev" href="#carouselExampleIndicators" role="button" data-slide="prev">
                       <span class="carousel-control-prev-icon" aria-hidden="true"></span>
@@ -228,7 +281,7 @@
               </a>
               <div class="card-body">
                 <h3 class="card-title">
-                  <a href="#"><?php echo $publicacion->titulo?></a>
+                  <a href="#"><?php echo $publicacion->titulo . $duracion; ?></a>
                 </h3>
                 <?php 
                   foreach($publicacion->getObjetivos() as $objetivo){
@@ -252,8 +305,6 @@
 
           <?php
             }
-            $i++;
-          }
           }
           ?>
 
