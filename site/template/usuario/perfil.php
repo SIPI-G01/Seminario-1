@@ -99,8 +99,8 @@
                         $i=0;
                         foreach($publicacion->getImagenes() as $imagen){
                       ?>
-                      <div class="carousel-item  <?php echo ($i == 0 ? 'active' : ''); ?>">
-                        <img class="d-block img-fluid" src="\archivos\recortes\<?php echo $imagen->archivo; ?>" alt="First slide">
+                      <div class="carousel-item  <?php echo ($i == 0 ? 'active' : ''); ?>" style="width:253px; height:200px;">
+                        <img class="d-block img-fluid" src="\archivos\recortes\<?php echo $imagen->archivo; ?>" alt="First slide" style="width:100%; height:100%">
                       </div>
                       <?php
                         $i++;
@@ -126,7 +126,15 @@
                 ?>
                 <h5><?php echo $objetivo->getObjetivo()->nombre ?></h5>
                <?php } ?>
-                <p style="color:black" class="card-text"><?php echo $publicacion->descripcion ?></p>
+                <p style="color:black" class="card-text" id="<?php echo 'desc-ambas'.$publicacion->id ?>">
+                <?php 
+                  if(strlen($publicacion->descripcion )>100)
+                  {
+                    $publicacion->descripcion = substr($publicacion->descripcion, 0, 100) . '... <a href="javascript:void(0)" onclick="verMas('."'".$publicacion->descripcion."'".', '."'".'ambas'.$publicacion->id."'".');">Ver mas</a>';
+                  }
+                  echo $publicacion->descripcion ;
+                ?>
+                </p>
               </div>
               <div class="card-footer">
                 <small class="text-muted float-left"><i class="fas fa-thumbs-up"></i> Likes: <?php echo sizeof($publicacion->getLikes());?></small>
@@ -147,6 +155,7 @@
 
         </div>
         <!-- /.row ambas -->
+        
         
         <div class="row" id="recetas" style="display:none">
         <?php 
@@ -179,8 +188,8 @@
                         $i=0;
                         foreach($publicacion->getImagenes() as $imagen){
                       ?>
-                      <div class="carousel-item  <?php echo ($i == 0 ? 'active' : ''); ?>">
-                        <img class="d-block img-fluid" src="\archivos\recortes\<?php echo $imagen->archivo; ?>" alt="First slide">
+                      <div class="carousel-item  <?php echo ($i == 0 ? 'active' : ''); ?>" style="width:253px; height:200px;">
+                        <img class="d-block img-fluid" src="\archivos\recortes\<?php echo $imagen->archivo; ?>" alt="First slide" style="width:100%; height:100%">
                       </div>
                       <?php
                         $i++;
@@ -206,7 +215,15 @@
                 ?>
                 <h5><?php echo $objetivo->getObjetivo()->nombre ?></h5>
                <?php } ?>
-                <p style="color:black" class="card-text"><?php echo $publicacion->descripcion ?></p>
+               <p style="color:black" class="card-text" id="<?php echo 'desc-recetas'.$publicacion->id ?>">
+                <?php 
+                  if(strlen($publicacion->descripcion )>100)
+                  {
+                    $publicacion->descripcion = substr($publicacion->descripcion, 0, 100) . '... <a href="javascript:void(0)" onclick="verMas('."'".$publicacion->descripcion."'".', '."'".'recetas'.$publicacion->id."'".');">Ver mas</a>';
+                  }
+                  echo $publicacion->descripcion ;
+                ?>
+                </p>
               </div>
               <div class="card-footer">
                 <small class="text-muted float-left"><i class="fas fa-thumbs-up"></i> Likes: <?php echo sizeof($publicacion->getLikes());?></small>
@@ -261,8 +278,8 @@
                         $i=0;
                         foreach($publicacion->getImagenes() as $imagen){
                       ?>
-                      <div class="carousel-item  <?php echo ($i == 0 ? 'active' : ''); ?>">
-                        <img class="d-block img-fluid" src="\archivos\recortes\<?php echo $imagen->archivo; ?>" alt="First slide">
+                      <div class="carousel-item  <?php echo ($i == 0 ? 'active' : ''); ?>" style="width:253px; height:200px;">
+                        <img class="d-block img-fluid" src="\archivos\recortes\<?php echo $imagen->archivo; ?>" alt="First slide" style="width:100%; height:100%">
                       </div>
                       <?php
                         $i++;
@@ -288,7 +305,15 @@
                 ?>
                 <h5><?php echo $objetivo->getObjetivo()->nombre ?></h5>
                <?php } ?>
-                <p style="color:black" class="card-text"><?php echo $publicacion->descripcion ?></p>
+               <p style="color:black" class="card-text" id="<?php echo 'desc-act-fis'.$publicacion->id ?>">
+                <?php 
+                  if(strlen($publicacion->descripcion )>100)
+                  {
+                    $publicacion->descripcion = substr($publicacion->descripcion, 0, 100) . '... <a href="javascript:void(0)" onclick="verMas('."'".$publicacion->descripcion."'".', '."'".'act-fis'.$publicacion->id."'".');">Ver mas</a>';
+                  }
+                  echo $publicacion->descripcion ;
+                ?>
+                </p>
               </div>
               <div class="card-footer">
                 <small class="text-muted float-left"><i class="fas fa-thumbs-up"></i> Likes: <?php echo sizeof($publicacion->getLikes());?></small>
@@ -390,5 +415,11 @@ function editarPublicacion(alias)
   {
 	  window.location = '/publicaciones/editar/' + alias;
   }
+
+function verMas(texto, id_publi)
+{
+  var elemento = document.getElementById("desc-"+id_publi);
+  elemento.innerHTML = texto;
+}
 
 </script>
