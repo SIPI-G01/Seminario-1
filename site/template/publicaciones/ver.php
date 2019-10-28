@@ -37,7 +37,7 @@ echo $publi->titulo . $objetivos . $duracion;
 
 <!--- Include the above in your HEAD tag ---------->
 <div class="col-md-3" style="width: 15rem;">
-  <a href="\usuario\perfil\<?php echo $publi->getUsuario()->alias; ?>" ><img class="userImg" src="\archivos\avatar-set\boy.png" name="aboutme" width="80" height="80"></a>
+  <a href="\usuario\perfil\<?php echo $publi->getUsuario()->alias; ?>" ><img class="userImg" src="\archivos\avatar-set\<?php echo $publi->getUsuario()->archivo; ?>" name="aboutme" width="80" height="80"></a>
   <div class="card-body" id="userCardBody">
     <h5 class="card-title" id="userCardTitle"><?php $usuario = $publi->getUsuario();
                             echo $usuario->nombre . " " . $usuario->apellido;?></h5>
@@ -61,10 +61,10 @@ echo $publi->titulo . $objetivos . $duracion;
                     <span><strong>Mail: </strong></span><span class="label label-info"><?php echo $usuario->mail;?></span><br>
                     <span><strong>Objetivos del usuario</strong></span><br>
                     <?php
-                    foreach($usuario->getObjetivos() as $objetivoUsuario){
+                    //foreach($usuario->getObjetivos() as $objetivoUsuario){
                       ?>
-                      <span><?php echo $objetivoUsuario->nombre; ?></span><br>
-                    <?php } ?>
+                      <span class="label label-info"><?php echo $objetivoUsuario->nombre; ?></span><br>
+                    <?php //} ?>
 
                     </div>
                     <hr>
@@ -85,7 +85,7 @@ echo $publi->titulo . $objetivos . $duracion;
    <ol class="carousel-indicators">
      <?php
      $i=0;
-     foreach ($publi->getImagenes() as $imagen) {?>
+     foreach ($publi->getImagenes() as $imagen) { ?>
 
      <li data-target="#carouselIndicators" data-slide-to="<?php echo $i; ?>" class="<?php echo ($i == 0 ? 'active' : ''); ?>"></li>
      <?php
@@ -163,7 +163,10 @@ echo $publi->titulo . $objetivos . $duracion;
 			<input class="btn btn-warning btn-lg" type="submit" name="comentar" onClick="agregarComentario();" value="Comentar">
 		  </p>
 		</form>
-	</div>
+  </div>
+  <?php
+    }
+  ?>
     <br>
     <h2 class="text-center">Comentarios</h2>
     <?php
@@ -260,10 +263,6 @@ echo $publi->titulo . $objetivos . $duracion;
    </div>
 
    </div>
-
-   <?php
-    }
-  ?>
 
 <script>
 
