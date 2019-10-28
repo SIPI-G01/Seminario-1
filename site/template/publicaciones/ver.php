@@ -61,10 +61,10 @@ echo $publi->titulo . $objetivos . $duracion;
                     <span><strong>Mail: </strong></span><span class="label label-info"><?php echo $usuario->mail;?></span><br>
                     <span><strong>Objetivos del usuario</strong></span><br>
                     <?php
-                    //foreach($usuario->getObjetivos() as $objetivoUsuario){
+                    foreach($usuario->getObjetivos() as $objetivoUsuario){
                       ?>
                       <span class="label label-info"><?php echo $objetivoUsuario->nombre; ?></span><br>
-                    <?php //} ?>
+                    <?php } ?>
 
                     </div>
                     <hr>
