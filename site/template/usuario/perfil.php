@@ -38,13 +38,12 @@
   <div class="container">
 
       <!-- Jumbotron Header -->
+      <?php if(Utiles::obtenerIdUsuarioLogueado() !=  $usuario->id){ ?>
       <header class="jumbotron my-4">
       <h1 class="display-3">¡Bienvenido al perfil de <?php echo $usuario->nombre;?> <?php echo $usuario->apellido; ?>!</h1>
       <p class="lead">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ipsa, ipsam, eligendi, in quo sunt possimus non incidunt odit vero aliquid similique quaerat nam nobis illo aspernatur vitae fugiat numquam repellat.</p>
-      <?php if(Utiles::obtenerIdUsuarioLogueado() ==  $usuario->id){ ?>
-      <button class="btn btn-primary btn-lg">Editar Perfil</button>
-      <?php } ?>
       </header>
+      <?php } ?>
 
     <div class="row">
 
