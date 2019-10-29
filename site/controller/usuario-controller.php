@@ -68,6 +68,63 @@ if (isset($token) && $token == Utiles::obtenerToken()) {
 				echo 'ERROR|<div class="alert dark alert-alt alert-danger fade in"><button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>' . $errores . '</div>';
 			}
 			break;
+
+		case 'editar-perfil':
+			
+			$valido = true;
+			$item = new usuario();
+			$errores = '<strong>Ocurrieron los siguientes errores:</strong>';
+			
+			if (!isset($_POST['first_name']) || trim($_POST['first_name']) == '') {
+				$errores .= '<p>- Debe ingresar al menos un nombre.</p>';
+				$valido = false;
+
+			}
+
+			if($valido){
+
+				$item->nombre = $_POST['first_name'];
+				var_dump($item->nombre);
+			}
+			
+
+			if (!isset($_POST['last_name']) || trim($_POST['last_name']) == '') {
+				$errores .= '<p>- Debe ingresar al menos un apellido.</p>';
+				$valido = false;
+
+			}
+			if (!isset($_POST['user_name']) || trim($_POST['user_name']) == '') {
+				$errores .= '<p>- Debe ingresar un nombre de usuario.</p>';
+				$valido = false;
+
+			}
+			if (!isset($_POST['email']) || trim($_POST['email']) == '') {
+				$errores .= '<p>- Debe ingresar un email.</p>';
+				$valido = false;
+
+			}
+			if (!isset($_POST['fecha_nac']) || trim($_POST['fecha_nac']) == '') {
+				$errores .= '<p>- Debe ingresar una fecha de nacimiento.</p>';
+				$valido = false;
+
+			}
+			/*if (!isset($_POST['password2']) || trim($_POST['password2']) == '') {
+				$errores .= '<p>- Debe ingresar una contraseña.</p>';
+				$valido = false;
+			}*/
+
+			if($valido) {
+
+				/*$item->id = Utiles::obtenerIdUsuarioLogueado();
+				$item->*/
+
+				echo 'OK|';
+
+			}else {
+				echo 'ERROR|<div class="alert dark alert-alt alert-danger fade in"><button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>' . $errores . '</div>';
+			}
+
+			break;
 	}
 
 }

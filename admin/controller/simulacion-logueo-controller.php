@@ -9,7 +9,7 @@
 		
 			$valido = true;
 
-			if(UsuarioDao::get(1) == null)
+			if(UsuarioDao::get(2) == null)
 			{
 				$valido = false;
 			}
@@ -18,7 +18,7 @@
 			{
 				if(Utiles::obtenerUsuarioLogueado() == null)
 				{
-					$usuario = UsuarioDao::get(1);	
+					$usuario = UsuarioDao::get(2);	
 					Utiles::iniciarSesion($usuario);
 				}
 			} 

@@ -1,5 +1,6 @@
 <?php
  //include_once  ($_SERVER["DOCUMENT_ROOT"] . '/site/view/home-usuario-view.php');
+ include_once $_SERVER['DOCUMENT_ROOT'] . '/site/utiles/Utiles.php';
  //$view = new home_usuario_view($params);
  $usuario = Utiles::obtenerUsuarioLogueado();
  ?>
@@ -54,77 +55,83 @@
         </div><!--/col-3-->
     	<div class="col-sm-9"> 
             <ul class="nav nav-tabs" style="width:1000px;">
-                <li class="active"><a data-toggle="tab" href="#home">Home</a></li>
+                <li class="active"><a data-toggle="tab" href="#data">Mis datos</a></li>
                 <li><a data-toggle="tab" href="#messages">Mis objetivos</a></li>
                 <li><a data-toggle="tab" href="#settings">Mis publicaciones</a></li>
               </ul>
 
-              
+          <div id="msj-error">
+
+          </div>
           <div class="tab-content">
-            <div class="tab-pane active" id="home">
+            <div class="tab-pane active" id="data">
                 <hr>
-                  <form class="form" action="##" method="post" id="registrationForm">
+                  <form class="form" action="javascript:void(1);" method="post" id="frm">
+
+                      <input type="hidden" name="accion" id="accion" value="editar-perfil"/>
+                      <input type="hidden" name="token" id="token" value="<?php echo Utiles::obtenerToken(); ?>"/>
+
                       <div class="form-group">
                           
                           <div class="col-xs-6">
-                              <label for="first_name"><h4>First name</h4></label>
-                              <input type="text" class="form-control" name="first_name" id="first_name" placeholder="first name" title="enter your first name if any.">
+                              <label for="first_name"><h4>Nombre/s</h4></label>
+                              <input type="text" class="form-control" name="first_name" id="first_name" placeholder="First Name" title="Editar nombre" value="<?php echo $usuario->nombre ?>">
                           </div>
                       </div>
                       <div class="form-group">
                           
                           <div class="col-xs-6">
-                            <label for="last_name"><h4>Last name</h4></label>
-                              <input type="text" class="form-control" name="last_name" id="last_name" placeholder="last name" title="enter your last name if any.">
-                          </div>
-                      </div>
-          
-                      <div class="form-group">
-                          
-                          <div class="col-xs-6">
-                              <label for="phone"><h4>Phone</h4></label>
-                              <input type="text" class="form-control" name="phone" id="phone" placeholder="enter phone" title="enter your phone number if any.">
+                            <label for="last_name"><h4>Apellido/s</h4></label>
+                              <input type="text" class="form-control" name="last_name" id="last_name" placeholder="Last Name" title="Editar apellido" value="<?php echo $usuario->apellido ?>">
                           </div>
                       </div>
           
                       <div class="form-group">
+                          
                           <div class="col-xs-6">
-                             <label for="mobile"><h4>Mobile</h4></label>
-                              <input type="text" class="form-control" name="mobile" id="mobile" placeholder="enter mobile number" title="enter your mobile number if any.">
+                              <label for="phone"><h4>Nombre de usuario</h4></label>
+                              <input type="text" class="form-control" name="user_name" id="user_name" placeholder="Nombre de usuario" title="Editar nombre de usuario" value="<?php echo $usuario->usuario ?>">
+                          </div>
+                      </div>
+          
+                      <div class="form-group">
+                          <div class="col-xs-6">
+                             <label for="mobile"><h4>Miembro desde</h4></label>
+                              <input type="text" class="form-control" name="fecha_miembro" id="fecha_miembro" placeholder="Fecha de registro" title="Estas con nosotros desde esta fecha" value="<?php echo $usuario->creado_fecha ?>">
                           </div>
                       </div>
                       <div class="form-group">
                           
                           <div class="col-xs-6">
                               <label for="email"><h4>Email</h4></label>
-                              <input type="email" class="form-control" name="email" id="email" placeholder="you@email.com" title="enter your email.">
+                              <input type="email" class="form-control" name="email" id="email" placeholder="you@email.com" title="Editar email" value="<?php echo $usuario->mail ?>">
                           </div>
                       </div>
                       <div class="form-group">
                           
                           <div class="col-xs-6">
-                              <label for="email"><h4>Location</h4></label>
-                              <input type="email" class="form-control" id="location" placeholder="somewhere" title="enter a location">
+                              <label for="email"><h4>Fecha de nacimiento</h4></label>
+                              <input type="email" class="form-control" name="fecha_nac" id="fecha_nac" placeholder="Fecha de nacimiento" title="Editar fecha de nacimiento" value="<?php echo $usuario->fecha_nacimiento ?>">
                           </div>
                       </div>
                       <div class="form-group">
                           
                           <div class="col-xs-6">
-                              <label for="password"><h4>Password</h4></label>
-                              <input type="password" class="form-control" name="password" id="password" placeholder="password" title="enter your password.">
+                              <label for="password"><h4>Contraseña</h4></label>
+                              <input type="password" class="form-control" name="password" id="password" placeholder="Contraseña" title="Contraseña actual" value="<?php echo $usuario->password ?>">
                           </div>
                       </div>
                       <div class="form-group">
                           
                           <div class="col-xs-6">
-                            <label for="password2"><h4>Verify</h4></label>
-                              <input type="password" class="form-control" name="password2" id="password2" placeholder="password2" title="enter your password2.">
+                            <label for="password2"><h4>Nueva Contraseña</h4></label>
+                              <input type="password" class="form-control" name="password2" id="password2" placeholder="Nueva Contraseña" title="Cambiar contraseña">
                           </div>
                       </div>
                       <div class="form-group">
                            <div class="col-xs-12">
                                 <br>
-                              	<button class="btn btn-lg btn-success" type="submit"><i class="glyphicon glyphicon-ok-sign"></i> Save</button>
+                              	<button class="btn btn-lg btn-success" type="submit" onclick="guardar();"><i class="glyphicon glyphicon-ok-sign"></i> Guardar</button>
                                	<button class="btn btn-lg" type="reset"><i class="glyphicon glyphicon-repeat"></i> Reset</button>
                             </div>
                       </div>
@@ -149,4 +156,37 @@
 
         </div><!--/col-9-->
     </div><!--/row-->
-                                                      
+                              
+<script>
+
+function guardar() {
+
+	$.ajax({
+		async:true,
+		type: "POST",
+		url: "/site/controller/usuario-controller.php",
+		data: $('#frm').serialize(),
+		beforeSend:function(){
+		},
+		success:function(datos) {
+			datos = datos.split("|");
+
+			if (datos[0] == 'OK') {
+				window.location.reload();
+				
+			} else {
+        location.hash = '';
+				$('#msj-error').html(datos[1]);
+				location.hash = 'msj-error';
+			}
+			return true;
+		},
+		timeout:8000,
+		error:function(){
+			return false;
+		}
+	});
+	
+}
+
+</script>
