@@ -11,16 +11,8 @@
 	<head>
 		<?php include_once ($_SERVER["DOCUMENT_ROOT"] . '/site/include/scripts-header.php'); ?>
 	</head>
-	<?php if($_GET['controller'] == 'home')
-	{
-		$id = "index-home";
-	}
-	else
-	{
-		$id = "index-default";
-	}
-	?>
-	<body  id="<?php echo $id;	?>">
+
+	<body  id="index-default">
 
 
 		<!-- start main-->
