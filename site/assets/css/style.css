@@ -14,6 +14,7 @@
 	font-family: arial;
 }
 */
+@import url('https://fonts.googleapis.com/css?family=Titillium+Web&display=swap');
 
 a
 {
@@ -81,7 +82,7 @@ table
 
 h1 a
 {
-	color: rgb(18, 209, 114) !important;
+	color:   #78e08f !important;
 	text-decoration: none !important;
 }
 
@@ -124,7 +125,7 @@ ul {
   margin: 0;
   padding: 0;
   overflow: hidden;
-  background-color:rgba(255, 255, 255, 0.47);
+  background-color: #18d8ce;
 }
 
 .texto-inicio
@@ -160,31 +161,24 @@ body{
 
 #index-default
 {
-	background-color: #bcdccd !important;
+	background-color: white !important;
   /*background-image: url("/archivos/Fondos/1.jpg");
   background-size: cover;
   background-repeat: no-repeat;*/
 	
 }
 
-#index-home{
-  background-image: url("/archivos/Fondos/1.jpg");
-  background-size: cover;
-  background-repeat: no-repeat;
-  width: 100%;
-  height: 100%;
-
-}
-
 h1{
-  font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+  font-family: 'Titillium Web', sans-serif !important;
   font-size: 80px !important;
   color: rgb(18, 209, 114);
-  text-shadow: 5px 5px rgba(0, 0, 0, 0.603);
+  text-shadow: 1px 1px rgba(0, 0, 0, 0.603);
 }
 
 .descHome{
-  font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+
+  font-family: 'Titillium Web', sans-serif;
+
   color: rgb(0, 0, 0);
   /*-webkit-text-fill-color: transparent;
   -webkit-text-stroke-width: 2px;*/
@@ -193,7 +187,7 @@ h1{
 }
 
 #selectObjetivos{
-  font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+  font-family: 'Titillium Web', sans-serif;
   font-size: 20px;
   margin-top: 40px;
   text-align: center;
@@ -207,12 +201,13 @@ h1{
   display: inline-block;
   font-size: 16px;
   cursor: pointer;
-  background-color: rgba(18, 209, 114, 0.774);
-  font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+  background-color:#18d8ce;
+  font-family: 'Titillium Web', sans-serif;
   font-size: 16px;
 }
 
 #objetivosList{
+  font-family: 'Titillium Web', sans-serif;
   text-align: center;
   width: 90%;
 }
@@ -229,15 +224,14 @@ li a {
   display: block;
   color: #5a595a;
   text-align: center;
-  font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+  font-family: 'Titillium Web', sans-serif;
   font-size: 20px;
   padding: 14px 16px;
   text-decoration: none;
 }
 
 li a:hover {
-  background-color: #98fa80;
-  color: #1cb300;
+  color: white;
   text-decoration: none;
 }
 
@@ -266,7 +260,7 @@ datalist{
 .verContainer{
   text-align: center;
   padding-bottom: 20px;
-  font-family: Arial, Helvetica, sans-serif;
+  font-family: 'Titillium Web', sans-serif;
   font-size: 25px;
 }
 
@@ -276,7 +270,7 @@ datalist{
   height: auto;
   display: inline-block;
   font-size: 40px;
-  font-family: Arial, Helvetica, sans-serif;
+  font-family: 'Titillium Web', sans-serif;
 }
 
 .row{
@@ -324,7 +318,7 @@ datalist{
   height: auto;
   display: inline-block;
   font-size: 40px;
-  font-family: Arial, Helvetica, sans-serif;
+  font-family: 'Titillium Web', sans-serif;
 }
 
 .imagen-inicio{
@@ -355,6 +349,7 @@ datalist{
   border-radius: 50%;
 }
 
+
 .button1{
   border: none;
   color: black;
@@ -363,7 +358,7 @@ datalist{
   display: inline-block;
   cursor: pointer;
   background-color: white;
-  font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+  font-family: 'Titillium Web', sans-serif;
   font-size: 12px;
 }
 .card-inner{
