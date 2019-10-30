@@ -55,7 +55,7 @@ echo $publi->titulo . $objetivos . $duracion;
                 </div>
                 <div class="modal-body">
                     <div style="text-align:center;">
-                    <img src="\archivos\usuarios\<?php echo $usuario->archivo; ?>" name="aboutme" width="140" height="140" class="img-circle"></a>
+                    <img src="\archivos\avatar-set\<?php echo $usuario->archivo; ?>" name="aboutme" width="140" height="140" class="img-circle"></a>
                     <h3 class="media-heading"><?php echo $usuario->nombre . " " . $usuario->apellido;?></h3>
                     <span><strong>Fecha de nacimiento: </strong></span><span class="label label-info"><?php echo $usuario->fecha_nacimiento;?></span><br>
                     <span><strong>Mail: </strong></span><span class="label label-info"><?php echo $usuario->mail;?></span><br>

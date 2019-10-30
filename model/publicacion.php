@@ -124,33 +124,75 @@ public function getReacciones() {
 	
 	public function getUnidadTiempo()
 	{
-		if($this->unidad == null)
-		{
 			if($this->unidad_tiempo == 1 || $this->unidad_tiempo == '1')
 			{
-				$this->unidad = 'minutos';
+				if($this->tiempo == 1)
+				{
+					$this->unidad = 'minuto';
+
+				}
+				else
+				{
+					$this->unidad = 'minutos';
+
+				}
 			}
 			else if($this->unidad_tiempo == 2 || $this->unidad_tiempo == '2')
 			{
-				$this->unidad = 'horas';
+				if($this->tiempo == 1)
+				{
+					$this->unidad = 'hora';
+
+				}
+				else
+				{
+					$this->unidad = 'horas';
+
+				}
 				
 			}
 			else if($this->unidad_tiempo == 3 || $this->unidad_tiempo == '3')
 			{
-				$this->unidad = 'dias';
+				if($this->tiempo == 1)
+				{
+					$this->unidad = 'dia';
+
+				}
+				else
+				{
+					$this->unidad = 'dias';
+
+				}
 				
 			}
 			else if($this->unidad_tiempo == 4 || $this->unidad_tiempo == '4')
 			{
-				$this->unidad = 'semanas';
+				if($this->tiempo == 1)
+				{
+					$this->unidad = 'semana';
+
+				}
+				else
+				{
+					$this->unidad = 'semanas';
+
+				}
 				
 			}
 			else
 			{
-				$this->unidad = 'meses';
+				if($this->tiempo == 1)
+				{
+					$this->unidad = 'mes';
+
+				}
+				else
+				{
+					$this->unidad = 'meses';
+
+				}
 				
 			}					
-		}
 		
 		return $this->unidad;
 	}

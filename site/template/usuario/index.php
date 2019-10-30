@@ -15,11 +15,11 @@
 
 <div class="container bootstrap snippet">
     <div class="row">
-  		<div class="col-sm-10"><h1><?php echo $usuario->nombre . ' ' . $usuario->apellido; ?></h1></div>
+  		<div class="col-sm-12"><h1><?php echo $usuario->nombre . ' ' . $usuario->apellido; ?></h1></div>
     	<!--<div class="col-sm-2"><a href="/users" class="pull-right"><img title="profile image" class="img-circle img-responsive" src="http://www.gravatar.com/avatar/28fd20ccec6865e2d5f0e1f4446eb7bf?s=100"></a></div>-->
     </div>
     <div class="row">
-  		<div class="col-sm-3"><!--left col-->
+  		<div class="col-sm-4"><!--left col-->
               
 
       <div class="text-center">
@@ -28,6 +28,8 @@
         <?php } else { ?>
             <img src="/site/images/faceless.jpg" alt="...">
         <?php } ?>
+        <h6>Cambiar Avatar...</h6>
+        <input type="file" class="text-center center-block file-upload">
       </div><br>
 
                
@@ -53,11 +55,12 @@
           </div>
           
         </div><!--/col-3-->
-    	<div class="col-sm-9"> 
+    	<div class="col-sm-8"> 
             <ul class="nav nav-tabs" style="width:1000px;">
                 <li class="active"><a data-toggle="tab" href="#data">Mis datos</a></li>
                 <li><a data-toggle="tab" href="#messages">Mis objetivos</a></li>
                 <li><a data-toggle="tab" href="#settings">Mis publicaciones</a></li>
+                <li><a data-toggle="tab" href="#avatar">Editar Avatar</a></li>
               </ul>
 
           <div id="msj-error">
@@ -89,7 +92,7 @@
                       <div class="form-group">
                           
                           <div class="col-xs-6">
-                              <label for="phone"><h4>Nombre de usuario</h4></label>
+                              <label for="user_name"><h4>Nombre de usuario</h4></label>
                               <input type="text" class="form-control" name="user_name" id="user_name" placeholder="Nombre de usuario" title="Editar nombre de usuario" value="<?php echo $usuario->usuario ?>">
                           </div>
                       </div>
@@ -97,7 +100,7 @@
                       <div class="form-group">
                           <div class="col-xs-6">
                              <label for="mobile"><h4>Miembro desde</h4></label>
-                              <input type="text" class="form-control" name="fecha_miembro" id="fecha_miembro" placeholder="Fecha de registro" title="Estas con nosotros desde esta fecha" value="<?php echo $usuario->creado_fecha ?>">
+                              <input type="text" class="form-control" name="fecha_miembro" id="fecha_miembro" placeholder="Fecha de registro" title="Estas con nosotros desde esta fecha" value="<?php echo $usuario->creado_fecha ?>" disabled >
                           </div>
                       </div>
                       <div class="form-group">
@@ -110,8 +113,8 @@
                       <div class="form-group">
                           
                           <div class="col-xs-6">
-                              <label for="email"><h4>Fecha de nacimiento</h4></label>
-                              <input type="email" class="form-control" name="fecha_nac" id="fecha_nac" placeholder="Fecha de nacimiento" title="Editar fecha de nacimiento" value="<?php echo $usuario->fecha_nacimiento ?>">
+                              <label for="fecha_nac"><h4>Fecha de nacimiento</h4></label>
+                              <input type="date" class="form-control" name="fecha_nac" id="fecha_nac" placeholder="Fecha de nacimiento" title="Editar fecha de nacimiento" value="<?php echo $usuario->fecha_nacimiento ?>">
                           </div>
                       </div>
                       <div class="form-group">
@@ -139,19 +142,24 @@
               
               <hr>
               
-             </div><!--/tab-pane-->
-             <div class="tab-pane" id="messages">
+            </div><!--/tab-pane-->
+            <div class="tab-pane" id="messages">
                
                 <iframe src="/usuario/objetivos" width="1000px" height="600px"></iframe>
                
-             </div><!--/tab-pane-->
-             <div class="tab-pane" id="settings">
+            </div><!--/tab-pane-->
+            <div class="tab-pane" id="settings">
             		
                 <iframe src="/usuario/perfil/<?php echo $usuario->alias; ?>" width="1000px" height="600px"></iframe>
-
-             </div>
                
-              </div><!--/tab-pane-->
+            </div><!--/tab-pane-->
+
+            <div class="tab-pane" id="avatar">
+            		
+                <iframe src="https://getavataaars.com/" width="1000px" height="600px"></iframe>
+
+             </div><!--/tab-pane-->
+
           </div><!--/tab-content-->
 
         </div><!--/col-9-->

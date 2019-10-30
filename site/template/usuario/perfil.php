@@ -123,7 +123,7 @@
                 <?php 
                   foreach($publicacion->getObjetivos() as $objetivo){
                 ?>
-                <h5><?php echo $objetivo->getObjetivo()->nombre ?></h5>
+                <h5><?php //echo $objetivo->getObjetivo()->nombre ?></h5>
                <?php } ?>
                 <p style="color:black" class="card-text" id="<?php echo 'desc-ambas'.$publicacion->id ?>">
                 <?php 
@@ -164,14 +164,15 @@
             if($publicacion->categoria == 1){
               if($publicacion->tiempo != null)
               {
-                $duracion .= ' (Duración: ' . $publicacion->tiempo . ' ' . $publicacion->getUnidadTiempo() . ')';
+                $duracion .= $publicacion->tiempo . ' ' . $publicacion->getUnidadTiempo();
               }
         ?>
           <div class="col-lg-4 col-md-6 mb-4">
-            <div class="card h-100">
-              <a href="#">
-                <div id="carouselExampleIndicators" class="carousel slide my-4" data-ride="carousel">
-                <ol class="carousel-indicators">
+            <div class="ft-recipe"> 
+              <div class="ft-recipe__thumb">
+                <!--<h3>Strawberry Waffle</h3>-->
+                <div id="carouselExampleIndicators_<?php echo $publicacion->id; ?>" class="carousel slide my-4" data-ride="carousel">
+                      <ol class="carousel-indicators">
                       <?php  
                         $i=0;
                         foreach($publicacion->getImagenes() as $imagen){
@@ -195,44 +196,31 @@
                         }
                       ?>
                     </div>
-                    <a class="carousel-control-prev" href="#carouselExampleIndicators" role="button" data-slide="prev">
+                    <a class="carousel-control-prev" href="#carouselExampleIndicators_<?php echo $publicacion->id; ?>" role="button" data-slide="prev">
                       <span class="carousel-control-prev-icon" aria-hidden="true"></span>
                       <span class="sr-only">Previous</span>
                     </a>
-                    <a class="carousel-control-next" href="#carouselExampleIndicators" role="button" data-slide="next">
+                    <a class="carousel-control-next" href="#carouselExampleIndicators_<?php echo $publicacion->id; ?>" role="button" data-slide="next">
                       <span class="carousel-control-next-icon" aria-hidden="true"></span>
                       <span class="sr-only">Next</span>
                     </a>
                 </div>
-              </a>
-              <div class="card-body">
-                <h3 class="card-title">
-                  <a href="#"><?php echo $publicacion->titulo . $duracion; ?></a>
-                </h3>
-                <?php 
-                  foreach($publicacion->getObjetivos() as $objetivo){
-                ?>
-                <h5><?php echo $objetivo->getObjetivo()->nombre ?></h5>
-               <?php } ?>
-               <p style="color:black" class="card-text" id="<?php echo 'desc-recetas'.$publicacion->id ?>">
-                <?php 
-                  if(strlen($publicacion->descripcion )>100)
-                  {
-                    $publicacion->descripcion = substr($publicacion->descripcion, 0, 100) . '... <a href="javascript:void(0)" onclick="verMas('."'".$publicacion->descripcion."'".', '."'".'recetas'.$publicacion->id."'".');">Ver mas</a>';
-                  }
-                  echo $publicacion->descripcion ;
-                ?>
-                </p>
               </div>
-              <div class="card-footer">
-                <small class="text-muted float-left"><i class="fas fa-thumbs-up"></i> Likes: <?php echo sizeof($publicacion->getLikes());?></small>
-                <small class="text-muted float-right"><i class="fas fa-thumbs-down"></i> Dislikes: <?php echo sizeof($publicacion->getDislikes());?></small>
-                <?php if(Utiles::obtenerIdUsuarioLogueado() ==  $usuario->id){ ?>
-                  <div class="row-center" style="text-align:center">
-		                <button id="editarPublicacion" onClick="editarPublicacion('<?php echo $publicacion->alias; ?>')" class="btn btn-info"><i class="fa fa-pencil"></i> Editar publicación</button>
-                    <button id="eliminarPublicacion" style="margin-top:5px" onclick="" class="btn btn-danger"><i class="fa fa-trash"></i> Eliminar publicacion</button>
+              <div class="ft-recipe__content">
+                <header class="content__header">
+                  <div class="row-wrapper">
+                    <h2 class="recipe-title"><?php echo $publicacion->titulo; ?></h2>
+                    <div class="user-rating"></div>
                   </div>
-                <?php } ?>
+                  <div class="recipe-details row" style="width:auto">
+                    <div class="recipe-details-item time col-md-8"><i class="far fa-clock"></i><br><span class="value"><?php echo $duracion; ?></span></div>
+                    <div class="recipe-details-item ingredients col-md-2"><i class="fas fa-thumbs-up"></i><br><span class="value">5</span></div>
+                    <div class="recipe-details-item servings col-md-2"><i class="fas fa-thumbs-down"></i><br><span class="value">4</span></div>
+                  </div>
+                </header>
+                <p class="description">
+                  There’s no better way to celebrate May being National Strawberry Month than by sharing a sweet treat with your pup!!! Strawberries...</p>
+                <footer class="content__footer"><a href="#">View Recipe</a></footer>
               </div>
             </div>
           </div>
@@ -261,7 +249,7 @@
             <div class="card h-100">
               <a href="#">
                 <div id="carouselExampleIndicators" class="carousel slide my-4" data-ride="carousel">
-                <ol class="carousel-indicators">
+                      <ol class="carousel-indicators">
                       <?php  
                         $i=0;
                         foreach($publicacion->getImagenes() as $imagen){

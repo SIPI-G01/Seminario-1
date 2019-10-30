@@ -11,7 +11,7 @@
 			<li id="headerDer"><a href="#inicio_sesion">Iniciar sesion</a></li>
 		<?php } else { ?>
 			<li id="headerDer">
-				<a href="/usuario/home">
+				<a href="/usuario/index">
 					Hola <?php echo Utiles::obtenerUsuarioLogueado()->usuario; ?> 
 					<span class="avatar avatar-online">
 						<?php if(Utiles::obtenerUsuarioLogueado()->archivo != null){?>
