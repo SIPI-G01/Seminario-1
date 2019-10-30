@@ -17,6 +17,11 @@ class Utiles {
 		$_SESSION['usuario-token'] = $usuario->id . time();
 	}// iniciarSesion
 
+	
+	public static function recargarSesion($usuario) {
+		$_SESSION['usuario-logueado'] = $usuario;
+	}// iniciarSesion
+
 	public static function cerrarSesion() {
 		unset($_SESSION['usuario-logueado']);
 		unset($_SESSION['usuario-token']);

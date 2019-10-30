@@ -20,7 +20,7 @@ final class usuario extends GenericEntity{
 	public $creado_fecha;	
 
 	private $objetivos = null;
-	public $publicaciones = null;
+	private $publicaciones = null;
 
 	public function __construct() {
 		$this->setPk(array("id"));

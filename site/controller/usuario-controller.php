@@ -9,6 +9,7 @@ $accion = isset($_POST['accion']) ? $_POST['accion'] : $_GET['accion'];
 if (isset($token) && $token == Utiles::obtenerToken()) {
 
 	include_once ($_SERVER["DOCUMENT_ROOT"] . '/dao/UsuarioObjetivoDao.php');
+	include_once ($_SERVER["DOCUMENT_ROOT"] . '/dao/UsuarioDao.php');
 
 	switch ($accion) {
 		case 'modificar-objetivos':
@@ -80,14 +81,6 @@ if (isset($token) && $token == Utiles::obtenerToken()) {
 				$valido = false;
 
 			}
-
-			if($valido){
-
-				$item->nombre = $_POST['first_name'];
-				var_dump($item->nombre);
-			}
-			
-
 			if (!isset($_POST['last_name']) || trim($_POST['last_name']) == '') {
 				$errores .= '<p>- Debe ingresar al menos un apellido.</p>';
 				$valido = false;
@@ -115,8 +108,17 @@ if (isset($token) && $token == Utiles::obtenerToken()) {
 
 			if($valido) {
 
-				/*$item->id = Utiles::obtenerIdUsuarioLogueado();
-				$item->*/
+				$item = UsuarioDao::get(Utiles::obtenerIdUsuarioLogueado());
+				$item->nombre = $_POST['first_name'];
+				$item->apellido = $_POST['last_name'];
+				$item->usuario = $_POST['user_name'];
+				$item->mail = $_POST['email'];
+				$item->fecha_nacimiento = $_POST['fecha_nac'];
+
+				UsuarioDao::modificar($item);
+
+				Utiles::recargarSesion($item);
+
 
 				echo 'OK|';
 
