@@ -126,7 +126,78 @@ if (isset($token) && $token == Utiles::obtenerToken()) {
 				echo 'ERROR|<div class="alert dark alert-alt alert-danger fade in"><button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>' . $errores . '</div>';
 			}
 
-			break;
+		break;
+		case 'cambiar-password' :
+			
+			$valido = true;
+			$item = new usuario();
+			$item = UsuarioDao::get(Utiles::obtenerIdUsuarioLogueado());
+			$errores = '<strong>Ocurrieron los siguientes errores:</strong>';
+			
+			if (!isset($_POST['password']) || trim($_POST['password']) == '') {
+				$errores .= '<p>- La contraseña no puede estar vacia</p>';
+				$valido = false;
+			}else if (!isset($_POST['password2']) || trim($_POST['password2']) == '') {
+				$errores .= '<p>- La nueva contraseña no puede estar vacia</p>';
+				$valido = false;
+			}else if($item->password != $_POST['password']){
+				$errores .= '<p>- La contraseña ingresada no es correcta. Intente nuevamente</p>';
+				$valido = false;
+			}
+
+
+			if($valido) {
+
+				$item->password = $_POST['password2'];
+
+				UsuarioDao::modificar($item);
+
+				Utiles::recargarSesion($item);
+
+
+				echo 'OK|';
+
+			}else {
+				echo 'ERROR|<div class="alert dark alert-alt alert-danger fade in"><button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>' . $errores . '</div>';
+			}
+		
+		break;
+		case 'eliminar-cuenta' : 
+
+			$valido = true;
+			$item = new usuario();
+			$item = UsuarioDao::get(Utiles::obtenerIdUsuarioLogueado());
+			$errores = '<strong>Ocurrieron los siguientes errores:</strong>';
+
+			if (!isset($_POST['password']) || trim($_POST['password']) == '') {
+				$errores .= '<p>- La contraseña no puede estar vacia</p>';
+				$valido = false;
+			}else if (!isset($_POST['password2']) || trim($_POST['password2']) == '') {
+				$errores .= '<p>- Debe completar ambos campos</p>';
+				$valido = false;
+			}else if($item->password != $_POST['password']){
+				$errores .= '<p>- La contraseña ingresada no es correcta. Intente nuevamente</p>';
+				$valido = false;
+			}else if($_POST['password'] != $_POST['password2']){
+				$errores .= '<p>- Las contraseñas no coinciden. Intente nuevamente</p>';
+				$valido = false;
+			}
+
+			if($valido) {
+
+				$item->activo = 0;
+
+				UsuarioDao::modificar($item);
+
+				Utiles::cerrarSesion($item);
+
+
+				echo 'OK|';
+
+			}else {
+				echo 'ERROR|<div class="alert dark alert-alt alert-danger fade in"><button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>' . $errores . '</div>';
+			}
+			
 	}
 
 }
