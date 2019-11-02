@@ -118,13 +118,12 @@ table
 .panel-body
 {
 	color: black;
-	background-color: #f3f3f3;
-	border: 1px solid #bfb9b9;
+  background-color: #77e9a2d7;
+	border: 1px solid #16ee45;
     border-radius: 8px;
     padding: 20px;
     margin-bottom: 25px !important;
 }
-
 .card-horizontal {
     display: flex;
     flex: 1 1 auto;
@@ -318,6 +317,7 @@ span{
 .card-text{
   font-family: 'Titillium Web', sans-serif;
 }
+
 
 
 
@@ -611,6 +611,49 @@ a {
   box-shadow: 0 10px 34px 0 rgba(255, 79, 135, 0.32);
 }
 
+.my-4{
+  font-family: 'Titillium Web', sans-serif;
+}
+.text-muted{
+  font-family: 'Titillium Web', sans-serif;
+
+}
+
+
+label{
+  font-family: 'Titillium Web', sans-serif;
+
+}
+
+.list-group-item{
+  font-family: 'Titillium Web', sans-serif;
+}
+.text-white-50{
+  font-family: 'Titillium Web', sans-serif;
+}
+.active{
+font-family: 'Titillium Web', sans-serif;
+}
+.text-left{
+  font-family: 'Titillium Web', sans-serif;
+}
+.mt-sm-4{
+  font-family: 'Titillium Web', sans-serif;
+}
+.mt-sm-2{
+  font-family: 'Titillium Web', sans-serif;
+}
+.dropdown{
+  display: block;
+  position: absolute !important;
+  left: 89%;
+  margin-top: 0px;
+  transition: visibility 0s,opacity 0.3s linear;
+  background-color: #31beb794;
+  border-radius: 4px;
+}
+
+/*
 .
 .footer{
   background: #152F4F;
@@ -629,3 +672,4 @@ a {
   }
   .copyright p{border-top:1px solid rgba(255,255,255,.1);} 
 } 
+*/
