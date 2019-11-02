@@ -207,7 +207,7 @@ class PublicacionDao {
 
 	public static function eliminar($id) {
 		$query = "UPDATE publicacion SET
-									activo = false,
+									activo = false
 					WHERE id = :id";
 
 		$params = array(

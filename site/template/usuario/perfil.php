@@ -148,7 +148,7 @@
                 <?php if(Utiles::obtenerIdUsuarioLogueado() ==  $usuario->id){ ?>
                   <div class="row-center" style="text-align:center;">
                     <button id="editarPublicacion" style="margin-top:10px;" onClick="editarPublicacion('<?php echo $publicacion->alias; ?>')" class="btn btn-info"><i class="fa fa-pencil"></i> Editar publicación</button>
-                    <button id="eliminarPublicacion" style="margin-top:5px" onclick="" class="btn btn-danger"><i class="fa fa-trash"></i> Eliminar publicacion</button>
+                    <button id="eliminarPublicacion" style="margin-top:5px" onClick="eliminarPublicacion('<?php echo $publicacion->alias; ?>')" class="btn btn-danger"><i class="fa fa-trash"></i> Eliminar publicacion</button>
 		              </div>
                 <?php } ?>
               </div>
@@ -315,7 +315,7 @@
                 <?php if(Utiles::obtenerIdUsuarioLogueado() ==  $usuario->id){ ?>
                   <div class="row-center" style="text-align:center">
 		                <button id="editarPublicacion" onClick="editarPublicacion('<?php echo $publicacion->alias; ?>')" class="btn btn-info"><i class="fa fa-pencil"></i> Editar publicación</button>
-                    <button id="eliminarPublicacion" style="margin-top:5px" onclick="" class="btn btn-danger"><i class="fa fa-trash"></i> Eliminar publicacion</button>
+                    <button id="eliminarPublicacion" style="margin-top:5px"  onClick="eliminarPublicacion('<?php echo $publicacion->alias; ?>')" class="btn btn-danger"><i class="fa fa-trash"></i> Eliminar publicacion</button>
                   </div>
                 <?php } ?>
               </div>
@@ -396,6 +396,28 @@ x.style.display = 'block';
 function editarPublicacion(alias)
   {
 	  window.location = '/publicaciones/editar/' + alias;
+  }
+function eliminarPublicacion(alias)
+  {
+		$.ajax({
+		async:true,
+		type: "POST",
+		url: "/site/controller/publicacion-controller.php",
+		data: "accion=eliminar&publicacion=" + alias + "&token=" + '<?php echo Utiles::obtenerToken(); ?>',
+		beforeSend:function(){
+		},
+		success:function(datos) {
+			
+			window.location.reload();
+			return true;
+		},
+		timeout:8000,
+		error:function(){
+			alert('Error. Intentelo mas tarde.');
+			return false;
+		}
+	});
+
   }
 
 function verMas(texto, id_publi)

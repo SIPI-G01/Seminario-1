@@ -36,7 +36,7 @@
 									<div class="col-sm-10">
 										<select class="form-control" id="estado" name="estado">
 											<option value="1" selected>Público</option>
-											<option value="2">Privado</option>
+											<option value="2">Borrador</option>
 										</select>
 									</div>
 								</div>

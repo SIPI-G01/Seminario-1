@@ -348,6 +348,12 @@ if (isset($token) && $token == Utiles::obtenerToken()) {
 				echo 'ERROR|<div class="alert dark alert-alt alert-danger fade in"><button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>' . $errores . '</div>';
 			}
 			break;
+			case 'eliminar':
+				$item = PublicacionDao::getXalias($_POST['publicacion']);
+				$item = $item[0];
+				PublicacionDao::eliminar($item->id);
+
+			break;
 	}
 
 }

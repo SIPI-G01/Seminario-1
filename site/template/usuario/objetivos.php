@@ -5,7 +5,7 @@
  
  if($tienePermiso)
  {
-	$view = new mis_objetivos_view(); 
+	$view_objetivos = new mis_objetivos_view(); 
  }
  
  ?>
@@ -36,7 +36,7 @@
 										<div class="col-sm-10">
 											<select class="form-control" id="selector_objetivo" name="selector_objetivo">	
 												<option value="0" selected disabled>Seleccione un objetivo...</option>																				
-												<?php foreach($view->objetivos as $objetivo){ ?>
+												<?php foreach($view_objetivos->objetivos as $objetivo){ ?>
 												<option value="<?php echo $objetivo->id; ?>"><?php echo $objetivo->nombre; ?></option>									
 												<?php } ?>
 											</select>
@@ -81,7 +81,7 @@
 <script>
 
 
-var objetivos = <?php echo json_encode($view->objetivos); ?>;
+var objetivosListado = <?php echo json_encode($view_objetivos->objetivos); ?>;
 var tabla = [];
 var idTabla = [];
 var objetivosSeleccionados = [];
@@ -92,7 +92,7 @@ precargarObjetivos();
 function precargarObjetivos()
 {								
 
-	objetivosSeleccionados = <?php echo json_encode($view->objetivosUsuario); ?>;
+	objetivosSeleccionados = <?php echo json_encode($view_objetivos->objetivosUsuario); ?>;
 	tabla.push("<tr><th>Objetivo</th><th>Fecha de inicio</th><th>Fecha de finalización</th><th></th></tr>");
 	$('#tabla').append("<tr><th class='text-center'>Objetivo</th><th class='text-center'>Fecha de inicio</th><th class='text-center'>Fecha de finalización</th><th></th></tr>");						
 
@@ -155,9 +155,7 @@ function agregarObjetivo()
 			if(aparecio == false)
 			{
 				var lineas = '';
-				objetivos.forEach(function(objetivo) {
-					console.log(objetivo.id);
-					console.log($('#selector_objetivo').val());
+				objetivosListado.forEach(function(objetivo) {
 					if(objetivo.id == $('#selector_objetivo').val())
 					{
 						datosGuardados.push({id: objetivo.id, nombre: objetivo.nombre, fecha_inicio: null, fecha_fin: null});

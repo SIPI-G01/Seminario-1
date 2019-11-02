@@ -68,7 +68,7 @@
 									<div class="col-sm-10">
 										<select class="form-control" id="estado" name="estado">
 											<option value="1" <?php echo ($view->publicacion->estado == 1 ? 'selected' : ''); ?> >Público</option>
-											<option value="2" <?php echo ($view->publicacion->estado == 2 ? 'selected' : ''); ?> >Privado</option>
+											<option value="2" <?php echo ($view->publicacion->estado == 2 ? 'selected' : ''); ?> >Borrador</option>
 										</select>
 									</div>
 								</div>
