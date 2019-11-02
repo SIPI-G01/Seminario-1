@@ -15,7 +15,7 @@
 					Hola <?php echo Utiles::obtenerUsuarioLogueado()->usuario; ?> 
 					<span class="avatar avatar-online">
 						<?php if(Utiles::obtenerUsuarioLogueado()->archivo != null){?>
-							<img src="/archivos/recortes/<?php echo Utiles::obtenerUsuarioLogueado()->archivo; ?>" alt="...">
+							<img src="<?php echo Utiles::obtenerUsuarioLogueado()->archivo; ?>" alt="...">
 						<?php } else { ?>
 							<img src="/site/images/faceless.jpg" alt="...">
 						<?php } ?>

@@ -94,20 +94,32 @@ if (isset($token) && $token == Utiles::obtenerToken()) {
 				$valido = false;
 
 			}
+			foreach(UsuarioDao::listActivos() as $usuario){
+				if(Utiles::obtenerUsuarioLogueado()->usuario != $_POST['user_name']){
+					if($usuario->usuario == $_POST['user_name']){
+						$errores .= '<p>- Nombre de usuario en uso. Por favor elija otro</p>';
+						$valido = false;
+					}
+				}
+			}
 			if (!isset($_POST['email']) || trim($_POST['email']) == '') {
 				$errores .= '<p>- Debe ingresar un email.</p>';
 				$valido = false;
 
+			}
+			foreach(UsuarioDao::listActivos() as $usuario){
+				if(Utiles::obtenerUsuarioLogueado()->mail != $_POST['email']){
+					if($usuario->mail == $_POST['email']){
+						$errores .= '<p>- Ya hay un usuario registrado con ese email.</p>';
+						$valido = false;
+					}
+				}
 			}
 			if (!isset($_POST['fecha_nac']) || trim($_POST['fecha_nac']) == '') {
 				$errores .= '<p>- Debe ingresar una fecha de nacimiento.</p>';
 				$valido = false;
 
 			}
-			/*if (!isset($_POST['password2']) || trim($_POST['password2']) == '') {
-				$errores .= '<p>- Debe ingresar una contraseña.</p>';
-				$valido = false;
-			}*/
 
 			if($valido) {
 
@@ -200,7 +212,25 @@ if (isset($token) && $token == Utiles::obtenerToken()) {
 			}else {
 				echo 'ERROR|<div class="alert dark alert-alt alert-danger fade in"><button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>' . $errores . '</div>';
 			}
+		break;
+		case 'generar-avatar':
+
+			$valido = true;
+			$item = Utiles::obtenerUsuarioLogueado();
 			
+			if($valido) {
+
+				$item->archivo = 'https://avataaars.io/?avatarStyle=' .$_POST['avatar-style']. '&topType=' .$_POST['topType']. '&accessoriesType='.$_POST['accessoriesType'].'&facialHairType='.$_POST['facialHairType'].'&facialHairColor='.$_POST['facialHairColor'].'&clotheType='.$_POST['clotheType'].'&clotheColor='.$_POST['clotheColor'].'&eyeType='.$_POST['eyeType'].'&eyebrowType='.$_POST['eyebrowType'].'&mouthType='.$_POST['mouthType'].'&skinColor='.$_POST['skinColor'];
+				$item->imagen = 'https://avataaars.io/?avatarStyle=' .$_POST['avatar-style']. '&topType=' .$_POST['topType']. '&accessoriesType='.$_POST['accessoriesType'].'&facialHairType='.$_POST['facialHairType'].'&facialHairColor='.$_POST['facialHairColor'].'&clotheType='.$_POST['clotheType'].'&clotheColor='.$_POST['clotheColor'].'&eyeType='.$_POST['eyeType'].'&eyebrowType='.$_POST['eyebrowType'].'&mouthType='.$_POST['mouthType'].'&skinColor='.$_POST['skinColor'];
+
+				UsuarioDao::modificar($item);	
+				Utiles::recargarSesion($item);			
+
+				echo 'OK|<img src="https://avataaars.io/?avatarStyle=' .$_POST['avatar-style']. '&topType=' .$_POST['topType']. '&accessoriesType='.$_POST['accessoriesType'].'&facialHairType='.$_POST['facialHairType'].'&facialHairColor='.$_POST['facialHairColor'].'&clotheType='.$_POST['clotheType'].'&clotheColor='.$_POST['clotheColor'].'&eyeType='.$_POST['eyeType'].'&eyebrowType='.$_POST['eyebrowType'].'&mouthType='.$_POST['mouthType'].'&skinColor='.$_POST['skinColor'].'" alt="" >';
+
+			}else {
+				//echo 'ERROR|<img src="https://avataaars.io/?avatarStyle=Circle&topType=NoHair&accessoriesType=Kurt&facialHairType=BeardMagestic&facialHairColor=BrownDark&clotheType=ShirtCrewNeck&clotheColor=Gray01&eyeType=WinkWacky&eyebrowType=RaisedExcited&mouthType=Sad&skinColor=DarkBrown" alt="" >';
+			}
 	}
 
 }

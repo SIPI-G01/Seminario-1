@@ -37,7 +37,7 @@ echo $publi->titulo . $objetivos . $duracion;
 
 <!--- Include the above in your HEAD tag ---------->
 <div class="col-md-3" style="width: 15rem;">
-  <a href="\usuario\perfil\<?php echo $publi->getUsuario()->alias; ?>" ><img class="userImg" src="\archivos\avatar-set\<?php echo $publi->getUsuario()->archivo; ?>" name="aboutme" width="80" height="80"></a>
+  <a href="\usuario\perfil\<?php echo $publi->getUsuario()->alias; ?>" ><img class="userImg" src="<?php echo $publi->getUsuario()->archivo; ?>" name="aboutme" width="80" height="80"></a>
   <div class="card-body" id="userCardBody">
     <h5 class="card-title" id="userCardTitle"><?php $usuario = $publi->getUsuario();
                             echo $usuario->nombre . " " . $usuario->apellido;?></h5>
@@ -183,7 +183,7 @@ echo $publi->titulo . $objetivos . $duracion;
 	    <div class="card-body" style="color:black">
 	        <div class="row">
         	    <div class="col-md-2">
-        	        <img src="/archivos/recortes/<?php echo($comentario->getUsuario()->imagen);  ?>" alt="" width="60" height="60" class="img img-rounded img-fluid"/>
+        	        <img src="<?php echo($comentario->getUsuario()->imagen);  ?>" alt="" width="60" height="60" class="img img-rounded img-fluid"/>
         	        <p class="text-secondary text-center"><?php echo($comentario->fecha);  ?></p>
         	    </div>
         	    <div class="col-md-10">
@@ -230,7 +230,7 @@ echo $publi->titulo . $objetivos . $duracion;
             	    <div class="card-body">
             	        <div class="row">
                     	    <div class="col-md-2">
-                    	        <img src="/archivos/recortes/<?php echo($respuesta->getUsuario()->imagen);  ?>" width="60" height="60" class="img img-rounded img-fluid"/>
+                    	        <img src="<?php echo($respuesta->getUsuario()->imagen);  ?>" width="60" height="60" class="img img-rounded img-fluid"/>
                     	        <p class="text-secondary text-center"><?php echo($respuesta->fecha);  ?></p>
                     	    </div>
                     	    <div class="col-md-10 text-left respuestaComentario" style="color:black;">

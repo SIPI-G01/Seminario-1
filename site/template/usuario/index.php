@@ -39,7 +39,7 @@
 
             <div class="text-center">
                 <?php if($usuario->archivo != null) { ?>
-                    <img src='https://avataaars.io/?avatarStyle=Circle&topType=NoHair&accessoriesType=Kurt&facialHairType=BeardMagestic&facialHairColor=BrownDark&clotheType=ShirtCrewNeck&clotheColor=Gray01&eyeType=WinkWacky&eyebrowType=RaisedExcited&mouthType=Sad&skinColor=DarkBrown'  alt="avatar">
+                    <img src="<?php echo $usuario->archivo ?>"  alt="avatar">
                 <?php } else { ?>
                     <img src="/site/images/faceless.jpg" alt="...">
                 <?php } ?>
@@ -92,6 +92,10 @@
     	<div class="col-md-9"> 
 
           <div id="msj-error">
+
+          </div>
+
+          <div id="avatar-generado" class="text-center">
 
           </div>
           <div class="tab-content">
@@ -148,9 +152,9 @@
 
 				</div>
 				<hr>
-				<center><h3>O bien, podrías crear una nueva</h3><br>
+				<div class="text-center"><h3>O bien, podrías crear una nueva</h3><br>
 					<button id="crearPublicacion" onClick="crearPublicacion()" class="btn btn-success"><i class="fa fa-pencil"></i> Crear publicación</button>
-				</center>
+                </div>
             </div><!--/tab-pane-->
 
             <div class="tab-pane" id="data">
@@ -248,10 +252,259 @@
                
             </div><!--/tab-pane-->
 
-            <div class="tab-pane" id="avatar">
-            		
-                <iframe src="https://getavataaars.com/?avatarStyle=Circle&topType=NoHair&accessoriesType=Kurt&facialHairType=Blank&facialHairColor=BrownDark&clotheType=ShirtCrewNeck&clotheColor=Gray01&eyeType=WinkWacky&eyebrowType=RaisedExcited&mouthType=Sad&skinColor=DarkBrown" width="100%" height="600px"></iframe>
+            <div class="tab-pane text-center" id="avatar">
+            <div class="alert dark alert-alt alert-danger fade in">Esta en desarrollo. Funicona pero necesita arreglos</div>
+                <br>
+                <br>
+                <br>
+                <form class="form-horizontal" action="javascript:void(1);" method="post" id="frm-avatar">
 
+                    <input type="hidden" name="accion" id="accion" value="generar-avatar"/>
+                    <input type="hidden" name="token" id="token" value="<?php echo Utiles::obtenerToken(); ?>"/>
+
+                    <div class="row form-group">
+                        <label for="avatar-style" class="col-sm-3 control-label">Avatar Style</label>
+                        <div class="col-sm-9">
+                            <label><input type="radio" id="avatar-style-circle" name="avatar-style" value="Circle"> Circle</label> 
+                            <label><input type="radio" id="avatar-style-transparent" name="avatar-style" value="Transparent"> Transparent</label>
+                        </div>
+                    </div>
+                    <div class="row form-group">
+                        <label for="topType" class="col-sm-3 control-label">Top</label>
+                        <div class="col-sm-9">
+                            <select id="topType" name="topType" class="form-control">
+                                <option value="NoHair">NoHair</option>
+                                <option value="Eyepatch">Eyepatch</option>
+                                <option value="Hat">Hat</option>
+                                <option value="Hijab">Hijab</option>
+                                <option value="Turban">Turban</option>
+                                <option value="WinterHat1">WinterHat1</option>
+                                <option value="WinterHat2">WinterHat2</option>
+                                <option value="WinterHat3">WinterHat3</option>
+                                <option value="WinterHat4">WinterHat4</option>
+                                <option value="LongHairBigHair">LongHairBigHair</option>
+                                <option value="LongHairBob">LongHairBob</option>
+                                <option value="LongHairBun">LongHairBun</option>
+                                <option value="LongHairCurly">LongHairCurly</option>
+                                <option value="LongHairCurvy">LongHairCurvy</option>
+                                <option value="LongHairDreads">LongHairDreads</option>
+                                <option value="LongHairFrida">LongHairFrida</option>
+                                <option value="LongHairFro">LongHairFro</option>
+                                <option value="LongHairFroBand">LongHairFroBand</option>
+                                <option value="LongHairNotTooLong">LongHairNotTooLong</option>
+                                <option value="LongHairShavedSides">LongHairShavedSides</option>
+                                <option value="LongHairMiaWallace">LongHairMiaWallace</option>
+                                <option value="LongHairStraight">LongHairStraight</option>
+                                <option value="LongHairStraight2">LongHairStraight2</option>
+                                <option value="LongHairStraightStrand">LongHairStraightStrand</option>
+                                <option value="ShortHairDreads01">ShortHairDreads01</option>
+                                <option value="ShortHairDreads02">ShortHairDreads02</option>
+                                <option value="ShortHairFrizzle">ShortHairFrizzle</option>
+                                <option value="ShortHairShaggyMullet">ShortHairShaggyMullet</option>
+                                <option value="ShortHairShortCurly">ShortHairShortCurly</option>
+                                <option value="ShortHairShortFlat">ShortHairShortFlat</option>
+                                <option value="ShortHairShortRound">ShortHairShortRound</option>
+                                <option value="ShortHairShortWaved">ShortHairShortWaved</option>
+                                <option value="ShortHairSides">ShortHairSides</option>
+                                <option value="ShortHairTheCaesar">ShortHairTheCaesar</option>
+                                <option value="ShortHairTheCaesarSidePart">ShortHairTheCaesarSidePart</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="row form-group">
+                        <label for="accessoriesType" class="col-sm-3 control-label">↳ 👓 Accessories</label>
+                        <div class="col-sm-9">
+                            <select id="accessoriesType" name="accessoriesType" class="form-control">
+                                <option value="Blank">Blank</option>
+                                <option value="Kurt">Kurt</option>
+                                <option value="Prescription01">Prescription01</option>
+                                <option value="Prescription02">Prescription02</option>
+                                <option value="Round">Round</option>
+                                <option value="Sunglasses">Sunglasses</option>
+                                <option value="Wayfarers">Wayfarers</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="row form-group">
+                        <label for="hatColor" class="col-sm-3 control-label">🎨 HatColor</label>
+                        <div class="col-sm-9">
+                            <select id="hatColor" class="form-control">
+                                <option value="Black">Black</option>
+                                <option value="Blue01">Blue01</option>
+                                <option value="Blue02">Blue02</option>
+                                <option value="Blue03">Blue03</option>
+                                <option value="Gray01">Gray01</option>
+                                <option value="Gray02">Gray02</option>
+                                <option value="Heather">Heather</option>
+                                <option value="PastelBlue">PastelBlue</option>
+                                <option value="PastelGreen">PastelGreen</option>
+                                <option value="PastelOrange">PastelOrange</option>
+                                <option value="PastelRed">PastelRed</option>
+                                <option value="PastelYellow">PastelYellow</option>
+                                <option value="Pink">Pink</option>
+                                <option value="Red">Red</option>
+                                <option value="White">White</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="row form-group">
+                        <label for="hairColor" class="col-sm-3 control-label">↳ 💈 Hair Color</label>
+                        <div class="col-sm-9">
+                            <select id="hairColor" name="hairColor" class="form-control">
+                                <option value="Auburn">Auburn</option>
+                                <option value="Black">Black</option>
+                                <option value="Blonde">Blonde</option>
+                                <option value="BlondeGolden">BlondeGolden</option>
+                                <option value="Brown">Brown</option>
+                                <option value="BrownDark">BrownDark</option>
+                                <option value="PastelPink">PastelPink</option>
+                                <option value="Platinum">Platinum</option>
+                                <option value="Red">Red</option>
+                                <option value="SilverGray">SilverGray</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="row form-group">
+                        <label for="facialHairType" class="col-sm-3 control-label">Facial Hair</label>
+                        <div class="col-sm-9">
+                            <select id="facialHairType" name="facialHairType" class="form-control">
+                                <option value="Blank">Blank</option>
+                                <option value="BeardMedium">BeardMedium</option>
+                                <option value="BeardLight">BeardLight</option>
+                                <option value="BeardMagestic">BeardMagestic</option>
+                                <option value="MoustacheFancy">MoustacheFancy</option>
+                                <option value="MoustacheMagnum">MoustacheMagnum</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="row form-group">
+                        <label for="facialHairColor" class="col-sm-3 control-label">↳ ✂️ Facial Hair Color</label>
+                        <div class="col-sm-9">
+                            <select id="facialHairColor" name="facialHairColor" class="form-control">
+                                <option value="Auburn">Auburn</option>
+                                <option value="Black">Black</option>
+                                <option value="Blonde">Blonde</option>
+                                <option value="BlondeGolden">BlondeGolden</option>
+                                <option value="Brown">Brown</option>
+                                <option value="BrownDark">BrownDark</option>
+                                <option value="Platinum">Platinum</option>
+                                <option value="Red">Red</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="row form-group">
+                        <label for="clotheType" class="col-sm-3 control-label">👔 Clothes</label>
+                        <div class="col-sm-9">
+                            <select id="clotheType" name="clotheType" class="form-control">
+                                <option value="BlazerShirt">BlazerShirt</option>
+                                <option value="BlazerSweater">BlazerSweater</option>
+                                <option value="CollarSweater">CollarSweater</option>
+                                <option value="GraphicShirt">GraphicShirt</option>
+                                <option value="Hoodie">Hoodie</option>
+                                <option value="Overall">Overall</option>
+                                <option value="ShirtCrewNeck">ShirtCrewNeck</option>
+                                <option value="ShirtScoopNeck">ShirtScoopNeck</option>
+                                <option value="ShirtVNeck">ShirtVNeck</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="row form-group">
+                        <label for="clotheColor" class="col-sm-3 control-label">↳ Color Fabric</label>
+                        <div class="col-sm-9">
+                            <select id="clotheColor" class="form-control">
+                                <option value="Black">Black</option>
+                                <option value="Blue01">Blue01</option>
+                                <option value="Blue02">Blue02</option>
+                                <option value="Blue03">Blue03</option>
+                                <option value="Gray01">Gray01</option>
+                                <option value="Gray02">Gray02</option>
+                                <option value="Heather">Heather</option>
+                                <option value="PastelBlue">PastelBlue</option>
+                                <option value="PastelGreen">PastelGreen</option>
+                                <option value="PastelOrange">PastelOrange</option>
+                                <option value="PastelRed">PastelRed</option>
+                                <option value="PastelYellow">PastelYellow</option>
+                                <option value="Pink">Pink</option>
+                                <option value="Red">Red</option>
+                                <option value="White">White</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="row form-group">
+                        <label for="eyeType" class="col-sm-3 control-label">👁 Eyes</label>
+                        <div class="col-sm-9">
+                            <select id="eyeType" name="eyeType" class="form-control">
+                                <option value="Close">Close</option>
+                                <option value="Cry">Cry</option>
+                                <option value="Default">Default</option>
+                                <option value="Dizzy">Dizzy</option>
+                                <option value="EyeRoll">EyeRoll</option>
+                                <option value="Happy">Happy</option>
+                                <option value="Hearts">Hearts</option>
+                                <option value="Side">Side</option>
+                                <option value="Squint">Squint</option>
+                                <option value="Surprised">Surprised</option>
+                                <option value="Wink">Wink</option>
+                                <option value="WinkWacky">WinkWacky</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="row form-group">
+                        <label for="eyebrowType" class="col-sm-3 control-label">✏️ Eyebrow</label>
+                        <div class="col-sm-9">
+                            <select id="eyebrowType" name="eyebrowType" class="form-control">
+                                <option value="Angry">Angry</option>
+                                <option value="AngryNatural">AngryNatural</option>
+                                <option value="Default">Default</option>
+                                <option value="DefaultNatural">DefaultNatural</option>
+                                <option value="FlatNatural">FlatNatural</option>
+                                <option value="RaisedExcited">RaisedExcited</option>
+                                <option value="RaisedExcitedNatural">RaisedExcitedNatural</option>
+                                <option value="SadConcerned">SadConcerned</option>
+                                <option value="SadConcernedNatural">SadConcernedNatural</option>
+                                <option value="UnibrowNatural">UnibrowNatural</option>
+                                <option value="UpDown">UpDown</option>
+                                <option value="UpDownNatural">UpDownNatural</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="row form-group">
+                        <label for="mouthType" class="col-sm-3 control-label">👄 Mouth</label>
+                        <div class="col-sm-9">
+                            <select id="mouthType" name="mouthType" class="form-control">
+                                <option value="Concerned">Concerned</option>
+                                <option value="Default">Default</option>
+                                <option value="Disbelief">Disbelief</option>
+                                <option value="Eating">Eating</option>
+                                <option value="Grimace">Grimace</option>
+                                <option value="Sad">Sad</option>
+                                <option value="ScreamOpen">ScreamOpen</option>
+                                <option value="Serious">Serious</option>
+                                <option value="Smile">Smile</option>
+                                <option value="Tongue">Tongue</option>
+                                <option value="Twinkle">Twinkle</option>
+                                <option value="Vomit">Vomit</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="row form-group">
+                        <label for="skinColor" class="col-sm-3 control-label">🎨 Skin</label>
+                        <div class="col-sm-9">
+                            <select id="skinColor" name="skinColor" class="form-control">
+                                <option value="Tanned">Tanned</option>
+                                <option value="Yellow">Yellow</option>
+                                <option value="Pale">Pale</option>
+                                <option value="Light">Light</option>
+                                <option value="Brown">Brown</option>
+                                <option value="DarkBrown">DarkBrown</option>
+                                <option value="Black">Black</option>
+                            </select>
+                        </div>
+                    </div>
+                </form>
+                <br>
+                <button class="btn btn-lg btn-success" type="submit" onclick="generarAvatar();"><i class="glyphicon glyphicon-ok-sign"></i> Crear Avatar</button>
+                <button class="btn btn-lg btn-warning" type="submit" onclick="generarAvatarRandom();"><i class="glyphicon glyphicon-random"></i> Avatar Random</button>
              </div><!--/tab-pane-->
 
              <div class="tab-pane" id="eliminar">
@@ -370,6 +623,36 @@ $.ajax({
     location.hash = '';
             $('#msj-error').html(datos[1]);
             location.hash = 'msj-error';
+        }
+        return true;
+    },
+    timeout:8000,
+    error:function(){
+        return false;
+    }
+});
+
+}
+
+function generarAvatar(){
+
+    $.ajax({
+    async:true,
+    type: "POST",
+    url: "/site/controller/usuario-controller.php",
+    data: $('#frm-avatar').serialize(),
+    beforeSend:function(){
+    },
+    success:function(datos) {
+        datos = datos.split("|");
+
+        if (datos[0] == 'OK') {
+            window.location.reload();  
+        } else {
+    location.hash = '';
+            $('#msj-error').html(datos[1]);
+            location.hash = 'msj-error';
+            window.location.reload();
         }
         return true;
     },
