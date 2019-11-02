@@ -53,7 +53,7 @@ class Utiles {
 	}// obtenerUsuarioLogueado
 
 	public static final function ValidarSesionIniciada() {
-		if (!Utiles::sesionIniciada()) {
+		if (Utiles::sesionIniciada()) {
 			Utiles::redirigir('/usuario');
 		}
 	}// ValidarSesionIniciada

@@ -9,6 +9,10 @@
 <!DOCTYPE html>
 <html lang="es">
 	<head>
+	  <title>Vita</title>
+	  <meta charset="utf-8">
+	  <meta name="viewport" content="width=device-width, initial-scale=1">
+
 		<?php include_once ($_SERVER["DOCUMENT_ROOT"] . '/site/include/scripts-header.php'); ?>
 	</head>
 
@@ -28,9 +32,10 @@
 				}
 
 				?>
+
 		</main>
     	<!-- end main-->
-
 		<?php include_once ($_SERVER["DOCUMENT_ROOT"] . '/site/include/pie.php'); ?>
+
 	</body>
 </html>

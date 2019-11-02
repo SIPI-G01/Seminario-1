@@ -16,6 +16,30 @@
 */
 @import url('https://fonts.googleapis.com/css?family=Titillium+Web&display=swap');
 
+.footer-bottom
+{
+	margin-top: 25px;
+	padding: 20px 0px;
+	color: white;
+	background-color: #343a40!important;
+}
+.nav-tabs > li > a:hover, .nav > li > a:hover, .nav > li > a:focus
+{
+	border: none !important;
+	background-color: transparent !important;
+}
+.nav-tabs > li > a
+{
+	border: none !important;
+}
+
+.nav-tabs > li.active > a, .nav-tabs > li.active > a:hover, .nav-tabs > li.active > a:focus
+{
+	color: #555 !important;
+    cursor: default !important;
+    background-color: #fff !important;
+	
+}
 a
 {
 	text-decoration: none !important;
@@ -141,7 +165,7 @@ ul {
 
 .imagen-inicio
 {
-  max-height: 80px;
+  max-height: 90px;
 }
 
 #headerDer {
@@ -343,10 +367,7 @@ span{
   font-family: 'Titillium Web', sans-serif;
 }
 
-.imagen-inicio{
-  height: 250px;
-  width: 100px;
-}
+
 
 #userCardBody{
   background: linear-gradient(#e66465, #9198e5);

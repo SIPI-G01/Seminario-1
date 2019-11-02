@@ -13,7 +13,7 @@
 <?php
 $objetivos = '';
 foreach($publi->getObjetivos() as $objetivo){
-  $objetivos .= '[' . $objetivo->getObjetivo()->nombre . '] ';
+  $objetivos .= ' [' . $objetivo->getObjetivo()->nombre . ']';
 }
 $duracion = '';
 if($publi->tiempo != null)

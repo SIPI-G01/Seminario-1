@@ -13,7 +13,7 @@
 <div class="container-fluid">
 	<?php if($tienePermiso){ ?>
 	
-	<div class="container">
+	<div class="container" style="width: auto;">
 		<div class="row">
 			<div class="col-md-12">
 				<h3>Mis objetivos</h3>

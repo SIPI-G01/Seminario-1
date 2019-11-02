@@ -1,6 +1,10 @@
 <?php
 include_once  ($_SERVER["DOCUMENT_ROOT"] . '/site/view/home-view.php');
+include_once  ($_SERVER["DOCUMENT_ROOT"] . '/site/utiles/utiles.php');
+
 $view = new home_view();
+
+Utiles::ValidarSesionIniciada();
 ?>
 <div class= "container-fluid">
 

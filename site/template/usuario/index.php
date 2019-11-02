@@ -5,21 +5,28 @@
  $usuario = Utiles::obtenerUsuarioLogueado();
  ?>
 
-<head>
-  <title>Mi perfil</title>
-  <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-</head>
 
 
 
-<!--<div class="container bootstrap snippet">-->
-    <div class="row">
+<div class="container bootstrap snippet" style="width: auto;">
   		<div class="col-sm-12"><h1><?php echo $usuario->nombre . ' ' . $usuario->apellido; ?></h1></div>
     	<!--<div class="col-sm-2"><a href="/users" class="pull-right"><img title="profile image" class="img-circle img-responsive" src="http://www.gravatar.com/avatar/28fd20ccec6865e2d5f0e1f4446eb7bf?s=100"></a></div>-->
-    </div>
-    <div class="row">
-  	    <div class="col-md-3"><!--left col-->
+  		<div class="col-sm-12">
+			<ul class="nav nav-tabs" style="margin-bottom: 20px;">
+				<li class="active"><a data-toggle="tab" href="#inicio">Inicio</a></li>			
+				<li><a data-toggle="tab" href="#data">Mis datos</a></li>
+				<li><a data-toggle="tab" href="#password">Cambiar Contraseña</a></li>
+				<li><a data-toggle="tab" href="#objetivos">Mis objetivos</a></li>
+				<li><a data-toggle="tab" href="#publicaciones">Mis publicaciones</a></li>
+				<li><a data-toggle="tab" href="#avatar">Editar Avatar</a></li>
+				<li><a data-toggle="tab" href="#eliminar">Eliminar Mi Cuenta</a></li>
+			</ul>
+		
+		</div>
+		
+
+		
+		<div class="col-md-3"><!--left col-->
               
 
             <div class="text-center">
@@ -31,7 +38,7 @@
                 <div class="form-group">
                     <div class="col-md-12">
                         <label for="mobile"><h4>Miembro desde</h4></label>
-                        <input type="text" class="form-control" name="fecha_miembro" id="fecha_miembro" placeholder="Fecha de registro" title="Estas con nosotros desde esta fecha" value="<?php echo $usuario->creado_fecha ?>" disabled >
+                        <input type="text" class="form-control" name="fecha_miembro" id="fecha_miembro" placeholder="Fecha de registro" title="Estas con nosotros desde esta fecha" value="<?php echo date_format(date_create($usuario->creado_fecha),'d/m/Y'); ?>" disabled >
                     </div>
                 </div>
             </div>
@@ -75,20 +82,18 @@
           
         </div><!--/col-3-->
     	<div class="col-md-9"> 
-            <ul class="nav nav-tabs" style="width:1000px;">
-                <li class="active"><a data-toggle="tab" href="#data">Mis datos</a></li>
-                <li><a data-toggle="tab" href="#password">Cambiar Contraseña</a></li>
-                <li><a data-toggle="tab" href="#objetivos">Mis objetivos</a></li>
-                <li><a data-toggle="tab" href="#publicaciones">Mis publicaciones</a></li>
-                <li><a data-toggle="tab" href="#avatar">Editar Avatar</a></li>
-                <li><a data-toggle="tab" href="#eliminar">Eliminar Mi Cuenta</a></li>
-              </ul>
 
           <div id="msj-error">
 
           </div>
           <div class="tab-content">
-            <div class="tab-pane active" id="data">
+		    <div class="tab-pane active" id="inicio">
+
+			<h1>PROXIMAMENTE.</h1>
+			
+            </div><!--/tab-pane-->
+
+            <div class="tab-pane" id="data">
                 <hr>
                   <form class="form" action="javascript:void(1);" method="post" id="frm-data">
 
@@ -174,19 +179,18 @@
                
             </div><!--/tab-pane-->
             <div class="tab-pane" id="objetivos">
-               
-                <iframe src="/usuario/objetivos" width="1000px" height="600px"></iframe>
-               
+				<?php include $_SERVER['DOCUMENT_ROOT'] . '/site/template/usuario/objetivos.php';?>
+                              
             </div><!--/tab-pane-->
             <div class="tab-pane" id="publicaciones">
             		
-                <iframe src="/usuario/perfil/<?php echo $usuario->alias; ?>" width="1000px" height="600px"></iframe>
+				<?php include $_SERVER['DOCUMENT_ROOT'] . '/site/template/usuario/perfil.php'; ?>
                
             </div><!--/tab-pane-->
 
             <div class="tab-pane" id="avatar">
             		
-                <iframe src="https://getavataaars.com/?avatarStyle=Circle&topType=NoHair&accessoriesType=Kurt&facialHairType=Blank&facialHairColor=BrownDark&clotheType=ShirtCrewNeck&clotheColor=Gray01&eyeType=WinkWacky&eyebrowType=RaisedExcited&mouthType=Sad&skinColor=DarkBrown" width="1000px" height="600px"></iframe>
+                <iframe src="https://getavataaars.com/?avatarStyle=Circle&topType=NoHair&accessoriesType=Kurt&facialHairType=Blank&facialHairColor=BrownDark&clotheType=ShirtCrewNeck&clotheColor=Gray01&eyeType=WinkWacky&eyebrowType=RaisedExcited&mouthType=Sad&skinColor=DarkBrown" width="100%" height="600px"></iframe>
 
              </div><!--/tab-pane-->
 
@@ -223,8 +227,7 @@
           </div><!--/tab-content-->
 
         </div><!--/col-9-->
-    </div><!--/row-->
-<!--</div>-->
+</div>
                               
 <script>
 
