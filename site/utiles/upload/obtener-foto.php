@@ -4,7 +4,6 @@ ini_set("memory_limit","256M");
 include_once ($_SERVER["DOCUMENT_ROOT"] . '/site/utiles/Utiles.php');
 include_once ($_SERVER["DOCUMENT_ROOT"] . '/site/utiles/upload/funciones-imagenes.php');
 
-Utiles::ValidarSesionIniciada();
 
 include_once ($_SERVER["DOCUMENT_ROOT"] . '/site/utiles/upload/FileUpload.php');
 
