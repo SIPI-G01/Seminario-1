@@ -527,6 +527,7 @@ function guardar() {
 		},
 		success:function(datos) {
 			datos = datos.split("|");
+			console.log(datos);
 			
 			if (datos[0] == 'OK') {
 				window.location = "/publicaciones/ver/" + datos[1];

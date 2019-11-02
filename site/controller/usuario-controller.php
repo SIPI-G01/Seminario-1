@@ -1,7 +1,6 @@
 <?php
 include_once ($_SERVER["DOCUMENT_ROOT"] . '/site/utiles/Utiles.php');
 
-Utiles::ValidarSesionIniciada();
 
 $token = isset($_POST['token']) ? $_POST['token'] : $_GET['token'];
 $accion = isset($_POST['accion']) ? $_POST['accion'] : $_GET['accion'];
@@ -12,6 +11,10 @@ if (isset($token) && $token == Utiles::obtenerToken()) {
 	include_once ($_SERVER["DOCUMENT_ROOT"] . '/dao/UsuarioDao.php');
 
 	switch ($accion) {
+		case 'logout':
+			Utiles::cerrarSesion();
+
+		break;
 		case 'modificar-objetivos':
 			$valido = true;
 			$errores = '<strong>Ocurrieron los siguientes errores:</strong>';

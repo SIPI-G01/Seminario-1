@@ -26,7 +26,7 @@ class ObjetivoDao {
 	}
 	
 		public static function listXcategoriaYusuario($idCategoria, $idUsuario) {
-		$query =   "SELECT o.* FROM objetivo AS o INNER JOIN usuario_objetivo AS uo ON uo.id_objetivo = o.id WHERE o.activo = 1 AND o.categoria IN (:categoria, 3) AND uo.id_usuario = :usuario";
+		$query =   "SELECT o.* FROM objetivo AS o INNER JOIN usuario_objetivo AS uo ON uo.id_objetivo = o.id WHERE o.activo = 1 AND uo.activo = 1 AND o.categoria IN (:categoria, 3) AND uo.id_usuario = :usuario";
 
 		$params = array(
 						":categoria" => $idCategoria,

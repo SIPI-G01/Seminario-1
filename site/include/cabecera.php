@@ -11,7 +11,7 @@
 			<li id="headerDer"><a href="#inicio_sesion">Iniciar sesion</a></li>
 		<?php } else { ?>
 			<li id="headerDer">
-				<a href="/usuario/index">
+				<a href="#">
 					Hola <?php echo Utiles::obtenerUsuarioLogueado()->usuario; ?> 
 					<span class="avatar avatar-online">
 						<?php if(Utiles::obtenerUsuarioLogueado()->archivo != null){?>
@@ -21,6 +21,11 @@
 						<?php } ?>
 					</span>
 				</a>
+				  <ul class="dropdown" style="position: absolute !important; left: 89%; margin-top: 0px;">
+					<li><a href="/usuario">Inicio</a></li>
+					<li><a href="#" onclick="cerrarSesion();">Cerrar sesión</a></li>
+				  </ul>
+
 			</li>
 		<?php } ?>
 		
@@ -33,3 +38,28 @@
 			<h1 class="line">⚜</h1>
     </div>-->
 </header>
+
+<script>
+    function cerrarSesion() {
+
+		$.ajax({
+			async:true,
+			type: "POST",
+			url: "/site/controller/usuario-controller.php",
+			data: "accion=logout&token=" + '<?php echo Utiles::obtenerToken(); ?>',
+			beforeSend:function(){
+			},
+			success:function(datos) {
+				
+				//window.location.href = "/";
+				return true;
+			},
+			timeout:8000,
+			error:function(){
+				alert('Error al cerrar sesion. Intentelo mas tarde.');
+				return false;
+			}
+		});
+    }
+
+</script>
