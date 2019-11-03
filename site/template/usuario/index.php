@@ -261,22 +261,26 @@
 
                     <input type="hidden" name="accion" id="accion" value="generar-avatar"/>
                     <input type="hidden" name="token" id="token" value="<?php echo Utiles::obtenerToken(); ?>"/>
-
+                 
+					<div class="row form-group">
+                        <div class="col-md-offset-3 col-sm-9">
+							<img class="text-center" src="<?php echo $usuario->archivo ?>"  id="avatar-edicion" alt="avatar">
+                        </div>
+                    </div>
                     <div class="row form-group">
                         <label for="avatar-style" class="col-sm-3 control-label">Tipo de Avatar</label>
                         <div class="col-sm-9">
-                            <label><input type="radio" id="avatar-style-circle" name="avatar-style" value="Circle"> Redondo</label> 
-                            <label><input type="radio" id="avatar-style-transparent" name="avatar-style" value="Transparent"> Transparente</label>
+                            <label><input type="radio" id="avatar-style-circle" name="avatar-style" value="Circle" onClick="cambioAvatar('avatarStyle', 'Circle');"> Redondo</label> 
+                            <label><input type="radio" id="avatar-style-transparent" name="avatar-style" value="Transparent" onClick="cambioAvatar('avatarStyle', 'Transparent');"> Transparente</label>
                         </div>
                     </div>
                     <div class="row form-group">
                         <label for="topType" class="col-sm-3 control-label">Cabeza</label>
                         <div class="col-sm-9 text-center">
-                            <select id="topType" name="topType" class="form-control">
-                                <option value="SeleccionarOpcion">Seleccione una opción</option>
+                            <select id="topType" name="topType" class="form-control"  onChange="cambioAvatar('topType', this.value);">
                                 <option value="NoHair">SinPelo</option>
                                 <option value="Eyepatch">Parche</option>
-                                <option value="Hat">Sombreo</option>
+                                <option value="Hat">Sombrero</option>
                                 <option value="Hijab">Hijab</option>
                                 <option value="Turban">Turbante</option>
                                 <option value="WinterHat1">GorroInvernal1</option>
@@ -315,8 +319,7 @@
                     <div class="row form-group">
                         <label for="accessoriesType" class="col-sm-3 control-label">↳ 👓 Accesorios</label>
                         <div class="col-sm-9">
-                            <select id="accessoriesType" name="accessoriesType" class="form-control">
-                                <option value="SeleccionarOpcion">Seleccione una opción</option>
+                            <select id="accessoriesType" name="accessoriesType" class="form-control" onChange="cambioAvatar('accessoriesType', this.value);">
                                 <option value="Blank">Vacio</option>
                                 <option value="Kurt">LentesDeSolKurtCobain</option>
                                 <option value="Prescription01">Anteojos01</option>
@@ -330,8 +333,7 @@
                     <div class="row form-group">
                         <label for="hatColor" class="col-sm-3 control-label">🎨 Color Sombrero</label>
                         <div class="col-sm-9">
-                            <select id="hatColor" name="hatColor" class="form-control">
-                                <option value="SeleccionarOpcion">Seleccione una opción</option>
+                            <select id="hatColor" name="hatColor" class="form-control" onChange="cambioAvatar('hatColor', this.value);">
                                 <option value="Black">Negro</option>
                                 <option value="Blue01">Azul01</option>
                                 <option value="Blue02">Azul02</option>
@@ -353,8 +355,7 @@
                     <div class="row form-group">
                         <label for="hairColor" class="col-sm-3 control-label">↳ 💈 Color Pelo</label>
                         <div class="col-sm-9">
-                            <select id="hairColor" name="hairColor" class="form-control">
-                                <option value="SeleccionarOpcion">Seleccione una opción</option>
+                            <select id="hairColor" name="hairColor" class="form-control" onChange="cambioAvatar('hairColor', this.value);">
                                 <option value="Auburn">Bermejo</option>
                                 <option value="Black">Negro</option>
                                 <option value="Blonde">Rubio</option>
@@ -371,8 +372,7 @@
                     <div class="row form-group">
                         <label for="facialHairType" class="col-sm-3 control-label">Barba</label>
                         <div class="col-sm-9">
-                            <select id="facialHairType" name="facialHairType" class="form-control">
-                                <option value="SeleccionarOpcion"> Seleccione una opción</option>
+                            <select id="facialHairType" name="facialHairType" class="form-control" onChange="cambioAvatar('facialHairType', this.value);">
                                 <option value="Blank">Rasurado</option>
                                 <option value="BeardMedium">BarbaMedia</option>
                                 <option value="BeardLight">BarbaTenue</option>
@@ -385,8 +385,7 @@
                     <div class="row form-group">
                         <label for="facialHairColor" class="col-sm-3 control-label">↳ ✂️ Color Barba</label>
                         <div class="col-sm-9">
-                            <select id="facialHairColor" name="facialHairColor" class="form-control">
-                                <option value="SeleccionarOpcion"> Seleccione una opción</option>
+                            <select id="facialHairColor" name="facialHairColor" class="form-control" onChange="cambioAvatar('facialHairColor', this.value);">
                                 <option value="Auburn">Bermejo</option>
                                 <option value="Black">Negro</option>
                                 <option value="Blonde">Rubio</option>
@@ -401,8 +400,7 @@
                     <div class="row form-group">
                         <label for="clotheType" class="col-sm-3 control-label">👔 Atuendos</label>
                         <div class="col-sm-9">
-                            <select id="clotheType" name="clotheType" class="form-control">
-                                <option value="SeleccionarOpcion"> Seleccione una opción</option>   
+                            <select id="clotheType" name="clotheType" class="form-control"  onChange="cambioAvatar('clotheType', this.value);">
                                 <option value="BlazerShirt">RemeraConSaco</option>
                                 <option value="BlazerSweater">PuloverConSaco</option>
                                 <option value="CollarSweater">PuloverConCuello</option>
@@ -416,10 +414,9 @@
                         </div>
                     </div>
                     <div class="row form-group">
-                        <label for="clotheColor" class="col-sm-3 control-label">↳ Color Fabric</label>
+                        <label for="clotheColor" class="col-sm-3 control-label">↳ Color Atuendo</label>
                         <div class="col-sm-9">
-                            <select id="clotheColor" name="clotheColor" class="form-control">
-                                <option value="SeleccionarOpcion"> Seleccione una opción</option>
+                            <select id="clotheColor" name="clotheColor" class="form-control" onChange="cambioAvatar('clotheColor', this.value);">
                                 <option value="Black">Negro</option>
                                 <option value="Blue01">Azul01</option>
                                 <option value="Blue02">Azul02</option>
@@ -441,8 +438,7 @@
                     <div class="row form-group">
                         <label for="eyeType" class="col-sm-3 control-label">👁 Ojos</label>
                         <div class="col-sm-9">
-                            <select id="eyeType" name="eyeType" class="form-control">
-                                <option value="SeleccionarOpcion"> Seleccione una opción</option>
+                            <select id="eyeType" name="eyeType" class="form-control" onChange="cambioAvatar('eyeType', this.value);">
                                 <option value="Close">Cerrados</option>
                                 <option value="Cry">Llorando</option>
                                 <option value="Default">PorDefecto</option>
@@ -461,8 +457,7 @@
                     <div class="row form-group">
                         <label for="eyebrowType" class="col-sm-3 control-label">✏️ Cejas</label>
                         <div class="col-sm-9">
-                            <select id="eyebrowType" name="eyebrowType" class="form-control">
-                                <option value="SeleccionarOpcion"> Seleccione una opción</option>
+                            <select id="eyebrowType" name="eyebrowType" class="form-control" onChange="cambioAvatar('eyebrowType', this.value);">
                                 <option value="Angry">Enojado1</option>
                                 <option value="AngryNatural">Enojado2</option>
                                 <option value="Default">PorDefecto1</option>
@@ -481,8 +476,7 @@
                     <div class="row form-group">
                         <label for="mouthType" class="col-sm-3 control-label">👄 Boca</label>
                         <div class="col-sm-9">
-                            <select id="mouthType" name="mouthType" class="form-control">
-                                <option value="SeleccionarOpcion"> Seleccione una opción</option>
+                            <select id="mouthType" name="mouthType" class="form-control" onChange="cambioAvatar('mouthType', this.value);">
                                 <option value="Concerned">Preocupado</option>
                                 <option value="Default">PorDefecto</option>
                                 <option value="Disbelief">Boquiabierto</option>
@@ -501,8 +495,7 @@
                     <div class="row form-group">
                         <label for="skinColor" class="col-sm-3 control-label">🎨 Piel</label>
                         <div class="col-sm-9">
-                            <select id="skinColor" name="skinColor" class="form-control">
-                                <option value="SeleccionarOpcion"> Seleccione una opción</option>
+                            <select id="skinColor" name="skinColor" class="form-control" onChange="cambioAvatar('skinColor', this.value);">
                                 <option value="Tanned">Bronceado</option>
                                 <option value="Yellow">Amarillenta</option>
                                 <option value="Pale">Palido</option>
@@ -555,6 +548,42 @@
 </div>
                               
 <script>
+var linkAvatar = '<?php echo $usuario->imagen; ?>';
+function cambioAvatar(tipo, valor)
+{
+	var partesLink = linkAvatar.split(tipo);
+	if(partesLink.length == 1)
+	{
+		var partesFinLink = partesLink[0].split('&');
+		if(partesFinLink.lenght == 1)
+		{
+			linkAvatar = partesFinLink + "?" + tipo + "=" + valor;			
+		}
+		else
+		{
+			linkAvatar = partesLink[0] + "&" + tipo + "=" + valor;	
+		}
+	}
+	else
+	{
+		var partesFinLink = partesLink[1].split('&');
+		var finLink = '';
+		var i = 0;
+		partesFinLink.forEach(function(parte) {
+		  
+			if(i > 0)
+			{
+				finLink += '&' + parte;	
+				console.log(finLink);
+				
+			}
+			i++;
+		});
+		linkAvatar = partesLink[0] + tipo + "=" + valor + finLink;			
+	}
+	$("#avatar-edicion").attr("src", linkAvatar);	
+	console.log(linkAvatar);
+}
 
 function guardarData() {
 
