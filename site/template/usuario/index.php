@@ -651,16 +651,13 @@ function cambioAvatar(tipo, valor)
 		  
 			if(i > 0)
 			{
-				finLink += '&' + parte;	
-				console.log(finLink);
-				
+				finLink += '&' + parte;					
 			}
 			i++;
 		});
 		linkAvatar = partesLink[0] + tipo + "=" + valor + finLink;			
 	}
 	$("#avatar-edicion").attr("src", linkAvatar);	
-	console.log(linkAvatar);
 }
 
 function guardarData() {
@@ -674,9 +671,8 @@ function guardarData() {
 		},
 		success:function(datos) {
 			datos = datos.split("|");
-
 			if (datos[0] == 'OK') {
-				window.location.reload();
+				window.location = "/";
 				
 			} else {
         location.hash = '';
@@ -767,6 +763,7 @@ function generarAvatar(){
     },
     success:function(datos) {
         datos = datos.split("|");
+			console.log(datos);
 
         if (datos[0] == 'OK') {
             window.location.reload();  

@@ -601,12 +601,10 @@ function guardar() {
                             $('#imagen-modificada').val('1');
 
                             var linea = '<tr id="' + imagen.ref + '">';
-                            linea += '<td><img id="img-recorte" src="/site/temp/recortes/' + imagen.namecode + '" width="100px"/></td>';
+                            linea += '<td><input type="hidden" name="recortegaleria-' + imagen.ref + '" id="recortegaleria-' + imagen.ref + '" value="0"> <img id="galeria-' + imagen.ref + '" src="/site/temp/recortes/' + imagen.namecode + '" width="70px" /></td>';
                             linea += '<td>' + imagen.name + '</td>';
-
-                            linea += '<td><button onclick="javascript:recortar(\'' + imagen.namecode + '\',\'site/temp\',\'img-recorte\', ' + propRecorte + ', \'imagenRecorte\');" type="button" class="btn btn-info btn-sm mr5" title="Recortar foto"><i class="fa fa-scissors"></i></button> ';
-
-                            linea += '<button onclick="javascript:eliminarimg(' + imagen.ref + ');" type="button" class="btn btn-danger btn-sm mr5" title="Quitar Imagen"><i class="fa fa-trash"></i> </button></td></tr>';
+                            linea += '<td><button onclick="javascript:recortar(\'' + imagen.namecode + '\',\'site/temp\',\'galeria-' + imagen.ref + '\', ' + propRecorte + ', \'recortegaleria-' + imagen.ref + '\');" type="button" class="btn btn-primary btn-sm mr5" title="Recortar foto"><i class="fa fa-scissors"></i> </button> ';
+                            linea += ' <button onclick="javascript:eliminarimg(' + imagen.ref + ');" type="button" class="btn btn-danger btn-sm mr5" title="Quitar Imagen"><i class="fa fa-trash"></i> </button></td></tr>';
 
                             $("#tabla-imagenes tbody").append(linea);
 

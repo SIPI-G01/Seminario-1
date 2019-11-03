@@ -232,10 +232,11 @@ if (isset($token) && $token == Utiles::obtenerToken()) {
 				$item->archivo = 'https://avataaars.io/?avatarStyle=' .$_POST['avatar-style']. '&topType=' .$_POST['topType']. '&accessoriesType='.$_POST['accessoriesType']. '&hatColor=' .$_POST['hatColor']. '&hairColor=' .$_POST['hairColor']. '&facialHairType=' .$_POST['facialHairType']. '&facialHairColor=' .$_POST['facialHairColor']. '&clotheType=' .$_POST['clotheType']. '&clotheColor=' .$_POST['clotheColor']. '&graphicType=' .$_POST['graphicType']. '&eyeType=' .$_POST['eyeType']. '&eyebrowType=' .$_POST['eyebrowType']. '&mouthType=' .$_POST['mouthType']. '&skinColor=' .$_POST['skinColor'];
 				$item->imagen = 'https://avataaars.io/?avatarStyle=' .$_POST['avatar-style']. '&topType=' .$_POST['topType']. '&accessoriesType='.$_POST['accessoriesType']. '&hatColor=' .$_POST['hatColor']. '&hairColor=' .$_POST['hairColor']. '&facialHairType=' .$_POST['facialHairType']. '&facialHairColor=' .$_POST['facialHairColor']. '&clotheType=' .$_POST['clotheType']. '&clotheColor=' .$_POST['clotheColor']. '&graphicType=' .$_POST['graphicType']. '&eyeType=' .$_POST['eyeType']. '&eyebrowType=' .$_POST['eyebrowType']. '&mouthType=' .$_POST['mouthType']. '&skinColor=' .$_POST['skinColor'];
 
-				UsuarioDao::modificar($item);	
+				UsuarioDao::modificar($item);
+				
 				Utiles::recargarSesion($item);			
 
-				echo 'OK|<img src="https://avataaars.io/?avatarStyle=' .$_POST['avatar-style']. '&topType=' .$_POST['topType']. '&accessoriesType='.$_POST['accessoriesType']. '&hatColor=' .$_POST['hatColor']. '&hairColor=' .$_POST['hairColor']. '&facialHairType=' .$_POST['facialHairType']. '&facialHairColor=' .$_POST['facialHairColor']. '&clotheType=' .$_POST['clotheType']. '&clotheColor=' .$_POST['clotheColor']. '&graphicType=' .$_POST['graphicType']. '&eyeType=' .$_POST['eyeType']. '&eyebrowType=' .$_POST['eyebrowType']. '&mouthType=' .$_POST['mouthType']. '&skinColor=' .$_POST['skinColor'].'" alt="" >';
+				echo 'OK|';
 
 			}else {
 				echo 'ERROR|<div class="alert dark alert-alt alert-danger fade in"><button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>' . $errores . '</div>';
