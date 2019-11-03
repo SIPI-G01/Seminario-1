@@ -21,7 +21,7 @@
 						<?php } ?>
 					</span>
 				</a>
-				  <ul class="dropdown">
+				  <ul class="dropdown" style="position: absolute !important; left: 89%; margin-top: 0px;">
 					<li><a href="/usuario">Inicio</a></li>
 					<li><a href="#" onclick="cerrarSesion();">Cerrar sesión</a></li>
 				  </ul>
