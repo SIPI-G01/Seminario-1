@@ -1,6 +1,7 @@
 <?php
  include_once  ($_SERVER["DOCUMENT_ROOT"] . '/site/view/home-usuario-view.php');
  include_once $_SERVER['DOCUMENT_ROOT'] . '/site/utiles/Utiles.php';
+ include_once $_SERVER['DOCUMENT_ROOT'] . '/dao/AvatarDao.php';
  $usuario = Utiles::obtenerUsuarioLogueado();
  $view_home = '';
 	if($usuario == null)
@@ -10,7 +11,24 @@
 	else
 	{
 		$view_home = new home_usuario_view();	
-	}
+    }
+    
+$link = $usuario->archivo;
+$componentes = explode("&",$link);
+$estiloAvatar = explode("=",$componentes[0]);
+$cabeza = explode("=",$componentes[1]);
+$accesorios = explode("=",$componentes[2]);
+$colorSombrero = explode("=",$componentes[3]);
+$colorPelo = explode("=",$componentes[4]);
+$barba = explode("=",$componentes[5]);
+$colorBarba = explode("=",$componentes[6]);
+$atuendo = explode("=",$componentes[7]);
+$colorAtuendo = explode("=",$componentes[8]);
+$estampa = explode("=",$componentes[9]);
+$ojos = explode("=",$componentes[10]);
+$cejas = explode("=",$componentes[11]);
+$boca = explode("=",$componentes[12]);
+$piel = explode("=",$componentes[13]);
 
  ?>
 
@@ -286,7 +304,12 @@
                         <label for="topType" class="col-sm-3 control-label">Cabeza</label>
                         <div class="col-sm-9 text-center">
                             <select id="topType" name="topType" class="form-control"  onChange="cambioAvatar('topType', this.value);">
-                                <option value="NoHair">SinPelo</option>
+                                <?php 
+                                    foreach(AvatarDao::getXcomponente('cabeza') as $componente){
+                                ?>
+                                <option value="<?php echo $componente->nombre_original; ?>" <?php echo ($componente->nombre_original == $cabeza[1] ? 'selected' : ''); ?> ><?php echo $componente->nombre_traducido; ?></option>
+                                <?php }; ?>
+                                <!--<option value="NoHair">SinPelo</option>
                                 <option value="Eyepatch">Parche</option>
                                 <option value="Hat">Sombrero</option>
                                 <option value="Hijab">Hijab</option>
@@ -320,7 +343,7 @@
                                 <option value="ShortHairShortWaved">PeloCortoOndulado</option>
                                 <option value="ShortHairSides">PeloALosCostados</option>
                                 <option value="ShortHairTheCaesar">CorteTheCaesar</option>
-                                <option value="ShortHairTheCaesarSidePart">CorteTheCaesarConRaya</option>
+                                <option value="ShortHairTheCaesarSidePart">CorteTheCaesarConRaya</option>-->
                             </select>
                         </div>
                     </div>
@@ -328,13 +351,18 @@
                         <label for="accessoriesType" class="col-sm-3 control-label">↳ 👓 Accesorios</label>
                         <div class="col-sm-9">
                             <select id="accessoriesType" name="accessoriesType" class="form-control" onChange="cambioAvatar('accessoriesType', this.value);">
-                                <option value="Blank">Vacio</option>
+                                <?php 
+                                    foreach(AvatarDao::getXcomponente('accesorios') as $componente){
+                                ?>
+                                <option value="<?php echo $componente->nombre_original; ?>" <?php echo ($componente->nombre_original == $accesorios[1] ? 'selected' : ''); ?> ><?php echo $componente->nombre_traducido; ?></option>
+                                <?php }; ?>
+                                <!--<option value="Blank">Vacio</option>
                                 <option value="Kurt">LentesDeSolKurtCobain</option>
                                 <option value="Prescription01">Anteojos01</option>
                                 <option value="Prescription02">Anteojos02</option>
                                 <option value="Round">AnteojosHarryPotter</option>
                                 <option value="Sunglasses">LentesDeSol</option>
-                                <option value="Wayfarers">LentesDeSolRayBan</option>
+                                <option value="Wayfarers">LentesDeSolRayBan</option>-->
                             </select>
                         </div>
                     </div>
@@ -342,7 +370,12 @@
                         <label for="hatColor" class="col-sm-3 control-label">🎨 Color Sombrero</label>
                         <div class="col-sm-9">
                             <select id="hatColor" name="hatColor" class="form-control" onChange="cambioAvatar('hatColor', this.value);">
-                                <option value="Black">Negro</option>
+                                <?php 
+                                    foreach(AvatarDao::getXcomponente('colorSombrero') as $componente){
+                                ?>
+                                <option value="<?php echo $componente->nombre_original; ?>" <?php echo ($componente->nombre_original == $colorSombrero[1] ? 'selected' : ''); ?> ><?php echo $componente->nombre_traducido; ?></option>
+                                <?php }; ?>
+                                <!--<option value="Black">Negro</option>
                                 <option value="Blue01">Azul01</option>
                                 <option value="Blue02">Azul02</option>
                                 <option value="Blue03">Azul03</option>
@@ -356,7 +389,7 @@
                                 <option value="PastelYellow">AmarilloPastel</option>
                                 <option value="Pink">Rosa</option>
                                 <option value="Red">Rojo</option>
-                                <option value="White">Blanco</option>
+                                <option value="White">Blanco</option>-->
                             </select>
                         </div>
                     </div>
@@ -364,7 +397,12 @@
                         <label for="hairColor" class="col-sm-3 control-label">↳ 💈 Color Pelo</label>
                         <div class="col-sm-9">
                             <select id="hairColor" name="hairColor" class="form-control" onChange="cambioAvatar('hairColor', this.value);">
-                                <option value="Auburn">Bermejo</option>
+                                <?php 
+                                    foreach(AvatarDao::getXcomponente('colorPelo') as $componente){
+                                ?>
+                                <option value="<?php echo $componente->nombre_original; ?>" <?php echo ($componente->nombre_original == $colorPelo[1] ? 'selected' : ''); ?> ><?php echo $componente->nombre_traducido; ?></option>
+                                <?php }; ?>
+                                <!--<option value="Auburn">Bermejo</option>
                                 <option value="Black">Negro</option>
                                 <option value="Blonde">Rubio</option>
                                 <option value="BlondeGolden">RubioDorado</option>
@@ -373,7 +411,7 @@
                                 <option value="PastelPink">RosaPastel</option>
                                 <option value="Platinum">Platinado</option>
                                 <option value="Red">Rojo</option>
-                                <option value="SilverGray">GrisPlata</option>
+                                <option value="SilverGray">GrisPlata</option>-->
                             </select>
                         </div>
                     </div>
@@ -381,12 +419,17 @@
                         <label for="facialHairType" class="col-sm-3 control-label">Barba</label>
                         <div class="col-sm-9">
                             <select id="facialHairType" name="facialHairType" class="form-control" onChange="cambioAvatar('facialHairType', this.value);">
-                                <option value="Blank">Rasurado</option>
+                                <?php 
+                                    foreach(AvatarDao::getXcomponente('barba') as $componente){
+                                ?>
+                                <option value="<?php echo $componente->nombre_original; ?>" <?php echo ($componente->nombre_original == $barba[1] ? 'selected' : ''); ?> ><?php echo $componente->nombre_traducido; ?></option>
+                                <?php }; ?>
+                                <!--<option value="Blank">Rasurado</option>
                                 <option value="BeardMedium">BarbaMedia</option>
                                 <option value="BeardLight">BarbaTenue</option>
                                 <option value="BeardMagestic">BarbaMagestuosa</option>
                                 <option value="MoustacheFancy">MostachoFrances</option>
-                                <option value="MoustacheMagnum">MostachoMagnum</option>
+                                <option value="MoustacheMagnum">MostachoMagnum</option>-->
                             </select>
                         </div>
                     </div>
@@ -394,6 +437,11 @@
                         <label for="facialHairColor" class="col-sm-3 control-label">↳ ✂️ Color Barba</label>
                         <div class="col-sm-9">
                             <select id="facialHairColor" name="facialHairColor" class="form-control" onChange="cambioAvatar('facialHairColor', this.value);">
+                                <?php 
+                                    foreach(AvatarDao::getXcomponente('colorBarba') as $componente){
+                                ?>
+                                <option value="<?php echo $componente->nombre_original; ?>" <?php echo ($componente->nombre_original == $colorPelo[1] ? 'selected' : ''); ?> ><?php echo $componente->nombre_traducido; ?></option>
+                                <?php }; ?>
                                 <option value="Auburn">Bermejo</option>
                                 <option value="Black">Negro</option>
                                 <option value="Blonde">Rubio</option>
@@ -409,7 +457,12 @@
                         <label for="clotheType" class="col-sm-3 control-label">👔 Atuendos</label>
                         <div class="col-sm-9">
                             <select id="clotheType" name="clotheType" class="form-control"  onChange="cambioAvatar('clotheType', this.value);">
-                                <option value="BlazerShirt">RemeraConSaco</option>
+                                <?php 
+                                    foreach(AvatarDao::getXcomponente('atuendos') as $componente){
+                                ?>
+                                <option value="<?php echo $componente->nombre_original; ?>" <?php echo ($componente->nombre_original == $atuendo[1] ? 'selected' : ''); ?> ><?php echo $componente->nombre_traducido; ?></option>
+                                <?php }; ?>
+                                <!--<option value="BlazerShirt">RemeraConSaco</option>
                                 <option value="BlazerSweater">PuloverConSaco</option>
                                 <option value="CollarSweater">PuloverConCuello</option>
                                 <option value="GraphicShirt">RemeraEstampada</option>
@@ -417,7 +470,7 @@
                                 <option value="Overall">Enterito</option>
                                 <option value="ShirtCrewNeck">RemeraCuelloRedondo</option>
                                 <option value="ShirtScoopNeck">RemeraCuelloRedondoAbierto</option>
-                                <option value="ShirtVNeck">RemeraCuelloEnV</option>
+                                <option value="ShirtVNeck">RemeraCuelloEnV</option>-->
                             </select>
                         </div>
                     </div>
@@ -425,7 +478,12 @@
                         <label for="clotheColor" class="col-sm-3 control-label">↳ 🎨 Color Atuendo</label>
                         <div class="col-sm-9">
                             <select id="clotheColor" name="clotheColor" class="form-control" onChange="cambioAvatar('clotheColor', this.value);">
-                                <option value="Black">Negro</option>
+                                <?php 
+                                    foreach(AvatarDao::getXcomponente('colorTela') as $componente){
+                                ?>
+                                <option value="<?php echo $componente->nombre_original; ?>" <?php echo ($componente->nombre_original == $colorAtuendo[1] ? 'selected' : ''); ?> ><?php echo $componente->nombre_traducido; ?></option>
+                                <?php }; ?>
+                                <!--<option value="Black">Negro</option>
                                 <option value="Blue01">Azul01</option>
                                 <option value="Blue02">Azul02</option>
                                 <option value="Blue03">Azul03</option>
@@ -439,7 +497,7 @@
                                 <option value="PastelYellow">AmarilloPastel</option>
                                 <option value="Pink">Rosa</option>
                                 <option value="Red">Rojo</option>
-                                <option value="White">Blanco</option>
+                                <option value="White">Blanco</option>-->
                             </select>
                         </div>
                     </div>
@@ -447,7 +505,12 @@
                         <label for="graphicType" class="col-sm-3 control-label">↳ Estampa</label>
                         <div class="col-sm-9">
                             <select id="graphicType" name="graphicType" class="form-control" onChange="cambioAvatar('graphicType', this.value);">
-                                <option value="Bat">Murciélago</option>
+                                <?php 
+                                    foreach(AvatarDao::getXcomponente('estampa') as $componente){
+                                ?>
+                                <option value="<?php echo $componente->nombre_original; ?>" <?php echo ($componente->nombre_original == $estampa[1] ? 'selected' : ''); ?> ><?php echo $componente->nombre_traducido; ?></option>
+                                <?php }; ?>
+                                <!--<option value="Bat">Murciélago</option>
                                 <option value="Cumbia">Cumbia</option>
                                 <option value="Deer">Ciervo</option>
                                 <option value="Diamond">Diamante</option>
@@ -457,7 +520,7 @@
                                 <option value="Selena">Selena</option>
                                 <option value="Bear">Oso</option>
                                 <option value="SkullOutline">Calavera1</option>
-                                <option value="Skull">Calavera2</option>
+                                <option value="Skull">Calavera2</option>-->
                             </select>
                         </div>
                     </div>
@@ -465,7 +528,12 @@
                         <label for="eyeType" class="col-sm-3 control-label">👁 Ojos</label>
                         <div class="col-sm-9">
                             <select id="eyeType" name="eyeType" class="form-control" onChange="cambioAvatar('eyeType', this.value);">
-                                <option value="Close">Cerrados</option>
+                                <?php 
+                                    foreach(AvatarDao::getXcomponente('ojos') as $componente){
+                                ?>
+                                <option value="<?php echo $componente->nombre_original; ?>" <?php echo ($componente->nombre_original == $ojos[1] ? 'selected' : ''); ?> ><?php echo $componente->nombre_traducido; ?></option>
+                                <?php }; ?>
+                                <!--<option value="Close">Cerrados</option>
                                 <option value="Cry">Llorando</option>
                                 <option value="Default">PorDefecto</option>
                                 <option value="Dizzy">EnCruz</option>
@@ -476,7 +544,7 @@
                                 <option value="Squint">Entrecerrados</option>
                                 <option value="Surprised">Sorprendido</option>
                                 <option value="Wink">Guiño1</option>
-                                <option value="WinkWacky">Guiño2</option>
+                                <option value="WinkWacky">Guiño2</option>-->
                             </select>
                         </div>
                     </div>
@@ -484,7 +552,12 @@
                         <label for="eyebrowType" class="col-sm-3 control-label">✏️ Cejas</label>
                         <div class="col-sm-9">
                             <select id="eyebrowType" name="eyebrowType" class="form-control" onChange="cambioAvatar('eyebrowType', this.value);">
-                                <option value="Angry">Enojado1</option>
+                                <?php 
+                                    foreach(AvatarDao::getXcomponente('cejas') as $componente){
+                                ?>
+                                <option value="<?php echo $componente->nombre_original; ?>" <?php echo ($componente->nombre_original == $cejas[1] ? 'selected' : ''); ?> ><?php echo $componente->nombre_traducido; ?></option>
+                                <?php }; ?>
+                                <!--<option value="Angry">Enojado1</option>
                                 <option value="AngryNatural">Enojado2</option>
                                 <option value="Default">PorDefecto1</option>
                                 <option value="DefaultNatural">PorDefecto2</option>
@@ -495,7 +568,7 @@
                                 <option value="SadConcernedNatural">TristePreocupado2</option>
                                 <option value="UnibrowNatural">Uniceja</option>
                                 <option value="UpDown">UnaCejaElevada1</option>
-                                <option value="UpDownNatural">UnaCejaElevada2</option>
+                                <option value="UpDownNatural">UnaCejaElevada2</option>-->
                             </select>
                         </div>
                     </div>
@@ -503,7 +576,12 @@
                         <label for="mouthType" class="col-sm-3 control-label">👄 Boca</label>
                         <div class="col-sm-9">
                             <select id="mouthType" name="mouthType" class="form-control" onChange="cambioAvatar('mouthType', this.value);">
-                                <option value="Concerned">Preocupado</option>
+                                <?php 
+                                    foreach(AvatarDao::getXcomponente('boca') as $componente){
+                                ?>
+                                <option value="<?php echo $componente->nombre_original; ?>" <?php echo ($componente->nombre_original == $boca[1] ? 'selected' : ''); ?> ><?php echo $componente->nombre_traducido; ?></option>
+                                <?php }; ?>
+                                <!--<option value="Concerned">Preocupado</option>
                                 <option value="Default">PorDefecto</option>
                                 <option value="Disbelief">Boquiabierto</option>
                                 <option value="Eating">Sonrojado</option>
@@ -514,7 +592,7 @@
                                 <option value="Smile">SonrisaDientes</option>
                                 <option value="Tongue">Lengua</option>
                                 <option value="Twinkle">Sonrisa</option>
-                                <option value="Vomit">Vomito</option>
+                                <option value="Vomit">Vomito</option>-->
                             </select>
                         </div>
                     </div>
@@ -522,13 +600,18 @@
                         <label for="skinColor" class="col-sm-3 control-label">🎨 Piel</label>
                         <div class="col-sm-9">
                             <select id="skinColor" name="skinColor" class="form-control" onChange="cambioAvatar('skinColor', this.value);">
-                                <option value="Tanned">Bronceado</option>
+                                <?php 
+                                    foreach(AvatarDao::getXcomponente('piel') as $componente){
+                                ?>
+                                <option value="<?php echo $componente->nombre_original; ?>" <?php echo ($componente->nombre_original == $piel[1] ? 'selected' : ''); ?> ><?php echo $componente->nombre_traducido; ?></option>
+                                <?php }; ?>
+                                <!--<option value="Tanned">Bronceado</option>
                                 <option value="Yellow">Amarillenta</option>
                                 <option value="Pale">Palido</option>
                                 <option value="Light">Claro</option>
                                 <option value="Brown">Moreno</option>
                                 <option value="DarkBrown">MorenoOscuro1</option>
-                                <option value="Black">MorenoOscuro2</option>
+                                <option value="Black">MorenoOscuro2</option>-->
                             </select>
                         </div>
                     </div>
@@ -574,6 +657,60 @@
 </div>
                               
 <script>
+
+restriccionesPrecargado();//funcion en proceso
+
+function restriccionesPrecargado(tipo, valor){//funcion en proceso
+    if(tipo == 'topType' && valor == 'Eyepatch')
+    {
+        var accesorios = document.getElementById("accesorios");
+        accesorios.style.display = 'none';
+    }else {
+        var accesorios = document.getElementById("accesorios");
+        accesorios.style.display = 'block';
+    }
+    if(tipo == 'topType' && (valor == 'Hijab' || valor == 'Turban'|| valor == 'WinterHat1' || valor == 'WinterHat2' || valor == 'WinterHat3' || valor == 'WinterHat4'))
+    {
+        var colorSombrero = document.getElementById("colorSombrero");
+        colorSombrero.style.display = 'block';
+    }else {
+        var colorSombrero = document.getElementById("colorSombrero");
+        colorSombrero.style.display = 'none';
+    }
+    if(tipo == 'topType' && (valor == 'NoHair' || valor == 'Eyepatch' || valor == 'Hat' || valor == 'Hijab' || valor == 'Turban' || valor == 'WinterHat1' || valor == 'WinterHat2' || valor == 'WinterHat3' || valor == 'WinterHat4' || valor == 'LongHairFrida' || valor == 'LongHairShavedSides'))
+    {
+        var colorPelo = document.getElementById("colorPelo");
+        colorPelo.style.display = 'none';
+    }else{
+        var colorPelo = document.getElementById("colorPelo");
+        colorPelo.style.display = 'block';
+    }
+    if(tipo == 'facialHairType' && valor == 'Blank' )
+    {
+        var colorBarba = document.getElementById("colorBarba");
+        colorBarba.style.display = 'none';
+    }else {
+        var colorBarba = document.getElementById("colorBarba");
+        colorBarba.style.display = 'block';
+    }
+    if(tipo == 'clotheType' && (valor == 'BlazerShirt' || valor == 'BlazerSweater'))
+    {
+        var colorAtuendo = document.getElementById("colorAtuendo");
+        colorAtuendo.style.display = 'none';
+    }else {
+        var colorAtuendo = document.getElementById("colorAtuendo");
+        colorAtuendo.style.display = 'block';
+    }
+    if(tipo == 'clotheType' && valor == 'GraphicShirt')
+    {
+        var estampa = document.getElementById("estampa");
+        estampa.style.display = 'block';
+    }else {
+        var estampa = document.getElementById("estampa");
+        estampa.style.display = 'none';
+    }
+}
+
 var linkAvatar = '<?php echo $usuario->imagen; ?>';
 function cambioAvatar(tipo, valor)
 {
