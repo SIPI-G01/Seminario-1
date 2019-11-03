@@ -37,7 +37,11 @@ echo $publi->titulo . $objetivos . $duracion;
 
 <!--- Include the above in your HEAD tag ---------->
 <div class="col-md-3" style="width: 15rem;">
-  <a href="\usuario\perfil\<?php echo $publi->getUsuario()->alias; ?>" ><img class="userImg" src="<?php echo $publi->getUsuario()->archivo; ?>" name="aboutme" width="80" height="80"></a>
+  <?php if(Utiles::obtenerUsuarioLogueado()->id != $publi->getUsuario()->id){ ?>
+    <a href="\usuario\perfil\<?php echo $publi->getUsuario()->alias; ?>" ><img class="userImg" src="<?php echo $publi->getUsuario()->archivo; ?>" name="aboutme" width="80" height="80"></a>
+  <?php }else{ ?>
+    <a href="/usuario"><img class="userImg" src="<?php echo $publi->getUsuario()->archivo; ?>" name="aboutme" width="80" height="80"></a>
+  <?php } ?>  
   <div class="card-body" id="userCardBody">
     <h5 class="card-title" id="userCardTitle"><?php $usuario = $publi->getUsuario();
                             echo $usuario->nombre . " " . $usuario->apellido;?></h5>

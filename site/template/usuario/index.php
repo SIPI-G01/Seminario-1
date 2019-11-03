@@ -267,6 +267,14 @@
 							<img class="text-center" src="<?php echo $usuario->archivo ?>"  id="avatar-edicion" alt="avatar">
                         </div>
                     </div>
+                    <div class="row">
+                        <div class="col-md-3"></div>
+                        <div id="alerta-cambios" class="col-md-9 alert dark alert-alt alert-success fade in text-center" style="display:none"><i class="glyphicon glyphicon-hourglass"></i> Hay cambios sin guardar...</div>
+                    </div>
+                    <br>
+                    <br>
+                    <br>
+                    <br>
                     <div class="row form-group">
                         <label for="avatar-style" class="col-sm-3 control-label">Tipo de Avatar</label>
                         <div class="col-sm-9">
@@ -316,7 +324,7 @@
                             </select>
                         </div>
                     </div>
-                    <div class="row form-group">
+                    <div class="row form-group" id="accesorios">
                         <label for="accessoriesType" class="col-sm-3 control-label">↳ 👓 Accesorios</label>
                         <div class="col-sm-9">
                             <select id="accessoriesType" name="accessoriesType" class="form-control" onChange="cambioAvatar('accessoriesType', this.value);">
@@ -330,7 +338,7 @@
                             </select>
                         </div>
                     </div>
-                    <div class="row form-group">
+                    <div class="row form-group" id="colorSombrero" style="display:none">
                         <label for="hatColor" class="col-sm-3 control-label">🎨 Color Sombrero</label>
                         <div class="col-sm-9">
                             <select id="hatColor" name="hatColor" class="form-control" onChange="cambioAvatar('hatColor', this.value);">
@@ -352,7 +360,7 @@
                             </select>
                         </div>
                     </div>
-                    <div class="row form-group">
+                    <div class="row form-group" id="colorPelo">
                         <label for="hairColor" class="col-sm-3 control-label">↳ 💈 Color Pelo</label>
                         <div class="col-sm-9">
                             <select id="hairColor" name="hairColor" class="form-control" onChange="cambioAvatar('hairColor', this.value);">
@@ -382,7 +390,7 @@
                             </select>
                         </div>
                     </div>
-                    <div class="row form-group">
+                    <div class="row form-group" id="colorBarba"> 
                         <label for="facialHairColor" class="col-sm-3 control-label">↳ ✂️ Color Barba</label>
                         <div class="col-sm-9">
                             <select id="facialHairColor" name="facialHairColor" class="form-control" onChange="cambioAvatar('facialHairColor', this.value);">
@@ -413,8 +421,8 @@
                             </select>
                         </div>
                     </div>
-                    <div class="row form-group">
-                        <label for="clotheColor" class="col-sm-3 control-label">↳ Color Atuendo</label>
+                    <div class="row form-group" id="colorAtuendo">
+                        <label for="clotheColor" class="col-sm-3 control-label">↳ 🎨 Color Atuendo</label>
                         <div class="col-sm-9">
                             <select id="clotheColor" name="clotheColor" class="form-control" onChange="cambioAvatar('clotheColor', this.value);">
                                 <option value="Black">Negro</option>
@@ -432,6 +440,24 @@
                                 <option value="Pink">Rosa</option>
                                 <option value="Red">Rojo</option>
                                 <option value="White">Blanco</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="row form-group" id="estampa" style="display:none">
+                        <label for="graphicType" class="col-sm-3 control-label">↳ Estampa</label>
+                        <div class="col-sm-9">
+                            <select id="graphicType" name="graphicType" class="form-control" onChange="cambioAvatar('graphicType', this.value);">
+                                <option value="Bat">Murciélago</option>
+                                <option value="Cumbia">Cumbia</option>
+                                <option value="Deer">Ciervo</option>
+                                <option value="Diamond">Diamante</option>
+                                <option value="Hola">Hola</option>
+                                <option value="Pizza">Pizza</option>
+                                <option value="Resist">Resist</option>
+                                <option value="Selena">Selena</option>
+                                <option value="Bear">Oso</option>
+                                <option value="SkullOutline">Calavera1</option>
+                                <option value="Skull">Calavera2</option>
                             </select>
                         </div>
                     </div>
@@ -551,6 +577,58 @@
 var linkAvatar = '<?php echo $usuario->imagen; ?>';
 function cambioAvatar(tipo, valor)
 {
+    var alerta_cambios = document.getElementById("alerta-cambios");
+    alerta_cambios.style.display = 'block';
+    if(tipo == 'topType' && valor == 'Eyepatch')
+    {
+        var accesorios = document.getElementById("accesorios");
+        accesorios.style.display = 'none';
+    }else {
+        var accesorios = document.getElementById("accesorios");
+        accesorios.style.display = 'block';
+    }
+    if(tipo == 'topType' && (valor == 'Hijab' || valor == 'Turban'|| valor == 'WinterHat1' || valor == 'WinterHat2' || valor == 'WinterHat3' || valor == 'WinterHat4'))
+    {
+        var colorSombrero = document.getElementById("colorSombrero");
+        colorSombrero.style.display = 'block';
+    }else {
+        var colorSombrero = document.getElementById("colorSombrero");
+        colorSombrero.style.display = 'none';
+    }
+    if(tipo == 'topType' && (valor == 'NoHair' || valor == 'Eyepatch' || valor == 'Hat' || valor == 'Hijab' || valor == 'Turban' || valor == 'WinterHat1' || valor == 'WinterHat2' || valor == 'WinterHat3' || valor == 'WinterHat4' || valor == 'LongHairFrida' || valor == 'LongHairShavedSides'))
+    {
+        var colorPelo = document.getElementById("colorPelo");
+        colorPelo.style.display = 'none';
+    }else{
+        var colorPelo = document.getElementById("colorPelo");
+        colorPelo.style.display = 'block';
+    }
+    if(tipo == 'facialHairType' && valor == 'Blank' )
+    {
+        var colorBarba = document.getElementById("colorBarba");
+        colorBarba.style.display = 'none';
+    }else {
+        var colorBarba = document.getElementById("colorBarba");
+        colorBarba.style.display = 'block';
+    }
+    if(tipo == 'clotheType' && (valor == 'BlazerShirt' || valor == 'BlazerSweater'))
+    {
+        var colorAtuendo = document.getElementById("colorAtuendo");
+        colorAtuendo.style.display = 'none';
+    }else {
+        var colorAtuendo = document.getElementById("colorAtuendo");
+        colorAtuendo.style.display = 'block';
+    }
+    if(tipo == 'clotheType' && valor == 'GraphicShirt')
+    {
+        var estampa = document.getElementById("estampa");
+        estampa.style.display = 'block';
+    }else {
+        var estampa = document.getElementById("estampa");
+        estampa.style.display = 'none';
+    }
+    
+
 	var partesLink = linkAvatar.split(tipo);
 	if(partesLink.length == 1)
 	{
@@ -676,6 +754,9 @@ $.ajax({
 }
 
 function generarAvatar(){
+
+    var alerta_cambios = document.getElementById("alerta-cambios");
+    alerta_cambios.style.display = 'none';
 
     $.ajax({
     async:true,

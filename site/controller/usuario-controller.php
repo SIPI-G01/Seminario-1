@@ -226,88 +226,16 @@ if (isset($token) && $token == Utiles::obtenerToken()) {
 				$valido = false;
 
 			}
-			if ($_POST['topType'] == 'SeleccionarOpcion') {
-
-				$errores .= '<p>- Debe elegir una opción.</p>';
-				$valido = false;
-
-			}
-			if ($_POST['accessoriesType'] == 'SeleccionarOpcion') {
-
-				$errores .= '<p>- Debe elegir una opción.</p>';
-				$valido = false;
-
-			}
-			if ($_POST['hatColor'] == 'SeleccionarOpcion') {
-
-				$errores .= '<p>- Debe elegir una opción.</p>';
-				$valido = false;
-
-			}
-			if ($_POST['hairColor'] == 'SeleccionarOpcion') {
-
-				$errores .= '<p>- Debe elegir una opción.</p>';
-				$valido = false;
-
-			}
-			if ($_POST['facialHairType'] == 'SeleccionarOpcion') {
-
-				$errores .= '<p>- Debe elegir una opción.</p>';
-				$valido = false;
-
-			}
-			if ($_POST['facialHairColor'] == 'SeleccionarOpcion') {
-
-				$errores .= '<p>- Debe elegir una opción.</p>';
-				$valido = false;
-
-			}
-			if ($_POST['clotheType'] == 'SeleccionarOpcion') {
-
-				$errores .= '<p>- Debe elegir una opción.</p>';
-				$valido = false;
-
-			}
-			if ($_POST['clotheColor'] == 'SeleccionarOpcion') {
-
-				$errores .= '<p>- Debe elegir una opción.</p>';
-				$valido = false;
-
-			}
-			if ($_POST['eyeType'] == 'SeleccionarOpcion') {
-
-				$errores .= '<p>- Debe elegir una opción.</p>';
-				$valido = false;
-
-			}
-			if ($_POST['eyebrowType'] == 'SeleccionarOpcion') {
-
-				$errores .= '<p>- Debe elegir una opción.</p>';
-				$valido = false;
-
-			}
-			if ($_POST['mouthType'] == 'SeleccionarOpcion') {
-
-				$errores .= '<p>- Debe elegir una opción.</p>';
-				$valido = false;
-
-			}
-			if ($_POST['skinColor'] == 'SeleccionarOpcion') {
-
-				$errores .= '<p>- Debe elegir una opción.</p>';
-				$valido = false;
-
-			}
-			
+	
 			if($valido) {
 
-				$item->archivo = 'https://avataaars.io/?avatarStyle=' .$_POST['avatar-style']. '&topType=' .$_POST['topType']. '&accessoriesType='.$_POST['accessoriesType'].'&facialHairType='.$_POST['facialHairType'].'&facialHairColor='.$_POST['facialHairColor'].'&clotheType='.$_POST['clotheType'].'&clotheColor='.$_POST['clotheColor'].'&eyeType='.$_POST['eyeType'].'&eyebrowType='.$_POST['eyebrowType'].'&mouthType='.$_POST['mouthType'].'&skinColor='.$_POST['skinColor'];
-				$item->imagen = 'https://avataaars.io/?avatarStyle=' .$_POST['avatar-style']. '&topType=' .$_POST['topType']. '&accessoriesType='.$_POST['accessoriesType'].'&facialHairType='.$_POST['facialHairType'].'&facialHairColor='.$_POST['facialHairColor'].'&clotheType='.$_POST['clotheType'].'&clotheColor='.$_POST['clotheColor'].'&eyeType='.$_POST['eyeType'].'&eyebrowType='.$_POST['eyebrowType'].'&mouthType='.$_POST['mouthType'].'&skinColor='.$_POST['skinColor'];
+				$item->archivo = 'https://avataaars.io/?avatarStyle=' .$_POST['avatar-style']. '&topType=' .$_POST['topType']. '&accessoriesType='.$_POST['accessoriesType']. '&hatColor=' .$_POST['hatColor']. '&hairColor=' .$_POST['hairColor']. '&facialHairType=' .$_POST['facialHairType']. '&facialHairColor=' .$_POST['facialHairColor']. '&clotheType=' .$_POST['clotheType']. '&clotheColor=' .$_POST['clotheColor']. '&graphicType=' .$_POST['graphicType']. '&eyeType=' .$_POST['eyeType']. '&eyebrowType=' .$_POST['eyebrowType']. '&mouthType=' .$_POST['mouthType']. '&skinColor=' .$_POST['skinColor'];
+				$item->imagen = 'https://avataaars.io/?avatarStyle=' .$_POST['avatar-style']. '&topType=' .$_POST['topType']. '&accessoriesType='.$_POST['accessoriesType']. '&hatColor=' .$_POST['hatColor']. '&hairColor=' .$_POST['hairColor']. '&facialHairType=' .$_POST['facialHairType']. '&facialHairColor=' .$_POST['facialHairColor']. '&clotheType=' .$_POST['clotheType']. '&clotheColor=' .$_POST['clotheColor']. '&graphicType=' .$_POST['graphicType']. '&eyeType=' .$_POST['eyeType']. '&eyebrowType=' .$_POST['eyebrowType']. '&mouthType=' .$_POST['mouthType']. '&skinColor=' .$_POST['skinColor'];
 
 				UsuarioDao::modificar($item);	
 				Utiles::recargarSesion($item);			
 
-				echo 'OK|<img src="https://avataaars.io/?avatarStyle=' .$_POST['avatar-style']. '&topType=' .$_POST['topType']. '&accessoriesType='.$_POST['accessoriesType'].'&facialHairType='.$_POST['facialHairType'].'&facialHairColor='.$_POST['facialHairColor'].'&clotheType='.$_POST['clotheType'].'&clotheColor='.$_POST['clotheColor'].'&eyeType='.$_POST['eyeType'].'&eyebrowType='.$_POST['eyebrowType'].'&mouthType='.$_POST['mouthType'].'&skinColor='.$_POST['skinColor'].'" alt="" >';
+				echo 'OK|<img src="https://avataaars.io/?avatarStyle=' .$_POST['avatar-style']. '&topType=' .$_POST['topType']. '&accessoriesType='.$_POST['accessoriesType']. '&hatColor=' .$_POST['hatColor']. '&hairColor=' .$_POST['hairColor']. '&facialHairType=' .$_POST['facialHairType']. '&facialHairColor=' .$_POST['facialHairColor']. '&clotheType=' .$_POST['clotheType']. '&clotheColor=' .$_POST['clotheColor']. '&graphicType=' .$_POST['graphicType']. '&eyeType=' .$_POST['eyeType']. '&eyebrowType=' .$_POST['eyebrowType']. '&mouthType=' .$_POST['mouthType']. '&skinColor=' .$_POST['skinColor'].'" alt="" >';
 
 			}else {
 				echo 'ERROR|<div class="alert dark alert-alt alert-danger fade in"><button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>' . $errores . '</div>';
