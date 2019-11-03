@@ -3,7 +3,7 @@ ini_set("memory_limit","256M");
 
 include_once ($_SERVER["DOCUMENT_ROOT"] . '/admin/utiles/Utiles.php');
 
-Utiles::ValidarSesionIniciada();
+//Utiles::ValidarSesionIniciada();
 
 include_once ($_SERVER["DOCUMENT_ROOT"] . '/admin/utiles/upload/FileUpload.php');
 
