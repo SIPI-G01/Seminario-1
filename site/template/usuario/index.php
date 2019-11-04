@@ -30,6 +30,9 @@ $cejas = explode("=",$componentes[11]);
 $boca = explode("=",$componentes[12]);
 $piel = explode("=",$componentes[13]);
 
+var_dump($estiloAvatar);
+
+
  ?>
 
 
@@ -296,8 +299,8 @@ $piel = explode("=",$componentes[13]);
                     <div class="row form-group">
                         <label for="avatar-style" class="col-sm-3 control-label">Tipo de Avatar</label>
                         <div class="col-sm-9">
-                            <label><input type="radio" id="avatar-style-circle" name="avatar-style" value="Circle" onClick="cambioAvatar('avatarStyle', 'Circle');"> Redondo</label> 
-                            <label><input type="radio" id="avatar-style-transparent" name="avatar-style" value="Transparent" onClick="cambioAvatar('avatarStyle', 'Transparent');"> Transparente</label>
+                            <label><input type="radio" id="avatar-style-circle" name="avatar-style" value="Circle" onClick="cambioAvatar('avatarStyle', 'Circle');" <?php //echo ($estiloAvatar[1] == 'Circle' ? 'selected' : ''); ?>> Redondo</label> 
+                            <label><input type="radio" id="avatar-style-transparent" name="avatar-style" value="Transparent" onClick="cambioAvatar('avatarStyle', 'Transparent');" <?php //echo ($estiloAvatar[1] == 'Transparent' ? 'selected' : ''); ?>> Transparente</label>
                         </div>
                     </div>
                     <div class="row form-group">
@@ -658,7 +661,8 @@ $piel = explode("=",$componentes[13]);
                               
 <script>
 
-restriccionesPrecargado();//funcion en proceso
+restriccionesPrecargado('topType','Eyepatch');
+
 
 function restriccionesPrecargado(tipo, valor){//funcion en proceso
     if(tipo == 'topType' && valor == 'Eyepatch')
@@ -705,7 +709,8 @@ function restriccionesPrecargado(tipo, valor){//funcion en proceso
     {
         var estampa = document.getElementById("estampa");
         estampa.style.display = 'block';
-    }else {
+    }else if(tipo == 'clotheType' && valor != 'GraphicShirt')
+    {
         var estampa = document.getElementById("estampa");
         estampa.style.display = 'none';
     }
@@ -760,7 +765,8 @@ function cambioAvatar(tipo, valor)
     {
         var estampa = document.getElementById("estampa");
         estampa.style.display = 'block';
-    }else {
+    }else if(tipo == 'clotheType' && valor != 'GraphicShirt')
+    {
         var estampa = document.getElementById("estampa");
         estampa.style.display = 'none';
     }
@@ -792,7 +798,8 @@ function cambioAvatar(tipo, valor)
 			}
 			i++;
 		});
-		linkAvatar = partesLink[0] + tipo + "=" + valor + finLink;			
+		linkAvatar = partesLink[0] + tipo + "=" + valor + finLink;	
+        console.log(linkAvatar);	
 	}
 	$("#avatar-edicion").attr("src", linkAvatar);	
 }
