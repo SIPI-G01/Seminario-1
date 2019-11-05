@@ -14,24 +14,37 @@
     }
     
 $link = $usuario->archivo;
-$componentes = explode("&",$link);
-$estiloAvatar = explode("=",$componentes[0]);
-$cabeza = explode("=",$componentes[1]);
-$accesorios = explode("=",$componentes[2]);
-$colorSombrero = explode("=",$componentes[3]);
-$colorPelo = explode("=",$componentes[4]);
-$barba = explode("=",$componentes[5]);
-$colorBarba = explode("=",$componentes[6]);
-$atuendo = explode("=",$componentes[7]);
-$colorAtuendo = explode("=",$componentes[8]);
-$estampa = explode("=",$componentes[9]);
-$ojos = explode("=",$componentes[10]);
-$cejas = explode("=",$componentes[11]);
-$boca = explode("=",$componentes[12]);
-$piel = explode("=",$componentes[13]);
+$componentesLink = explode("&",$link);
+$estiloAvatar = explode("=",$componentesLink[0]);
+$cabeza = explode("=",$componentesLink[1]);
+$accesorios = explode("=",$componentesLink[2]);
+$colorSombrero = explode("=",$componentesLink[3]);
+$colorPelo = explode("=",$componentesLink[4]);
+$barba = explode("=",$componentesLink[5]);
+$colorBarba = explode("=",$componentesLink[6]);
+$atuendo = explode("=",$componentesLink[7]);
+$colorAtuendo = explode("=",$componentesLink[8]);
+$estampa = explode("=",$componentesLink[9]);
+$ojos = explode("=",$componentesLink[10]);
+$cejas = explode("=",$componentesLink[11]);
+$boca = explode("=",$componentesLink[12]);
+$piel = explode("=",$componentesLink[13]);
 
-var_dump($estiloAvatar);
 
+$estilosAv = AvatarDao::getXcomponente('estilo_avatar');
+$compCab = AvatarDao::getXcomponente('cabeza');
+$compAcc = AvatarDao::getXcomponente('accesorios');
+$compColSom = AvatarDao::getXcomponente('colorSombrero');
+$compColPelo = AvatarDao::getXcomponente('colorPelo');
+$compBarba = AvatarDao::getXcomponente('barba');
+$compColBarba = AvatarDao::getXcomponente('colorBarba');
+$compAtu = AvatarDao::getXcomponente('atuendos');
+$compColAtu = AvatarDao::getXcomponente('colorTela');
+$compEst = AvatarDao::getXcomponente('estampa');
+$compOjos = AvatarDao::getXcomponente('ojos');
+$compCejas = AvatarDao::getXcomponente('cejas');
+$compBoca = AvatarDao::getXcomponente('boca');
+$compPiel = AvatarDao::getXcomponente('piel');
 
  ?>
 
@@ -274,7 +287,7 @@ var_dump($estiloAvatar);
             </div><!--/tab-pane-->
 
             <div class="tab-pane text-center" id="avatar">
-            <div class="alert dark alert-alt alert-danger fade in">Esta en desarrollo. Funicona pero necesita arreglos</div>
+            <!--<div class="alert dark alert-alt alert-danger fade in">Esta en desarrollo. Funicona pero necesita arreglos</div>-->
                 <br>
                 <br>
                 <br>
@@ -299,8 +312,8 @@ var_dump($estiloAvatar);
                     <div class="row form-group">
                         <label for="avatar-style" class="col-sm-3 control-label">Tipo de Avatar</label>
                         <div class="col-sm-9">
-                            <label><input type="radio" id="avatar-style-circle" name="avatar-style" value="Circle" onClick="cambioAvatar('avatarStyle', 'Circle');" <?php //echo ($estiloAvatar[1] == 'Circle' ? 'selected' : ''); ?>> Redondo</label> 
-                            <label><input type="radio" id="avatar-style-transparent" name="avatar-style" value="Transparent" onClick="cambioAvatar('avatarStyle', 'Transparent');" <?php //echo ($estiloAvatar[1] == 'Transparent' ? 'selected' : ''); ?>> Transparente</label>
+                            <label><input type="radio" id="avatar-style-circle" name="avatar-style" value="Circle" onClick="cambioAvatar('avatarStyle', 'Circle');" <?php echo ($estiloAvatar[1] == 'Circle' ? 'checked' : ''); ?>> Redondo</label> 
+                            <label><input type="radio" id="avatar-style-transparent" name="avatar-style" value="Transparent" onClick="cambioAvatar('avatarStyle', 'Transparent');" <?php echo ($estiloAvatar[1] == 'Transparent' ? 'checked' : ''); ?>> Transparente</label>
                         </div>
                     </div>
                     <div class="row form-group">
@@ -445,14 +458,14 @@ var_dump($estiloAvatar);
                                 ?>
                                 <option value="<?php echo $componente->nombre_original; ?>" <?php echo ($componente->nombre_original == $colorPelo[1] ? 'selected' : ''); ?> ><?php echo $componente->nombre_traducido; ?></option>
                                 <?php }; ?>
-                                <option value="Auburn">Bermejo</option>
+                                <!--<option value="Auburn">Bermejo</option>
                                 <option value="Black">Negro</option>
                                 <option value="Blonde">Rubio</option>
                                 <option value="BlondeGolden">RubioDorado</option>
                                 <option value="Brown">Castaño</option>
                                 <option value="BrownDark">CastañoOscuro</option>
                                 <option value="Platinum">Platinado</option>
-                                <option value="Red">Rojo</option>
+                                <option value="Red">Rojo</option>-->
                             </select>
                         </div>
                     </div>
@@ -621,7 +634,8 @@ var_dump($estiloAvatar);
                 </form>
                 <br>
                 <button class="btn btn-lg btn-success" type="submit" onclick="generarAvatar();"><i class="glyphicon glyphicon-ok-sign"></i> Crear Avatar</button>
-                <button class="btn btn-lg btn-warning" type="submit" onclick="generarAvatarRandom();"><i class="glyphicon glyphicon-random"></i> Avatar Random</button>
+                <button class="btn btn-lg btn-danger" type="submit" onclick="descartarCambios();"><i class="glyphicon glyphicon-remove"></i>  Descartar Cambios</button>
+                <button class="btn btn-lg btn-warning" type="submit" onclick="avatarRandom();"><i class="glyphicon glyphicon-random"></i> Avatar Random</button>
              </div><!--/tab-pane-->
 
              <div class="tab-pane" id="eliminar">
@@ -658,61 +672,78 @@ var_dump($estiloAvatar);
 
         </div><!--/col-9-->
 </div>
+
+<?php 
+    
+    //echo "<script>";
+    //echo "restriccionesPrecargado('topType', 'Eyepatch')";
+    //echo "</script>";
+?>
                               
 <script>
+restriccionesPrecargado('<?php echo $cabeza[0]; ?>','<?php echo $cabeza[1]; ?>');
+restriccionesPrecargado('<?php echo $barba[0]; ?>','<?php echo $barba[1]; ?>');
+restriccionesPrecargado('<?php echo $atuendo[0]; ?>','<?php echo $atuendo[1]; ?>');
 
-restriccionesPrecargado('topType','Eyepatch');
-
-
-function restriccionesPrecargado(tipo, valor){//funcion en proceso
-    if(tipo == 'topType' && valor == 'Eyepatch')
+function restriccionesPrecargado(tipo, valor)
+{
+    if(tipo == 'topType')
     {
-        var accesorios = document.getElementById("accesorios");
-        accesorios.style.display = 'none';
-    }else {
-        var accesorios = document.getElementById("accesorios");
-        accesorios.style.display = 'block';
+        if(valor == 'Eyepatch')
+        {
+            var accesorios = document.getElementById("accesorios");
+            accesorios.style.display = 'none';
+        }else {
+            var accesorios = document.getElementById("accesorios");
+            accesorios.style.display = 'block';
+        }
+        if(valor == 'Hijab' || valor == 'Turban'|| valor == 'WinterHat1' || valor == 'WinterHat2' || valor == 'WinterHat3' || valor == 'WinterHat4')
+        {
+            var colorSombrero = document.getElementById("colorSombrero");
+            colorSombrero.style.display = 'block';
+        }else {
+            var colorSombrero = document.getElementById("colorSombrero");
+            colorSombrero.style.display = 'none';
+        }
+        if(valor == 'NoHair' || valor == 'Eyepatch' || valor == 'Hat' || valor == 'Hijab' || valor == 'Turban' || valor == 'WinterHat1' || valor == 'WinterHat2' || valor == 'WinterHat3' || valor == 'WinterHat4' || valor == 'LongHairFrida' || valor == 'LongHairShavedSides')
+        {
+            var colorPelo = document.getElementById("colorPelo");
+            colorPelo.style.display = 'none';
+        }else{
+            var colorPelo = document.getElementById("colorPelo");
+            colorPelo.style.display = 'block';
+        }
     }
-    if(tipo == 'topType' && (valor == 'Hijab' || valor == 'Turban'|| valor == 'WinterHat1' || valor == 'WinterHat2' || valor == 'WinterHat3' || valor == 'WinterHat4'))
+    if(tipo == 'facialHairType')
     {
-        var colorSombrero = document.getElementById("colorSombrero");
-        colorSombrero.style.display = 'block';
-    }else {
-        var colorSombrero = document.getElementById("colorSombrero");
-        colorSombrero.style.display = 'none';
+        if(valor == 'Blank' )
+        {
+            var colorBarba = document.getElementById("colorBarba");
+            colorBarba.style.display = 'none';
+        }else {
+            var colorBarba = document.getElementById("colorBarba");
+            colorBarba.style.display = 'block';
+        }
     }
-    if(tipo == 'topType' && (valor == 'NoHair' || valor == 'Eyepatch' || valor == 'Hat' || valor == 'Hijab' || valor == 'Turban' || valor == 'WinterHat1' || valor == 'WinterHat2' || valor == 'WinterHat3' || valor == 'WinterHat4' || valor == 'LongHairFrida' || valor == 'LongHairShavedSides'))
+    if(tipo == 'clotheType')
     {
-        var colorPelo = document.getElementById("colorPelo");
-        colorPelo.style.display = 'none';
-    }else{
-        var colorPelo = document.getElementById("colorPelo");
-        colorPelo.style.display = 'block';
-    }
-    if(tipo == 'facialHairType' && valor == 'Blank' )
-    {
-        var colorBarba = document.getElementById("colorBarba");
-        colorBarba.style.display = 'none';
-    }else {
-        var colorBarba = document.getElementById("colorBarba");
-        colorBarba.style.display = 'block';
-    }
-    if(tipo == 'clotheType' && (valor == 'BlazerShirt' || valor == 'BlazerSweater'))
-    {
-        var colorAtuendo = document.getElementById("colorAtuendo");
-        colorAtuendo.style.display = 'none';
-    }else {
-        var colorAtuendo = document.getElementById("colorAtuendo");
-        colorAtuendo.style.display = 'block';
-    }
-    if(tipo == 'clotheType' && valor == 'GraphicShirt')
-    {
-        var estampa = document.getElementById("estampa");
-        estampa.style.display = 'block';
-    }else if(tipo == 'clotheType' && valor != 'GraphicShirt')
-    {
-        var estampa = document.getElementById("estampa");
-        estampa.style.display = 'none';
+        if(valor == 'BlazerShirt' || valor == 'BlazerSweater')
+        {
+            var colorAtuendo = document.getElementById("colorAtuendo");
+            colorAtuendo.style.display = 'none';
+        }else {
+            var colorAtuendo = document.getElementById("colorAtuendo");
+            colorAtuendo.style.display = 'block';
+        }
+        if(valor == 'GraphicShirt')
+        {
+            var estampa = document.getElementById("estampa");
+            estampa.style.display = 'block';
+        }else
+        {
+            var estampa = document.getElementById("estampa");
+            estampa.style.display = 'none';
+        }
     }
 }
 
@@ -721,54 +752,64 @@ function cambioAvatar(tipo, valor)
 {
     var alerta_cambios = document.getElementById("alerta-cambios");
     alerta_cambios.style.display = 'block';
-    if(tipo == 'topType' && valor == 'Eyepatch')
+    if(tipo == 'topType')
     {
-        var accesorios = document.getElementById("accesorios");
-        accesorios.style.display = 'none';
-    }else {
-        var accesorios = document.getElementById("accesorios");
-        accesorios.style.display = 'block';
+        if(valor == 'Eyepatch')
+        {
+            var accesorios = document.getElementById("accesorios");
+            accesorios.style.display = 'none';
+        }else {
+            var accesorios = document.getElementById("accesorios");
+            accesorios.style.display = 'block';
+        }
+        if(valor == 'Hijab' || valor == 'Turban'|| valor == 'WinterHat1' || valor == 'WinterHat2' || valor == 'WinterHat3' || valor == 'WinterHat4')
+        {
+            var colorSombrero = document.getElementById("colorSombrero");
+            colorSombrero.style.display = 'block';
+        }else {
+            var colorSombrero = document.getElementById("colorSombrero");
+            colorSombrero.style.display = 'none';
+        }
+        if(valor == 'NoHair' || valor == 'Eyepatch' || valor == 'Hat' || valor == 'Hijab' || valor == 'Turban' || valor == 'WinterHat1' || valor == 'WinterHat2' || valor == 'WinterHat3' || valor == 'WinterHat4' || valor == 'LongHairFrida' || valor == 'LongHairShavedSides')
+        {
+            var colorPelo = document.getElementById("colorPelo");
+            colorPelo.style.display = 'none';
+        }else{
+            var colorPelo = document.getElementById("colorPelo");
+            colorPelo.style.display = 'block';
+        }
     }
-    if(tipo == 'topType' && (valor == 'Hijab' || valor == 'Turban'|| valor == 'WinterHat1' || valor == 'WinterHat2' || valor == 'WinterHat3' || valor == 'WinterHat4'))
+    if(tipo == 'facialHairType')
     {
-        var colorSombrero = document.getElementById("colorSombrero");
-        colorSombrero.style.display = 'block';
-    }else {
-        var colorSombrero = document.getElementById("colorSombrero");
-        colorSombrero.style.display = 'none';
+        if(valor == 'Blank' )
+        {
+            console.log("entre");
+            var colorBarba = document.getElementById("colorBarba");
+            colorBarba.style.display = 'none';
+        }else {
+            var colorBarba = document.getElementById("colorBarba");
+            colorBarba.style.display = 'block';
+        }
     }
-    if(tipo == 'topType' && (valor == 'NoHair' || valor == 'Eyepatch' || valor == 'Hat' || valor == 'Hijab' || valor == 'Turban' || valor == 'WinterHat1' || valor == 'WinterHat2' || valor == 'WinterHat3' || valor == 'WinterHat4' || valor == 'LongHairFrida' || valor == 'LongHairShavedSides'))
+    if(tipo == 'clotheType')
     {
-        var colorPelo = document.getElementById("colorPelo");
-        colorPelo.style.display = 'none';
-    }else{
-        var colorPelo = document.getElementById("colorPelo");
-        colorPelo.style.display = 'block';
-    }
-    if(tipo == 'facialHairType' && valor == 'Blank' )
-    {
-        var colorBarba = document.getElementById("colorBarba");
-        colorBarba.style.display = 'none';
-    }else {
-        var colorBarba = document.getElementById("colorBarba");
-        colorBarba.style.display = 'block';
-    }
-    if(tipo == 'clotheType' && (valor == 'BlazerShirt' || valor == 'BlazerSweater'))
-    {
-        var colorAtuendo = document.getElementById("colorAtuendo");
-        colorAtuendo.style.display = 'none';
-    }else {
-        var colorAtuendo = document.getElementById("colorAtuendo");
-        colorAtuendo.style.display = 'block';
-    }
-    if(tipo == 'clotheType' && valor == 'GraphicShirt')
-    {
-        var estampa = document.getElementById("estampa");
-        estampa.style.display = 'block';
-    }else if(tipo == 'clotheType' && valor != 'GraphicShirt')
-    {
-        var estampa = document.getElementById("estampa");
-        estampa.style.display = 'none';
+        if(valor == 'BlazerShirt' || valor == 'BlazerSweater')
+        {
+            var colorAtuendo = document.getElementById("colorAtuendo");
+            colorAtuendo.style.display = 'none';
+        }else {
+            var colorAtuendo = document.getElementById("colorAtuendo");
+            colorAtuendo.style.display = 'block';
+        }
+        if(valor == 'GraphicShirt')
+        {
+            var estampa = document.getElementById("estampa");
+            estampa.style.display = 'block';
+        }else
+        {
+            var estampa = document.getElementById("estampa");
+            estampa.style.display = 'none';
+        }
     }
     
 
@@ -803,6 +844,113 @@ function cambioAvatar(tipo, valor)
 	}
 	$("#avatar-edicion").attr("src", linkAvatar);	
 }
+
+function descartarCambios(){
+
+    let link = '<?php echo $link; ?>';
+
+    if('<?php echo $estiloAvatar[1]; ?>' == 'Circle'){
+        $("#avatar-style-circle").prop("checked", true);
+    }else {
+        $("#avatar-style-transparent").prop("checked", true);
+    }
+    $('#topType').val('<?php echo $cabeza[1]; ?>');
+    $('#accessoriesType').val('<?php echo $accesorios[1]; ?>');
+    $('#hatColor').val('<?php echo $colorSombrero[1]; ?>');
+    $('#hairColor').val('<?php echo $colorPelo[1]; ?>');
+    $('#facialHairType').val('<?php echo $barba[1]; ?>');
+    $('#facialHairColor').val('<?php echo $colorBarba[1]; ?>');
+    $('#clotheType').val('<?php echo $atuendo[1]; ?>');
+    $('#clotheColor').val('<?php echo $colorAtuendo[1]; ?>');
+    $('#graphicType').val('<?php echo $estampa[1]; ?>');
+    $('#eyeType').val('<?php echo $ojos[1]; ?>');
+    $('#eyebrowType').val('<?php echo $cejas[1]; ?>');
+    $('#mouthType').val('<?php echo $boca[1]; ?>');
+    $('#skinColor').val('<?php echo $piel[1]; ?>');
+
+    $("#avatar-edicion").attr("src", link);
+
+}
+
+function avatarRandom()
+{
+
+    var alerta_cambios = document.getElementById("alerta-cambios");
+    alerta_cambios.style.display = 'block';
+
+    var estilos = <?php echo json_encode($estilosAv); ?>;
+    var estilo = estilos[Math.floor(Math.random() * estilos.length)].nombre_original
+
+    var compCab = <?php echo json_encode($compCab); ?>;
+    var cabeza = compCab[Math.floor(Math.random() * compCab.length)].nombre_original
+
+    var compAcc = <?php echo json_encode($compAcc); ?>;
+    var accesorio = compAcc[Math.floor(Math.random() * compAcc.length)].nombre_original
+
+    var compColSom = <?php echo json_encode($compColSom); ?>;
+    var colorSombrero = compColSom[Math.floor(Math.random() * compColSom.length)].nombre_original
+
+    var compColPelo = <?php echo json_encode($compColPelo); ?>;
+    var colorPelo = compColPelo[Math.floor(Math.random() * compColPelo.length)].nombre_original
+
+    var compBarba = <?php echo json_encode($compBarba); ?>;
+    var barba = compBarba[Math.floor(Math.random() * compBarba.length)].nombre_original
+
+    var compColBarba = <?php echo json_encode($compColBarba); ?>;
+    var colorBarba = compColBarba[Math.floor(Math.random() * compColBarba.length)].nombre_original
+
+    var compAtu = <?php echo json_encode($compAtu); ?>;
+    var atuendo = compAtu[Math.floor(Math.random() * compAtu.length)].nombre_original
+
+    var compColAtu = <?php echo json_encode($compColAtu); ?>;
+    var colorAtuendo = compColAtu[Math.floor(Math.random() * compColAtu.length)].nombre_original
+
+    var compEst = <?php echo json_encode($compEst); ?>;
+    var estampa = compEst[Math.floor(Math.random() * compEst.length)].nombre_original
+
+    var compOjos = <?php echo json_encode($compOjos); ?>;
+    var ojos = compOjos[Math.floor(Math.random() * compOjos.length)].nombre_original
+
+    var compCejas = <?php echo json_encode($compCejas); ?>;
+    var cejas = compCejas[Math.floor(Math.random() * compCejas.length)].nombre_original
+
+    var compBoca = <?php echo json_encode($compBoca); ?>;
+    var boca = compBoca[Math.floor(Math.random() * compBoca.length)].nombre_original
+
+    var compPiel = <?php echo json_encode($compPiel); ?>;
+    var piel = compPiel[Math.floor(Math.random() * compPiel.length)].nombre_original
+
+    console.log(estilo,cabeza,accesorio,colorSombrero,colorPelo,barba,colorBarba,atuendo,colorAtuendo,estampa,ojos,cejas,boca,piel);
+
+    //$("input[name='avatar-style']:checked").val();
+    if(estilo == 'Circle'){
+        $("#avatar-style-circle").prop("checked", true);
+    }else {
+        $("#avatar-style-transparent").prop("checked", true);
+    }
+    $('#topType').val(cabeza);
+    $('#accessoriesType').val(accesorio);
+    $('#hatColor').val(colorSombrero);
+    $('#hairColor').val(colorPelo);
+    $('#facialHairType').val(barba);
+    $('#facialHairColor').val(colorBarba);
+    $('#clotheType').val(atuendo);
+    $('#clotheColor').val(colorAtuendo);
+    $('#graphicType').val(estampa);
+    $('#eyeType').val(ojos);
+    $('#eyebrowType').val(cejas);
+    $('#mouthType').val(boca);
+    $('#skinColor').val(piel);
+    
+    var link = 'https://avataaars.io/?avatarStyle='+ estilo +'&topType='+ cabeza +'&accessoriesType='+ accesorio +'&hatColor='+ colorSombrero +'&hairColor='+ colorPelo +'&facialHairType='+ barba +'&facialHairColor='+ colorBarba +'&clotheType='+ atuendo +'&clotheColor='+ colorAtuendo +'&graphicType='+ estampa +'&eyeType='+ ojos +'&eyebrowType='+ cejas +'&mouthType='+ boca +'&skinColor='+ piel; 
+    $("#avatar-edicion").attr("src", link);
+
+    restriccionesPrecargado('topType',cabeza);
+    restriccionesPrecargado('facialHairType',barba);
+    restriccionesPrecargado('clotheType',atuendo);	
+
+}
+
 
 function guardarData() {
 

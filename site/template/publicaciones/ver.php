@@ -38,7 +38,7 @@ echo $publi->titulo . $objetivos . $duracion;
 <!--- Include the above in your HEAD tag ---------->
 <div class="col-md-3" style="width: 15rem;">
   <?php if(Utiles::obtenerUsuarioLogueado()->id != $publi->getUsuario()->id){ ?>
-    <a href="\usuario\perfil\<?php echo $publi->getUsuario()->alias; ?>" ><img class="userImg" src="<?php echo $publi->getUsuario()->archivo; ?>" name="aboutme" width="80" height="80"></a>
+    <a href="\usuario\perfil\<?php echo $publi->getUsuario()->alias; ?>"><img class="userImg" src="<?php echo $publi->getUsuario()->archivo; ?>" name="aboutme" width="80" height="80"></a>
   <?php }else{ ?>
     <a href="/usuario"><img class="userImg" src="<?php echo $publi->getUsuario()->archivo; ?>" name="aboutme" width="80" height="80"></a>
   <?php } ?>  
@@ -46,7 +46,7 @@ echo $publi->titulo . $objetivos . $duracion;
     <h5 class="card-title" id="userCardTitle"><?php $usuario = $publi->getUsuario();
                             echo $usuario->nombre . " " . $usuario->apellido;?></h5>
     <em class="card-text" id="userCardText"><?php echo "Miembro desde el " . $usuario->creado_fecha;?></em><br><br>
-    <a href="#aboutModal" data-toggle="modal" data-target="#myModal" class="btn btn-dark">Acerca de mi</a>
+    <a href="#aboutModal" data-toggle="modal" data-target="#myModal" class="btn btn-light"><i class="far fa-address-card"></i> Acerca de mi</a>
   </div>
 </div>
     <!-- Modal -->
@@ -59,7 +59,7 @@ echo $publi->titulo . $objetivos . $duracion;
                 </div>
                 <div class="modal-body">
                     <div style="text-align:center;">
-                    <img src="\archivos\avatar-set\<?php echo $usuario->archivo; ?>" name="aboutme" width="140" height="140" class="img-circle"></a>
+                    <img src="<?php echo $usuario->archivo; ?>" name="aboutme" width="140" height="140" class="img-circle"></a>
                     <h3 class="media-heading"><?php echo $usuario->nombre . " " . $usuario->apellido;?></h3>
                     <span><strong>Fecha de nacimiento: </strong></span><span class="label label-info"><?php echo $usuario->fecha_nacimiento;?></span><br>
                     <span><strong>Mail: </strong></span><span class="label label-info"><?php echo $usuario->mail;?></span><br>
