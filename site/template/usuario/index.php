@@ -14,22 +14,38 @@
     }
     
 $link = $usuario->archivo;
+$estiloAvatar = array ('', '');
+$cabeza = array ('', '');
+$accesorios = array ('', '');
+$colorSombrero = array ('', '');
+$colorPelo = array ('', '');
+$barba = array ('', '');
+$colorBarba = array ('', '');
+$atuendo = array ('', '');
+$colorAtuendo = array ('', '');
+$estampa = array ('', '');
+$ojos = array ('', '');
+$cejas = array ('', '');
+$boca = array ('', '');
+$piel = array ('', '');
 $componentesLink = explode("&",$link);
-$estiloAvatar = explode("=",$componentesLink[0]);
-$cabeza = explode("=",$componentesLink[1]);
-$accesorios = explode("=",$componentesLink[2]);
-$colorSombrero = explode("=",$componentesLink[3]);
-$colorPelo = explode("=",$componentesLink[4]);
-$barba = explode("=",$componentesLink[5]);
-$colorBarba = explode("=",$componentesLink[6]);
-$atuendo = explode("=",$componentesLink[7]);
-$colorAtuendo = explode("=",$componentesLink[8]);
-$estampa = explode("=",$componentesLink[9]);
-$ojos = explode("=",$componentesLink[10]);
-$cejas = explode("=",$componentesLink[11]);
-$boca = explode("=",$componentesLink[12]);
-$piel = explode("=",$componentesLink[13]);
-
+if(count($componentesLink) > 1)
+{
+	$estiloAvatar = explode("=",$componentesLink[0]);
+	$cabeza = explode("=",$componentesLink[1]);
+	$accesorios = explode("=",$componentesLink[2]);
+	$colorSombrero = explode("=",$componentesLink[3]);
+	$colorPelo = explode("=",$componentesLink[4]);
+	$barba = explode("=",$componentesLink[5]);
+	$colorBarba = explode("=",$componentesLink[6]);
+	$atuendo = explode("=",$componentesLink[7]);
+	$colorAtuendo = explode("=",$componentesLink[8]);
+	$estampa = explode("=",$componentesLink[9]);
+	$ojos = explode("=",$componentesLink[10]);
+	$cejas = explode("=",$componentesLink[11]);
+	$boca = explode("=",$componentesLink[12]);
+	$piel = explode("=",$componentesLink[13]);
+}
 
 $estilosAv = AvatarDao::getXcomponente('estilo_avatar');
 $compCab = AvatarDao::getXcomponente('cabeza');
