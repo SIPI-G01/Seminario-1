@@ -799,7 +799,6 @@ function cambioAvatar(tipo, valor)
     {
         if(valor == 'Blank' )
         {
-            console.log("entre");
             var colorBarba = document.getElementById("colorBarba");
             colorBarba.style.display = 'none';
         }else {
@@ -856,7 +855,6 @@ function cambioAvatar(tipo, valor)
 			i++;
 		});
 		linkAvatar = partesLink[0] + tipo + "=" + valor + finLink;	
-        console.log(linkAvatar);	
 	}
 	$("#avatar-edicion").attr("src", linkAvatar);	
 }
@@ -936,7 +934,6 @@ function avatarRandom()
     var compPiel = <?php echo json_encode($compPiel); ?>;
     var piel = compPiel[Math.floor(Math.random() * compPiel.length)].nombre_original
 
-    console.log(estilo,cabeza,accesorio,colorSombrero,colorPelo,barba,colorBarba,atuendo,colorAtuendo,estampa,ojos,cejas,boca,piel);
 
     //$("input[name='avatar-style']:checked").val();
     if(estilo == 'Circle'){
@@ -1071,7 +1068,6 @@ function generarAvatar(){
     },
     success:function(datos) {
         datos = datos.split("|");
-			console.log(datos);
 
         if (datos[0] == 'OK') {
             window.location.reload();  
