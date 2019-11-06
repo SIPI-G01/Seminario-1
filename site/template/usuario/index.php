@@ -14,20 +14,21 @@
     }
     
 $link = $usuario->archivo;
-$estiloAvatar = array ('', '');
-$cabeza = array ('', '');
-$accesorios = array ('', '');
+$estiloAvatar = array ('avatarStyle', 'Circle');
+$cabeza = array ('topType', 'NoHair');
+$accesorios = array ('accessoriesType', 'Blank');
 $colorSombrero = array ('', '');
 $colorPelo = array ('', '');
-$barba = array ('', '');
-$colorBarba = array ('', '');
-$atuendo = array ('', '');
+$barba = array ('facialHairType', 'Blanck');
+$colorBarba = array ('facialHairColor', 'Auburn');
+$atuendo = array ('clotheType', 'BlazerShirt');
 $colorAtuendo = array ('', '');
 $estampa = array ('', '');
-$ojos = array ('', '');
-$cejas = array ('', '');
-$boca = array ('', '');
-$piel = array ('', '');
+$ojos = array ('eyeType', 'Close');
+$cejas = array ('eyebrowType', 'Angry');
+$boca = array ('mouthType', 'Concerned');
+$piel = array ('skinColor', 'Tanned');
+
 $componentesLink = explode("&",$link);
 if(count($componentesLink) > 1)
 {
@@ -46,7 +47,6 @@ if(count($componentesLink) > 1)
 	$boca = explode("=",$componentesLink[12]);
 	$piel = explode("=",$componentesLink[13]);
 }
-
 $estilosAv = AvatarDao::getXcomponente('estilo_avatar');
 $compCab = AvatarDao::getXcomponente('cabeza');
 $compAcc = AvatarDao::getXcomponente('accesorios');
