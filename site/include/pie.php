@@ -4,7 +4,7 @@
                 <div class="col-sm-7 text-left">
                    <h2>Vita</h2>
 
-					<p class="pr-5 text-white-50">Tu mejor opcion a la hora de necesitar un consejo en cuantos a recetas,actividades y mucho mas! </p>
+					<p class="pr-5 text-white-50">Tu mejor opcion a la hora de necesitar un consejo en cuanto a recetas, actividades y mucho mas! </p>
 				</div>
 				<div class="col-lg-2 col-xs-6 location">
 				  <h4 class="mt-lg-0 mt-sm-4">Ubicacion</h4>
