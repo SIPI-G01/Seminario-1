@@ -285,6 +285,7 @@ datalist{
 .carousel-indicators{
   align-content: center;
   margin: auto;
+  font-size: 50px;
 }
 
 .modal-title{
@@ -312,7 +313,7 @@ span{
   height: 400px;
   width: 600px;
   border-radius: 20px;
-  box-shadow: 8px 8px 8px rgba(0,0,0,0.548);
+  box-shadow: 2px 2px 5px 5px rgba(0,0,0,0.548);
   /*border-style: solid;
   border-color: black;
   border-width: 5px;*/

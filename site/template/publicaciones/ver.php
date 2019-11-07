@@ -9,93 +9,108 @@
  $publi = $view->publi;
  ?>
 
-<div class="verContainer">
-<?php
-$objetivos = '';
-foreach($publi->getObjetivos() as $objetivo){
-  $objetivos .= ' [' . $objetivo->getObjetivo()->nombre . ']';
-}
-$duracion = '';
-if($publi->tiempo != null)
-{
-	$duracion .= ' (Duración: ' . $publi->tiempo . ' ' . $publi->getUnidadTiempo() . ')';
-	
-}
-echo $publi->titulo . $objetivos . $duracion;
-?>
+<div class="verContainer" >
+  <?php
+    $objetivos = '';
+    foreach($publi->getObjetivos() as $objetivo){
+      $objetivos .= ' [' . $objetivo->getObjetivo()->nombre . ']';
+    }
+    $duracion = '';
+    if($publi->tiempo != null)
+    {
+      $duracion .= ' (Duración: ' . $publi->tiempo . ' ' . $publi->getUnidadTiempo() . ')';
+    }
+    echo $publi->titulo . $objetivos . $duracion;
+  ?>
 </div>
 
-<?php if(Utiles::obtenerIdUsuarioLogueado() ==  $publi->getUsuario()->id){ ?>
-		<div class="row text-center">
-		<button style="margin-left: 45%;" id="editarPublicacion" onClick="editarPublicacion('<?php echo $publi->alias; ?>')" class="btn btn-info"><i class="fa fa-pencil"></i> Editar publicación</button>
-		</div>
+<?php if(Utiles::obtenerIdUsuarioLogueado() !=  $publi->getUsuario()->id){ ?>
+  <div class="row text-center" style="padding-bottom:10px">
+    <div class="col-md-3">
+      
+    </div>
+	  <div class="col-md-9">
+      <button id="editarPublicacion" onClick="editarPublicacion('<?php echo $publi->alias; ?>')" class="btn btn-info"><i class="fa fa-pencil"></i> Editar publicación</button>
+    </div>
+	</div>
 <?php } ?>
 
-<div class="row" style="margin:0px 5px">
-    <!--<div class="col-md-2" style="border: 5px solid black;">-->
-    <!--ACA VAN LOS DATOS DEL USUARIO-->
-
-<!--- Include the above in your HEAD tag ---------->
-<div class="col-md-3" style="width: 15rem;">
-  <?php if(Utiles::obtenerUsuarioLogueado()->id != $publi->getUsuario()->id){ ?>
+<div class="row" style="margin:0px 5px;">
+ 
+  <div class="col-md-3" style="width: 15rem;">
+    <?php 
+      if(Utiles::obtenerUsuarioLogueado() != null){
+        if(Utiles::obtenerUsuarioLogueado()->id != $publi->getUsuario()->id){ 
+    ?>
     <a href="\usuario\perfil\<?php echo $publi->getUsuario()->alias; ?>"><img class="userImg" src="<?php echo $publi->getUsuario()->archivo; ?>" name="aboutme" width="80" height="80"></a>
-  <?php }else{ ?>
+    <?php 
+      }else{ ?>
     <a href="/usuario"><img class="userImg" src="<?php echo $publi->getUsuario()->archivo; ?>" name="aboutme" width="80" height="80"></a>
-  <?php } ?>  
-  <div class="card-body" id="userCardBody">
-    <h5 class="card-title" id="userCardTitle"><?php $usuario = $publi->getUsuario();
-                            echo $usuario->nombre . " " . $usuario->apellido;?></h5>
-    <em class="card-text" id="userCardText"><?php echo "Miembro desde el " . $usuario->creado_fecha;?></em><br><br>
-    <a href="#aboutModal" data-toggle="modal" data-target="#myModal" class="btn btn-light"><i class="far fa-address-card"></i> Acerca de mi</a>
-  </div>
-</div>
-    <!-- Modal -->
-    <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
-        <div class="modal-dialog">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true"></button>
-                    <h4 class="modal-title" id="myModalLabel"><?php echo $usuario->nombre . " " . $usuario->apellido;?></h4>
-                </div>
-                <div class="modal-body">
-                    <div style="text-align:center;">
-                    <img src="<?php echo $usuario->archivo; ?>" name="aboutme" width="140" height="140" class="img-circle"></a>
-                    <h3 class="media-heading"><?php echo $usuario->nombre . " " . $usuario->apellido;?></h3>
-                    <span><strong>Fecha de nacimiento: </strong></span><span class="label label-info"><?php echo $usuario->fecha_nacimiento;?></span><br>
-                    <span><strong>Mail: </strong></span><span class="label label-info"><?php echo $usuario->mail;?></span><br>
-                    <span><strong>Objetivos del usuario</strong></span><br>
-                    <?php
-                    foreach($usuario->getObjetivos() as $objetivoUsuario){
-                      ?>
-                      <span class="label label-info"><?php echo $objetivoUsuario->nombre; ?></span><br>
-                    <?php } ?>
-
-                    </div>
-                    <hr>
-                </div>
-                <div class="modal-footer">
-                    <div style="text-align:center;">
-                    <button type="button" class="button1" data-dismiss="modal">Ok</button>
-                    </div>
-                </div>
-            </div>
-        </div>
+    <?php 
+      }
+    }else{ ?>
+    <a href="\usuario\perfil\<?php echo $publi->getUsuario()->alias; ?>"><img class="userImg" src="<?php echo $publi->getUsuario()->archivo; ?>" name="aboutme" width="80" height="80"></a>
+    <?php 
+    }
+    ?>  
+    <div class="card-body" id="userCardBody">
+      <h5 class="card-title" id="userCardTitle"><?php $usuario = $publi->getUsuario();
+                              echo $usuario->nombre . " " . $usuario->apellido;?></h5>
+      <em class="card-text" id="userCardText"><?php echo "Miembro desde el " . $usuario->creado_fecha;?></em><br><br>
+      <?php if(Utiles::obtenerIdUsuarioLogueado() ==  $publi->getUsuario()->id){ ?>
+        <button id="editarPublicacion" onClick="editarPublicacion('<?php echo $publi->alias; ?>')" class="btn btn-light"><i class="fa fa-pencil"></i> Editar publicación</button>
+      <?php }else{ ?>
+        <a href="#aboutModal" data-toggle="modal" data-target="#myModal" class="btn btn-light"><i class="far fa-address-card"></i> Acerca de mi</a>
+      <?php } ?>
     </div>
+  </div>
+    <!-- Modal -->
+  <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <button type="button" class="close" data-dismiss="modal" aria-hidden="true"></button>
+          <h4 class="modal-title" id="myModalLabel"><?php echo $usuario->nombre . " " . $usuario->apellido;?></h4>
+        </div>
+        <div class="modal-body">
+          <div style="text-align:center;">
+            <img src="<?php echo $usuario->archivo; ?>" name="aboutme" width="140" height="140" class="img-circle"></a>
+            <h3 class="media-heading"><?php echo $usuario->nombre . " " . $usuario->apellido;?></h3>
+            <span><strong>Fecha de nacimiento: </strong></span><span class="label label-info"><?php echo $usuario->fecha_nacimiento;?></span><br>
+            <span><strong>Mail: </strong></span><span class="label label-info"><?php echo $usuario->mail;?></span><br>
+            <span><strong>Objetivos del usuario</strong></span><br>
+            <?php
+              foreach($usuario->getObjetivos() as $objetivoUsuario){
+            ?>
+            <span class="label label-info"><?php echo $objetivoUsuario->nombre; ?></span><br>
+            <?php } ?>
+          </div>
+          <hr>
+        </div>
+        <div class="modal-footer">
+          <div style="text-align:center;">
+            <button type="button" class="button1" data-dismiss="modal">Ok</button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
     <!--</div>-->
 
 
 <div class="col-md-9">
   <div id="carouselIndicators_<?php echo $publi->id; ?>" class="carousel slide" data-ride="carousel">
-   <ol class="carousel-indicators">
-     <?php
-     $i=0;
-     foreach ($publi->getImagenes() as $imagen) { ?>
+    <ol class="carousel-indicators">
+      <?php
+      $i=0;
+      foreach ($publi->getImagenes() as $imagen) { ?>
 
-     <li data-target="#carouselIndicators" data-slide-to="<?php echo $i; ?>" class="<?php echo ($i == 0 ? 'active' : ''); ?>"></li>
-     <?php
-     $i++;
-      }?>   </ol>
-   <div class="carousel-inner" style="padding-bottom:15px">
+      <li data-target="#carouselIndicators" data-slide-to="<?php echo $i; ?>" class="<?php echo ($i == 0 ? 'active' : ''); ?>"></li>
+      <?php
+      $i++;
+          }?>     
+    </ol>
+   <div class="carousel-inner" style="padding:15px">
      <?php
      $i=0;
      foreach ($publi->getImagenes() as $imagen) {?>
@@ -106,11 +121,11 @@ echo $publi->titulo . $objetivos . $duracion;
      $i++;
    }?>
    </div>
-   <a class="carousel-control-prev" href="#carouselIndicators_<?php echo $publi->id; ?>" role="button" data-slide="prev">
+   <a class="carousel-control-prev" href="#carouselIndicators_<?php echo $publi->id; ?>" role="button" data-slide="prev" style="margin-left:20%;">
      <span class="carousel-control-prev-icon" aria-hidden="true"></span>
      <span class="sr-only">Previous</span>
    </a>
-   <a class="carousel-control-next" href="#carouselIndicators_<?php echo $publi->id; ?>" role="button" data-slide="next">
+   <a class="carousel-control-next" href="#carouselIndicators_<?php echo $publi->id; ?>" role="button" data-slide="next" style="margin-right:20%;">
      <span class="carousel-control-next-icon" aria-hidden="true"></span>
      <span class="sr-only">Next</span>
    </a>
@@ -118,20 +133,35 @@ echo $publi->titulo . $objetivos . $duracion;
   </div>
   </div>
 
-  <?php  $tienePermiso = (Utiles::obtenerUsuarioLogueado() == null ? false : true); ?>
+
+  <?php  $tienePermiso = (Utiles::obtenerUsuarioLogueado() == null ? false : true); 
+    
+          if(Utiles::obtenerIdUsuarioLogueado() ==  $publi->getUsuario()->id){
+              $tienePermiso=false;
+          }
+  ?>
   <?php if($tienePermiso){?>
-  <div class="row">
-
-    <div class="col-md-3" >
+  <!--<div class="container">-->
+    <div class="row">
+      <div class="col-md-3" >
+      </div>
+      <div class="col-md-9 text-center" >
+        <button id="like" class="btn btn-success" onclick="likePub()" <?php $publi->votoLike();?>><i class="fas fa-thumbs-up"></i> <?php echo sizeof($publi->getLikes());?></button>
+        <button id="dislike" class="btn btn-danger" onclick="dislikePub()" <?php $publi->votoDisLike();?>><i class="fas fa-thumbs-down"></i> <?php echo sizeof($publi->getDislikes());?></button>
+      </div>
     </div>
-    <div class="col-md-9">
-      <span class="label label-success"></span>
-
-      <button id="like" class="btn btn-success btn-sm" onclick="likePub()" <?php $publi->votoLike();?>><i class="fas fa-thumbs-up"></i> <?php echo sizeof($publi->getLikes());?></button>
-      <button id="dislike" class="btn btn-danger btn-sm" onclick="dislikePub()" <?php $publi->votoDisLike();?>><i class="fas fa-thumbs-down"></i> <?php echo sizeof($publi->getDislikes());?></button>
-            <span class="label label-warning"></span>
+  <!--</div>-->
+  <?php
+    }else{
+  ?>
+    <div class="row" >
+      <div class="col-md-3"  >
+      </div>
+      <div class="col-md-9 text-center" >
+        <button class="btn btn-success" disabled><i class="fas fa-thumbs-up"></i> <?php echo sizeof($publi->getLikes());?></button>
+        <button class="btn btn-danger" disabled><i class="fas fa-thumbs-down"></i> <?php echo sizeof($publi->getDislikes());?></button>
+      </div>
     </div>
-  </div>
   <?php
     }
   ?>
@@ -142,14 +172,15 @@ echo $publi->titulo . $objetivos . $duracion;
     ?>
   </div>
 
+  </div>
+
 <?php  $tienePermiso = (Utiles::obtenerUsuarioLogueado() == null ? false : true); ?>
 <?php if($tienePermiso){?>
-  <div class="row">
-    <div id="L" class="col-md-12">
+  <!--<div class="container" style="border:5px solid black">-->
 
     <!--<h2 id="h2-cmmnt">SISTEMA DE COMENTARIOS</h2>-->
 
-	<div class="row text-center">
+	<div class="row text-center" >
 		<div id="msj-error">
 
 		</div>
@@ -172,15 +203,17 @@ echo $publi->titulo . $objetivos . $duracion;
     }
   ?>
     <br>
-    <h2 class="text-center">Comentarios</h2>
+<div class="row" >
+  <h2 style="font-size:20px;" >Comentarios</h2>
+</div>
+<br>
+<div class="container" >
     <?php
         $i=0;
         foreach ($publi->getComentarios() as $comentario) {
 
           if($comentario->reply==0){
     ?>
-
-    <div class="container">
 
 
 	<div class="card">
@@ -264,9 +297,8 @@ echo $publi->titulo . $objetivos . $duracion;
 
 
 
-   </div>
+   <!--</div>-->
 
-   </div>
 
 <script>
 
