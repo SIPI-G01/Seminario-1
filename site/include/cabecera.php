@@ -8,11 +8,14 @@
         <li id="headerIzq"><a href="#faq">FAQ</a></li>
 		<?php if(Utiles::obtenerUsuarioLogueado() == null){ ?>
 			<li id="headerDer"><a href="#registro">Registrarse</a></li>
-			<li id="headerDer"><a href="#inicio_sesion">Iniciar sesion</a></li>
+			<li id="headerDer"><a href="#" onclick="iniciarSesion();">Iniciar sesion</a></li>
+			<li id="headerDer"><input type="password" id="password" placeholder="Ingresar contraseña" name="password" required></li>
+			<li id="headerDer"><input type="text" id="username" placeholder="Ingresar usuario" name="username" required></li>
+
 		<?php } else { ?>
 			<li id="headerDer">
 				<a href="#">
-					Hola <?php echo Utiles::obtenerUsuarioLogueado()->usuario; ?> 
+					Hola <?php echo Utiles::obtenerUsuarioLogueado()->usuario; ?>
 					<span class="avatar avatar-online">
 						<?php if(Utiles::obtenerUsuarioLogueado()->archivo != null){?>
 							<img src="<?php echo Utiles::obtenerUsuarioLogueado()->archivo; ?>" alt="...">
@@ -28,11 +31,11 @@
 
 			</li>
 		<?php } ?>
-		
+
     </ul>
     <div class="headContainer">
 			<div class="headImg"><h1><a href="/home"><img class="imagen-inicio" src="/site/images/logo.png"></a></h1></div>
-			<div class="headTitle"><h1><a href="/home">Vita</a></h1></div>		
+			<div class="headTitle"><h1><a href="/home">Vita</a></h1></div>
     </div>
     <!--<div class="divLine">
 			<h1 class="line">⚜</h1>
@@ -50,7 +53,7 @@
 			beforeSend:function(){
 			},
 			success:function(datos) {
-				
+
 				//window.location.href = "/";
 				return true;
 			},
@@ -61,5 +64,15 @@
 			}
 		});
     }
+
+		function iniciarSesion(){
+
+			$.ajax({
+				async:true,
+				type: "POST",
+				url: "/site/controller/usuario-controller.php",
+				data: "accion=login&username=" + $('#username').val() + "&password=" + $('#password').val() + "&token=" + '<?php echo Utiles::obtenerToken(); ?>'
+			})
+		}
 
 </script>
