@@ -7,12 +7,16 @@ class UsuarioDao {
 	public static function get($id) {
 		return GenericDao::get("usuario", array("id" => $id));
 	}// get
-	
+
 	public static function getXalias($alias) {
 		return GenericDao::find("usuario", array(array("alias", "=", $alias), array("activo", "=", "1")));
 	}
 
-	
+	public static function getXUsername($username) {
+		return GenericDao::find("usuario", array(array("usuario", "=", $username), array("activo", "=", "1")));
+	}
+
+
 	public static function listActivos() {
 		return GenericDao::find("usuario", array(array("activo", "=", "1")));
 	}
