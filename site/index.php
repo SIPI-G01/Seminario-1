@@ -1,8 +1,10 @@
 <?php
+	include_once $_SERVER['DOCUMENT_ROOT'] . '/site/utiles/Utiles.php';
 
 	$controller = (isset($_GET['controller']) && $_GET['controller'] != '') ? $_GET['controller'] : 'home';
 	$accion = (isset($_GET['accion']) && $_GET['accion'] != '') ? $_GET['accion'] : 'index';
 	$params = (isset($_GET['params'])) ? $_GET['params'] : '';
+
 
 ?>
 

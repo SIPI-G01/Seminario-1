@@ -1,6 +1,6 @@
 <?php
  include_once  ($_SERVER["DOCUMENT_ROOT"] . '/site/view/perfil-view.php');
- include_once  ($_SERVER["DOCUMENT_ROOT"] . '/site/utiles/utiles.php');
+ include_once  ($_SERVER["DOCUMENT_ROOT"] . '/site/utiles/Utiles.php');
 
  if(isset($usuario->alias))
  {

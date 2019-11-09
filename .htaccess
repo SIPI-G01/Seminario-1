@@ -1,3 +1,9 @@
+# HTID:11562584: DO NOT REMOVE OR MODIFY THIS LINE AND THE LINES BELOW
+
+php_value display_errors 1
+
+# DO NOT REMOVE OR MODIFY THIS LINE AND THE LINES ABOVE HTID:11562584:
+
 <IfModule mod_rewrite.c>
 
 RewriteEngine on

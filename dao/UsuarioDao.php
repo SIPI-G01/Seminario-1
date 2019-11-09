@@ -16,6 +16,9 @@ class UsuarioDao {
 		return GenericDao::find("usuario", array(array("usuario", "=", $username), array("activo", "=", "1")));
 	}
 
+	public static function getXUsernameYPassword($username, $password) {
+		return GenericDao::find("usuario", array(array("usuario", "=", $username), array("password", "=", $password), array("activo", "=", "1")));
+	}
 
 	public static function listActivos() {
 		return GenericDao::find("usuario", array(array("activo", "=", "1")));

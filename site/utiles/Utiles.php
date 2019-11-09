@@ -1,9 +1,8 @@
 <?php
-if(session_id() == '') {
-    session_start();
-}
-
-set_time_limit(0);
+    if(session_id() == '') {
+        session_start();
+    }
+//set_time_limit(0);
 
 date_default_timezone_set('America/Argentina/Buenos_Aires');
 

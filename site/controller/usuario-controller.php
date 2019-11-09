@@ -5,8 +5,6 @@ include_once ($_SERVER["DOCUMENT_ROOT"] . '/dao/AvatarDao.php');
 
 $token = isset($_POST['token']) ? $_POST['token'] : $_GET['token'];
 $accion = isset($_POST['accion']) ? $_POST['accion'] : $_GET['accion'];
-$username = isset($_POST['username']) ? $_POST['username'] : $_GET['username'];
-$password = isset($_POST['password']) ? $_POST['password'] : $_GET['password'];
 
 if (isset($token) && $token == Utiles::obtenerToken()) {
 
@@ -19,32 +17,49 @@ if (isset($token) && $token == Utiles::obtenerToken()) {
 
 		break;
 		case 'login':
-			$usuariosActivos = UsuarioDao::listActivos();
-			$encontro = false;
-			$i = 0;
-			while($encontro==false and $i <= count($usuariosActivos)){
-				if($usuariosActivos[i]->usuario == $username){
-					$usuario = $usuariosActivos[i];
-					$encontro = true;
-				}else{
-					$i++;
-				}
+			//var_dump($_POST);
+			$valido = true;
+			$error = '';
+			if(!isset($_POST['username']) || $_POST['username'] == '' || $_POST['username'] == null)
+			{
+				$valido = false;
+				$error = 'Debe ingresar un nombre de usuario';
 			}
-			if($encontro == false) {?>
-				<script>alert('El usuario ingresado es incorrecto.')</script>;
-				<?php
-			}else {
-				if ($usuario->password == $password) {
-					//aca debe redireccionar al index con el usuario ya logueado
-					?>
-					<script>alert('joya')</script>;
-					<?php
-				}else {
-					?>
-					<script>alert('La contraseña ingresada es incorrecta.')</script>;
-					<?php
-				}
+			else if (!isset($_POST['password']) || $_POST['password'] == '' || $_POST['password'] == null)
+			{
+				$valido = false;
+				$error = 'Debe ingresar una contraseña';
 			}
+			else
+			{
+				$usuario = UsuarioDao::getXUsernameYPassword($_POST['username'], md5($_POST['password']));
+				if($usuario == null)
+				{
+					$valido = false;
+					$usuario = UsuarioDao::getXUsername($_POST['username']);
+					if($usuario == null)
+					{
+						$error = "No existe el usuario";
+					}
+					else
+					{
+						$error = "Contraseña incorrecta";
+					}
+				}
+				else
+				{
+					Utiles::iniciarSesion($usuario[0]);
+					echo 'OK|';
+				}
+	
+			}
+			
+			if(!$valido)
+			{
+				echo 'ERROR|' . $error;				
+			}
+						
+			
 		break;
 		case 'modificar-objetivos':
 			$valido = true;
@@ -186,7 +201,7 @@ if (isset($token) && $token == Utiles::obtenerToken()) {
 			}else if (!isset($_POST['password2']) || trim($_POST['password2']) == '') {
 				$errores .= '<p>- La nueva contraseña no puede estar vacia</p>';
 				$valido = false;
-			}else if($item->password != $_POST['password']){
+			}else if($item->password != md5($_POST['password'])){
 				$errores .= '<p>- La contraseña ingresada no es correcta. Intente nuevamente</p>';
 				$valido = false;
 			}
@@ -194,7 +209,7 @@ if (isset($token) && $token == Utiles::obtenerToken()) {
 
 			if($valido) {
 
-				$item->password = $_POST['password2'];
+				$item->password = md5($_POST['password2']);
 
 				UsuarioDao::modificar($item);
 
@@ -221,10 +236,10 @@ if (isset($token) && $token == Utiles::obtenerToken()) {
 			}else if (!isset($_POST['password2']) || trim($_POST['password2']) == '') {
 				$errores .= '<p>- Debe completar ambos campos</p>';
 				$valido = false;
-			}else if($item->password != $_POST['password']){
+			}else if($item->password != md5($_POST['password'])){
 				$errores .= '<p>- La contraseña ingresada no es correcta. Intente nuevamente</p>';
 				$valido = false;
-			}else if($_POST['password'] != $_POST['password2']){
+			}else if(md5($_POST['password']) != md5($_POST['password2'])){
 				$errores .= '<p>- Las contraseñas no coinciden. Intente nuevamente</p>';
 				$valido = false;
 			}
