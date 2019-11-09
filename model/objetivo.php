@@ -9,6 +9,8 @@ final class objetivo extends GenericEntity{
 	public $descripcion;
 	public $alias;
 	public $categoria; //1: Recetas, 2: Actividad fisica 3: Ambas
+	public $color_texto;
+	public $color_fondo;
 
 	public $activo;
 	private $tiempos = null;

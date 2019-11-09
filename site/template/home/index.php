@@ -108,15 +108,16 @@ function cambiarTiempos()
 		tiemposMostrar = [];
 		var resultado = '<div class="col-md-12"><div class="row">';
 		var i = 0;
+		resultado += '<div class="col-md-3"><strong>Tiempo que insume: </strong></div><div class="col-md-9">';
 		tiempos.forEach(function(tiempo) {
 			if(tiempo.id_objetivo == objetivo)
 			{
 				tiemposMostrar[i] = tiempo;
 				i++;
-				resultado += '<div class="col-md-2"><input type="checkbox" id="tiempo_'+ tiempo.id +'">' + tiempo.tiempo + '</input></div>';
+				resultado += '<div class="col-md-3"><input type="checkbox" id="tiempo_'+ tiempo.id +'">' + tiempo.tiempo + '</input></div>';
 			}
 		});
-		resultado += '</div></div>';
+		resultado += '</div></div></div></div>';
 		$('#tiempos-receta').append(resultado);
 		objetivos.forEach(function(objs) {
 			if(objs.id == objetivo)
@@ -132,15 +133,16 @@ function cambiarTiempos()
 		tiemposMostrar = [];
 		var resultado = '<div class="col-md-12"><div class="row">';
 		var i = 0;
+		resultado += '<div class="col-md-3"><strong>Tiempo que insume: </strong></div><div class="col-md-9">';		
 		tiempos.forEach(function(tiempo) {
 			if(tiempo.id_objetivo == objetivo)
 			{
 				tiemposMostrar[i] = tiempo;
 				i++;
-				resultado += '<div class="col-md-2"><input type="checkbox" id="tiempo_'+ tiempo.id +'">' + tiempo.tiempo + '</input></div>';
+				resultado += '<div class="col-md-3"><input type="checkbox" id="tiempo_'+ tiempo.id +'">' + tiempo.tiempo + '</input></div>';
 			}
 		});
-		resultado += '</div></div>';
+		resultado += '</div></div></div></div>';
 		$('#tiempos-actividad').append(resultado);
 		objetivos.forEach(function(objs) {
 			if(objs.id == objetivo)
