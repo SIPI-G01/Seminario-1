@@ -206,6 +206,11 @@ ul {
 {
   max-height: 90px;
 }
+#headerDer:hover .dropdown{
+    margin-top: 0px;
+    left: auto;
+    right: 0;
+}
 
 #headerDer
 {

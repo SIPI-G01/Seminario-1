@@ -4,6 +4,8 @@
 ?>
 <header id="masthead" class="masthead">
 <!--ACA VA EL HEADER-->
+
+		
     <ul style="position: relative;">
         <li id="headerIzq" ><a class="active" href="/home">Inicio</a></li>
         <li id="headerIzq"><a href="#faq">FAQ</a></li>
@@ -29,7 +31,7 @@
 						<?php } ?>
 					</span>
 				</a>
-				  <ul class="dropdown" style="position: absolute !important; left: 89%; margin-top: 0px;">
+				  <ul class="dropdown" style="margin-top: 0px;">
 					<li><a href="/usuario">Inicio</a></li>
 					<li><a href="#" onclick="cerrarSesion();">Cerrar sesión</a></li>
 				  </ul>
