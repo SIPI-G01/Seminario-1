@@ -151,13 +151,54 @@ h1 a
 
 p
 {
-  font-family: 'Titillium Web', sans-serif;
+  font-family: 'Titillium Web', sans-serif !important;
+}
+
+h3{
+  font-family: 'Titillium Web', sans-serif !important;
+
+}
+.ml-2{
+  font-family: 'Titillium Web', sans-serif !important;
+}
+
+.iniciarSesionInput{
+  font-family: 'Titillium Web', sans-serif !important;
+}
+.btn-lg{
+  font-family: 'Titillium Web', sans-serif !important;
+}
+.float-left{
+  font-family: 'Titillium Web', sans-serif !important;
+}
+.text-center{
+  font-family: 'Titillium Web', sans-serif !important;
+}
+
+.btn-success{
+  font-family: 'Titillium Web', sans-serif !important;
+}
+
+.text-muted{
+  font-family: 'Titillium Web', sans-serif !important;
+}
+
+.iniciarSesion{
+  font-family: 'Titillium Web', sans-serif !important;
+}
+.btn-primary{
+  font-family: 'Titillium Web', sans-serif !important;
 }
 
 .pagination
 {
     background-color: transparent !important;
-
+}
+.btn-light{
+  font-family: 'Titillium Web', sans-serif !important;
+}
+h4{
+  font-family: 'Titillium Web', sans-serif !important;
 }
 
 .ordenar
@@ -194,6 +235,15 @@ ul {
   overflow: hidden;
   background-color: #18d8ce;
 }
+
+.cajaPubli{
+  text-align:left !important;
+  margin-top: 10px !important;
+  border-block-end: 1.5px solid #5b616152 !important;
+  border-block-start: 1.5px solid #5b616152 !important;
+  border-radius:20px !important;
+}
+
 
 .texto-inicio
 {
@@ -284,6 +334,20 @@ h1{
   background-color:#18d8ce;
   font-family: 'Titillium Web', sans-serif;
   font-size: 16px;
+}
+
+h2{
+  font-family: 'Titillium Web', sans-serif !important;
+}
+
+.mt-sm-4{
+  font-family: 'Titillium Web', sans-serif !important;
+
+}
+
+.mt-sm-2{
+  font-family: 'Titillium Web', sans-serif !important;
+
 }
 
 #objetivosList{

@@ -98,7 +98,7 @@
     <!--</div>-->
 
 
-<div class="col-md-9">
+<div class="col-md-6">
   <div id="carouselIndicators_<?php echo $publi->id; ?>" class="carousel slide" data-ride="carousel">
     <ol class="carousel-indicators">
       <?php
@@ -145,7 +145,7 @@
     <div class="row">
       <div class="col-md-3" >
       </div>
-      <div class="col-md-9 text-center" >
+      <div class="col-md-6 text-center" >
         <button id="like" class="btn btn-success" onclick="likePub()" <?php $publi->votoLike();?>><i class="fas fa-thumbs-up"></i> <?php echo sizeof($publi->getLikes());?></button>
         <button id="dislike" class="btn btn-danger" onclick="dislikePub()" <?php $publi->votoDisLike();?>><i class="fas fa-thumbs-down"></i> <?php echo sizeof($publi->getDislikes());?></button>
       </div>
@@ -157,7 +157,7 @@
     <div class="row" >
       <div class="col-md-3"  >
       </div>
-      <div class="col-md-9 text-center" >
+      <div class="col-md-6 text-center" >
         <button class="btn btn-success" disabled><i class="fas fa-thumbs-up"></i> <?php echo sizeof($publi->getLikes());?></button>
         <button class="btn btn-danger" disabled><i class="fas fa-thumbs-down"></i> <?php echo sizeof($publi->getDislikes());?></button>
       </div>
@@ -166,12 +166,11 @@
     }
   ?>
 
-  <div class="col-md-12" style="text-align:left; margin-top: 10px; border: 2px solid black; border-radius:10px">
+  <div class="col-md-12 cajaPubli">
     <?php
     echo '<h5>'.$publi->texto.'</h5>';
     ?>
   </div>
-
   </div>
 
 <?php  $tienePermiso = (Utiles::obtenerUsuarioLogueado() == null ? false : true); ?>
@@ -179,7 +178,6 @@
   <!--<div class="container" style="border:5px solid black">-->
 
     <!--<h2 id="h2-cmmnt">SISTEMA DE COMENTARIOS</h2>-->
-
 	<div class="row text-center" >
 		<div id="msj-error">
 
@@ -203,7 +201,7 @@
     }
   ?>
     <br>
-<div class="row" >
+<div class="column" >
   <h2 style="font-size:20px;" >Comentarios</h2>
 </div>
 <br>
