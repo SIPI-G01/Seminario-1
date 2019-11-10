@@ -20,8 +20,13 @@
     {
       $duracion .= ' (Duración: ' . $publi->tiempo . ' ' . $publi->getUnidadTiempo() . ')';
     }
-    echo $publi->titulo . $objetivos . $duracion;
+
   ?>
+  <!--AGREGADO-->
+  <div class="tutclase">
+   <?php echo $publi->titulo; ?>
+  </div>
+  <!--FIN-->
 </div>
 
 <?php if(Utiles::obtenerIdUsuarioLogueado() !=  $publi->getUsuario()->id){ ?>
@@ -121,16 +126,18 @@
      $i++;
    }?>
    </div>
-   <a class="carousel-control-prev" href="#carouselIndicators_<?php echo $publi->id; ?>" role="button" data-slide="prev" style="margin-left:20%;">
+   <a class="carousel-control-prev" href="#carouselIndicators_<?php echo $publi->id; ?>" role="button" data-slide="prev" style="margin-left:10%;">
      <span class="carousel-control-prev-icon" aria-hidden="true"></span>
      <span class="sr-only">Previous</span>
    </a>
-   <a class="carousel-control-next" href="#carouselIndicators_<?php echo $publi->id; ?>" role="button" data-slide="next" style="margin-right:20%;">
+   <a class="carousel-control-next" href="#carouselIndicators_<?php echo $publi->id; ?>" role="button" data-slide="next" style="margin-right:10%;">
      <span class="carousel-control-next-icon" aria-hidden="true"></span>
      <span class="sr-only">Next</span>
    </a>
    </div>
   </div>
+    <div class="col-md-3" style="border:5px solid black">
+    </div>
   </div>
 
 
@@ -165,12 +172,14 @@
   <?php
     }
   ?>
-
-  <div class="col-md-12 cajaPubli">
+  <div class="row">
+    <div class="col-md-1"></div>
+    <div class="col-md-10 cajaPubli">
     <?php
     echo '<h5>'.$publi->texto.'</h5>';
     ?>
-  </div>
+    </div>
+    <div class="col-md-1"></div>
   </div>
 
 <?php  $tienePermiso = (Utiles::obtenerUsuarioLogueado() == null ? false : true); ?>
@@ -178,31 +187,36 @@
   <!--<div class="container" style="border:5px solid black">-->
 
     <!--<h2 id="h2-cmmnt">SISTEMA DE COMENTARIOS</h2>-->
+
 	<div class="row text-center" >
-		<div id="msj-error">
+    <div id="msj-error">
 
-		</div>
+    </div>
 
-		<form name="form1" id="frm"  style="margin-left: 23.5%;" action="javascript:void(1);">
-		<input type="hidden" name="accion" id="accion" value="nuevo"/>
-			<input type="hidden" name="token" id="token" value="<?php echo Utiles::obtenerToken(); ?>"/>
-		<input type="hidden" name="id_publicacion" id="id_publicacion" value="<?php echo $publi->id; ?>"/>
+    <div class="col-md-3"></div>
+    <div class="col-md-6"> 
+      <form name="form1" id="frm" action="javascript:void(1);">
+      <input type="hidden" name="accion" id="accion" value="nuevo"/>
+        <input type="hidden" name="token" id="token" value="<?php echo Utiles::obtenerToken(); ?>"/>
+      <input type="hidden" name="id_publicacion" id="id_publicacion" value="<?php echo $publi->id; ?>"/>
 
-		  <label for="comentario"></label>
-		  <p style="color:black;">
-			<textarea name="comentario" cols="80" rows="5" id="comentario"><?php if(isset($_GET['user'])) { ?>@<?php echo $_GET['user']; ?><?php } ?> </textarea>
-		  </p>
-		  <p style="color:black">
-			<input class="btn btn-warning btn-lg" type="submit" name="comentar" onClick="agregarComentario();" value="Comentar">
-		  </p>
-		</form>
+        <label for="comentario"></label>
+        <p style="color:black;">
+        <textarea name="comentario" cols="80" rows="5" id="comentario"><?php if(isset($_GET['user'])) { ?>@<?php echo $_GET['user']; ?><?php } ?> </textarea>
+        </p>
+        <p style="color:black">
+        <input class="btn btn-warning btn-lg" type="submit" name="comentar" onClick="agregarComentario();" value="Comentar">
+        </p>
+      </form>
+    </div>
   </div>
   <?php
     }
   ?>
     <br>
-<div class="column" >
-  <h2 style="font-size:20px;" >Comentarios</h2>
+<div class="row text-center">
+  <div class="col-md-3"></div>
+  <div class="col-md-6"><h2 style="font-size:20px;" >Comentarios</h2></div>
 </div>
 <br>
 <div class="container" >
