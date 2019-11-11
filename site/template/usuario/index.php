@@ -77,13 +77,22 @@ if($usuario->archivo != null && $usuario->archivo != '')
     	<!--<div class="col-sm-2"><a href="/users" class="pull-right"><img title="profile image" class="img-circle img-responsive" src="http://www.gravatar.com/avatar/28fd20ccec6865e2d5f0e1f4446eb7bf?s=100"></a></div>-->
   		<div class="col-sm-12">
 			<ul class="nav nav-tabs" style="margin-bottom: 20px;">
-				<li class="active"><a data-toggle="tab" href="#inicio">Inicio</a></li>			
-				<li><a data-toggle="tab" href="#data">Mis datos</a></li>
-				<li><a data-toggle="tab" href="#password">Cambiar Contraseña</a></li>
-				<li><a data-toggle="tab" href="#objetivos">Mis objetivos</a></li>
-				<li><a data-toggle="tab" href="#publicaciones">Mis publicaciones</a></li>
-				<li><a data-toggle="tab" href="#avatar">Editar Avatar</a></li>
-				<li><a data-toggle="tab" href="#eliminar">Eliminar Mi Cuenta</a></li>
+                <li class="active"><a data-toggle="tab" href="#inicio">Inicio</a></li>
+                <!-- <li><a data-toggle="tab" href="#profile">Mi Perfil</a></li> -->
+                <li class="nav-item dropdown">
+                    <a class="nav-link dropdown-toggle" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">Mi perfil</a>
+                    <div class="dropdown-menu">
+                        <a class="dropdown-item" href="#objetivos">Mis objetivos</a>
+                        <a class="dropdown-item" href="#publicaciones">Mis publicaciones</a>
+                        <a class="dropdown-item" href="#data">Mis datos</a>
+                        <a class="dropdown-item" href="#password">Cambiar Contraseña</a>
+                        <a class="dropdown-item" href="#avatar">Editar Avatar</a>
+                        <div class="dropdown-divider"></div>
+                        <a class="dropdown-item" href="#eliminar">Eliminar Mi Cuenta</a>
+                    </div>
+                </li>
+                <!-- <li><a data-toggle="tab" href="#objetivos">Mis objetivos</a></li>
+                <li><a data-toggle="tab" href="#publicaciones">Mis publicaciones</a></li> -->
 			</ul>
 		
 		</div>
@@ -93,7 +102,7 @@ if($usuario->archivo != null && $usuario->archivo != '')
 		<div class="col-md-3"><!--left col-->
               
 
-            <div class="text-center">
+            <!-- <div class="text-center">
                 <?php if($usuario->archivo != null) { ?>
                     <img src="<?php echo $usuario->archivo ?>"  alt="avatar">
                 <?php } else { ?>
@@ -105,7 +114,7 @@ if($usuario->archivo != null && $usuario->archivo != '')
                         <label for="mobile"><p>Miembro desde: <?php echo date_format(date_create($usuario->creado_fecha),'d/m/Y'); ?></p></label>
                     </div>
                 </div>
-            </div>
+            </div> -->
             <br>
             <br>
             <br>
@@ -212,6 +221,15 @@ if($usuario->archivo != null && $usuario->archivo != '')
 					<button id="crearPublicacion" onClick="crearPublicacion()" class="btn btn-success"><i class="fa fa-pencil"></i> Crear publicación</button>
                 </div>
             </div><!--/tab-pane-->
+
+            <!-- <div class="tab-pane" id="profile">
+                    <ul class="nav nav-tabs" style="margin-bottom: 20px;">
+                        <li class="active"><a data-toggle="tab" href="#data">Mis datos</a></li>
+                        <li><a data-toggle="tab" href="#password">Cambiar Contraseña</a></li>
+                        <li><a data-toggle="tab" href="#avatar">Editar Avatar</a></li>
+                        <li><a data-toggle="tab" href="#eliminar">Eliminar Mi Cuenta</a></li>
+                    </ul>
+            </div> -->
 
             <div class="tab-pane" id="data">
                 <hr>
