@@ -440,32 +440,6 @@ span{
   text-align: center;
 }
 
-.divLine{
-  text-align: center;
-}
-
-.line{
-  display: inline-block;
-  position: relative;
-}
-
-.line::after, .line::before{
-  content: "";
-  position: absolute;
-  width: 600px;
-  height: 3px;
-  background-color: black;
-  top: 0.6em;
-}
-
-.line::before{
-  left:-650px;
-}
-
-.line::after{
-  right:-650px;
-}
-
 .descPub{
   margin-top: 20px;
 }
@@ -541,3 +515,28 @@ span{
   color: transparent; 
   text-shadow: 0px 3px 3px rgba(255,255,255,0.4),0px -1px 1px rgba(0,0,0,0.3);
   }
+
+  /*AGREGADO*/
+
+  .lines-effect {
+    display: inline-block;
+    position: relative;
+    font-family: 'Titillium Web', sans-serif;
+}
+
+.lines-effect::after, .lines-effect::before{
+    content:'';
+    position: absolute;
+    width: 140px;
+    height: 2px;
+    background-color: currentColor;
+    top: 0.6em;
+}
+
+.lines-effect::after{
+    left: -160px;
+}
+
+.lines-effect::before{
+    right: -160px;
+}

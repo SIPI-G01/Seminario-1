@@ -193,6 +193,8 @@ class PublicacionDao {
 		return GenericDao::find("publicacion", array(array("id_usuario", "=", $id_usuario), array("activo", "=", "1")));
 	}
 
+
+
 	public static function nuevo($item) {
 		$item->fecha = date("Y-m-d H:i:s", time());
 		$item->activo = 1;
@@ -216,6 +218,10 @@ class PublicacionDao {
 
 		GenericDao::executeQuery($query, $params);
 	}// eliminar
+
+	public static function topPublicaciones($objetivos = array(), $orden=0, $categoria = ''){
+
+	}
 }
 
 ?>

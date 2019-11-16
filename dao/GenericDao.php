@@ -86,7 +86,6 @@ class GenericDao {
 		if (isset($from) && is_numeric($from) && isset($to) && is_numeric($to)) {
 			$query .= " LIMIT $from, $to";
 		}// if limit
-
 		$DBH = getConnection();
 		$STH = $DBH->prepare($query);
 		$STH->setFetchMode(PDO::FETCH_ASSOC);

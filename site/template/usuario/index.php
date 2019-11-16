@@ -102,7 +102,7 @@ if($usuario->archivo != null && $usuario->archivo != '')
 		<div class="col-md-3"><!--left col-->
               
 
-            <!-- <div class="text-center">
+            <div class="text-center">
                 <?php if($usuario->archivo != null) { ?>
                     <img src="<?php echo $usuario->archivo ?>"  alt="avatar">
                 <?php } else { ?>
@@ -114,7 +114,7 @@ if($usuario->archivo != null && $usuario->archivo != '')
                         <label for="mobile"><p>Miembro desde: <?php echo date_format(date_create($usuario->creado_fecha),'d/m/Y'); ?></p></label>
                     </div>
                 </div>
-            </div> -->
+            </div>
             <br>
             <br>
             <br>
@@ -164,7 +164,7 @@ if($usuario->archivo != null && $usuario->archivo != '')
 
           </div>
           <div class="tab-content">
-		    <div class="tab-pane active" id="inicio">
+		    <div class="tab-pane active text-center" id="inicio">
 
 				<h2>Hola, <?php echo $usuario->usuario ?>.</h2>
 				<h3><center>¡Buscá una publicación ahora!</center></h3>
@@ -220,6 +220,18 @@ if($usuario->archivo != null && $usuario->archivo != '')
 				<div class="text-center"><h3>O bien, podrías crear una nueva</h3><br>
 					<button id="crearPublicacion" onClick="crearPublicacion()" class="btn btn-success"><i class="fa fa-pencil"></i> Crear publicación</button>
                 </div>
+                <br>
+                <h3 class="lines-effect">Publicaciones de su interés</h3>
+                <?php
+
+                $publicaciones = array();
+                foreach($usuario->getObjetivos() as $objetivo){
+                array_push($publicaciones, PublicacionObjetivoDao::listXobjetivo($objetivo->id));
+                }
+                var_dump($publicaciones);
+                //foreach($publicaciones as $publicacion){
+                ?>
+                
             </div><!--/tab-pane-->
 
             <!-- <div class="tab-pane" id="profile">
