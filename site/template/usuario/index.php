@@ -222,15 +222,110 @@ if($usuario->archivo != null && $usuario->archivo != '')
                 </div>
                 <br>
                 <h3 class="lines-effect">Publicaciones de su interés</h3>
+                <br>
                 <?php
 
-                $publicaciones = array();
-                foreach($usuario->getObjetivos() as $objetivo){
-                array_push($publicaciones, PublicacionObjetivoDao::listXobjetivo($objetivo->id));
-                }
-                var_dump($publicaciones);
-                //foreach($publicaciones as $publicacion){
+                    foreach($usuario->getObjetivos() as $objetivo){
+                        foreach(PublicacionObjetivoDao::listXobjetivo($objetivo->id) as $publicacion_objetivo){
+                            $pub = PublicacionDao::get($publicacion_objetivo->id_publicacion);
+                            $fechas [$pub->id] = $pub->fecha;
+                        }
+                    }
+                    arsort($fechas);
+                    $keys = array_keys($fechas);
+                    if(count($fechas) < 3){
+                        $limite = count($fechas);
+                    }
+                    else{
+                        $limite = 3;
+                    }
+                    
+                    for($i = 0; $i < $limite  ; $i++){
+
+                        $pubTop = PublicacionDao::get($keys[$i]);
+                        $duracion = '';
+                        if($pubTop->tiempo != null)
+                        {
+                            $duracion .= ' (Duración: ' . $pubTop->tiempo . ' ' . $pubTop->getUnidadTiempo() . ')';
+                        }
                 ?>
+                <div class="col-lg-4 col-md-6 mb-4">
+            <div class="card h-100">
+              <a href="#">
+                <div id="carouselExampleIndicators_<?php echo $pubTop->id; ?>" class="carousel slide my-4" data-ride="carousel">
+                    <ol class="carousel-indicators">
+                      <?php  
+                        $i=0;
+                        if($pubTop != null){
+                        foreach($pubTop->getImagenes() as $imagen){
+                      ?>
+                      <li data-target="#carouselIndicators" data-slide-to="<?php echo $i; ?>" class="<?php echo ($i == 0 ? 'active' : ''); ?>"></li>
+                      <?php
+                        $i++;
+                            }
+                        }
+                      ?>
+                    </ol>
+                    <div class="carousel-inner" role="listbox">
+                      <?php  
+                        $i=0;
+                        if($pubTop !=null){
+                        foreach($pubTop->getImagenes() as $imagen){
+                      ?>
+                      <div class="carousel-item  <?php echo ($i == 0 ? 'active' : ''); ?>" style="width:253px; height:200px;">
+                        <img class="d-block img-fluid" src="\archivos\recortes\<?php echo $imagen->archivo; ?>" alt="First slide" style="width:100%; height:100%">
+                      </div>
+                      <?php
+                        $i++;
+                            }
+                        }
+                      ?>
+                    </div>
+                    <a class="carousel-control-prev" href="#carouselExampleIndicators_<?php echo $pubTop->id; ?>" role="button" data-slide="prev">
+                      <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                      <span class="sr-only">Previous</span>
+                    </a>
+                    <a class="carousel-control-next" href="#carouselExampleIndicators_<?php echo $pubTop->id; ?>" role="button" data-slide="next">
+                      <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                      <span class="sr-only">Next</span>
+                    </a>
+                </div>
+              </a>
+              <div class="card-body">
+                <h3 class="card-title">
+                  <a href="/publicaciones/ver/<?php echo $pubTop->alias; ?>"><?php echo $pubTop->titulo . $duracion; ?></a>
+                </h3>
+                <?php 
+                  foreach($pubTop->getObjetivos() as $objetivo){
+                ?>
+                <h5><?php //echo $objetivo->getObjetivo()->nombre ?></h5>
+               <?php } ?>
+                <p style="color:black" class="card-text" id="<?php echo 'desc-ambas'.$pubTop->id ?>">
+                <?php 
+                  if(strlen($pubTop->descripcion )>100)
+                  {
+                    $pubTop->descripcion = substr($pubTop->descripcion, 0, 100) . '... <a href="javascript:void(0)" onclick="verMas('."'".$pubTop->descripcion."'".', '."'".'ambas'.$pubTop->id."'".');">Ver mas</a>';
+                  }
+                  echo $pubTop->descripcion ;
+                ?>
+                </p>
+              </div>
+              <div class="card-footer">
+                <small class="text-muted float-left"><i class="fas fa-thumbs-up"></i> Likes: <?php echo sizeof($pubTop->getLikes());?></small>
+                <small class="text-muted float-right"><i class="fas fa-thumbs-down"></i> Dislikes: <?php echo sizeof($pubTop->getDislikes());?></small>
+                <?php if(Utiles::obtenerIdUsuarioLogueado() ==  $usuario->id){ ?>
+                  <div class="row-center" style="text-align:center;">
+                    <button id="editarPublicacion" style="margin-top:10px;" onClick="editarPublicacion('<?php echo $pubTop->alias; ?>')" class="btn btn-info"><i class="fa fa-pencil"></i> Editar publicación</button>
+                    <button id="eliminarPublicacion" style="margin-top:5px" onClick="eliminarPublicacion('<?php echo $pubTop->alias; ?>')" class="btn btn-danger"><i class="fa fa-trash"></i> Eliminar publicacion</button>
+		              </div>
+                <?php } ?>
+              </div>
+            </div>
+          </div>
+
+          <?php
+            }
+          ?>
                 
             </div><!--/tab-pane-->
 
