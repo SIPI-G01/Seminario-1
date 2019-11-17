@@ -1118,7 +1118,8 @@ function avatarRandom()
     $('#skinColor').val(piel);
     
     var link = 'https://avataaars.io/?avatarStyle='+ estilo +'&topType='+ cabeza +'&accessoriesType='+ accesorio +'&hatColor='+ colorSombrero +'&hairColor='+ colorPelo +'&facialHairType='+ barba +'&facialHairColor='+ colorBarba +'&clotheType='+ atuendo +'&clotheColor='+ colorAtuendo +'&graphicType='+ estampa +'&eyeType='+ ojos +'&eyebrowType='+ cejas +'&mouthType='+ boca +'&skinColor='+ piel; 
-    $("#avatar-edicion").attr("src", link);
+   	linkAvatar = link;   
+	$("#avatar-edicion").attr("src", link);
 
     restriccionesPrecargado('topType',cabeza);
     restriccionesPrecargado('facialHairType',barba);

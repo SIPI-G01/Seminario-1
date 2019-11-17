@@ -25,14 +25,14 @@ if (isset($token) && $token == Utiles::obtenerToken()) {
 				$valido = false;
 				$error = 'Debe ingresar un nombre de usuario';
 			}
-			else if (!isset($_POST['password']) || $_POST['password'] == '' || $_POST['password'] == null)
+			else if (!isset($_POST['pwd']) || $_POST['pwd'] == '' || $_POST['pwd'] == null)
 			{
 				$valido = false;
 				$error = 'Debe ingresar una contraseña';
 			}
 			else
 			{
-				$usuario = UsuarioDao::getXUsernameYPassword($_POST['username'], md5($_POST['password']));
+				$usuario = UsuarioDao::getXUsernameYPassword($_POST['username'], md5($_POST['pwd']));
 				if($usuario == null)
 				{
 					$valido = false;
@@ -309,12 +309,10 @@ if (isset($token) && $token == Utiles::obtenerToken()) {
 
 			}
 			foreach(UsuarioDao::listActivos() as $usuario){
-				if(Utiles::obtenerUsuarioLogueado()->usuario != $_POST['user_name']){
 					if($usuario->usuario == $_POST['user_name']){
 						$errores .= '<p>- Nombre de usuario en uso. Por favor elija otro</p>';
 						$valido = false;
 					}
-				}
 			}
 			if (!isset($_POST['email']) || trim($_POST['email']) == '') {
 				$errores .= '<p>- Debe ingresar un email.</p>';
@@ -322,12 +320,10 @@ if (isset($token) && $token == Utiles::obtenerToken()) {
 
 			}
 			foreach(UsuarioDao::listActivos() as $usuario){
-				if(Utiles::obtenerUsuarioLogueado()->mail != $_POST['email']){
 					if($usuario->mail == $_POST['email']){
 						$errores .= '<p>- Ya hay un usuario registrado con ese email.</p>';
 						$valido = false;
 					}
-				}
 			}
 			if (!isset($_POST['fecha_nac']) || trim($_POST['fecha_nac']) == '') {
 				$errores .= '<p>- Debe ingresar una fecha de nacimiento.</p>';

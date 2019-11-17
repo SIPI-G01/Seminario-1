@@ -14,10 +14,10 @@
 		</li>
 		<?php if(Utiles::obtenerUsuarioLogueado() == null){ ?>
 			<li id="headerDerLogIn">
-			<form class="form" action="javascript:void(1);" method="post" id="frm-data">
+			<form class="form" action="javascript:void(1);" method="post" id="frm-loginlogin">
 				
 				<input type="text" id="username" class="iniciarSesionInput" placeholder="Ingresar usuario" name="username" required>
-				<input type="password" id="password" class="iniciarSesionInput" placeholder="Ingresar contraseña" name="password" required>
+				<input type="password" id="pwd" class="iniciarSesionInput" placeholder="Ingresar contraseña" name="pwd" required>
 				<input type="button" class="btn btn-dark iniciarSesion" onclick="iniciarSesion();" value="Iniciar sesion">
 				<input type="button" class="btn btn-primary" onclick="registrarse();" value="Registrarse">				
 			</form>

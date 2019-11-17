@@ -60,6 +60,10 @@ $link = 'https://avataaars.io/?avatarStyle=Circle&topType=NoHair&accessoriesType
           <div class="tab-content">
 
             <div class="tab-pane active" id="data">
+			       <div id="msj-error-data">
+
+					</div>
+
                   <form class="form" action="javascript:void(1);" method="post" id="frm-data">
 
                       <input type="hidden" name="accion" id="accion" value="verificacion-datos-registro"/>
@@ -104,13 +108,13 @@ $link = 'https://avataaars.io/?avatarStyle=Circle&topType=NoHair&accessoriesType
 					  <div class="form-group">         
                         <div class="col-xs-6">
                             <label for="password"><h4>Contraseña</h4></label>
-                            <input type="password" class="form-control" name="password" id="password" placeholder="Contraseña" title="Contraseña actual">
+                            <input type="password" class="form-control" name="password" id="password" placeholder="Contraseña" title="Contraseña">
                         </div>
                     </div>
 					<div class="form-group">         
                         <div class="col-xs-6">
                             <label for="password2"><h4>Repetir contraseña</h4></label>
-                            <input type="password" class="form-control" name="password2" id="password2" placeholder="Contraseña" title="Contraseña actual">
+                            <input type="password" class="form-control" name="password2" id="password2" placeholder="Contraseña" title="Contraseña">
                         </div>
                     </div>
                       <div class="form-group text-right">
@@ -141,7 +145,6 @@ $link = 'https://avataaars.io/?avatarStyle=Circle&topType=NoHair&accessoriesType
                     </div>
                     <div class="row">
                         <div class="col-md-3"></div>
-                        <div id="alerta-cambios" class="col-md-9 alert dark alert-alt alert-success fade in text-center" style="display:none"><i class="glyphicon glyphicon-hourglass"></i> Hay cambios sin guardar...</div>
                     </div>
                     <br>
                     <br>
@@ -600,8 +603,6 @@ restriccionesPrecargado('<?php echo $atuendo[0]; ?>','<?php echo $atuendo[1]; ?>
 var linkAvatar = '<?php echo $avatarUsuario; ?>';
 function cambioAvatar(tipo, valor)
 {
-    var alerta_cambios = document.getElementById("alerta-cambios");
-    alerta_cambios.style.display = 'block';
     if(tipo == 'topType')
     {
         if(valor == 'Eyepatch')
@@ -723,13 +724,8 @@ function descartarCambios(){
     $("#avatar-edicion").attr("src", link);
 
 }
-
 function avatarRandom()
 {
-
-    var alerta_cambios = document.getElementById("alerta-cambios");
-    alerta_cambios.style.display = 'block';
-
     var estilos = <?php echo json_encode($estilosAv); ?>;
     var estilo = estilos[Math.floor(Math.random() * estilos.length)].nombre_original
 
@@ -794,13 +790,15 @@ function avatarRandom()
     $('#skinColor').val(piel);
     
     var link = 'https://avataaars.io/?avatarStyle='+ estilo +'&topType='+ cabeza +'&accessoriesType='+ accesorio +'&hatColor='+ colorSombrero +'&hairColor='+ colorPelo +'&facialHairType='+ barba +'&facialHairColor='+ colorBarba +'&clotheType='+ atuendo +'&clotheColor='+ colorAtuendo +'&graphicType='+ estampa +'&eyeType='+ ojos +'&eyebrowType='+ cejas +'&mouthType='+ boca +'&skinColor='+ piel; 
-    $("#avatar-edicion").attr("src", link);
+	linkAvatar = link;   
+   $("#avatar-edicion").attr("src", link);
 
     restriccionesPrecargado('topType',cabeza);
     restriccionesPrecargado('facialHairType',barba);
     restriccionesPrecargado('clotheType',atuendo);	
 
 }
+avatarRandom();
 
 
 function guardarData() {
@@ -834,8 +832,6 @@ function guardarData() {
 
 function generarAvatar(){
 
-    var alerta_cambios = document.getElementById("alerta-cambios");
-    alerta_cambios.style.display = 'none';
 
     $.ajax({
     async:true,
