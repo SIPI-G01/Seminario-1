@@ -8,9 +8,9 @@
 		
     <ul style="position: relative;">
         <li id="headerIzq" ><a class="active" href="/home">Inicio</a></li>
-        <li id="headerIzq"><a href="#faq">FAQ</a></li>
+        <li id="headerIzq"><a href="/faq">FAQ</a></li>
 		<li id="headerIzq" class="centrar">
-			<a href="/home" style="padding-top: 7px; padding-bottom: 0px;"><img class="imagen-inicio" src="/site/images/logo.png"> Vita</a>
+			<a href="/home" style="padding-top: 7px; padding-bottom: 0px; font-size: 25px;"><img class="imagen-inicio" src="/site/images/logo.png"> Vita</a>
 		</li>
 		<?php if(Utiles::obtenerUsuarioLogueado() == null){ ?>
 			<li id="headerDerLogIn">
@@ -56,7 +56,10 @@
 </header>
 
 <script>
-    function registrarse(){}
+    function registrarse()
+	{
+		window.location = '/registrarse';
+	}
 	
 	function cerrarSesion() {
 
