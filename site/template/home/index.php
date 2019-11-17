@@ -8,6 +8,10 @@ Utiles::ValidarSesionIniciada();
 
 ?>
 <div class= "container-fluid">
+	<div class="headContainer">
+			<div class="headImg"><h1><a href="/home"><img class="imagen-vita" src="/site/images/logo.png"></a></h1></div>
+			<div class="headTitle"><h1><a href="/home">Vita</a></h1></div>
+    </div>
 
 	<div class="row texto-inicio">
 		<div class="col-md-12">

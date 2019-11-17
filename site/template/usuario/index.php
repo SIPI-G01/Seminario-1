@@ -1,7 +1,6 @@
 <?php
  include_once  ($_SERVER["DOCUMENT_ROOT"] . '/site/view/home-usuario-view.php');
  include_once $_SERVER['DOCUMENT_ROOT'] . '/site/utiles/Utiles.php';
- include_once $_SERVER['DOCUMENT_ROOT'] . '/dao/AvatarDao.php';
  $usuario = Utiles::obtenerUsuarioLogueado();
  $view_home = '';
 	if($usuario == null)
@@ -47,20 +46,20 @@ if(count($componentesLink) > 1)
 	$boca = explode("=",$componentesLink[12]);
 	$piel = explode("=",$componentesLink[13]);
 }
-$estilosAv = AvatarDao::getXcomponente('estilo_avatar');
-$compCab = AvatarDao::getXcomponente('cabeza');
-$compAcc = AvatarDao::getXcomponente('accesorios');
-$compColSom = AvatarDao::getXcomponente('colorSombrero');
-$compColPelo = AvatarDao::getXcomponente('colorPelo');
-$compBarba = AvatarDao::getXcomponente('barba');
-$compColBarba = AvatarDao::getXcomponente('colorBarba');
-$compAtu = AvatarDao::getXcomponente('atuendos');
-$compColAtu = AvatarDao::getXcomponente('colorTela');
-$compEst = AvatarDao::getXcomponente('estampa');
-$compOjos = AvatarDao::getXcomponente('ojos');
-$compCejas = AvatarDao::getXcomponente('cejas');
-$compBoca = AvatarDao::getXcomponente('boca');
-$compPiel = AvatarDao::getXcomponente('piel');
+$estilosAv = $view_home->estilosAv;
+$compCab = $view_home->compCab;
+$compAcc = $view_home->compAcc;
+$compColSom = $view_home->compColSom;
+$compColPelo = $view_home->compColPelo;
+$compBarba = $view_home->compBarba;
+$compColBarba = $view_home->compColBarba;
+$compAtu = $view_home->compAtu;
+$compColAtu = $view_home->compColAtu;
+$compEst = $view_home->compEst;
+$compOjos = $view_home->compOjos;
+$compCejas = $view_home->compCejas;
+$compBoca = $view_home->compBoca;
+$compPiel = $view_home->compPiel;
 
 $avatarUsuario = 'https://avataaars.io/?avatarStyle=Circle&topType=NoHair&accessoriesType=Blank&facialHairType=Blanck&facialHairColor=Auburn&clotheType=BlazerShirt&eyeType=Close&eyebrowType=Angry&mouthType=Concerned&skinColor=Tanned';
 
@@ -76,25 +75,26 @@ if($usuario->archivo != null && $usuario->archivo != '')
 <div class="container bootstrap snippet" style="width: auto;">
     	<!--<div class="col-sm-2"><a href="/users" class="pull-right"><img title="profile image" class="img-circle img-responsive" src="http://www.gravatar.com/avatar/28fd20ccec6865e2d5f0e1f4446eb7bf?s=100"></a></div>-->
   		<div class="col-sm-12">
-			<ul class="nav nav-tabs" style="margin-bottom: 20px;">
+			<ul class="nav nav-tabs">
                 <li class="active"><a data-toggle="tab" href="#inicio">Inicio</a></li>
+				<li><a data-toggle="tab" href="#objetivos">Mis objetivos</a></li>
+                <li><a data-toggle="tab" href="#publicaciones">Mis publicaciones</a></li>				
                 <!-- <li><a data-toggle="tab" href="#profile">Mi Perfil</a></li> -->
-                <li class="nav-item dropdown">
+                <li class="nav-item dropdown" onmouseover="$('#listOp2').show();" onmouseout="$('#listOp2').hide();">
                     <a class="nav-link dropdown-toggle" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">Mi perfil</a>
                     <div class="dropdown-menu">
-                        <a class="dropdown-item" href="#objetivos">Mis objetivos</a>
-                        <a class="dropdown-item" href="#publicaciones">Mis publicaciones</a>
-                        <a class="dropdown-item" href="#data">Mis datos</a>
-                        <a class="dropdown-item" href="#password">Cambiar Contraseña</a>
-                        <a class="dropdown-item" href="#avatar">Editar Avatar</a>
-                        <div class="dropdown-divider"></div>
-                        <a class="dropdown-item" href="#eliminar">Eliminar Mi Cuenta</a>
                     </div>
                 </li>
                 <!-- <li><a data-toggle="tab" href="#objetivos">Mis objetivos</a></li>
                 <li><a data-toggle="tab" href="#publicaciones">Mis publicaciones</a></li> -->
 			</ul>
-		
+			<ul id="listOp2" class="dropdown" style="display: none; margin-top: -10px; left: 38%; z-index: 999999; position: absolute;" onmouseover="$('#listOp2').show();" onmouseout="$('#listOp2').hide();">
+					<li><a data-toggle="tab" href="#data">Mis datos</a></li>
+					<li> <a data-toggle="tab" href="#password">Cambiar Contraseña</a></li>
+					<li><a data-toggle="tab" href="#avatar">Editar Avatar</a></li>	
+					<li><a data-toggle="tab" href="#eliminar">Eliminar Mi Cuenta</a></li>
+			</ul>
+
 		</div>
 		
 
@@ -167,6 +167,101 @@ if($usuario->archivo != null && $usuario->archivo != '')
 		    <div class="tab-pane active text-center" id="inicio">
 
 				<h2>Hola, <?php echo $usuario->usuario ?>.</h2>
+			  <div class="publicaciones-recomendadas">
+
+				<?php if (count($view_home->recomendados) > 0){ ?>
+				 <h3 class="lines-effect">Publicaciones recientes</h3>
+                <br>
+				<?php } ?>
+                <?php
+
+                    foreach($view_home->recomendados as $pubTop){
+
+                        $duracion = '';
+                        if($pubTop->tiempo != null)
+                        {
+                            $duracion .= ' (Duración: ' . $pubTop->tiempo . ' ' . $pubTop->getUnidadTiempo() . ')';
+                        }
+                ?>
+                <div class="col-lg-4 col-md-6 mb-4">
+					<div class="card h-100">
+					  <a href="#">
+						<div id="carouselExampleIndicators_<?php echo $pubTop->id; ?>" class="carousel slide my-4" data-ride="carousel">
+							<ol class="carousel-indicators">
+							  <?php  
+								$i=0;
+								if($pubTop != null){
+								foreach($pubTop->getImagenes() as $imagen){
+							  ?>
+							  <li data-target="#carouselIndicators" data-slide-to="<?php echo $i; ?>" class="<?php echo ($i == 0 ? 'active' : ''); ?>"></li>
+							  <?php
+								$i++;
+									}
+								}
+							  ?>
+							</ol>
+							<div class="carousel-inner" role="listbox">
+							  <?php  
+								$i=0;
+								if($pubTop !=null){
+								foreach($pubTop->getImagenes() as $imagen){
+							  ?>
+							  <div class="carousel-item  <?php echo ($i == 0 ? 'active' : ''); ?>" style="width:253px; height:200px;">
+								<img class="d-block img-fluid" src="\archivos\recortes\<?php echo $imagen->archivo; ?>" alt="First slide" style="width:100%; height:100%">
+							  </div>
+							  <?php
+								$i++;
+									}
+								}
+							  ?>
+							</div>
+							<a class="carousel-control-prev" href="#carouselExampleIndicators_<?php echo $pubTop->id; ?>" role="button" data-slide="prev">
+							  <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+							  <span class="sr-only">Previous</span>
+							</a>
+							<a class="carousel-control-next" href="#carouselExampleIndicators_<?php echo $pubTop->id; ?>" role="button" data-slide="next">
+							  <span class="carousel-control-next-icon" aria-hidden="true"></span>
+							  <span class="sr-only">Next</span>
+							</a>
+						</div>
+					  </a>
+					  <div class="card-body">
+						<h3 class="card-title">
+						  <a href="/publicaciones/ver/<?php echo $pubTop->alias; ?>"><?php echo $pubTop->titulo . $duracion; ?></a>
+						</h3>
+						<?php 
+						  foreach($pubTop->getObjetivos() as $objetivo){
+						?>
+						<h5><?php //echo $objetivo->getObjetivo()->nombre ?></h5>
+					   <?php } ?>
+						<p style="color:black" class="card-text" id="<?php echo 'desc-ambas'.$pubTop->id ?>">
+						<?php 
+						  if(strlen($pubTop->descripcion )>100)
+						  {
+							$pubTop->descripcion = substr($pubTop->descripcion, 0, 100) . '... <a href="javascript:void(0)" onclick="verMas('."'".$pubTop->descripcion."'".', '."'".'ambas'.$pubTop->id."'".');">Ver mas</a>';
+						  }
+						  echo $pubTop->descripcion ;
+						?>
+						</p>
+					  </div>
+					  <div class="card-footer">
+						<small class="text-muted float-left"><i class="fas fa-thumbs-up"></i> Likes: <?php echo sizeof($pubTop->getLikes());?></small>
+						<small class="text-muted float-right"><i class="fas fa-thumbs-down"></i> Dislikes: <?php echo sizeof($pubTop->getDislikes());?></small>
+						<?php if(Utiles::obtenerIdUsuarioLogueado() ==  $usuario->id){ ?>
+						  <div class="row-center" style="text-align:center;">
+							<button id="editarPublicacion" style="margin-top:10px;" onClick="editarPublicacion('<?php echo $pubTop->alias; ?>')" class="btn btn-info"><i class="fa fa-pencil"></i> Editar publicación</button>
+							<button id="eliminarPublicacion" style="margin-top:5px" onClick="eliminarPublicacion('<?php echo $pubTop->alias; ?>')" class="btn btn-danger"><i class="fa fa-trash"></i> Eliminar publicacion</button>
+							  </div>
+						<?php } ?>
+					  </div>
+					</div>
+				  </div>
+
+				  <?php
+					}
+				  ?>
+				  </div>
+				  <br>
 				<h3><center>¡Buscá una publicación ahora!</center></h3>
 				<div class="row buscador">
 					<div class="col-md-12" id="objetivosList">
@@ -220,112 +315,7 @@ if($usuario->archivo != null && $usuario->archivo != '')
 				<div class="text-center"><h3>O bien, podrías crear una nueva</h3><br>
 					<button id="crearPublicacion" onClick="crearPublicacion()" class="btn btn-success"><i class="fa fa-pencil"></i> Crear publicación</button>
                 </div>
-                <br>
-                <h3 class="lines-effect">Publicaciones de su interés</h3>
-                <br>
-                <?php
-
-                    foreach($usuario->getObjetivos() as $objetivo){
-                        foreach(PublicacionObjetivoDao::listXobjetivo($objetivo->id) as $publicacion_objetivo){
-                            $pub = PublicacionDao::get($publicacion_objetivo->id_publicacion);
-                            $fechas [$pub->id] = $pub->fecha;
-                        }
-                    }
-                    arsort($fechas);
-                    $keys = array_keys($fechas);
-                    if(count($fechas) < 3){
-                        $limite = count($fechas);
-                    }
-                    else{
-                        $limite = 3;
-                    }
-                    
-                    for($i = 0; $i < $limite  ; $i++){
-
-                        $pubTop = PublicacionDao::get($keys[$i]);
-                        $duracion = '';
-                        if($pubTop->tiempo != null)
-                        {
-                            $duracion .= ' (Duración: ' . $pubTop->tiempo . ' ' . $pubTop->getUnidadTiempo() . ')';
-                        }
-                ?>
-                <div class="col-lg-4 col-md-6 mb-4">
-            <div class="card h-100">
-              <a href="#">
-                <div id="carouselExampleIndicators_<?php echo $pubTop->id; ?>" class="carousel slide my-4" data-ride="carousel">
-                    <ol class="carousel-indicators">
-                      <?php  
-                        $i=0;
-                        if($pubTop != null){
-                        foreach($pubTop->getImagenes() as $imagen){
-                      ?>
-                      <li data-target="#carouselIndicators" data-slide-to="<?php echo $i; ?>" class="<?php echo ($i == 0 ? 'active' : ''); ?>"></li>
-                      <?php
-                        $i++;
-                            }
-                        }
-                      ?>
-                    </ol>
-                    <div class="carousel-inner" role="listbox">
-                      <?php  
-                        $i=0;
-                        if($pubTop !=null){
-                        foreach($pubTop->getImagenes() as $imagen){
-                      ?>
-                      <div class="carousel-item  <?php echo ($i == 0 ? 'active' : ''); ?>" style="width:253px; height:200px;">
-                        <img class="d-block img-fluid" src="\archivos\recortes\<?php echo $imagen->archivo; ?>" alt="First slide" style="width:100%; height:100%">
-                      </div>
-                      <?php
-                        $i++;
-                            }
-                        }
-                      ?>
-                    </div>
-                    <a class="carousel-control-prev" href="#carouselExampleIndicators_<?php echo $pubTop->id; ?>" role="button" data-slide="prev">
-                      <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-                      <span class="sr-only">Previous</span>
-                    </a>
-                    <a class="carousel-control-next" href="#carouselExampleIndicators_<?php echo $pubTop->id; ?>" role="button" data-slide="next">
-                      <span class="carousel-control-next-icon" aria-hidden="true"></span>
-                      <span class="sr-only">Next</span>
-                    </a>
-                </div>
-              </a>
-              <div class="card-body">
-                <h3 class="card-title">
-                  <a href="/publicaciones/ver/<?php echo $pubTop->alias; ?>"><?php echo $pubTop->titulo . $duracion; ?></a>
-                </h3>
-                <?php 
-                  foreach($pubTop->getObjetivos() as $objetivo){
-                ?>
-                <h5><?php //echo $objetivo->getObjetivo()->nombre ?></h5>
-               <?php } ?>
-                <p style="color:black" class="card-text" id="<?php echo 'desc-ambas'.$pubTop->id ?>">
-                <?php 
-                  if(strlen($pubTop->descripcion )>100)
-                  {
-                    $pubTop->descripcion = substr($pubTop->descripcion, 0, 100) . '... <a href="javascript:void(0)" onclick="verMas('."'".$pubTop->descripcion."'".', '."'".'ambas'.$pubTop->id."'".');">Ver mas</a>';
-                  }
-                  echo $pubTop->descripcion ;
-                ?>
-                </p>
-              </div>
-              <div class="card-footer">
-                <small class="text-muted float-left"><i class="fas fa-thumbs-up"></i> Likes: <?php echo sizeof($pubTop->getLikes());?></small>
-                <small class="text-muted float-right"><i class="fas fa-thumbs-down"></i> Dislikes: <?php echo sizeof($pubTop->getDislikes());?></small>
-                <?php if(Utiles::obtenerIdUsuarioLogueado() ==  $usuario->id){ ?>
-                  <div class="row-center" style="text-align:center;">
-                    <button id="editarPublicacion" style="margin-top:10px;" onClick="editarPublicacion('<?php echo $pubTop->alias; ?>')" class="btn btn-info"><i class="fa fa-pencil"></i> Editar publicación</button>
-                    <button id="eliminarPublicacion" style="margin-top:5px" onClick="eliminarPublicacion('<?php echo $pubTop->alias; ?>')" class="btn btn-danger"><i class="fa fa-trash"></i> Eliminar publicacion</button>
-		              </div>
-                <?php } ?>
-              </div>
-            </div>
-          </div>
-
-          <?php
-            }
-          ?>
+               
                 
             </div><!--/tab-pane-->
 

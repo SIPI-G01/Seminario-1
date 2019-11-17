@@ -9,6 +9,9 @@
     <ul style="position: relative;">
         <li id="headerIzq" ><a class="active" href="/home">Inicio</a></li>
         <li id="headerIzq"><a href="#faq">FAQ</a></li>
+		<li id="headerIzq" class="centrar">
+			<a href="/home" style="padding-top: 7px; padding-bottom: 0px;"><img class="imagen-inicio" src="/site/images/logo.png"> Vita</a>
+		</li>
 		<?php if(Utiles::obtenerUsuarioLogueado() == null){ ?>
 			<li id="headerDerLogIn">
 			<form class="form" action="javascript:void(1);" method="post" id="frm-data">
@@ -20,7 +23,7 @@
 			</form>
 			</li>
 		<?php } else { ?>
-			<li id="headerDer">
+			<li id="headerDer" onmouseover="$('#listOp').show();" onmouseout="$('#listOp').hide();">
 				<a href="#">
 					Hola <?php echo Utiles::obtenerUsuarioLogueado()->usuario; ?>
 					<span class="avatar avatar-online">
@@ -31,22 +34,25 @@
 						<?php } ?>
 					</span>
 				</a>
-				  <ul class="dropdown" style="margin-top: 0px;">
-					<li><a href="/usuario">Inicio</a></li>
-					<li><a href="#" onclick="cerrarSesion();">Cerrar sesión</a></li>
-				  </ul>
 
 			</li>
 		<?php } ?>
 
     </ul>
+	
+				  <ul id="listOp" class="dropdown" style="display: none; margin-top: -10px; right: 0%; z-index: 999999; position: absolute;" onmouseover="$('#listOp').show();" onmouseout="$('#listOp').hide();">
+					<li><a href="/usuario">Inicio</a></li>
+					<li><a href="/usuario/objetivos">Mis objetivos</a></li>
+					<li><a href="/usuario/perfil/<?php echo Utiles::obtenerUsuarioLogueado()->alias; ?>">Mis publicaciones</a></li>	
+					<li><a href="#" onclick="cerrarSesion();">Cerrar sesión</a></li>
+				  </ul>
+	
+	<!--
     <div class="headContainer">
-			<div class="headImg"><h1><a href="/home"><img class="imagen-inicio" src="/site/images/logo.png"></a></h1></div>
+			<div class="headImg"><h1><a href="/home"><img class="imagen-vita" src="/site/images/logo.png"></a></h1></div>
 			<div class="headTitle"><h1><a href="/home">Vita</a></h1></div>
     </div>
-    <!--<div class="divLine">
-			<h1 class="line">⚜</h1>
-    </div>-->
+	-->
 </header>
 
 <script>

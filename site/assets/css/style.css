@@ -254,7 +254,15 @@ ul {
 
 .imagen-inicio
 {
-  max-height: 90px;
+  max-height: 46px;
+}
+.imagen-vita
+{
+	max-height: 90px;
+}
+.centrar
+{
+   margin-left: 37%;
 }
 #headerDer:hover .dropdown{
     margin-top: 0px;

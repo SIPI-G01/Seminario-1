@@ -176,6 +176,33 @@ class PublicacionDao {
 		$res = GenericDao::executeQuery($query, null, "publicacion", true);
 		return count($res);
 	}
+	
+	
+	public static function publicacionesRecomendadas() {
+		$cantidad = 3;
+		$objetivos = Utiles::obtenerUsuarioLogueado()->getObjetivos();
+
+		$query =   "SELECT DISTINCT p.* FROM publicacion p
+					LEFT JOIN publicacion_objetivo po ON po.id_publicacion = p.id
+					WHERE p.activo = 1 AND p.estado = 1";
+
+		if (sizeof($objetivos) > 0) {
+			$in = "(";
+			$coma = false;
+			for ($i=0; $i < sizeof($objetivos); $i++) {
+					$in .= ($coma ? ', ' : '') . '"' . $objetivos[$i]->id . '"';
+					$coma = true;
+			}
+			$in .= ")";
+
+			$query .= ($coma ? " AND po.id_objetivo IN " . $in : '');
+		}
+		$query .= " AND p.id_usuario <> " . Utiles::obtenerIdUsuarioLogueado();		
+		$query .= " ORDER BY p.fecha DESC";
+		$query .=  ($cantidad >= 0 ? " LIMIT " . $cantidad : '');
+		return GenericDao::executeQuery($query, null, 'publicacion', true);
+
+	}
 
 	public static function listActivos() {
 		return GenericDao::find("publicacion", array(array("activo", "=", "1")));

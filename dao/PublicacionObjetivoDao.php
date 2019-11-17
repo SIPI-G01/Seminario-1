@@ -17,7 +17,6 @@ class PublicacionObjetivoDao {
 		return GenericDao::find("publicacion_objetivo", array(array("id_publicacion", "=", $id_publicacion)));
 	}
 	public static function listXobjetivo($id_objetivo){
-		//var_dump($id_objetivo);
 		return GenericDao::find("publicacion_objetivo", array(array("id_objetivo", "=", $id_objetivo)));
 	}
 
