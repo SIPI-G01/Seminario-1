@@ -40,14 +40,15 @@ $link = 'https://avataaars.io/?avatarStyle=Circle&topType=NoHair&accessoriesType
 <div class="container bootstrap snippet" style="width: auto;">
     	<!--<div class="col-sm-2"><a href="/users" class="pull-right"><img title="profile image" class="img-circle img-responsive" src="http://www.gravatar.com/avatar/28fd20ccec6865e2d5f0e1f4446eb7bf?s=100"></a></div>-->
   		<div class="col-sm-12">
-			<ul class="nav nav-tabs">
+			<ul class="nav nav-tabs" style="display: none;">
                 <li class="active"><a data-toggle="tab" href="#data">Mis datos</a></li>
 				<li><a data-toggle="tab" href="#avatar">Editar Avatar</a></li>					
 				<li><a data-toggle="tab" href="#objetivos">Mis objetivos</a></li>
+				<li><a data-toggle="tab" href="#fin">Fin</a></li>				
 			</ul>
 
 		</div>
-		
+		<h2 style="text-align: center;">Registro</h2>
     	<div class="col-md-12"> 
 
           <div id="msj-error">
@@ -134,8 +135,11 @@ $link = 'https://avataaars.io/?avatarStyle=Circle&topType=NoHair&accessoriesType
                 <br>
                 <br>
                 <form class="form-horizontal" action="javascript:void(1);" method="post" id="frm-avatar">
+			       <div id="msj-error-avatar">
 
-                    <input type="hidden" name="accion" id="accion" value="generar-avatar"/>
+					</div>
+
+                    <input type="hidden" name="accion" id="accion" value="nuevo-avatar"/>
                     <input type="hidden" name="token" id="token" value="<?php echo Utiles::obtenerToken(); ?>"/>
                  
 					<div class="row form-group">
@@ -148,8 +152,11 @@ $link = 'https://avataaars.io/?avatarStyle=Circle&topType=NoHair&accessoriesType
                     </div>
                     <br>
                     <br>
-                    <br>
-                    <br>
+                    <div class="row form-group text-center">
+                        <div class="col-md-offset-3 col-sm-9">
+							<button class="btn  btn-warning" type="submit" onclick="avatarRandom();"><i class="glyphicon glyphicon-random"></i> Avatar Random</button>
+                        </div>                    
+					</div>
                     <div class="row form-group">
                         <label for="avatar-style" class="col-sm-3 control-label">Tipo de Avatar</label>
                         <div class="col-sm-9">
@@ -511,15 +518,74 @@ $link = 'https://avataaars.io/?avatarStyle=Circle&topType=NoHair&accessoriesType
                             </select>
                         </div>
                     </div>
+					<div class="row form-group">
+                        <div class="col-sm-offset-3 col-sm-9">
+						   <div class="col-xs-6 text-left">
+								<button class="btn  btn-info text-left" type="submit" onclick="atras1();"> Atras</button>
+							</div>
+						   <div class="col-xs-6 text-right">
+								<button class="btn  btn-info text-right" type="submit" onclick="generarAvatar();"> Continuar</button>				
+							</div>
+                        </div>
+                    </div>
+
                 </form>
-                <br>
-                <button class="btn btn-lg btn-success" type="submit" onclick="generarAvatar();"><i class="glyphicon glyphicon-ok-sign"></i> Crear Avatar</button>
-                <button class="btn btn-lg btn-danger" type="submit" onclick="descartarCambios();"><i class="glyphicon glyphicon-remove"></i>  Descartar Cambios</button>
-                <button class="btn btn-lg btn-warning" type="submit" onclick="avatarRandom();"><i class="glyphicon glyphicon-random"></i> Avatar Random</button>
+
              </div><!--/tab-pane-->
             <div class="tab-pane" id="objetivos">
-				<?php //include $_SERVER['DOCUMENT_ROOT'] . '/site/template/usuario/objetivos.php';?>
+				<form class="form-horizontal" action="javascript:void(1);" id="frm-objetivos">
+					<div class="col-md-12" style="margin-top: 20px;">
+							<div id="error">
+							</div>
+								<input type="hidden" name="accion" id="accion" value="registrar"/>
+								<input type="hidden" name="token" id="token" value="<?php echo Utiles::obtenerToken(); ?>"/>
+							
+								<div class="form-group row">
+									<label class="col-sm-2 control-label">Objetivo/s *</label>
+									<div class="col-md-10 row">
+										<div class="col-sm-10">
+											<select class="form-control" id="selector_objetivo" name="selector_objetivo">	
+												<option value="0" selected disabled>Seleccione un objetivo...</option>																				
+												<?php foreach($view->objetivos as $objetivo){ ?>
+												<option value="<?php echo $objetivo->id; ?>"><?php echo $objetivo->nombre; ?></option>									
+												<?php } ?>
+											</select>
+										</div>
+										<div class="col-md-2">
+											<button type="button" onclick="javascript:agregarObjetivo();" class="btn btn-animate btn-animate-side btn-success">
+												<span><i class="icon fa fa-plus" aria-hidden="true"></i> Agregar</span>
+											</button>									
+										</div>
+										<div class="col-md-12" style="margin-top:25px;">
+											<!--TABLA-->
+											<div id="mensajes-error-tabla"></div>												
+											<table id="tabla"></table>
+										</div>
+
+									</div>
+
+								</div>
+									
+									
+									
+								<div class="row form-group">
+									<div class="col-md-12">
+									   <div class="col-xs-6 text-left">
+											<button class="btn  btn-info text-left" type="submit" onclick="atras2();"> Atras</button>
+										</div>
+									   <div class="col-xs-6 text-right">
+											<button class="btn  btn-info text-right" type="submit" onclick="guardar();"> Registrarme</button>				
+										</div>
+									</div>
+								</div>
+						</div>
+				</form>
                               
+            </div><!--/tab-pane-->
+            <div class="tab-pane" id="fin">
+                <h2 class="main-title">Usuario registrado</h2><!-- /.main-title -->
+                <h3 class="sub-title">Le hemos enviado un mail para activar su cuenta.</h3><!-- /.sub-title -->
+                <a href="/" class="btn">Ir a la home</a><!-- /.btn -->
             </div><!--/tab-pane-->
           </div><!--/tab-content-->
 
@@ -698,32 +764,6 @@ function cambioAvatar(tipo, valor)
 	$("#avatar-edicion").attr("src", linkAvatar);	
 }
 
-function descartarCambios(){
-
-    let link = '<?php echo $link; ?>';
-
-    if('<?php echo $estiloAvatar[1]; ?>' == 'Circle'){
-        $("#avatar-style-circle").prop("checked", true);
-    }else {
-        $("#avatar-style-transparent").prop("checked", true);
-    }
-    $('#topType').val('<?php echo $cabeza[1]; ?>');
-    $('#accessoriesType').val('<?php echo $accesorios[1]; ?>');
-    $('#hatColor').val('<?php echo $colorSombrero[1]; ?>');
-    $('#hairColor').val('<?php echo $colorPelo[1]; ?>');
-    $('#facialHairType').val('<?php echo $barba[1]; ?>');
-    $('#facialHairColor').val('<?php echo $colorBarba[1]; ?>');
-    $('#clotheType').val('<?php echo $atuendo[1]; ?>');
-    $('#clotheColor').val('<?php echo $colorAtuendo[1]; ?>');
-    $('#graphicType').val('<?php echo $estampa[1]; ?>');
-    $('#eyeType').val('<?php echo $ojos[1]; ?>');
-    $('#eyebrowType').val('<?php echo $cejas[1]; ?>');
-    $('#mouthType').val('<?php echo $boca[1]; ?>');
-    $('#skinColor').val('<?php echo $piel[1]; ?>');
-
-    $("#avatar-edicion").attr("src", link);
-
-}
 function avatarRandom()
 {
     var estilos = <?php echo json_encode($estilosAv); ?>;
@@ -830,6 +870,15 @@ function guardarData() {
 	
 }
 
+function atras1()
+{
+	$('[href="#data"]').click();
+}
+function atras2()
+{
+	$('[href="#avatar"]').click();
+}
+
 function generarAvatar(){
 
 
@@ -842,13 +891,12 @@ function generarAvatar(){
     },
     success:function(datos) {
         datos = datos.split("|");
-
+		console.log(datos);
         if (datos[0] == 'OK') {
-            window.location.reload();  
+			$('[href="#objetivos"]').click();
         } else {
-    location.hash = '';
-            $('#msj-error').html(datos[1]);
-            location.hash = 'msj-error';
+            $('#msj-error-avatar').html(datos[1]);
+            location.hash = 'msj-error-avatar';
         }
         return true;
     },
@@ -859,5 +907,160 @@ function generarAvatar(){
 });
 
 }
+
+
+
+
+var objetivosListado = <?php echo json_encode($view->objetivos); ?>;
+var tabla = [];
+var idTabla = [];
+var objetivosSeleccionados = [];
+var datosGuardados = [];
+
+function actualizarGuardarDatos(id, tipo)
+{
+	if(tipo == 1)
+	{
+		//Fecha inicio
+		datosGuardados.forEach(function(dato) {
+			if(dato.id == id)
+			{
+				dato.fecha_inicio = $('#fecha_inicio_' + id).val();
+			}
+		});
+		
+	}
+	else if(tipo == 2)
+	{
+		//Fecha fin
+		datosGuardados.forEach(function(dato) {
+			if(dato.id == id)
+			{
+				dato.fecha_fin = $('#fecha_fin_' + id).val();
+			}
+		});		
+	}
+}
+
+function precargarObjetivos()
+{								
+	tabla.push("<tr><th>Objetivo</th><th>Fecha de inicio</th><th>Fecha de finalización</th><th></th></tr>");
+	$('#tabla').append("<tr><th class='text-center'>Objetivo</th><th class='text-center'>Fecha de inicio</th><th class='text-center'>Fecha de finalización</th><th></th></tr>");						
+}
+
+precargarObjetivos();
+
+function agregarObjetivo()
+{
+	$('#mensajes-error-tabla').html('');
+	$('#mensajes-error-tabla').fadeOut();	
+	
+	if($('#selector_objetivo').val() == 0 || $('#selector_objetivo').val() == null)
+	{
+		$('#mensajes-error-tabla').html("<p><b>Ocurrieron los siguientes errores:</b><br> - Debe seleccionar un objetivo</p>");
+		$('#mensajes-error-tabla').fadeIn();			
+	}
+	else
+	{
+		var aparecio = false;
+		objetivosSeleccionados.forEach(function(objetivo) {
+			if(objetivo.id == $('#selector_objetivo').val())
+			{
+				aparecio = true;
+			}
+		});
+		
+		if(aparecio == false)
+		{
+			var lineas = '';
+			objetivosListado.forEach(function(objetivo) {
+				if(objetivo.id == $('#selector_objetivo').val())
+				{
+					datosGuardados.push({id: objetivo.id, nombre: objetivo.nombre, fecha_inicio: null, fecha_fin: null});
+					objetivosSeleccionados.push(objetivo);
+					lineas = "<tr><th class='text-center'>" + objetivo.nombre + "</th><td><input onchange='actualizarGuardarDatos(" + objetivo.id + ", 1)' type='date' name='fecha_inicio_"+ objetivo.id +"' id='fecha_inicio_"+ objetivo.id +"' value='" + objetivo.fecha_inicio + "'/></td><td><input onchange='actualizarGuardarDatos(" + objetivo.id + ", 2)' type='date' name='fecha_fin_"+ objetivo.id +"' id='fecha_fin_"+ objetivo.id +"' value='" + objetivo.fecha_fin + "'/></td><td class='text-right'><button onclick='javascript:eliminarObjetivo("+ objetivo.id + ");' type='button' class='btn btn-danger btn-sm mr5'><i class='fa fa-trash'></i> Eliminar</button></td></tr>";
+				}
+			});
+			
+			tabla.push(lineas);
+			idTabla.push($('#selector_objetivo').val());
+			console.log(lineas);
+			$('#tabla').append(lineas);
+			$('#selector_objetivo').val(0);	
+		}
+		else
+		{
+			$('#mensajes-error-tabla').html("<p><b>Ocurrieron los siguientes errores:</b><br> - El objetivo ya se había agregado previamente.</p>");
+			$('#mensajes-error-tabla').fadeIn();			
+			
+		}		
+	}
+}
+
+function eliminarObjetivo(id)
+{
+		$('#mensajes-error-tabla').html('');
+		$('#mensajes-error-tabla').fadeOut();	
+		
+
+	var i = 0;
+	idTabla.forEach(function(t) {
+		if(t == id)
+		{
+			idTabla.splice(i, 1);
+			tabla.splice(i+1, 1);
+			datosGuardados.splice(i, 1);
+			
+		}
+		i++;
+	});
+	
+	i = 0;
+	objetivosSeleccionados.forEach(function(objetivo) {
+		if(objetivo.id == id)
+		{
+			objetivosSeleccionados.splice(i, 1);
+		}
+		i++;
+	});
+	
+	rearmarTabla();
+}
+
+function rearmarTabla()
+{
+		$('#tabla').html('');
+		tabla.forEach(function(t) {
+			$('#tabla').append(t);
+		});
+}
+
+function guardar() {
+	$.ajax({
+		async:true,
+		type: "POST",
+		url: "/site/controller/usuario-controller.php",
+		data: $('#frm-objetivos').serialize() + "&objetivos=" + JSON.stringify(datosGuardados) + "&avatar=" + linkAvatar + "&nombre=" + $('#first_name').val() + "&apellido=" + $('#last_name').val() + "&fecha_nacimiento=" + $('#fecha_nac').val() + "&usuario=" + $('#user_name').val() + "&email=" + $('#email').val() + "&password=" + $('#password').val(),
+		beforeSend:function(){
+		},
+		success:function(datos) {
+			datos = datos.split("|");
+			console.log(datos);
+			if (datos[0] == 'OK') {
+				$('[href="#fin"]').click();
+			} else {
+				$('#error').html(datos[1]);
+				location.hash = 'error';
+			}
+			return true;
+		},
+		timeout:8000,
+		error:function(){
+			return false;
+		}
+	});
+	
+}
+
 
 </script>

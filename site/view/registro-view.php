@@ -4,10 +4,7 @@
 
     class registro_view {
 
-		public $objetivosReceta;
-		public $objetivosActividad;
-		public $tiemposReceta;		
-		public $tiemposActividad;
+		public $objetivos;
 		public $estilosAv;
 		public $compCab;
 		public $compAcc;
@@ -27,10 +24,7 @@
 
 
         function __construct() {
-			/* $this->objetivosReceta = ObjetivoDao::listXcategoriaYusuario(1, Utiles::obtenerIdUsuarioLogueado());
-			$this->objetivosActividad = ObjetivoDao::listXcategoriaYusuario(2, Utiles::obtenerIdUsuarioLogueado());
-			$this->tiemposReceta = ObjetivoTiempoDao::listXcategoria(1);
-			$this->tiemposActividad = ObjetivoTiempoDao::listXcategoria(2); */
+			$this->objetivos = ObjetivoDao::listActivos();
 			
 			$this->estilosAv = AvatarDao::getXcomponente('estilo_avatar');
 			$this->compCab = AvatarDao::getXcomponente('cabeza');

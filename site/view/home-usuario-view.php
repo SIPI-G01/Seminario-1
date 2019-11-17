@@ -34,7 +34,7 @@
 			$this->recomendados = PublicacionDao::publicacionesRecomendadas();
 			$this->tiemposReceta = ObjetivoTiempoDao::listXcategoria(1);
 			$this->tiemposActividad = ObjetivoTiempoDao::listXcategoria(2);
-			
+
 			$this->estilosAv = AvatarDao::getXcomponente('estilo_avatar');
 			$this->compCab = AvatarDao::getXcomponente('cabeza');
 			$this->compAcc = AvatarDao::getXcomponente('accesorios');

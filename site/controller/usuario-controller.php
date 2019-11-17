@@ -350,6 +350,74 @@ if (isset($token) && $token == Utiles::obtenerToken()) {
 			}
 
 		break;
+		case 'nuevo-avatar':
+
+			$valido = true;
+			$errores = '<strong>Ocurrieron los siguientes errores:</strong>';
+
+			if (!isset($_POST['avatar-style']) || trim($_POST['avatar-style']) == '') {
+
+				$errores .= '<p>- Debe elegir un estilo de avatar.</p>';
+				$valido = false;
+
+			}
+
+			if($valido) {
+
+				echo 'OK|';
+
+			}else {
+				echo 'ERROR|<div class="alert dark alert-alt alert-danger fade in"><button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>' . $errores . '</div>';
+			}
+		break;
+		case 'registrar':
+			$valido = true;
+			$errores = '<strong>Ocurrieron los siguientes errores:</strong>';
+
+			$objetivos = json_decode($_POST['objetivos']);
+
+			if (!isset($objetivos) || $objetivos == ''  || count($objetivos) == 0) {
+				$errores .= '<p>- Debe seleccionar al menos un objetivo.</p>';
+				$valido = false;
+			}
+
+			if ($valido) {
+				
+				$item = new usuario();
+				$item->mail = $_POST['email'];
+				$item->usuario = $_POST['usuario'];
+				$item->alias = Utiles::generarAlias($_POST['usuario']);
+				$item->password = md5($_POST['password']);
+				$item->nombre = $_POST['nombre'];
+				$item->apellido = $_POST['apellido'];
+				$item->fecha_nacimiento = $_POST['fecha_nacimiento'];
+				$item->imagen = $_POST['avatar'];
+				$item->archivo = $_POST['avatar'];
+				$item->activado = 1;
+				
+				$idUsuario = UsuarioDao::nuevo($item);
+				
+				// Guardo objetivos
+				if ($objetivos != null && count($objetivos) > 0) {
+					foreach($objetivos as $objetivo)
+					{
+						$obj = new usuario_objetivo();
+						$obj->id_usuario = $idUsuario;
+						$obj->id_objetivo = $objetivo->id;
+						$obj->fecha_inicio = ($objetivo->fecha_inicio == null || $objetivo->fecha_inicio == '' ? null : $objetivo->fecha_inicio);
+						$obj->fecha_fin = ($objetivo->fecha_fin == null || $objetivo->fecha_fin == '' ? null : $objetivo->fecha_fin);
+
+						UsuarioObjetivoDao::nuevo($obj);
+					}
+				}
+
+				echo 'OK|';
+
+			} else {
+				echo 'ERROR|<div class="alert dark alert-alt alert-danger fade in"><button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>' . $errores . '</div>';
+			}
+		break;
+
 
 	}
 
