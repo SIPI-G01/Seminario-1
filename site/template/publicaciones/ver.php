@@ -9,6 +9,7 @@
  $publi = $view->publi;
  ?>
 
+
 <div class="verContainer" >
   <?php
     $objetivos = '';
@@ -50,7 +51,9 @@
     <a href="\usuario\perfil\<?php echo $publi->getUsuario()->alias; ?>"><img class="userImg" src="<?php echo $publi->getUsuario()->archivo; ?>" name="aboutme" width="80" height="80"></a>
     <?php 
       }else{ ?>
-    <a href="/usuario"><img class="userImg" src="<?php echo $publi->getUsuario()->archivo; ?>" name="aboutme" width="80" height="80"></a>
+    <div class="row">
+    <a href="/usuario" class= "col-9"><img class="userImg" src="<?php echo $publi->getUsuario()->archivo; ?>" name="aboutme" width="80" height="80"></a>
+    </div>
     <?php 
       }
     }else{ ?>
@@ -136,8 +139,7 @@
    </a>
    </div>
   </div>
-    <div class="col-md-3" style="border:5px solid black">
-    </div>
+ 
   </div>
 
 

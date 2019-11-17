@@ -236,6 +236,10 @@ ul {
   background-color: #18d8ce;
 }
 
+.list-group{
+  background-color: transparent !important;
+}
+
 .cajaPubli{
   text-align:left !important;
   margin-top: 10px !important;
@@ -473,6 +477,8 @@ span{
   /*background: linear-gradient(#18d8ce, #18eee3);*/
   background: #18d8ce;
   box-shadow: 10px 10px 10px rgba(0,0,0,0.548);
+  width: 240px;
+  height: 145px;
   border-left: 7px solid #0d9b94;
   border-radius: 0px 15px 15px 0px;
 }
@@ -505,6 +511,7 @@ span{
 }
 .card-inner{
   margin-left: 4rem;
+  border-top-color: transparent !important;
 }
 
 .cmmntTexto{
@@ -514,9 +521,9 @@ span{
 
 /*AGREGADO*/
 .tutclase {
-  font-family:Arial, Helvetica, sans-serif; 
+  font-family:'Titillium Web', sans-serif; 
   font-weight: bold; font-size: 70px !important; 
-  background: #202020; 
+  background: #464545; 
   -webkit-background-clip: text; 
   -moz-background-clip: text; 
   background-clip: text; 
