@@ -1,18 +1,8 @@
 <?php
- include_once  ($_SERVER["DOCUMENT_ROOT"] . '/site/view/home-usuario-view.php');
+ include_once  ($_SERVER["DOCUMENT_ROOT"] . '/site/view/registro-view.php');
  include_once $_SERVER['DOCUMENT_ROOT'] . '/site/utiles/Utiles.php';
- $usuario = Utiles::obtenerUsuarioLogueado();
- $view_home = '';
-	if($usuario == null)
-	{
-		echo '<script>window.location.href = "/"; </script>';
-	}
-	else
-	{
-		$view_home = new home_usuario_view();	
-    }
+ $view = new registro_view();	
     
-$link = $usuario->archivo;
 $estiloAvatar = array ('avatarStyle', 'Circle');
 $cabeza = array ('topType', 'NoHair');
 $accesorios = array ('accessoriesType', 'Blank');
@@ -28,133 +18,36 @@ $cejas = array ('eyebrowType', 'Angry');
 $boca = array ('mouthType', 'Concerned');
 $piel = array ('skinColor', 'Tanned');
 
-$componentesLink = explode("&",$link);
-if(count($componentesLink) > 1)
-{
-	$estiloAvatar = explode("=",$componentesLink[0]);
-	$cabeza = explode("=",$componentesLink[1]);
-	$accesorios = explode("=",$componentesLink[2]);
-	$colorSombrero = explode("=",$componentesLink[3]);
-	$colorPelo = explode("=",$componentesLink[4]);
-	$barba = explode("=",$componentesLink[5]);
-	$colorBarba = explode("=",$componentesLink[6]);
-	$atuendo = explode("=",$componentesLink[7]);
-	$colorAtuendo = explode("=",$componentesLink[8]);
-	$estampa = explode("=",$componentesLink[9]);
-	$ojos = explode("=",$componentesLink[10]);
-	$cejas = explode("=",$componentesLink[11]);
-	$boca = explode("=",$componentesLink[12]);
-	$piel = explode("=",$componentesLink[13]);
-}
-$estilosAv = $view_home->estilosAv;
-$compCab = $view_home->compCab;
-$compAcc = $view_home->compAcc;
-$compColSom = $view_home->compColSom;
-$compColPelo = $view_home->compColPelo;
-$compBarba = $view_home->compBarba;
-$compColBarba = $view_home->compColBarba;
-$compAtu = $view_home->compAtu;
-$compColAtu = $view_home->compColAtu;
-$compEst = $view_home->compEst;
-$compOjos = $view_home->compOjos;
-$compCejas = $view_home->compCejas;
-$compBoca = $view_home->compBoca;
-$compPiel = $view_home->compPiel;
+$estilosAv = $view->estilosAv;
+$compCab = $view->compCab;
+$compAcc = $view->compAcc;
+$compColSom = $view->compColSom;
+$compColPelo = $view->compColPelo;
+$compBarba = $view->compBarba;
+$compColBarba = $view->compColBarba;
+$compAtu = $view->compAtu;
+$compColAtu = $view->compColAtu;
+$compEst = $view->compEst;
+$compOjos = $view->compOjos;
+$compCejas = $view->compCejas;
+$compBoca = $view->compBoca;
+$compPiel = $view->compPiel;
 
 $avatarUsuario = 'https://avataaars.io/?avatarStyle=Circle&topType=NoHair&accessoriesType=Blank&facialHairType=Blanck&facialHairColor=Auburn&clotheType=BlazerShirt&eyeType=Close&eyebrowType=Angry&mouthType=Concerned&skinColor=Tanned';
 
-if($usuario->archivo != null && $usuario->archivo != '')
-{
-	$avatarUsuario = $usuario->archivo;
-}
- ?>
-
-
-
-
+?>
 <div class="container bootstrap snippet" style="width: auto;">
     	<!--<div class="col-sm-2"><a href="/users" class="pull-right"><img title="profile image" class="img-circle img-responsive" src="http://www.gravatar.com/avatar/28fd20ccec6865e2d5f0e1f4446eb7bf?s=100"></a></div>-->
   		<div class="col-sm-12">
 			<ul class="nav nav-tabs">
-                <li class="active"><a data-toggle="tab" href="#inicio">Inicio</a></li>
+                <li class="active"><a data-toggle="tab" href="#data">Mis datos</a></li>
+				<li><a data-toggle="tab" href="#avatar">Editar Avatar</a></li>					
 				<li><a data-toggle="tab" href="#objetivos">Mis objetivos</a></li>
-                <li><a data-toggle="tab" href="#publicaciones">Mis publicaciones</a></li>				
-                <!-- <li><a data-toggle="tab" href="#profile">Mi Perfil</a></li> -->
-                <li class="nav-item dropdown" onmouseover="$('#listOp2').show();" onmouseout="$('#listOp2').hide();">
-                    <a class="nav-link dropdown-toggle" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">Mi perfil</a>
-                    <div class="dropdown-menu">
-                    </div>
-                </li>
-                <!-- <li><a data-toggle="tab" href="#objetivos">Mis objetivos</a></li>
-                <li><a data-toggle="tab" href="#publicaciones">Mis publicaciones</a></li> -->
-			</ul>
-			<ul id="listOp2" class="dropdown" style="display: none; margin-top: -10px; left: 38%; z-index: 999999; position: absolute;" onmouseover="$('#listOp2').show();" onmouseout="$('#listOp2').hide();">
-					<li><a data-toggle="tab" href="#data">Mis datos</a></li>
-					<li> <a data-toggle="tab" href="#password">Cambiar Contraseña</a></li>
-					<li><a data-toggle="tab" href="#avatar">Editar Avatar</a></li>	
-					<li><a data-toggle="tab" href="#eliminar">Eliminar Mi Cuenta</a></li>
 			</ul>
 
 		</div>
 		
-
-		
-		<div class="col-md-3"><!--left col-->
-              
-
-            <div class="text-center">
-                <?php if($usuario->archivo != null) { ?>
-                    <img src="<?php echo $usuario->archivo ?>"  alt="avatar">
-                <?php } else { ?>
-                    <img src="/site/images/faceless.jpg" alt="...">
-                <?php } ?>
-                <div class="form-group">
-                    <div class="col-md-12">
-                        <label><h4><?php echo $usuario->usuario; ?></h4></label><br>					
-                        <label for="mobile"><p>Miembro desde: <?php echo date_format(date_create($usuario->creado_fecha),'d/m/Y'); ?></p></label>
-                    </div>
-                </div>
-            </div>
-            <br>
-            <br>
-            <br>
-            <br>
-
-               
-          <!--<div class="panel panel-default">
-            <div class="panel-heading">Website <i class="fa fa-link fa-1x"></i></div>
-            <div class="panel-body"><a href="http://bootnipets.com">bootnipets.com</a></div>
-          </div>-->
-          
-          
-            <ul class="list-group">
-                <li class="list-group-item text-muted">Actividad <i class="fa fa-dashboard fa-1x"></i></li>
-                <!--<li class="list-group-item text-right"><span class="pull-left"><strong>Shares</strong></span> 125</li>-->
-                <?php 
-                    
-                    $cantLikes = 0;
-                    $cantDislikes = 0;
-                    $cantPubli= 0;
-                    foreach ($usuario->getPublicaciones() as $publicacion){
-                        $cantPubli ++;
-                        $cantLikes += sizeof($publicacion->getLikes());
-                        $cantDislikes += sizeof($publicacion->getDislikes());
-                    }
-                ?>
-                <li class="list-group-item text-right"><span class="pull-left"><strong>Likes</strong></span><?php echo $cantLikes ?></li>
-                <li class="list-group-item text-right"><span class="pull-left"><strong>Dislikes</strong></span><?php echo $cantDislikes ?></li>  
-                <li class="list-group-item text-right"><span class="pull-left"><strong>Publicaciones</strong></span><?php echo $cantPubli ?></li>            <!--<li class="list-group-item text-right"><span class="pull-left"><strong>Seguidores</strong></span> 78</li>-->
-            </ul> 
-               
-          <!--<div class="panel panel-default">
-            <div class="panel-heading">Redes Sociales</div>
-            <div class="panel-body">
-            	<i class="fab fa-facebook fa-2x"></i> <i class="fab fa-github fa-2x"></i> <i class="fab fa-twitter fa-2x"></i> <i class="fab fa-pinterest fa-2x"></i> <i class="fab fa-google-plus fa-2x"></i>
-            </div>
-          </div>-->
-          
-        </div><!--/col-3-->
-    	<div class="col-md-9"> 
+    	<div class="col-md-12"> 
 
           <div id="msj-error">
 
@@ -164,171 +57,8 @@ if($usuario->archivo != null && $usuario->archivo != '')
 
           </div>
           <div class="tab-content">
-		    <div class="tab-pane active text-center" id="inicio">
 
-				<h2>Hola, <?php echo $usuario->usuario ?>.</h2>
-			  <div class="publicaciones-recomendadas">
-
-				<?php if (count($view_home->recomendados) > 0){ ?>
-				 <h3 class="lines-effect">Publicaciones recientes</h3>
-                <br>
-				<?php } ?>
-                <?php
-
-                    foreach($view_home->recomendados as $pubTop){
-
-                        $duracion = '';
-                        if($pubTop->tiempo != null)
-                        {
-                            $duracion .= ' (Duración: ' . $pubTop->tiempo . ' ' . $pubTop->getUnidadTiempo() . ')';
-                        }
-                ?>
-                <div class="col-lg-4 col-md-6 mb-4">
-					<div class="card h-100">
-					  <a href="#">
-						<div id="carouselExampleIndicators_<?php echo $pubTop->id; ?>" class="carousel slide my-4" data-ride="carousel">
-							<ol class="carousel-indicators">
-							  <?php  
-								$i=0;
-								if($pubTop != null){
-								foreach($pubTop->getImagenes() as $imagen){
-							  ?>
-							  <li data-target="#carouselIndicators" data-slide-to="<?php echo $i; ?>" class="<?php echo ($i == 0 ? 'active' : ''); ?>"></li>
-							  <?php
-								$i++;
-									}
-								}
-							  ?>
-							</ol>
-							<div class="carousel-inner" role="listbox">
-							  <?php  
-								$i=0;
-								if($pubTop !=null){
-								foreach($pubTop->getImagenes() as $imagen){
-							  ?>
-							  <div class="carousel-item  <?php echo ($i == 0 ? 'active' : ''); ?>" style="width:253px; height:200px;">
-								<img class="d-block img-fluid" src="\archivos\recortes\<?php echo $imagen->archivo; ?>" alt="First slide" style="width:100%; height:100%">
-							  </div>
-							  <?php
-								$i++;
-									}
-								}
-							  ?>
-							</div>
-							<a class="carousel-control-prev" href="#carouselExampleIndicators_<?php echo $pubTop->id; ?>" role="button" data-slide="prev">
-							  <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-							  <span class="sr-only">Previous</span>
-							</a>
-							<a class="carousel-control-next" href="#carouselExampleIndicators_<?php echo $pubTop->id; ?>" role="button" data-slide="next">
-							  <span class="carousel-control-next-icon" aria-hidden="true"></span>
-							  <span class="sr-only">Next</span>
-							</a>
-						</div>
-					  </a>
-					  <div class="card-body">
-						<h3 class="card-title">
-						  <a href="/publicaciones/ver/<?php echo $pubTop->alias; ?>"><?php echo $pubTop->titulo . $duracion; ?></a>
-						</h3>
-						<?php 
-						  foreach($pubTop->getObjetivos() as $objetivo){
-						?>
-						<h5><?php //echo $objetivo->getObjetivo()->nombre ?></h5>
-					   <?php } ?>
-						<p style="color:black" class="card-text" id="<?php echo 'desc-ambas'.$pubTop->id ?>">
-						<?php 
-						  if(strlen($pubTop->descripcion )>100)
-						  {
-							$pubTop->descripcion = substr($pubTop->descripcion, 0, 100) . '... <a href="javascript:void(0)" onclick="verMas('."'".$pubTop->descripcion."'".', '."'".'ambas'.$pubTop->id."'".');">Ver mas</a>';
-						  }
-						  echo $pubTop->descripcion ;
-						?>
-						</p>
-					  </div>
-					  <div class="card-footer">
-						<small class="text-muted float-left"><i class="fas fa-thumbs-up"></i> Likes: <?php echo sizeof($pubTop->getLikes());?></small>
-						<small class="text-muted float-right"><i class="fas fa-thumbs-down"></i> Dislikes: <?php echo sizeof($pubTop->getDislikes());?></small>
-						<?php if(Utiles::obtenerIdUsuarioLogueado() ==  $usuario->id){ ?>
-						  <div class="row-center" style="text-align:center;">
-							<button id="editarPublicacion" style="margin-top:10px;" onClick="editarPublicacion('<?php echo $pubTop->alias; ?>')" class="btn btn-info"><i class="fa fa-pencil"></i> Editar publicación</button>
-							<button id="eliminarPublicacion" style="margin-top:5px" onClick="eliminarPublicacion('<?php echo $pubTop->alias; ?>')" class="btn btn-danger"><i class="fa fa-trash"></i> Eliminar publicacion</button>
-							  </div>
-						<?php } ?>
-					  </div>
-					</div>
-				  </div>
-
-				  <?php
-					}
-				  ?>
-				  </div>
-				  <br>
-				<h3><center>¡Buscá una publicación ahora!</center></h3>
-				<div class="row buscador">
-					<div class="col-md-12" id="objetivosList">
-						<div class="form-group">
-							<select class="form-control" id="categoria" name="categoria" onChange="seleccionarObjetivos();">
-								<option value="0" selected disabled>Seleccione una categoría...</option>
-								<option value="1">Recetas</option>
-								<option value="2">Actividad física</option>
-							</select>
-						</div>
-					</div>
-
-					<div id="buscador-objetivos-receta" class="col-md-12" style="display: none;">
-						<div class="col-md-10" id="objetivosList">
-							<div class="form-group">
-									<select class="form-control" id="objetivos-receta" name="objetivos-receta" onChange="cambiarTiempos();">
-										<option value="0" selected disabled>Seleccione un objetivo...</option>
-										<?php foreach($view_home->objetivosReceta as $objetivo){ ?>
-											<option value="<?php echo $objetivo->id; ?>"><?php echo $objetivo->nombre; ?></option>
-										<?php } ?>
-									</select>
-							</div>
-						</div>
-						<div class="col-md-2" id="botonBuscar">
-							<button id="buscar" class="form-control" onclick="buscar();"><i class="fas fa-search"></i> Buscar</button>
-						</div>
-						<div class="col-md-10" id="tiempos-receta">
-						</div>
-					</div>
-					<div id="buscador-objetivos-actividad" class="col-md-12" style="display: none;">
-						<div class="col-md-10" id="objetivosList">
-							<div class="form-group">
-									<select class="form-control" id="objetivos-actividad" name="objetivos-actividad" onChange="cambiarTiempos();">
-										<option value="0" selected disabled>Seleccione un objetivo...</option>
-										<?php foreach($view_home->objetivosActividad as $objetivo){ ?>
-											<option value="<?php echo $objetivo->id; ?>"><?php echo $objetivo->nombre; ?></option>
-										<?php } ?>
-									</select>
-							</div>
-						</div>
-						<div class="col-md-2" id="botonBuscar">
-							<button id="buscar" class="form-control" onclick="buscar();"><i class="fas fa-search"></i> Buscar</button>
-						</div>
-						<div class="col-md-10" id="tiempos-actividad">
-						</div>
-					</div>
-
-
-				</div>
-				<hr>
-				<div class="text-center"><h3>O bien, podrías crear una nueva</h3><br>
-					<button id="crearPublicacion" onClick="crearPublicacion()" class="btn btn-success"><i class="fa fa-pencil"></i> Crear publicación</button>
-                </div>
-               
-                
-            </div><!--/tab-pane-->
-
-            <!-- <div class="tab-pane" id="profile">
-                    <ul class="nav nav-tabs" style="margin-bottom: 20px;">
-                        <li class="active"><a data-toggle="tab" href="#data">Mis datos</a></li>
-                        <li><a data-toggle="tab" href="#password">Cambiar Contraseña</a></li>
-                        <li><a data-toggle="tab" href="#avatar">Editar Avatar</a></li>
-                        <li><a data-toggle="tab" href="#eliminar">Eliminar Mi Cuenta</a></li>
-                    </ul>
-            </div> -->
-
-            <div class="tab-pane" id="data">
+            <div class="tab-pane active" id="data">
                 <hr>
                   <form class="form" action="javascript:void(1);" method="post" id="frm-data">
 
@@ -339,14 +69,14 @@ if($usuario->archivo != null && $usuario->archivo != '')
                           
                           <div class="col-xs-6">
                               <label for="first_name"><h4>Nombre/s</h4></label>
-                              <input type="text" class="form-control" name="first_name" id="first_name" placeholder="Nombre" title="Editar nombre" value="<?php echo $usuario->nombre ?>">
+                              <input type="text" class="form-control" name="first_name" id="first_name" placeholder="Nombre" title="Editar nombre" value="">
                           </div>
                       </div>
                       <div class="form-group">
                           
                           <div class="col-xs-6">
                             <label for="last_name"><h4>Apellido/s</h4></label>
-                              <input type="text" class="form-control" name="last_name" id="last_name" placeholder="Apellido" title="Editar apellido" value="<?php echo $usuario->apellido ?>">
+                              <input type="text" class="form-control" name="last_name" id="last_name" placeholder="Apellido" title="Editar apellido" value="">
                           </div>
                       </div>
           
@@ -354,23 +84,35 @@ if($usuario->archivo != null && $usuario->archivo != '')
                           
                           <div class="col-xs-6">
                               <label for="user_name"><h4>Nombre de usuario</h4></label>
-                              <input type="text" class="form-control" name="user_name" id="user_name" placeholder="Nombre de usuario" title="Editar nombre de usuario" value="<?php echo $usuario->usuario ?>">
+                              <input type="text" class="form-control" name="user_name" id="user_name" placeholder="Nombre de usuario" title="Editar nombre de usuario" value="">
                           </div>
                       </div>
                       <div class="form-group">
                           
                           <div class="col-xs-6">
                               <label for="email"><h4>Email</h4></label>
-                              <input type="email" class="form-control" name="email" id="email" placeholder="mi@email.com" title="Editar email" value="<?php echo $usuario->mail ?>">
+                              <input type="email" class="form-control" name="email" id="email" placeholder="mi@email.com" title="Editar email" value="">
                           </div>
                       </div>
                       <div class="form-group">
                           
                           <div class="col-xs-6">
                               <label for="fecha_nac"><h4>Fecha de nacimiento</h4></label>
-                              <input type="date" class="form-control" name="fecha_nac" id="fecha_nac" placeholder="Fecha de nacimiento" title="Editar fecha de nacimiento" value="<?php echo $usuario->fecha_nacimiento ?>">
+                              <input type="date" class="form-control" name="fecha_nac" id="fecha_nac" placeholder="Fecha de nacimiento" title="Editar fecha de nacimiento" value="">
                           </div>
                       </div>
+					  <div class="form-group">         
+                        <div class="col-xs-6">
+                            <label for="password"><h4>Contraseña</h4></label>
+                            <input type="password" class="form-control" name="password" id="password" placeholder="Contraseña" title="Contraseña actual">
+                        </div>
+                    </div>
+					<div class="form-group">         
+                        <div class="col-xs-6">
+                            <label for="password2"><h4>Repetir contraseña</h4></label>
+                            <input type="password" class="form-control" name="password2" id="password2" placeholder="Contraseña" title="Contraseña actual">
+                        </div>
+                    </div>
                       <div class="form-group">
                            <div class="col-xs-12">
                                 <br>
@@ -383,44 +125,6 @@ if($usuario->archivo != null && $usuario->archivo != '')
               
               
             </div><!--/tab-pane-->
-            <div class="tab-pane" id="password">
-                <form class="form" action="javascript:void(1);" method="post" id="frm-pass">
-
-                    <input type="hidden" name="accion" id="accion" value="cambiar-password"/>
-                    <input type="hidden" name="token" id="token" value="<?php echo Utiles::obtenerToken(); ?>"/>
-
-                    <div class="form-group">         
-                        <div class="col-xs-6">
-                            <label for="password"><h4>Contraseña</h4></label>
-                            <input type="password" class="form-control" name="password" id="password" placeholder="Contraseña" title="Contraseña actual">
-                        </div>
-                    </div>
-                    <div class="form-group">
-                        <div class="col-xs-6">
-                            <label for="password2"><h4>Nueva Contraseña</h4></label>
-                            <input type="password" class="form-control" name="password2" id="password2" placeholder="Nueva Contraseña" title="Cambiar contraseña">
-                        </div>
-                    </div>
-                    <div class="form-group">
-                        <div class="col-xs-12">
-                            <br>
-                            <button class="btn btn-lg btn-success" type="submit" onclick="guardarPass();"><i class="glyphicon glyphicon-ok-sign"></i> Guardar</button>
-                            <button class="btn btn-lg" type="reset"><i class="glyphicon glyphicon-repeat"></i> Reset</button>
-                        </div>
-                    </div>
-                </form>
-               
-            </div><!--/tab-pane-->
-            <div class="tab-pane" id="objetivos">
-				<?php include $_SERVER['DOCUMENT_ROOT'] . '/site/template/usuario/objetivos.php';?>
-                              
-            </div><!--/tab-pane-->
-            <div class="tab-pane" id="publicaciones">
-            		
-				<?php include $_SERVER['DOCUMENT_ROOT'] . '/site/template/usuario/perfil.php'; ?>
-               
-            </div><!--/tab-pane-->
-
             <div class="tab-pane text-center" id="avatar">
             <!--<div class="alert dark alert-alt alert-danger fade in">Esta en desarrollo. Funicona pero necesita arreglos</div>-->
                 <br>
@@ -457,7 +161,7 @@ if($usuario->archivo != null && $usuario->archivo != '')
                             <select id="topType" name="topType" class="form-control"  onChange="cambioAvatar('topType', this.value);">
                                 <?php 
 									$i = 0;	
-                                    foreach($view_home->compCab as $componente){
+                                    foreach($view->compCab as $componente){
                                 ?>
                                 <option value="<?php echo $componente->nombre_original; ?>" <?php echo ($componente->nombre_original == $cabeza[1] || $i == 0 ? 'selected' : ''); ?> ><?php echo $componente->nombre_traducido; ?></option>
                                 <?php 
@@ -507,7 +211,7 @@ if($usuario->archivo != null && $usuario->archivo != '')
                             <select id="accessoriesType" name="accessoriesType" class="form-control" onChange="cambioAvatar('accessoriesType', this.value);">
                                 <?php
 									$i = 0;								
-                                    foreach($view_home->compAcc as $componente){
+                                    foreach($view->compAcc as $componente){
                                 ?>
                                 <option value="<?php echo $componente->nombre_original; ?>" <?php echo ($componente->nombre_original == $accesorios[1] || $i == 0 ? 'selected' : ''); ?> ><?php echo $componente->nombre_traducido; ?></option>
                                 <?php 
@@ -529,7 +233,7 @@ if($usuario->archivo != null && $usuario->archivo != '')
                             <select id="hatColor" name="hatColor" class="form-control" onChange="cambioAvatar('hatColor', this.value);">
                                 <?php 
 									$i = 0;	
-                                    foreach($view_home->compColSom as $componente){
+                                    foreach($view->compColSom as $componente){
                                 ?>
                                 <option value="<?php echo $componente->nombre_original; ?>" <?php echo ($componente->nombre_original == $colorSombrero[1] || $i == 0 ? 'selected' : ''); ?> ><?php echo $componente->nombre_traducido; ?></option>
                                 <?php 
@@ -559,7 +263,7 @@ if($usuario->archivo != null && $usuario->archivo != '')
                             <select id="hairColor" name="hairColor" class="form-control" onChange="cambioAvatar('hairColor', this.value);">
                                 <?php 
 									$i = 0;	
-                                    foreach($view_home->compColPelo as $componente){
+                                    foreach($view->compColPelo as $componente){
                                 ?>
                                 <option value="<?php echo $componente->nombre_original; ?>" <?php echo ($componente->nombre_original == $colorPelo[1] || $i == 0 ? 'selected' : ''); ?> ><?php echo $componente->nombre_traducido; ?></option>
                                 <?php 
@@ -584,7 +288,7 @@ if($usuario->archivo != null && $usuario->archivo != '')
                             <select id="facialHairType" name="facialHairType" class="form-control" onChange="cambioAvatar('facialHairType', this.value);">
                                 <?php 
 									$i = 0;	
-                                    foreach($view_home->compBarba as $componente){
+                                    foreach($view->compBarba as $componente){
                                 ?>
                                 <option value="<?php echo $componente->nombre_original; ?>" <?php echo ($componente->nombre_original == $barba[1] || $i == 0 ? 'selected' : ''); ?> ><?php echo $componente->nombre_traducido; ?></option>
                                 <?php 
@@ -605,7 +309,7 @@ if($usuario->archivo != null && $usuario->archivo != '')
                             <select id="facialHairColor" name="facialHairColor" class="form-control" onChange="cambioAvatar('facialHairColor', this.value);">
                                 <?php 
 									$i = 0;	
-                                    foreach($view_home->compColBarba as $componente){
+                                    foreach($view->compColBarba as $componente){
                                 ?>
                                 <option value="<?php echo $componente->nombre_original; ?>" <?php echo ($componente->nombre_original == $colorPelo[1] || $i == 0 ? 'selected' : ''); ?> ><?php echo $componente->nombre_traducido; ?></option>
                                 <?php 
@@ -628,7 +332,7 @@ if($usuario->archivo != null && $usuario->archivo != '')
                             <select id="clotheType" name="clotheType" class="form-control"  onChange="cambioAvatar('clotheType', this.value);">
                                 <?php 
 									$i = 0;	
-                                    foreach($view_home->compAtu as $componente){
+                                    foreach($view->compAtu as $componente){
                                 ?>
                                 <option value="<?php echo $componente->nombre_original; ?>" <?php echo ($componente->nombre_original == $atuendo[1] || $i == 0 ? 'selected' : ''); ?> ><?php echo $componente->nombre_traducido; ?></option>
                                 <?php 
@@ -652,7 +356,7 @@ if($usuario->archivo != null && $usuario->archivo != '')
                             <select id="clotheColor" name="clotheColor" class="form-control" onChange="cambioAvatar('clotheColor', this.value);">
                                 <?php 
 									$i = 0;	
-                                    foreach($view_home->compColAtu as $componente){
+                                    foreach($view->compColAtu as $componente){
                                 ?>
                                 <option value="<?php echo $componente->nombre_original; ?>" <?php echo ($componente->nombre_original == $colorAtuendo[1] || $i == 0 ? 'selected' : ''); ?> ><?php echo $componente->nombre_traducido; ?></option>
                                 <?php 
@@ -682,7 +386,7 @@ if($usuario->archivo != null && $usuario->archivo != '')
                             <select id="graphicType" name="graphicType" class="form-control" onChange="cambioAvatar('graphicType', this.value);">
                                 <?php 
 									$i = 0;	
-                                    foreach($view_home->compEst as $componente){
+                                    foreach($view->compEst as $componente){
                                 ?>
                                 <option value="<?php echo $componente->nombre_original; ?>" <?php echo ($componente->nombre_original == $estampa[1] || $i == 0 ? 'selected' : ''); ?> ><?php echo $componente->nombre_traducido; ?></option>
                                 <?php 
@@ -708,7 +412,7 @@ if($usuario->archivo != null && $usuario->archivo != '')
                             <select id="eyeType" name="eyeType" class="form-control" onChange="cambioAvatar('eyeType', this.value);">
                                 <?php 
 									$i = 0;	
-                                    foreach($view_home->compOjos as $componente){
+                                    foreach($view->compOjos as $componente){
                                 ?>
                                 <option value="<?php echo $componente->nombre_original; ?>" <?php echo ($componente->nombre_original == $ojos[1] || $i == 0 ? 'selected' : ''); ?> ><?php echo $componente->nombre_traducido; ?></option>
                                 <?php 
@@ -735,7 +439,7 @@ if($usuario->archivo != null && $usuario->archivo != '')
                             <select id="eyebrowType" name="eyebrowType" class="form-control" onChange="cambioAvatar('eyebrowType', this.value);">
                                 <?php 
 									$i = 0;	
-                                    foreach($view_home->compCejas as $componente){
+                                    foreach($view->compCejas as $componente){
                                 ?>
                                 <option value="<?php echo $componente->nombre_original; ?>" <?php echo ($componente->nombre_original == $cejas[1] || $i == 0 ? 'selected' : ''); ?> ><?php echo $componente->nombre_traducido; ?></option>
                                 <?php 
@@ -762,7 +466,7 @@ if($usuario->archivo != null && $usuario->archivo != '')
                             <select id="mouthType" name="mouthType" class="form-control" onChange="cambioAvatar('mouthType', this.value);">
                                 <?php 
 									$i = 0;	
-                                    foreach($view_home->compBoca as $componente){
+                                    foreach($view->compBoca as $componente){
                                 ?>
                                 <option value="<?php echo $componente->nombre_original; ?>" <?php echo ($componente->nombre_original == $boca[1] || $i == 0 ? 'selected' : ''); ?> ><?php echo $componente->nombre_traducido; ?></option>
                                 <?php 
@@ -789,7 +493,7 @@ if($usuario->archivo != null && $usuario->archivo != '')
                             <select id="skinColor" name="skinColor" class="form-control" onChange="cambioAvatar('skinColor', this.value);">
                                 <?php 
 									$i = 0;	
-                                    foreach($view_home->compPiel as $componente){
+                                    foreach($view->compPiel as $componente){
                                 ?>
                                 <option value="<?php echo $componente->nombre_original; ?>" <?php echo ($componente->nombre_original == $piel[1] || $i == 0 ? 'selected' : ''); ?> ><?php echo $componente->nombre_traducido; ?></option>
                                 <?php 
@@ -811,37 +515,10 @@ if($usuario->archivo != null && $usuario->archivo != '')
                 <button class="btn btn-lg btn-danger" type="submit" onclick="descartarCambios();"><i class="glyphicon glyphicon-remove"></i>  Descartar Cambios</button>
                 <button class="btn btn-lg btn-warning" type="submit" onclick="avatarRandom();"><i class="glyphicon glyphicon-random"></i> Avatar Random</button>
              </div><!--/tab-pane-->
-
-             <div class="tab-pane" id="eliminar">
-               
-               <hr>
-               <form class="form" action="javascript:void(1);" method="post" id="frm-eliminar">
-
-                   <input type="hidden" name="accion" id="accion" value="eliminar-cuenta"/>
-                   <input type="hidden" name="token" id="token" value="<?php echo Utiles::obtenerToken(); ?>"/>
-
-                   <div class="form-group">         
-                       <div class="col-xs-6">
-                           <label for="password"><h4>Contraseña</h4></label>
-                           <input type="password" class="form-control" name="password" id="password" placeholder="Contraseña" title="Contraseña actual">
-                       </div>
-                   </div>
-                   <div class="form-group">
-                       <div class="col-xs-6">
-                           <label for="password2"><h4>Repetir Contraseña</h4></label>
-                           <input type="password" class="form-control" name="password2" id="password2" placeholder="Contraseña" title="Contraseña actual">
-                       </div>
-                   </div>
-                   <div class="form-group">
-                       <div class="col-xs-12">
-                           <br>
-                           <button class="btn btn-lg btn-danger" type="submit" onclick="eliminarCuenta();"><i class="glyphicon glyphicon-remove"></i> Eliminar</button>
-                       </div>
-                   </div>
-               </form>
-              
-            </div><!--/tab pane-->
-
+            <div class="tab-pane" id="objetivos">
+				<?php include $_SERVER['DOCUMENT_ROOT'] . '/site/template/usuario/objetivos.php';?>
+                              
+            </div><!--/tab-pane-->
           </div><!--/tab-content-->
 
         </div><!--/col-9-->
@@ -1271,8 +948,8 @@ function seleccionarObjetivos()
 		$('#buscador-objetivos-actividad').fadeOut();
 		$('#tiempos-receta').html('');
 		$('#objetivos-receta').val(0);
-		tiempos = <?php echo json_encode($view_home->tiemposReceta);?>;
-		objetivos = <?php echo json_encode($view_home->objetivosReceta);?>;
+		tiempos = <?php echo json_encode($view->tiemposReceta);?>;
+		objetivos = <?php echo json_encode($view->objetivosReceta);?>;
 		categoria = "receta";
 	}
 	else
@@ -1281,8 +958,8 @@ function seleccionarObjetivos()
 		$('#buscador-objetivos-receta').fadeOut();
 		$('#tiempos-actividad').html('');
 		$('#objetivos-actividad').val(0);
-		tiempos = <?php echo json_encode($view_home->tiemposActividad);?>;
-		objetivos = <?php echo json_encode($view_home->objetivosActividad);?>;
+		tiempos = <?php echo json_encode($view->tiemposActividad);?>;
+		objetivos = <?php echo json_encode($view->objetivosActividad);?>;
 		categoria = "actividad-fisica";
 	}
 }
