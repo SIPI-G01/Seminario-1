@@ -34,6 +34,7 @@ $compBoca = $view->compBoca;
 $compPiel = $view->compPiel;
 
 $avatarUsuario = 'https://avataaars.io/?avatarStyle=Circle&topType=NoHair&accessoriesType=Blank&facialHairType=Blanck&facialHairColor=Auburn&clotheType=BlazerShirt&eyeType=Close&eyebrowType=Angry&mouthType=Concerned&skinColor=Tanned';
+$link = 'https://avataaars.io/?avatarStyle=Circle&topType=NoHair&accessoriesType=Blank&facialHairType=Blanck&facialHairColor=Auburn&clotheType=BlazerShirt&eyeType=Close&eyebrowType=Angry&mouthType=Concerned&skinColor=Tanned';
 
 ?>
 <div class="container bootstrap snippet" style="width: auto;">
@@ -59,10 +60,9 @@ $avatarUsuario = 'https://avataaars.io/?avatarStyle=Circle&topType=NoHair&access
           <div class="tab-content">
 
             <div class="tab-pane active" id="data">
-                <hr>
                   <form class="form" action="javascript:void(1);" method="post" id="frm-data">
 
-                      <input type="hidden" name="accion" id="accion" value="editar-perfil"/>
+                      <input type="hidden" name="accion" id="accion" value="verificacion-datos-registro"/>
                       <input type="hidden" name="token" id="token" value="<?php echo Utiles::obtenerToken(); ?>"/>
 
                       <div class="form-group">
@@ -79,26 +79,26 @@ $avatarUsuario = 'https://avataaars.io/?avatarStyle=Circle&topType=NoHair&access
                               <input type="text" class="form-control" name="last_name" id="last_name" placeholder="Apellido" title="Editar apellido" value="">
                           </div>
                       </div>
-          
                       <div class="form-group">
                           
-                          <div class="col-xs-6">
-                              <label for="user_name"><h4>Nombre de usuario</h4></label>
-                              <input type="text" class="form-control" name="user_name" id="user_name" placeholder="Nombre de usuario" title="Editar nombre de usuario" value="">
+                          <div class="col-xs-12">
+                              <label for="fecha_nac"><h4>Fecha de nacimiento</h4></label>
+                              <input type="date" class="form-control" name="fecha_nac" id="fecha_nac" placeholder="Fecha de nacimiento" title="Editar fecha de nacimiento" value="">
                           </div>
                       </div>
                       <div class="form-group">
                           
-                          <div class="col-xs-6">
+                          <div class="col-xs-12">
                               <label for="email"><h4>Email</h4></label>
                               <input type="email" class="form-control" name="email" id="email" placeholder="mi@email.com" title="Editar email" value="">
                           </div>
                       </div>
+        
                       <div class="form-group">
                           
-                          <div class="col-xs-6">
-                              <label for="fecha_nac"><h4>Fecha de nacimiento</h4></label>
-                              <input type="date" class="form-control" name="fecha_nac" id="fecha_nac" placeholder="Fecha de nacimiento" title="Editar fecha de nacimiento" value="">
+                          <div class="col-xs-12">
+                              <label for="user_name"><h4>Nombre de usuario</h4></label>
+                              <input type="text" class="form-control" name="user_name" id="user_name" placeholder="Nombre de usuario" title="Editar nombre de usuario" value="">
                           </div>
                       </div>
 					  <div class="form-group">         
@@ -113,11 +113,10 @@ $avatarUsuario = 'https://avataaars.io/?avatarStyle=Circle&topType=NoHair&access
                             <input type="password" class="form-control" name="password2" id="password2" placeholder="Contraseña" title="Contraseña actual">
                         </div>
                     </div>
-                      <div class="form-group">
+                      <div class="form-group text-right">
                            <div class="col-xs-12">
                                 <br>
-                              	<button class="btn btn-lg btn-success" type="submit" onclick="guardarData();"><i class="glyphicon glyphicon-ok-sign"></i> Guardar</button>
-                               	<button class="btn btn-lg" type="reset"><i class="glyphicon glyphicon-repeat"></i> Reset</button>
+                              	<button class="btn btn-info" type="submit" onclick="guardarData();">Continuar</button>
                             </div>
                       </div>
               	    </form>
@@ -516,7 +515,7 @@ $avatarUsuario = 'https://avataaars.io/?avatarStyle=Circle&topType=NoHair&access
                 <button class="btn btn-lg btn-warning" type="submit" onclick="avatarRandom();"><i class="glyphicon glyphicon-random"></i> Avatar Random</button>
              </div><!--/tab-pane-->
             <div class="tab-pane" id="objetivos">
-				<?php include $_SERVER['DOCUMENT_ROOT'] . '/site/template/usuario/objetivos.php';?>
+				<?php //include $_SERVER['DOCUMENT_ROOT'] . '/site/template/usuario/objetivos.php';?>
                               
             </div><!--/tab-pane-->
           </div><!--/tab-content-->
@@ -532,9 +531,6 @@ $avatarUsuario = 'https://avataaars.io/?avatarStyle=Circle&topType=NoHair&access
 ?>
                               
 <script>
-restriccionesPrecargado('<?php echo $cabeza[0]; ?>','<?php echo $cabeza[1]; ?>');
-restriccionesPrecargado('<?php echo $barba[0]; ?>','<?php echo $barba[1]; ?>');
-restriccionesPrecargado('<?php echo $atuendo[0]; ?>','<?php echo $atuendo[1]; ?>');
 
 function restriccionesPrecargado(tipo, valor)
 {
@@ -597,6 +593,9 @@ function restriccionesPrecargado(tipo, valor)
         }
     }
 }
+restriccionesPrecargado('<?php echo $cabeza[0]; ?>','<?php echo $cabeza[1]; ?>');
+restriccionesPrecargado('<?php echo $barba[0]; ?>','<?php echo $barba[1]; ?>');
+restriccionesPrecargado('<?php echo $atuendo[0]; ?>','<?php echo $atuendo[1]; ?>');
 
 var linkAvatar = '<?php echo $avatarUsuario; ?>';
 function cambioAvatar(tipo, valor)
@@ -816,12 +815,12 @@ function guardarData() {
 		success:function(datos) {
 			datos = datos.split("|");
 			if (datos[0] == 'OK') {
-				window.location = "/";
+                $('[href="#avatar"]').click();
 				
 			} else {
         location.hash = '';
-				$('#msj-error').html(datos[1]);
-				location.hash = 'msj-error';
+				$('#msj-error-data').html(datos[1]);
+				location.hash = 'msj-error-data';
 			}
 			return true;
 		},
@@ -831,66 +830,6 @@ function guardarData() {
 		}
 	});
 	
-}
-
-function guardarPass() {
-
-$.ajax({
-    async:true,
-    type: "POST",
-    url: "/site/controller/usuario-controller.php",
-    data: $('#frm-pass').serialize(),
-    beforeSend:function(){
-    },
-    success:function(datos) {
-        datos = datos.split("|");
-
-        if (datos[0] == 'OK') {
-            window.location.reload();
-            
-        } else {
-    location.hash = '';
-            $('#msj-error').html(datos[1]);
-            location.hash = 'msj-error';
-        }
-        return true;
-    },
-    timeout:8000,
-    error:function(){
-        return false;
-    }
-});
-
-}
-
-function eliminarCuenta() {
-
-$.ajax({
-    async:true,
-    type: "POST",
-    url: "/site/controller/usuario-controller.php",
-    data: $('#frm-eliminar').serialize(),
-    beforeSend:function(){
-    },
-    success:function(datos) {
-        datos = datos.split("|");
-
-        if (datos[0] == 'OK') {
-            window.location = "/home";
-            
-        } else {
-    location.hash = '';
-            $('#msj-error').html(datos[1]);
-            location.hash = 'msj-error';
-        }
-        return true;
-    },
-    timeout:8000,
-    error:function(){
-        return false;
-    }
-});
-
 }
 
 function generarAvatar(){
@@ -925,145 +864,4 @@ function generarAvatar(){
 
 }
 
-</script>
-
-<script>
-
-function crearPublicacion()
-{
-  window.location = '/publicaciones/crear';
-}
-
-var tiempos = [];
-var objetivos = [];
-var alias_objetivo = "";
-var tiemposMostrar = [];
-var categoria = 0;
-
-function seleccionarObjetivos()
-{
-	if($('#categoria').val() == 1)
-	{
-		$('#buscador-objetivos-receta').fadeIn();
-		$('#buscador-objetivos-actividad').fadeOut();
-		$('#tiempos-receta').html('');
-		$('#objetivos-receta').val(0);
-		tiempos = <?php echo json_encode($view->tiemposReceta);?>;
-		objetivos = <?php echo json_encode($view->objetivosReceta);?>;
-		categoria = "receta";
-	}
-	else
-	{
-		$('#buscador-objetivos-actividad').fadeIn();
-		$('#buscador-objetivos-receta').fadeOut();
-		$('#tiempos-actividad').html('');
-		$('#objetivos-actividad').val(0);
-		tiempos = <?php echo json_encode($view->tiemposActividad);?>;
-		objetivos = <?php echo json_encode($view->objetivosActividad);?>;
-		categoria = "actividad-fisica";
-	}
-}
-
-function cambiarTiempos()
-{
-	if($('#categoria').val() == 1)
-	{
-		var objetivo = $('#objetivos-receta').val();
-		$('#tiempos-receta').html('');
-		tiemposMostrar = [];
-		var resultado = '<div class="col-md-12"><div class="row">';
-		var i = 0;
-		resultado += '<div class="col-md-3"><strong>Tiempo que insume: </strong></div><div class="col-md-9">';
-		tiempos.forEach(function(tiempo) {
-			if(tiempo.id_objetivo == objetivo)
-			{
-				tiemposMostrar[i] = tiempo;
-				i++;
-				resultado += '<div class="col-md-3"><input type="checkbox" id="tiempo_'+ tiempo.id +'">' + tiempo.tiempo + '</input></div>';
-			}
-		});
-		resultado += '</div></div></div></div>';
-		$('#tiempos-receta').append(resultado);
-		objetivos.forEach(function(objs) {
-			if(objs.id == objetivo)
-			{
-				alias_objetivo = objs.alias;
-			}
-		});
-	}
-	else
-	{
-		var objetivo = $('#objetivos-actividad').val();
-		$('#tiempos-actividad').html('');
-		tiemposMostrar = [];
-		var resultado = '<div class="col-md-12"><div class="row">';
-		var i = 0;
-		resultado += '<div class="col-md-3"><strong>Tiempo que insume: </strong></div><div class="col-md-9">';		
-		tiempos.forEach(function(tiempo) {
-			if(tiempo.id_objetivo == objetivo)
-			{
-				tiemposMostrar[i] = tiempo;
-				i++;
-				resultado += '<div class="col-md-3"><input type="checkbox" id="tiempo_'+ tiempo.id +'">' + tiempo.tiempo + '</input></div>';
-			}
-		});
-		resultado += '</div></div></div></div>';
-		$('#tiempos-actividad').append(resultado);
-		objetivos.forEach(function(objs) {
-			if(objs.id == objetivo)
-			{
-				alias_objetivo = objs.alias;
-			}
-		});
-
-	}
-
-}
-
-function buscar()
-{
-	if($('#categoria').val() == 1)
-	{
-		if($('#objetivos-receta').val() != null)
-		{
-			var tiempos = "";
-			tiemposMostrar.forEach(function(tiempo) {
-				if($('#tiempo_'+ tiempo.id).is(":checked"))
-				{
-					tiempos += "_" + tiempo.alias;
-				}
-			});
-
-			if(tiempos != "")
-			{
-				tiempos = "_tiempos" + tiempos;
-			}
-
-			window.location.href = "/publicaciones/index/categoria_" + categoria + "_objetivo_" + alias_objetivo + tiempos;
-		}
-
-	}
-	else
-	{
-		if($('#objetivos-actividad').val() != null)
-		{
-			var tiempos = "";
-			tiemposMostrar.forEach(function(tiempo) {
-				if($('#tiempo_'+ tiempo.id).is(":checked"))
-				{
-					tiempos += "_" + tiempo.alias;
-				}
-			});
-
-			if(tiempos != "")
-			{
-				tiempos = "_tiempos" + tiempos;
-			}
-
-			window.location.href = "/publicaciones/index/categoria_" + categoria + "_objetivo_" + alias_objetivo + tiempos;
-		}
-
-	}
-
-}
 </script>

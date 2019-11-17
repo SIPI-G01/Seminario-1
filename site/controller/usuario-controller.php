@@ -286,6 +286,75 @@ if (isset($token) && $token == Utiles::obtenerToken()) {
 			}else {
 				echo 'ERROR|<div class="alert dark alert-alt alert-danger fade in"><button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>' . $errores . '</div>';
 			}
+		break;
+		
+		case 'verificacion-datos-registro':
+
+			$valido = true;
+			$errores = '<strong>Ocurrieron los siguientes errores:</strong>';
+
+			if (!isset($_POST['first_name']) || trim($_POST['first_name']) == '') {
+				$errores .= '<p>- Debe completar el campo nombre.</p>';
+				$valido = false;
+
+			}
+			if (!isset($_POST['last_name']) || trim($_POST['last_name']) == '') {
+				$errores .= '<p>- Debe completar el campo apellido.</p>';
+				$valido = false;
+
+			}
+			if (!isset($_POST['user_name']) || trim($_POST['user_name']) == '') {
+				$errores .= '<p>- Debe ingresar un nombre de usuario.</p>';
+				$valido = false;
+
+			}
+			foreach(UsuarioDao::listActivos() as $usuario){
+				if(Utiles::obtenerUsuarioLogueado()->usuario != $_POST['user_name']){
+					if($usuario->usuario == $_POST['user_name']){
+						$errores .= '<p>- Nombre de usuario en uso. Por favor elija otro</p>';
+						$valido = false;
+					}
+				}
+			}
+			if (!isset($_POST['email']) || trim($_POST['email']) == '') {
+				$errores .= '<p>- Debe ingresar un email.</p>';
+				$valido = false;
+
+			}
+			foreach(UsuarioDao::listActivos() as $usuario){
+				if(Utiles::obtenerUsuarioLogueado()->mail != $_POST['email']){
+					if($usuario->mail == $_POST['email']){
+						$errores .= '<p>- Ya hay un usuario registrado con ese email.</p>';
+						$valido = false;
+					}
+				}
+			}
+			if (!isset($_POST['fecha_nac']) || trim($_POST['fecha_nac']) == '') {
+				$errores .= '<p>- Debe ingresar una fecha de nacimiento.</p>';
+				$valido = false;
+			}
+			
+			if (!isset($_POST['password']) || trim($_POST['password']) == '') {
+				$errores .= '<p>- El campo contraseña no puede estar vacío.</p>';
+				$valido = false;
+			}else if (!isset($_POST['password2']) || trim($_POST['password2']) == '') {
+				$errores .= '<p>- El campo repetir contraseña no puede estar vacío.</p>';
+				$valido = false;
+			}else if($_POST['password2'] != $_POST['password']){
+				$errores .= '<p>- Las contraseñas ingresadas no coinciden.</p>';
+				$valido = false;
+			}
+			
+			if($valido) {
+
+				echo 'OK|';
+
+			}else {
+				echo 'ERROR|<div class="alert dark alert-alt alert-danger fade in"><button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>' . $errores . '</div>';
+			}
+
+		break;
+
 	}
 
 }
