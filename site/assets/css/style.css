@@ -116,7 +116,7 @@ tr
 }
 table
 {
-	width: 100%;
+  width: 100%;
 }
 
 .avatar img
@@ -156,7 +156,6 @@ p
 
 h3{
   font-family: 'Titillium Web', sans-serif !important;
-
 }
 .ml-2{
   font-family: 'Titillium Web', sans-serif !important;
@@ -169,9 +168,6 @@ h3{
   font-family: 'Titillium Web', sans-serif !important;
 }
 .float-left{
-  font-family: 'Titillium Web', sans-serif !important;
-}
-.text-center{
   font-family: 'Titillium Web', sans-serif !important;
 }
 
@@ -513,7 +509,27 @@ span{
   margin-left: 4rem;
   border-top-color: transparent !important;
 }
-
+.panel-body{
+  background-color: #18d8ce;
+}
+.mr5{
+  font-family: 'Titillium Web', sans-serif;
+}
+td{
+  font-family: 'Titillium Web', sans-serif;
+}
+.control-label{
+  color: #132f4b;
+  font-family: 'Titillium Web', sans-serif;
+  font-size: 15px;
+}
+.text-center{
+  color: #132f4b;
+  font-family: 'Titillium Web', sans-serif !important;
+}
+.form-control{
+  font-family: 'Titillium Web', sans-serif !important;
+}
 .cmmntTexto{
   color: black;
   text-align: left;
