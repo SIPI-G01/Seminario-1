@@ -881,7 +881,7 @@ function atras2()
 
 function generarAvatar(){
 
-
+	console.log(linkAvatar);
     $.ajax({
     async:true,
     type: "POST",
@@ -1036,6 +1036,7 @@ function rearmarTabla()
 }
 
 function guardar() {
+
 	$.ajax({
 		async:true,
 		type: "POST",

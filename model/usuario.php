@@ -18,6 +18,7 @@ final class usuario extends GenericEntity{
 	public $activado;	
 	public $activo;
 	public $creado_fecha;	
+	public $token;
 
 	private $objetivos = null;
 	private $publicaciones = null;

@@ -5,7 +5,6 @@ include_once ($_SERVER["DOCUMENT_ROOT"] . '/dao/AvatarDao.php');
 
 $token = isset($_POST['token']) ? $_POST['token'] : $_GET['token'];
 $accion = isset($_POST['accion']) ? $_POST['accion'] : $_GET['accion'];
-
 if (isset($token) && $token == Utiles::obtenerToken()) {
 
 	include_once ($_SERVER["DOCUMENT_ROOT"] . '/dao/UsuarioObjetivoDao.php');
@@ -393,8 +392,9 @@ if (isset($token) && $token == Utiles::obtenerToken()) {
 				$item->fecha_nacimiento = $_POST['fecha_nacimiento'];
 				$item->imagen = $_POST['avatar'];
 				$item->archivo = $_POST['avatar'];
-				$item->activado = 1;
-				
+				$item->activado = 0;
+				$item->token = time();
+
 				$idUsuario = UsuarioDao::nuevo($item);
 				
 				// Guardo objetivos
@@ -410,6 +410,25 @@ if (isset($token) && $token == Utiles::obtenerToken()) {
 						UsuarioObjetivoDao::nuevo($obj);
 					}
 				}
+				
+				/*
+				 * Mando mail para la activacion
+				 */
+
+				$archivo = file_get_contents($_SERVER['DOCUMENT_ROOT'].'/mails/confirma.html');
+				
+				$linkActivacion = "http://" . $_SERVER["SERVER_NAME"] . "/usuario/activacion/" . $item->token . "-" . $idUsuario;
+
+				$archivo = str_replace("#URL_CONFIRMAR#",$linkActivacion, $archivo);
+				
+					$archivo = str_replace("#TEXTO_BOTON#",'Activar mi cuenta', $archivo);
+					$archivo = str_replace("#TEXTO_DESC#",'¡Hacé click en el botón para activar tu cuenta!', $archivo);
+					$archivo = str_replace("#TITULO#",'Ya casi terminamos...', $archivo);
+					$archivo = str_replace("#PEQ_DESC#",'Falta solo un paso para terminar de registrarte.', $archivo);
+					$archivo = str_replace("#NOMBRE#",'Hola ' . ucfirst($_POST['nombre']), $archivo);
+
+				$banner = '';
+				Utiles::enviarEmail($_POST['email'], '', '¡Activá tu cuenta!', $archivo, $banner);				
 
 				echo 'OK|';
 

@@ -78,6 +78,77 @@ class Utiles {
 	public static function redirigir($url) {
 		echo '<script> window.location.href = "' . $url . '"; </script>';
 	}
+	
+	public static function enviarEmail($to, $cco, $asunto, $mensaje, $banner = '') {
+
+		include_once ($_SERVER["DOCUMENT_ROOT"] . '/PHPMailer-master/PHPMailerAutoload.php');
+
+		$mail = new PHPMailer();
+		$mail->isSMTP();
+		$mail->Host = 'smtp.sendgrid.net';
+		$mail->SMTPAuth = true;
+		$mail->Username = 'AxelR';
+		$mail->Password = 'VITA-seminario1';
+		$mail->SMTPSecure = 'tls';
+		$mail->Port = 587;
+		$mail->CharSet = 'UTF-8';
+
+		$mail->SMTPOptions = array(
+			'ssl' => array(
+				'verify_peer' => false,
+				'verify_peer_name' => false,
+				'allow_self_signed' => true
+			)
+		);
+
+		$mail->SetFrom('info@vita.com', 'Vita');
+		$mail->addReplyTo('info@vita.com', 'Vita');
+
+		$mail->addAddress($to);
+		foreach (explode(',', $cco) as $direccion) {
+			if ($direccion != null && $direccion != '') {
+				$mail->addBCC(trim($direccion));
+			}
+		}
+		$mail->isHTML(true);											// Set email format to HTML
+
+		$archivo = file_get_contents($_SERVER['DOCUMENT_ROOT'].'/mails/esqueleto.html');
+		$archivo = str_replace("#URL#",Utiles::getURL(), $archivo);
+		$archivo = str_replace("#ASUNTO#", $asunto, $archivo);
+		$archivo = str_replace("#CUERPO#", $mensaje, $archivo);
+		$archivo = str_replace("#DESCRIPCION#", '', $archivo);
+		$archivo = str_replace("#BANNER#", (($banner) ? '<tr>
+			<td align="left" style="font-family: Open Sans, Helvetica, Arial, sans-serif; font-size: 16px; font-weight: 400;">
+				<table align="center" border="0" cellpadding="0" cellspacing="0" width="100%" style="max-width:600px;">
+					<tr>
+						<td align="center" style="font-family: Open Sans, Helvetica, Arial, sans-serif; font-size: 16px; font-weight: 400;">
+							<img src="' .  $banner . '" width="100%" height="auto" style="display: block; border: 0px;" />
+						</td>
+					</tr>
+				</table>
+			</td>
+		</tr>' : ''), $archivo);
+		$archivo = str_replace("#URL_LOGO#",Utiles::getURL() . '/site/images/logo.png', $archivo);
+
+		// ARMO EL FOOTER //
+		$foot = "Vita | Seminario 1 Miércoles Mañana 2C 2019, Grupo 1";
+		$archivo = str_replace("#TEXTO_FOOTER#", $foot, $archivo);
+		// FIN FOOTER //
+
+
+		$mail->Subject = $asunto;
+		$mail->Body    = $archivo;
+
+		if(!$mail->send()) {
+			echo 'Mailer Error: ' . $mail->ErrorInfo;
+		}
+
+	}// enviarEmail
+	
+	public static function getURL()
+	{
+		return 'localhost';
+	}
 
 }
 ?>
