@@ -88,7 +88,7 @@
 				async:true,
 				type: "POST",
 				url: "/site/controller/usuario-controller.php",
-				data: "accion=login&username=" + $('#username').val() + "&password=" + $('#password').val() + "&token=" + '<?php echo Utiles::obtenerToken(); ?>',
+				data: "accion=login&username=" + $('#username').val() + "&pwd=" + $('#pwd').val() + "&token=" + '<?php echo Utiles::obtenerToken(); ?>',
 				beforeSend:function(){
 				},
 				success:function(datos) {
