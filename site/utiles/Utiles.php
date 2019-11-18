@@ -7,6 +7,7 @@
 date_default_timezone_set('America/Argentina/Buenos_Aires');
 
 include_once ($_SERVER["DOCUMENT_ROOT"] . '/dao/UsuarioDao.php');
+include_once ($_SERVER["DOCUMENT_ROOT"] . '/dao/MailDao.php');
 
 
 class Utiles {
@@ -87,8 +88,8 @@ class Utiles {
 		$mail->isSMTP();
 		$mail->Host = 'smtp.sendgrid.net';
 		$mail->SMTPAuth = true;
-		$mail->Username = 'AxelR';
-		$mail->Password = 'VITA-seminario1';
+		$mail->Username = MailDao::get(1)->valor;
+		$mail->Password = MailDao::get(2)->valor;
 		$mail->SMTPSecure = 'tls';
 		$mail->Port = 587;
 		$mail->CharSet = 'UTF-8';
@@ -101,8 +102,8 @@ class Utiles {
 			)
 		);
 
-		$mail->SetFrom('info@vita.com', 'Vita');
-		$mail->addReplyTo('info@vita.com', 'Vita');
+		$mail->SetFrom(MailDao::get(3)->valor, MailDao::get(4)->valor);
+		$mail->addReplyTo(MailDao::get(3)->valor, MailDao::get(4)->valor);
 
 		$mail->addAddress($to);
 		foreach (explode(',', $cco) as $direccion) {
