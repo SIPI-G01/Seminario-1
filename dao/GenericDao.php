@@ -33,7 +33,6 @@ class GenericDao {
 		}// foreach pk field
 
 		$query = "SELECT * FROM $table WHERE" . $where;
-
 		$DBH = getConnection();
 		$STH = $DBH->prepare($query);
 		$STH->setFetchMode(PDO::FETCH_ASSOC);
