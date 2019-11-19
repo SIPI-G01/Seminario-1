@@ -47,8 +47,17 @@ if (isset($token) && $token == Utiles::obtenerToken()) {
 				}
 				else
 				{
-					Utiles::iniciarSesion($usuario[0]);
-					echo 'OK|';
+					if($usuario->activado == 0)
+					{
+						$valido = false;
+						$error = "Para poder iniciar sesión, primero debe activar su cuenta desde su casilla de mail.";
+
+					}
+					else
+					{
+						Utiles::iniciarSesion($usuario[0]);
+						echo 'OK|';	
+					}
 				}
 	
 			}

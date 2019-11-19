@@ -1036,6 +1036,30 @@ function rearmarTabla()
 }
 
 function guardar() {
+/*let timerInterval;
+Swal.fire({
+  title: 'Enviando mail',
+  html: 'Recuerde chequear su mail para activar su cuenta.',
+  timer: 8000,
+  timerProgressBar: true,
+  onBeforeOpen: () => {
+    Swal.showLoading()
+    timerInterval = setInterval(() => {
+      Swal.getContent().querySelector('b')
+        .textContent = Swal.getTimerLeft()
+    }, 100)
+  },
+  onClose: () => {
+    clearInterval(timerInterval)
+  }
+}).then((result) => {
+  if (
+    /* Read more about handling dismissals below */
+    result.dismiss === Swal.DismissReason.timer
+  ) {
+  }
+})
+*/
 
 	$.ajax({
 		async:true,
