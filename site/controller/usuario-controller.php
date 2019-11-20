@@ -47,7 +47,7 @@ if (isset($token) && $token == Utiles::obtenerToken()) {
 				}
 				else
 				{
-					if($usuario->activado == 0)
+					if($usuario[0]->activado == 0)
 					{
 						$valido = false;
 						$error = "Para poder iniciar sesión, primero debe activar su cuenta desde su casilla de mail.";
@@ -388,9 +388,20 @@ if (isset($token) && $token == Utiles::obtenerToken()) {
 				$errores .= '<p>- Debe seleccionar al menos un objetivo.</p>';
 				$valido = false;
 			}
+			foreach(UsuarioDao::listActivos() as $usuario){
+					if($usuario->usuario == $_POST['usuario']){
+						$errores .= '<p>- Nombre de usuario en uso. Por favor elija otro</p>';
+						$valido = false;
+					}
+			}
+			foreach(UsuarioDao::listActivos() as $usuario){
+					if($usuario->mail == $_POST['email']){
+						$errores .= '<p>- Ya hay un usuario registrado con ese email.</p>';
+						$valido = false;
+					}
+			}
 
 			if ($valido) {
-				
 				$item = new usuario();
 				$item->mail = $_POST['email'];
 				$item->usuario = $_POST['usuario'];
