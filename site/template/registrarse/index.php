@@ -1054,7 +1054,6 @@ Swal.fire({
   }
 }).then((result) => {
   if (
-    /* Read more about handling dismissals below */
     result.dismiss === Swal.DismissReason.timer
   ) {
   }
@@ -1065,12 +1064,11 @@ Swal.fire({
 		async:true,
 		type: "POST",
 		url: "/site/controller/usuario-controller.php",
-		data: $('#frm-objetivos').serialize() + "&objetivos=" + JSON.stringify(datosGuardados) + "&avatar=" + linkAvatar + "&nombre=" + $('#first_name').val() + "&apellido=" + $('#last_name').val() + "&fecha_nacimiento=" + $('#fecha_nac').val() + "&usuario=" + $('#user_name').val() + "&email=" + $('#email').val() + "&password=" + $('#password').val(),
+		data: $('#frm-objetivos').serialize() + "&objetivos=" + JSON.stringify(datosGuardados) + "&avatar=" + btoa(linkAvatar) + "&nombre=" + $('#first_name').val() + "&apellido=" + $('#last_name').val() + "&fecha_nacimiento=" + $('#fecha_nac').val() + "&usuario=" + $('#user_name').val() + "&email=" + $('#email').val() + "&password=" + $('#password').val(),
 		beforeSend:function(){
 		},
 		success:function(datos) {
 			datos = datos.split("|");
-			console.log(datos);
 			if (datos[0] == 'OK') {
 				$('[href="#fin"]').click();
 			} else {

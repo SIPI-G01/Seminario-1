@@ -402,6 +402,11 @@ if (isset($token) && $token == Utiles::obtenerToken()) {
 			}
 
 			if ($valido) {
+				
+				$avatar = str_replace(' ','+',$_POST['avatar']);
+				$avatar = base64_decode($avatar);
+				
+				
 				$item = new usuario();
 				$item->mail = $_POST['email'];
 				$item->usuario = $_POST['usuario'];
@@ -410,8 +415,8 @@ if (isset($token) && $token == Utiles::obtenerToken()) {
 				$item->nombre = $_POST['nombre'];
 				$item->apellido = $_POST['apellido'];
 				$item->fecha_nacimiento = $_POST['fecha_nacimiento'];
-				$item->imagen = $_POST['avatar'];
-				$item->archivo = $_POST['avatar'];
+				$item->imagen = $avatar;
+				$item->archivo = $avatar;
 				$item->activado = 0;
 				$item->token = time();
 
