@@ -8,7 +8,7 @@
 		
     <ul style="position: relative;">
         <li id="headerIzq" ><a class="active" href="/home">Inicio</a></li>
-        <li id="headerIzq"><a href="/faq">FAQ</a></li>
+        <li id="headerIzq"><a href="/faq" title="Esta ayuda contiene enlaces a manuales y explicaciones que le facilitarán el día a día en Vita.">FAQ</a></li>
 		<li id="headerIzq" class="centrar">
 			<a href="/home" style="padding-top: 7px; padding-bottom: 0px; font-size: 25px;"><img class="imagen-inicio" src="/site/images/logo.png"> Vita</a>
 		</li>
