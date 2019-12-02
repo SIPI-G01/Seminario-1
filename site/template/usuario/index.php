@@ -166,7 +166,61 @@ if($usuario->archivo != null && $usuario->archivo != '')
           <div class="tab-content">
 		    <div class="tab-pane active text-center" id="inicio">
 
-				<h2>Hola, <?php echo $usuario->usuario ?>.</h2>
+                <h2>Hola, <?php echo $usuario->usuario ?>.</h2>
+                <h3><center>¡Buscá una publicación ahora!</center></h3>
+				<div class="row buscador">
+					<div class="col-md-12" id="objetivosList">
+						<div class="form-group">
+							<select class="form-control" id="categoria" name="categoria" onChange="seleccionarObjetivos();">
+								<option value="0" selected disabled>Seleccione una categoría...</option>
+								<option value="1">Recetas</option>
+								<option value="2">Actividad física</option>
+							</select>
+						</div>
+					</div>
+
+					<div id="buscador-objetivos-receta" class="col-md-12" style="display: none;">
+						<div class="col-md-10" id="objetivosList">
+							<div class="form-group">
+									<select class="form-control" id="objetivos-receta" name="objetivos-receta" onChange="cambiarTiempos();">
+										<option value="0" selected disabled>Seleccione un objetivo...</option>
+										<?php foreach($view_home->objetivosReceta as $objetivo){ ?>
+											<option value="<?php echo $objetivo->id; ?>"><?php echo $objetivo->nombre; ?></option>
+										<?php } ?>
+									</select>
+							</div>
+						</div>
+						<div class="col-md-2" id="botonBuscar">
+							<button id="buscar" class="form-control" onclick="buscar();"><i class="fas fa-search"></i> Buscar</button>
+						</div>
+						<div class="col-md-10" id="tiempos-receta">
+						</div>
+					</div>
+					<div id="buscador-objetivos-actividad" class="col-md-12" style="display: none;">
+						<div class="col-md-10" id="objetivosList">
+							<div class="form-group">
+									<select class="form-control" id="objetivos-actividad" name="objetivos-actividad" onChange="cambiarTiempos();">
+										<option value="0" selected disabled>Seleccione un objetivo...</option>
+										<?php foreach($view_home->objetivosActividad as $objetivo){ ?>
+											<option value="<?php echo $objetivo->id; ?>"><?php echo $objetivo->nombre; ?></option>
+										<?php } ?>
+									</select>
+							</div>
+						</div>
+						<div class="col-md-2" id="botonBuscar">
+							<button id="buscar" class="form-control" onclick="buscar();"><i class="fas fa-search"></i> Buscar</button>
+						</div>
+						<div class="col-md-10" id="tiempos-actividad">
+						</div>
+					</div>
+
+
+				</div>
+				<hr>
+				<div class="text-center"><h3>O bien, podrías crear una nueva</h3><br>
+					<button id="crearPublicacion" onClick="crearPublicacion()" class="btn btn-success"><i class="fa fa-pencil"></i> Crear publicación</button>
+                </div>
+
 			  <div class="publicaciones-recomendadas">
 
 				<?php if (count($view_home->recomendados) > 0){ ?>
@@ -262,59 +316,7 @@ if($usuario->archivo != null && $usuario->archivo != '')
 				  ?>
 				  </div>
 				  <br>
-				<h3><center>¡Buscá una publicación ahora!</center></h3>
-				<div class="row buscador">
-					<div class="col-md-12" id="objetivosList">
-						<div class="form-group">
-							<select class="form-control" id="categoria" name="categoria" onChange="seleccionarObjetivos();">
-								<option value="0" selected disabled>Seleccione una categoría...</option>
-								<option value="1">Recetas</option>
-								<option value="2">Actividad física</option>
-							</select>
-						</div>
-					</div>
 
-					<div id="buscador-objetivos-receta" class="col-md-12" style="display: none;">
-						<div class="col-md-10" id="objetivosList">
-							<div class="form-group">
-									<select class="form-control" id="objetivos-receta" name="objetivos-receta" onChange="cambiarTiempos();">
-										<option value="0" selected disabled>Seleccione un objetivo...</option>
-										<?php foreach($view_home->objetivosReceta as $objetivo){ ?>
-											<option value="<?php echo $objetivo->id; ?>"><?php echo $objetivo->nombre; ?></option>
-										<?php } ?>
-									</select>
-							</div>
-						</div>
-						<div class="col-md-2" id="botonBuscar">
-							<button id="buscar" class="form-control" onclick="buscar();"><i class="fas fa-search"></i> Buscar</button>
-						</div>
-						<div class="col-md-10" id="tiempos-receta">
-						</div>
-					</div>
-					<div id="buscador-objetivos-actividad" class="col-md-12" style="display: none;">
-						<div class="col-md-10" id="objetivosList">
-							<div class="form-group">
-									<select class="form-control" id="objetivos-actividad" name="objetivos-actividad" onChange="cambiarTiempos();">
-										<option value="0" selected disabled>Seleccione un objetivo...</option>
-										<?php foreach($view_home->objetivosActividad as $objetivo){ ?>
-											<option value="<?php echo $objetivo->id; ?>"><?php echo $objetivo->nombre; ?></option>
-										<?php } ?>
-									</select>
-							</div>
-						</div>
-						<div class="col-md-2" id="botonBuscar">
-							<button id="buscar" class="form-control" onclick="buscar();"><i class="fas fa-search"></i> Buscar</button>
-						</div>
-						<div class="col-md-10" id="tiempos-actividad">
-						</div>
-					</div>
-
-
-				</div>
-				<hr>
-				<div class="text-center"><h3>O bien, podrías crear una nueva</h3><br>
-					<button id="crearPublicacion" onClick="crearPublicacion()" class="btn btn-success"><i class="fa fa-pencil"></i> Crear publicación</button>
-                </div>
                
                 
             </div><!--/tab-pane-->
