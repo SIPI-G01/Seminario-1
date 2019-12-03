@@ -19,6 +19,15 @@
     border-radius: 4px;
 
 }
+
+.container-ver
+{
+	background-color: #18d8ce66;
+    border-radius: 15px;
+	margin: 10px;
+}
+
+
 .swal2-popup
 {
     font-size: unset !important;
@@ -538,7 +547,7 @@ td{
 /*AGREGADO*/
 .tutclase {
   font-family:'Titillium Web', sans-serif; 
-  font-weight: bold; font-size: 70px !important; 
+  font-weight: bold; font-size: 50px !important; 
   background: #464545; 
   -webkit-background-clip: text; 
   -moz-background-clip: text; 
