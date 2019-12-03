@@ -13,7 +13,7 @@
 $objetivos = '';
 foreach($publi->getObjetivos() as $objetivo){			
 	
-	$objetivos .= '<span style="color:' . ($objetivo->getObjetivo()->color_texto != null ? $objetivo->getObjetivo()->color_texto : 'white') .'; background-color: ' . ($objetivo->getObjetivo()->color_fondo != null ? $objetivo->getObjetivo()->color_fondo : '#4da4da') .'; border-radius: 10px; padding: 2px; margin: 0px 4px;">' . $objetivo->getObjetivo()->nombre . '</span> ';
+	$objetivos .= '<span style="color:' . ($objetivo->getObjetivo()->color_texto != null ? $objetivo->getObjetivo()->color_texto : 'white') .'; background-color: ' . ($objetivo->getObjetivo()->color_fondo != null ? $objetivo->getObjetivo()->color_fondo : '#4da4da') .'; border-radius: 10px; padding: 2px; margin: 0px 4px; box-shadow: 1px 1px 1px 1px #888888;">' . $objetivo->getObjetivo()->nombre . '</span> ';
 }
 
 ?>
@@ -165,7 +165,7 @@ foreach($publi->getObjetivos() as $objetivo){
 			<div class="col-md-12 text-center">
 			  <?php if(count($publi->getComentarios()) > 0){ ?>
 				  <div class="col-md-3"></div>
-				  <div class="col-md-6"><h2 style="font-size:20px;" >Comentarios</h2></div>
+				  <div class="col-md-6"><h2 style="font-size:20px;" ><b><u>Comentarios</u></b></h2></div>
 			  <?php } ?>
 
 			</div>

@@ -24,9 +24,9 @@
 {
 	background-color: #18d8ce66;
     border-radius: 15px;
-	margin: 10px;
+  margin: 10px;
+  box-shadow: 1px 1px 1px 1px #888888;
 }
-
 
 .swal2-popup
 {
