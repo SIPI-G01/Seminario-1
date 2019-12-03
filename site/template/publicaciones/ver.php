@@ -27,14 +27,18 @@ foreach($publi->getObjetivos() as $objetivo){
 
 <div class="container">
 	<div class="row" style="margin-bottom:10px;">
-		<div class="col-md-12 text-center tutclase">
-			<?php echo $publi->titulo; ?>
-		</div>
-		<div class="col-md-12 text-center">
-			<?php echo $objetivos; ?> <?php if($publi->tiempo != null){ ?><i class="far fa-clock"></i> <?php echo $publi->tiempo . ' ' . $publi->getUnidadTiempo(); ?><?php } ?>
+		<div class="col-md-3 "><!--left col-->             
+        </div><!--/col-3-->
+		<div class="col-md-8"> 
 
-		</div>
+			<div class="col-md-12 text-center tutclase">
+				<?php echo $publi->titulo; ?>
+			</div>
+			<div class="col-md-12 text-center">
+				<?php echo $objetivos; ?> <?php if($publi->tiempo != null){ ?><i class="far fa-clock"></i> <?php echo $publi->tiempo . ' ' . $publi->getUnidadTiempo(); ?><?php } ?>
 
+			</div>
+		</DIV>
 	</div>
 
 	<div class="row">
