@@ -17,6 +17,12 @@ foreach($publi->getObjetivos() as $objetivo){
 }
 
 ?>
+<?php  $tienePermiso = (Utiles::obtenerUsuarioLogueado() == null ? false : true); 
+			$tienePermisoLike = $tienePermiso;
+	          if(Utiles::obtenerIdUsuarioLogueado() ==  $publi->getUsuario()->id){
+              $tienePermisoLike=false;
+          }
+?>
 
 
 <div class="container">
@@ -54,204 +60,191 @@ foreach($publi->getObjetivos() as $objetivo){
             </div>        
         </div><!--/col-3-->
 		<div class="col-md-8"> 
-				<div class="col-md-12">
-					<div id="carouselIndicators_<?php echo $publi->id; ?>" class="carousel slide" data-ride="carousel">
-						<ol class="carousel-indicators">
-						  <?php
-						  $i=0;
-						  foreach ($publi->getImagenes() as $imagen) { ?>
+			<div class="col-md-12">
+				<div id="carouselIndicators_<?php echo $publi->id; ?>" class="carousel slide" data-ride="carousel">
+					<ol class="carousel-indicators">
+					  <?php
+					  $i=0;
+					  foreach ($publi->getImagenes() as $imagen) { ?>
 
-						  <li data-target="#carouselIndicators" data-slide-to="<?php echo $i; ?>" class="<?php echo ($i == 0 ? 'active' : ''); ?>"></li>
-						  <?php
-						  $i++;
-							  }?>     
-						</ol>
-					   <div class="carousel-inner" style="padding:15px">
-						 <?php
-						 $i=0;
-						 foreach ($publi->getImagenes() as $imagen) {?>
-						   <div class="carousel-item  <?php echo ($i == 0 ? 'active' : ''); ?>">
-							 <img class="carousel-img" src="\archivos\recortes\<?php echo $imagen->archivo; ?>" class="d-block w-100" alt="Card image cap">
-						   </div>
-						 <?php
-						 $i++;
-					   }?>
+					  <li data-target="#carouselIndicators" data-slide-to="<?php echo $i; ?>" class="<?php echo ($i == 0 ? 'active' : ''); ?>"></li>
+					  <?php
+					  $i++;
+						  }?>     
+					</ol>
+				   <div class="carousel-inner" style="padding:15px">
+					 <?php
+					 $i=0;
+					 foreach ($publi->getImagenes() as $imagen) {?>
+					   <div class="carousel-item  <?php echo ($i == 0 ? 'active' : ''); ?>">
+						 <img class="carousel-img" src="\archivos\recortes\<?php echo $imagen->archivo; ?>" class="d-block w-100" alt="Card image cap">
 					   </div>
-					   <a class="carousel-control-prev" href="#carouselIndicators_<?php echo $publi->id; ?>" role="button" data-slide="prev" style="margin-left:10%;">
-						 <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-						 <span class="sr-only">Previous</span>
-					   </a>
-					   <a class="carousel-control-next" href="#carouselIndicators_<?php echo $publi->id; ?>" role="button" data-slide="next" style="margin-right:10%;">
-						 <span class="carousel-control-next-icon" aria-hidden="true"></span>
-						 <span class="sr-only">Next</span>
-					   </a>
+					 <?php
+					 $i++;
+				   }?>
 				   </div>
-				</div>
-				<div class="col-md-12 container-ver">
-				    <?php
-						echo '<h5>'.$publi->texto.'</h5>';
-					?>
-				</div>
-        </div>
-
-	</div>
-	<?php  $tienePermiso = (Utiles::obtenerUsuarioLogueado() == null ? false : true); 
-			$tienePermisoLike = $tienePermiso;
-	          if(Utiles::obtenerIdUsuarioLogueado() ==  $publi->getUsuario()->id){
-              $tienePermisoLike=false;
-          }
-?>
-	<div class="row">
+				   <a class="carousel-control-prev" href="#carouselIndicators_<?php echo $publi->id; ?>" role="button" data-slide="prev" style="margin-left:10%;">
+					 <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+					 <span class="sr-only">Previous</span>
+				   </a>
+				   <a class="carousel-control-next" href="#carouselIndicators_<?php echo $publi->id; ?>" role="button" data-slide="next" style="margin-right:10%;">
+					 <span class="carousel-control-next-icon" aria-hidden="true"></span>
+					 <span class="sr-only">Next</span>
+				   </a>
+			   </div>
+			</div>
+			<div class="col-md-12 container-ver">
+				<?php
+					echo '<h5>'.$publi->texto.'</h5>';
+				?>
+			</div>
+			<div class="col-md-12">
 	
-		<div class="col-md-12">
-		
-		  <?php if($tienePermisoLike){?>
-			  <div class="col-md-3" >
-			  </div>
-			  <div class="col-md-6 text-center" >
-				<button id="like" class="btn btn-success" onclick="likePub()" <?php $publi->votoLike();?>><i class="fas fa-thumbs-up"></i> <?php echo sizeof($publi->getLikes());?></button>
-				<button id="dislike" class="btn btn-danger" onclick="dislikePub()" <?php $publi->votoDisLike();?>><i class="fas fa-thumbs-down"></i> <?php echo sizeof($publi->getDislikes());?></button>
-			  </div>
-		  <?php
-			}else{
-		  ?>
-			  <div class="col-md-3"  >
-			  </div>
-			  <div class="col-md-6 text-center" >
-				<button class="btn btn-success" disabled><i class="fas fa-thumbs-up"></i> <?php echo sizeof($publi->getLikes());?></button>
-				<button class="btn btn-danger" disabled><i class="fas fa-thumbs-down"></i> <?php echo sizeof($publi->getDislikes());?></button>
-			  </div>
-		  <?php
-			}
-		  ?>
-
-		
-		</div>
-	
-	</div>
-	<div class="row">
-		<div class="col-md-12">
-		
-			<?php if($tienePermiso){?>
-
-				<div class="row text-center" >
-					<div id="msj-error">
-
-					</div>
-
-					<div class="col-md-3"></div>
-					<div class="col-md-6"> 
-					  <form name="form1" id="frm" action="javascript:void(1);">
-					  <input type="hidden" name="accion" id="accion" value="nuevo"/>
-						<input type="hidden" name="token" id="token" value="<?php echo Utiles::obtenerToken(); ?>"/>
-					  <input type="hidden" name="id_publicacion" id="id_publicacion" value="<?php echo $publi->id; ?>"/>
-
-						<label for="comentario"></label>
-						<p style="color:black;">
-						<textarea name="comentario" cols="80" rows="5" id="comentario"><?php if(isset($_GET['user'])) { ?>@<?php echo $_GET['user']; ?><?php } ?> </textarea>
-						</p>
-						<p style="color:black">
-						<input class="btn btn-warning btn-lg" type="submit" name="comentar" onClick="agregarComentario();" value="Comentar">
-						</p>
-					  </form>
-					</div>
-				</div>
-			<?php
-			}
-			?>
-		
-		</div>
-	
-	</div>
-	<div class="row">
-		<div class="col-md-12 text-center">
-		  <?php if(count($publi->getComentarios()) > 0){ ?>
-			  <div class="col-md-3"></div>
-			  <div class="col-md-6"><h2 style="font-size:20px;" >Comentarios</h2></div>
-		  <?php } ?>
-
-		</div>
-		<div class="col-md-12" >
-			<?php
-				$i=0;
-				foreach ($publi->getComentarios() as $comentario) {
-
-				  if($comentario->reply==0){
-			?>
-
-
-			<div class="card">
-				<div class="card-body" style="color:black">
-					<div class="row">
-						<div class="col-md-2">
-							<img src="<?php echo($comentario->getUsuario()->imagen);  ?>" alt="" width="60" height="60" class="img img-rounded img-fluid"/>
-							<p class="text-secondary text-center"><?php echo($comentario->fecha);  ?></p>
-						</div>
-						<div class="col-md-10">
-							<p>
-							  <a class="float-left" href="#"><strong><?php echo($comentario->getusuario()->usuario); ?></strong></a>
-
-						   </p>
-						   <div class="clearfix"></div>
-							<p style="color:black;text-align:left"><?php echo $comentario->texto; ?></p>
-							<p>
-								<button class="float-right btn btn-info ml-2" onclick="responder(<?php echo $comentario->id ?>);"> <i class="fa fa-reply"></i> Responder</button>
-						   </p>
-						</div>
+			  <?php if($tienePermisoLike){?>
+				  <div class="col-md-3" >
 				  </div>
-				  <div id="<?php echo 'div-resp'.$comentario->id; ?>" style="display:none">
-					<form name="<?php echo 'form'.$comentario->id; ?>" id="<?php echo 'formResp'.$comentario->id; ?>"action="javascript:void(1);">
-					  <input type="hidden" name="accion" id="accion" value="nuevoResp"/>
-					  <input type="hidden" name="token" id="token" value="<?php echo Utiles::obtenerToken(); ?>"/>
-					  <input type="hidden" name="id_publicacion" id="id_publicacion" value="<?php echo $publi->id; ?>"/>
-
-					  <label for="<?php echo 'respuesta'.$comentario->id; ?>"></label>
-						<p style="color:black;">
-						  <textarea name="<?php echo 'respuesta'.$comentario->id; ?>" cols="60" rows="3" id="<?php echo 'respuesta'.$comentario->id; ?>" style="text-align:left"></textarea>
-						</p>
-						<p>
-						  <input class="btn btn-warning btn-lg" type="submit" name="<?php echo 'responder'.$comentario->id; ?>" onclick="agregarRespuesta(<?php echo $comentario->id ?>);" value="Responder">
-						</p>
-					</form>
+				  <div class="col-md-6 text-center" >
+					<button id="like" class="btn btn-success" onclick="likePub()" <?php $publi->votoLike();?>><i class="fas fa-thumbs-up"></i> <?php echo sizeof($publi->getLikes());?></button>
+					<button id="dislike" class="btn btn-danger" onclick="dislikePub()" <?php $publi->votoDisLike();?>><i class="fas fa-thumbs-down"></i> <?php echo sizeof($publi->getDislikes());?></button>
 				  </div>
-				  <!-- Esta parte corresponde a las respuestas del comentario -->
-				  <?php
-					$j=0;
-					foreach($publi->getRespuestas($comentario->id) as $respuesta){
+			  <?php
+				}else{
+			  ?>
+				  <div class="col-md-3"  >
+				  </div>
+				  <div class="col-md-6 text-center" >
+					<button class="btn btn-success" disabled><i class="fas fa-thumbs-up"></i> <?php echo sizeof($publi->getLikes());?></button>
+					<button class="btn btn-danger" disabled><i class="fas fa-thumbs-down"></i> <?php echo sizeof($publi->getDislikes());?></button>
+				  </div>
+			  <?php
+				}
+			  ?>
 
-					  if($comentario->id == $respuesta->reply){
-				  ?>
-						<div class="card card-inner">
-							<div class="card-body">
-								<div class="row">
-									<div class="col-md-2">
-										<img src="<?php echo($respuesta->getUsuario()->imagen);  ?>" width="60" height="60" class="img img-rounded img-fluid"/>
-										<p class="text-secondary text-center"><?php echo($respuesta->fecha);  ?></p>
-									</div>
-									<div class="col-md-10 text-left respuestaComentario" style="color:black;">
-										<p><a href="#"><strong><?php echo($respuesta->getusuario()->usuario); ?></strong></a></p>
-										<p><?php echo $respuesta->texto; ?></p>
-										<p>
-									   </p>
+	
+			</div>
+			
+			
+			
+			<div class="col-md-12">
+			
+				<?php if($tienePermiso){?>
+
+					<div class="row text-center" >
+						<div id="msj-error">
+
+						</div>
+
+						<div class="col-md-3"></div>
+						<div class="col-md-6"> 
+						  <form name="form1" id="frm" action="javascript:void(1);">
+						  <input type="hidden" name="accion" id="accion" value="nuevo"/>
+							<input type="hidden" name="token" id="token" value="<?php echo Utiles::obtenerToken(); ?>"/>
+						  <input type="hidden" name="id_publicacion" id="id_publicacion" value="<?php echo $publi->id; ?>"/>
+
+							<label for="comentario"></label>
+							<p style="color:black;">
+							<textarea name="comentario" cols="80" rows="5" id="comentario"><?php if(isset($_GET['user'])) { ?>@<?php echo $_GET['user']; ?><?php } ?> </textarea>
+							</p>
+							<p style="color:black">
+							<input class="btn btn-warning btn-lg" type="submit" name="comentar" onClick="agregarComentario();" value="Comentar">
+							</p>
+						  </form>
+						</div>
+					</div>
+				<?php
+				}
+				?>
+			
+			</div>
+
+			<div class="col-md-12 text-center">
+			  <?php if(count($publi->getComentarios()) > 0){ ?>
+				  <div class="col-md-3"></div>
+				  <div class="col-md-6"><h2 style="font-size:20px;" >Comentarios</h2></div>
+			  <?php } ?>
+
+			</div>
+			<div class="col-md-12" >
+				<?php
+					$i=0;
+					foreach ($publi->getComentarios() as $comentario) {
+
+					  if($comentario->reply==0){
+				?>
+
+
+				<div class="card">
+					<div class="card-body" style="color:black">
+						<div class="row">
+							<div class="col-md-2">
+								<img src="<?php echo($comentario->getUsuario()->imagen);  ?>" alt="" width="60" height="60" class="img img-rounded img-fluid"/>
+								<p class="text-secondary text-center"><?php echo($comentario->fecha);  ?></p>
+							</div>
+							<div class="col-md-10">
+								<p>
+								  <a class="float-left" href="#"><strong><?php echo($comentario->getusuario()->usuario); ?></strong></a>
+
+							   </p>
+							   <div class="clearfix"></div>
+								<p style="color:black;text-align:left"><?php echo $comentario->texto; ?></p>
+								<p>
+									<button class="float-right btn btn-info ml-2" onclick="responder(<?php echo $comentario->id ?>);"> <i class="fa fa-reply"></i> Responder</button>
+							   </p>
+							</div>
+					  </div>
+					  <div id="<?php echo 'div-resp'.$comentario->id; ?>" style="display:none">
+						<form name="<?php echo 'form'.$comentario->id; ?>" id="<?php echo 'formResp'.$comentario->id; ?>"action="javascript:void(1);">
+						  <input type="hidden" name="accion" id="accion" value="nuevoResp"/>
+						  <input type="hidden" name="token" id="token" value="<?php echo Utiles::obtenerToken(); ?>"/>
+						  <input type="hidden" name="id_publicacion" id="id_publicacion" value="<?php echo $publi->id; ?>"/>
+
+						  <label for="<?php echo 'respuesta'.$comentario->id; ?>"></label>
+							<p style="color:black;">
+							  <textarea name="<?php echo 'respuesta'.$comentario->id; ?>" cols="60" rows="3" id="<?php echo 'respuesta'.$comentario->id; ?>" style="text-align:left"></textarea>
+							</p>
+							<p>
+							  <input class="btn btn-warning btn-lg" type="submit" name="<?php echo 'responder'.$comentario->id; ?>" onclick="agregarRespuesta(<?php echo $comentario->id ?>);" value="Responder">
+							</p>
+						</form>
+					  </div>
+					  <!-- Esta parte corresponde a las respuestas del comentario -->
+					  <?php
+						$j=0;
+						foreach($publi->getRespuestas($comentario->id) as $respuesta){
+
+						  if($comentario->id == $respuesta->reply){
+					  ?>
+							<div class="card card-inner">
+								<div class="card-body">
+									<div class="row">
+										<div class="col-md-2">
+											<img src="<?php echo($respuesta->getUsuario()->imagen);  ?>" width="60" height="60" class="img img-rounded img-fluid"/>
+											<p class="text-secondary text-center"><?php echo($respuesta->fecha);  ?></p>
+										</div>
+										<div class="col-md-10 text-left respuestaComentario" style="color:black;">
+											<p><a href="#"><strong><?php echo($respuesta->getusuario()->usuario); ?></strong></a></p>
+											<p><?php echo $respuesta->texto; ?></p>
+											<p>
+										   </p>
+										</div>
 									</div>
 								</div>
-							</div>
+						</div>
+						<?php
+							}
+						  $j++;
+						  }
+						?>
 					</div>
-					<?php
-						}
-					  $j++;
-					  }
-					?>
 				</div>
+			  <?php
+					}
+				  $i++;
+				  }
+				?>
 			</div>
-		  <?php
-				}
-			  $i++;
-			  }
-			?>
-		</div>
+        </div>
 	</div>
-
 </div>
 
   <!-- Modal -->
