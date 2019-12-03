@@ -95,12 +95,17 @@ foreach($publi->getObjetivos() as $objetivo){
         </div>
 
 	</div>
-	<?php  $tienePermiso = (Utiles::obtenerUsuarioLogueado() == null ? false : true); ?>
+	<?php  $tienePermiso = (Utiles::obtenerUsuarioLogueado() == null ? false : true); 
+			$tienePermisoLike = $tienePermiso;
+	          if(Utiles::obtenerIdUsuarioLogueado() ==  $publi->getUsuario()->id){
+              $tienePermisoLike=false;
+          }
+?>
 	<div class="row">
 	
 		<div class="col-md-12">
 		
-		  <?php if($tienePermiso){?>
+		  <?php if($tienePermisoLike){?>
 			  <div class="col-md-3" >
 			  </div>
 			  <div class="col-md-6 text-center" >
