@@ -35,6 +35,7 @@ foreach($publi->getObjetivos() as $objetivo){
 				<?php echo $publi->titulo; ?>
 			</div>
 			<div class="col-md-12 text-center">
+				<br/>
 				<?php echo $objetivos; ?> <?php if($publi->tiempo != null){ ?><i class="far fa-clock"></i> <?php echo $publi->tiempo . ' ' . $publi->getUnidadTiempo(); ?><?php } ?>
 
 			</div>
