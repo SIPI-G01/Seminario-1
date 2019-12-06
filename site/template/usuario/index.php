@@ -74,20 +74,20 @@ if($usuario->archivo != null && $usuario->archivo != '')
 
 <div class="container bootstrap snippet" style="width: auto;">
     	<!--<div class="col-sm-2"><a href="/users" class="pull-right"><img title="profile image" class="img-circle img-responsive" src="http://www.gravatar.com/avatar/28fd20ccec6865e2d5f0e1f4446eb7bf?s=100"></a></div>-->
-  		<div class="col-sm-12">
+  		<!-- <div class="col-sm-12">
 			<ul class="nav nav-tabs">
-                <li class="active"><a data-toggle="tab" href="#inicio">Inicio</a></li>
-				<li><a data-toggle="tab" href="#objetivos">Mis objetivos</a></li>
-                <li><a data-toggle="tab" href="#publicaciones">Mis publicaciones</a></li>				
+                <li class="active"><a data-toggle="tab" href="#inicio">Inicio</a></li> -->
+				<!-- <li><a data-toggle="tab" href="#objetivos">Mis objetivos</a></li>
+                <li><a data-toggle="tab" href="#publicaciones">Mis publicaciones</a></li>				 -->
                 <!-- <li><a data-toggle="tab" href="#profile">Mi Perfil</a></li> -->
-                <li class="nav-item dropdown" onmouseover="$('#listOp2').show();" onmouseout="$('#listOp2').hide();">
+                <!-- <li class="nav-item dropdown" onmouseover="$('#listOp2').show();" onmouseout="$('#listOp2').hide();">
                     <a class="nav-link dropdown-toggle" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">Mi perfil</a>
                     <div class="dropdown-menu">
                     </div>
-                </li>
+                </li> -->
                 <!-- <li><a data-toggle="tab" href="#objetivos">Mis objetivos</a></li>
                 <li><a data-toggle="tab" href="#publicaciones">Mis publicaciones</a></li> -->
-			</ul>
+			<!-- </ul>
 			<ul id="listOp2" class="dropdown" style="display: none; margin-top: -10px; left: 38%; z-index: 999999; position: absolute;" onmouseover="$('#listOp2').show();" onmouseout="$('#listOp2').hide();">
 					<li><a data-toggle="tab" href="#data">Mis datos</a></li>
 					<li> <a data-toggle="tab" href="#password">Cambiar Contraseña</a></li>
@@ -95,7 +95,7 @@ if($usuario->archivo != null && $usuario->archivo != '')
 					<li><a data-toggle="tab" href="#eliminar">Eliminar Mi Cuenta</a></li>
 			</ul>
 
-		</div>
+		</div> -->
 		
 
 		
@@ -104,7 +104,7 @@ if($usuario->archivo != null && $usuario->archivo != '')
 
             <div class="text-center">
                 <?php if($usuario->archivo != null) { ?>
-                    <img src="<?php echo $usuario->archivo ?>"  alt="avatar">
+                    <img src="<?php echo $usuario->archivo ?>"  alt="avatar" heigth="50%" width="50%">
                 <?php } else { ?>
                     <img src="/site/images/faceless.jpg" alt="...">
                 <?php } ?>
@@ -330,89 +330,8 @@ if($usuario->archivo != null && $usuario->archivo != '')
                     </ul>
             </div> -->
 
-            <div class="tab-pane" id="data">
-                <hr>
-                  <form class="form" action="javascript:void(1);" method="post" id="frm-data">
-
-                      <input type="hidden" name="accion" id="accion" value="editar-perfil"/>
-                      <input type="hidden" name="token" id="token" value="<?php echo Utiles::obtenerToken(); ?>"/>
-
-                      <div class="form-group">
-                          
-                          <div class="col-xs-6">
-                              <label for="first_name"><h4>Nombre/s</h4></label>
-                              <input type="text" class="form-control" name="first_name" id="first_name" placeholder="Nombre" title="Editar nombre" value="<?php echo $usuario->nombre ?>">
-                          </div>
-                      </div>
-                      <div class="form-group">
-                          
-                          <div class="col-xs-6">
-                            <label for="last_name"><h4>Apellido/s</h4></label>
-                              <input type="text" class="form-control" name="last_name" id="last_name" placeholder="Apellido" title="Editar apellido" value="<?php echo $usuario->apellido ?>">
-                          </div>
-                      </div>
-          
-                      <div class="form-group">
-                          
-                          <div class="col-xs-6">
-                              <label for="user_name"><h4>Nombre de usuario</h4></label>
-                              <input type="text" class="form-control" name="user_name" id="user_name" placeholder="Nombre de usuario" title="Editar nombre de usuario" value="<?php echo $usuario->usuario ?>">
-                          </div>
-                      </div>
-                      <div class="form-group">
-                          
-                          <div class="col-xs-6">
-                              <label for="email"><h4>Email</h4></label>
-                              <input type="email" class="form-control" name="email" id="email" placeholder="mi@email.com" title="Editar email" value="<?php echo $usuario->mail ?>">
-                          </div>
-                      </div>
-                      <div class="form-group">
-                          
-                          <div class="col-xs-6">
-                              <label for="fecha_nac"><h4>Fecha de nacimiento</h4></label>
-                              <input type="date" class="form-control" name="fecha_nac" id="fecha_nac" placeholder="Fecha de nacimiento" title="Editar fecha de nacimiento" value="<?php echo $usuario->fecha_nacimiento ?>">
-                          </div>
-                      </div>
-                      <div class="form-group">
-                           <div class="col-xs-12">
-                                <br>
-                              	<button class="btn btn-lg btn-success" type="submit" onclick="guardarData();"><i class="glyphicon glyphicon-ok-sign"></i> Guardar</button>
-                               	<button class="btn btn-lg" type="reset"><i class="glyphicon glyphicon-repeat"></i> Reset</button>
-                            </div>
-                      </div>
-              	    </form>
-              
-              
-              
-            </div><!--/tab-pane-->
-            <div class="tab-pane" id="password">
-                <form class="form" action="javascript:void(1);" method="post" id="frm-pass">
-
-                    <input type="hidden" name="accion" id="accion" value="cambiar-password"/>
-                    <input type="hidden" name="token" id="token" value="<?php echo Utiles::obtenerToken(); ?>"/>
-
-                    <div class="form-group">         
-                        <div class="col-xs-6">
-                            <label for="password"><h4>Contraseña</h4></label>
-                            <input type="password" class="form-control" name="password" id="password" placeholder="Contraseña" title="Contraseña actual">
-                        </div>
-                    </div>
-                    <div class="form-group">
-                        <div class="col-xs-6">
-                            <label for="password2"><h4>Nueva Contraseña</h4></label>
-                            <input type="password" class="form-control" name="password2" id="password2" placeholder="Nueva Contraseña" title="Cambiar contraseña">
-                        </div>
-                    </div>
-                    <div class="form-group">
-                        <div class="col-xs-12">
-                            <br>
-                            <button class="btn btn-lg btn-success" type="submit" onclick="guardarPass();"><i class="glyphicon glyphicon-ok-sign"></i> Guardar</button>
-                            <button class="btn btn-lg" type="reset"><i class="glyphicon glyphicon-repeat"></i> Reset</button>
-                        </div>
-                    </div>
-                </form>
-               
-            </div><!--/tab-pane-->
+            
+      
             <div class="tab-pane" id="objetivos">
 				<?php include $_SERVER['DOCUMENT_ROOT'] . '/site/template/usuario/objetivos.php';?>
                               

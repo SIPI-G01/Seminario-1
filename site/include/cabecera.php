@@ -46,6 +46,7 @@
 					<li><a href="/usuario">Inicio</a></li>
 					<li><a href="/usuario/objetivos">Mis objetivos</a></li>
 					<li><a href="/usuario/perfil/<?php echo Utiles::obtenerUsuarioLogueado()->alias; ?>">Mis publicaciones</a></li>	
+					<li><a href="/usuario/miPerfil/<?php echo Utiles::obtenerUsuarioLogueado()->alias; ?>">Mi perfil</a></li>
 					<li><a href="#" onclick="cerrarSesion();">Cerrar sesión</a></li>
 				  </ul>
 	
