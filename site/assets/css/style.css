@@ -5,6 +5,15 @@
 	color: white !important;
 }
 
+td
+{
+    background-color: #45b7b7;
+}
+th
+{
+    background-color: black;
+    color: white !important;
+}
 .iniciarSesionInput
 {
     margin: 2px 0px;	
