@@ -129,10 +129,10 @@ class Utiles {
 				</table>
 			</td>
 		</tr>' : ''), $archivo);
-		$archivo = str_replace("#URL_LOGO#",Utiles::getURL() . '/site/images/logo.png', $archivo);
+		$archivo = str_replace("#URL_LOGO#",'http://vita-seminario1.000webhostapp.com/site/images/logo.png', $archivo);
 
 		// ARMO EL FOOTER //
-		$foot = "Vita | Seminario 1 Miércoles Mañana 2C 2019, Grupo 1";
+		$foot = "Vita | 2019";
 		$archivo = str_replace("#TEXTO_FOOTER#", $foot, $archivo);
 		// FIN FOOTER //
 

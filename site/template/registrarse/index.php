@@ -876,7 +876,6 @@ function atras2()
 
 function generarAvatar(){
 
-	console.log(linkAvatar);
     $.ajax({
     async:true,
     type: "POST",
@@ -886,7 +885,6 @@ function generarAvatar(){
     },
     success:function(datos) {
         datos = datos.split("|");
-		console.log(datos);
         if (datos[0] == 'OK') {
 			$('[href="#objetivos"]').click();
         } else {
@@ -940,7 +938,7 @@ function actualizarGuardarDatos(id, tipo)
 function precargarObjetivos()
 {								
 	tabla.push("<tr><th>Objetivo</th><th>Fecha de inicio</th><th>Fecha de finalización</th><th></th></tr>");
-	$('#tabla').append("<tr><td class='text-center'>Objetivo</><th class='text-center'>Fecha de inicio</th><th class='text-center'>Fecha de finalización</th><th></th></tr>");						
+	$('#tabla').append("<tr><th class='text-center'>Objetivo</th><th class='text-center'>Fecha de inicio</th><th class='text-center'>Fecha de finalización</th><th></th></tr>");						
 }
 
 precargarObjetivos();
@@ -979,7 +977,6 @@ function agregarObjetivo()
 			
 			tabla.push(lineas);
 			idTabla.push($('#selector_objetivo').val());
-			console.log(lineas);
 			$('#tabla').append(lineas);
 			$('#selector_objetivo').val(0);	
 		}
@@ -1031,30 +1028,15 @@ function rearmarTabla()
 }
 
 function guardar() {
-/*let timerInterval;
 Swal.fire({
   title: 'Enviando mail',
-  html: 'Recuerde chequear su mail para activar su cuenta.',
-  timer: 8000,
-  timerProgressBar: true,
-  onBeforeOpen: () => {
-    Swal.showLoading()
-    timerInterval = setInterval(() => {
-      Swal.getContent().querySelector('b')
-        .textContent = Swal.getTimerLeft()
-    }, 100)
-  },
-  onClose: () => {
-    clearInterval(timerInterval)
-  }
-}).then((result) => {
-  if (
-    result.dismiss === Swal.DismissReason.timer
-  ) {
-  }
-})
-*/
+  text: 'Recuerde chequear su mail para activar su cuenta.',
+  icon: 'info',
+  showCloseButton: false,
+  showConfirmButton: false,
+  showCancelButton: false
 
+})
 	$.ajax({
 		async:true,
 		type: "POST",
@@ -1065,8 +1047,10 @@ Swal.fire({
 		success:function(datos) {
 			datos = datos.split("|");
 			if (datos[0] == 'OK') {
+				Swal.close();
 				$('[href="#fin"]').click();
 			} else {
+				Swal.close();
 				$('#error').html(datos[1]);
 				location.hash = 'error';
 			}
