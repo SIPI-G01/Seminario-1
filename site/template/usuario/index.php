@@ -89,13 +89,6 @@
                 <li class="list-group-item text-right"><span class="pull-left"><strong>Dislikes</strong></span><?php echo $cantDislikes ?></li>  
                 <li class="list-group-item text-right"><span class="pull-left"><strong>Publicaciones</strong></span><?php echo $cantPubli ?></li>            <!--<li class="list-group-item text-right"><span class="pull-left"><strong>Seguidores</strong></span> 78</li>-->
             </ul> 
-               
-          <!--<div class="panel panel-default">
-            <div class="panel-heading">Redes Sociales</div>
-            <div class="panel-body">
-            	<i class="fab fa-facebook fa-2x"></i> <i class="fab fa-github fa-2x"></i> <i class="fab fa-twitter fa-2x"></i> <i class="fab fa-pinterest fa-2x"></i> <i class="fab fa-google-plus fa-2x"></i>
-            </div>
-          </div>-->
           
         </div><!--/col-3-->
     	<div class="col-md-9"> 
@@ -258,22 +251,6 @@
                
                 
             </div><!--/tab-pane-->
-
-            <!-- <div class="tab-pane" id="profile">
-                    <ul class="nav nav-tabs" style="margin-bottom: 20px;">
-                        <li class="active"><a data-toggle="tab" href="#data">Mis datos</a></li>
-                        <li><a data-toggle="tab" href="#password">Cambiar Contraseña</a></li>
-                        <li><a data-toggle="tab" href="#avatar">Editar Avatar</a></li>
-                        <li><a data-toggle="tab" href="#eliminar">Eliminar Mi Cuenta</a></li>
-                    </ul>
-            </div> -->
-
-            
-
-
-
-
-
           </div><!--/tab-content-->
 
         </div><!--/col-9-->

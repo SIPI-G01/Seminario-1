@@ -75,12 +75,6 @@ if($usuario->archivo != null && $usuario->archivo != '')
 <div class="container">
     <div class="row">
 		<div class="col-md-3">
-		     <!-- <div class="list-group " id="list-tab" role="tablist">
-                <a href="#data" class="list-group-item list-group-item-action">Mis Datos</a>
-                <a href="#password" class="list-group-item list-group-item-action">Cambiar Contraseña</a>
-                <a href="#" class="list-group-item list-group-item-action">Editar Avatar</a>
-                <a href="#" class="list-group-item list-group-item-action">Eliminar Cuenta</a>
-            </div>  -->
             <div class="list-group" id="list-tab" role="tablist">
                 <a class="list-group-item list-group-item-primary list-group-item-action active" id="list-data-list" data-toggle="list" href="#data" role="tab" aria-controls="mis-datos">Mis Datos</a>
                 <a class="list-group-item list-group-item-primary list-group-item-action" id="list-password-list" data-toggle="list" href="#password" role="tab" aria-controls="cambiar-contrasena">Cambiar Contraseña</a>
