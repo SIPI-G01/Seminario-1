@@ -63,13 +63,13 @@ else
 		}else { ?>
 			<div class="col-md-12">
 				<div class="row">
-					<div class="col-md-6" style="text-align:left;">
+							<div class="form-control col-md-6" style="text-align: left; color: black; border: none !important; box-shadow: none !important;">
 						<p><?php echo $view->pags;?></p>
 					</div>
 						
 					<div class="col-md-6 ordenar">
 						<div class="row">
-							<div class="col-md-6" style="text-align: right; color: black;">
+							<div class="form-control col-md-6" style="text-align: right; color: black; border: none !important; box-shadow: none !important;">
 								<span>Ordenar por: </span>
 							</div>					
 							<div class="col-md-6">
