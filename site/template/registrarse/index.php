@@ -543,18 +543,13 @@ $link = 'https://avataaars.io/?avatarStyle=Circle&topType=NoHair&accessoriesType
 								<div class="form-group row">
 									<label class="col-sm-2 control-label">Objetivo/s *</label>
 									<div class="col-md-10 row">
-										<div class="col-sm-10">
-											<select class="form-control" id="selector_objetivo" name="selector_objetivo">	
+										<div class="col-sm-12">
+											<select class="form-control" id="selector_objetivo" name="selector_objetivo"  onChange="javascript:agregarObjetivo();">	
 												<option value="0" selected disabled>Seleccione un objetivo...</option>																				
 												<?php foreach($view->objetivos as $objetivo){ ?>
 												<option value="<?php echo $objetivo->id; ?>"><?php echo $objetivo->nombre; ?></option>									
 												<?php } ?>
 											</select>
-										</div>
-										<div class="col-md-2">
-											<button type="button" onclick="javascript:agregarObjetivo();" class="btn btn-animate btn-animate-side btn-success">
-												<span><i class="icon fa fa-plus" aria-hidden="true"></i> Agregar</span>
-											</button>									
 										</div>
 										<div class="col-md-12" style="margin-top:25px;">
 											<!--TABLA-->
