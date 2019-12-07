@@ -301,7 +301,7 @@ if($usuario->archivo != null && $usuario->archivo != '')
 					  <div class="card-footer">
 						<small class="text-muted float-left"><i class="fas fa-thumbs-up"></i> Likes: <?php echo sizeof($pubTop->getLikes());?></small>
 						<small class="text-muted float-right"><i class="fas fa-thumbs-down"></i> Dislikes: <?php echo sizeof($pubTop->getDislikes());?></small>
-						<?php if(Utiles::obtenerIdUsuarioLogueado() ==  $usuario->id){ ?>
+						<?php if(Utiles::obtenerIdUsuarioLogueado() ==  $pubTop->getUsuario()->id){ ?>
 						  <div class="row-center" style="text-align:center;">
 							<button id="editarPublicacion" style="margin-top:10px;" onClick="editarPublicacion('<?php echo $pubTop->alias; ?>')" class="btn btn-info"><i class="fa fa-pencil"></i> Editar publicación</button>
 							<button id="eliminarPublicacion" style="margin-top:5px" onClick="eliminarPublicacion('<?php echo $pubTop->alias; ?>')" class="btn btn-danger"><i class="fa fa-trash"></i> Eliminar publicacion</button>
