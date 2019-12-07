@@ -59,6 +59,9 @@
         ?>
           <div class="col-lg-4 col-md-6 mb-4">
             <div class="card h-100">
+			  <?php if($publicacion->estado == 2){ ?>
+				   <div class="ribbon"><span>BORRADOR</span></div>
+			  <?php } ?>
               <a href="#">
                 <div id="carouselExampleIndicators_<?php echo $publicacion->id; ?>" class="carousel slide my-4" data-ride="carousel">
                     <ol class="carousel-indicators">
@@ -73,7 +76,7 @@
                       ?>
                     </ol>
                     <div class="carousel-inner" role="listbox">
-                      <?php  
+					  <?php  
                         $i=0;
                         foreach($publicacion->getImagenes() as $imagen){
                       ?>
@@ -139,14 +142,20 @@
         <?php 
           $publicaciones = $usuario->getPublicaciones();
           foreach($publicaciones as $publicacion){
-            $duracion = '';
-            if($publicacion->tiempo != null)
-            {
-              $duracion .= ' (Duración: ' . $publicacion->tiempo . ' ' . $publicacion->getUnidadTiempo() . ')';
-            }
-        ?>
+			if($publicacion->categoria == 1)
+			{
+				$duracion = '';
+				if($publicacion->tiempo != null)
+				{
+				  $duracion .= ' (Duración: ' . $publicacion->tiempo . ' ' . $publicacion->getUnidadTiempo() . ')';
+				}
+		?>
           <div class="col-lg-4 col-md-6 mb-4">
             <div class="card h-100">
+			  <?php if($publicacion->estado == 2){ ?>
+				   <div class="ribbon"><span>BORRADOR</span></div>
+			  <?php } ?>
+			
               <a href="#">
                 <div id="carouselExampleIndicators_<?php echo $publicacion->id; ?>" class="carousel slide my-4" data-ride="carousel">
                     <ol class="carousel-indicators">
@@ -216,6 +225,7 @@
           </div>
 
           <?php
+			}
             }
           ?>
 
@@ -236,6 +246,10 @@
         ?>
           <div class="col-lg-4 col-md-6 mb-4">
             <div class="card h-100">
+			  <?php if($publicacion->estado == 2){ ?>
+				   <div class="ribbon"><span>BORRADOR</span></div>
+			  <?php } ?>
+			
               <a href="#">
                 <div id="carouselExampleIndicators_<?php echo $publicacion->id; ?>" class="carousel slide my-4" data-ride="carousel">
                       <ol class="carousel-indicators">
