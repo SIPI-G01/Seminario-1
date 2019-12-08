@@ -389,6 +389,11 @@ h2{
   float: left;
 }
 
+a{
+  font-family: 'Titillium Web', sans-serif;
+
+}
+
 li a {
   display: block;
   color: #5a595a;
