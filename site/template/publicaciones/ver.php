@@ -139,8 +139,7 @@ foreach($publi->getObjetivos() as $objetivo){
 
 						</div>
 
-						<div class="col-md-3"></div>
-						<div class="col-md-6"> 
+						<div class="col-md-12"> 
 						  <form name="form1" id="frm" action="javascript:void(1);">
 						  <input type="hidden" name="accion" id="accion" value="nuevo"/>
 							<input type="hidden" name="token" id="token" value="<?php echo Utiles::obtenerToken(); ?>"/>
