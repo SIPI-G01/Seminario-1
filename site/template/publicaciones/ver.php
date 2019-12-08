@@ -52,7 +52,7 @@ foreach($publi->getObjetivos() as $objetivo){
                 <?php } ?>
                 <div class="form-group">
                     <div class="col-md-12">
-                        <label><h4><?php echo $usuario->usuario; ?></h4></label><br>					
+                        <label><a href="/usuario/perfil/<?php echo $usuario->alias; ?>" style="color: black !important;"> <h4><?php echo $usuario->usuario; ?></h4></a></label><br>					
                         <label for="mobile"><p>Miembro desde: <?php echo date_format(date_create($usuario->creado_fecha),'d/m/Y'); ?></p></label>
                     </div>
                 </div>
@@ -183,17 +183,19 @@ foreach($publi->getObjetivos() as $objetivo){
 						<div class="row">
 							<div class="col-md-2">
 								<img src="<?php echo($comentario->getUsuario()->imagen);  ?>" alt="" width="60" height="60" class="img img-rounded img-fluid"/>
-								<p class="text-secondary text-center"><?php echo($comentario->fecha);  ?></p>
+								<p class="text-secondary text-center"><?php echo date_format(date_create($comentario->fecha),"d/m/Y H:i:s"); ?></p>
 							</div>
 							<div class="col-md-10">
 								<p>
-								  <a class="float-left" href="#"><strong><?php echo($comentario->getusuario()->usuario); ?></strong></a>
+								  <a class="float-left" href="/usuario/perfil/<?php echo $comentario->getusuario()->alias; ?>"><strong><?php echo($comentario->getusuario()->usuario); ?></strong></a>
 
 							   </p>
 							   <div class="clearfix"></div>
 								<p style="color:black;text-align:left"><?php echo $comentario->texto; ?></p>
 								<p>
-									<button class="float-right btn btn-info ml-2" onclick="responder(<?php echo $comentario->id ?>);"> <i class="fa fa-reply"></i> Responder</button>
+									<?php if(Utiles::obtenerUsuarioLogueado() != null){ ?>
+										<button class="float-right btn btn-info ml-2" onclick="responder(<?php echo $comentario->id ?>);"> <i class="fa fa-reply"></i> Responder</button>
+   									<?php } ?>
 							   </p>
 							</div>
 					  </div>
@@ -224,10 +226,10 @@ foreach($publi->getObjetivos() as $objetivo){
 									<div class="row">
 										<div class="col-md-2">
 											<img src="<?php echo($respuesta->getUsuario()->imagen);  ?>" width="60" height="60" class="img img-rounded img-fluid"/>
-											<p class="text-secondary text-center"><?php echo($respuesta->fecha);  ?></p>
+											<p class="text-secondary text-center"><?php echo date_format(date_create($comentario->fecha),"d/m/Y H:i:s");  ?></p>
 										</div>
 										<div class="col-md-10 text-left respuestaComentario" style="color:black;">
-											<p><a href="#"><strong><?php echo($respuesta->getusuario()->usuario); ?></strong></a></p>
+											<p><a href="/usuario/perfil/<?php echo $respuesta->getusuario()->alias; ?>"><strong><?php echo($respuesta->getusuario()->usuario); ?></strong></a></p>
 											<p><?php echo $respuesta->texto; ?></p>
 											<p>
 										   </p>
