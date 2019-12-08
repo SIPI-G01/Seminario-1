@@ -170,7 +170,7 @@
                 ?>
                 <div class="col-lg-4 col-md-6 mb-4">
 					<div class="card h-100">
-					  <a href="#">
+					  <a href="/publicaciones/ver/<?php echo $pubTop->alias; ?>">
 						<div id="carouselExampleIndicators_<?php echo $pubTop->id; ?>" class="carousel slide my-4" data-ride="carousel">
 							<ol class="carousel-indicators">
 							  <?php  
