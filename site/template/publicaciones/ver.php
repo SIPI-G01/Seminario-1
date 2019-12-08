@@ -46,8 +46,10 @@ foreach($publi->getObjetivos() as $objetivo){
 		<div class="col-md-3 "><!--left col-->             
             <div style="padding-bottom: 10px;" class="text-center container-ver">
                 <?php if($usuario->archivo != null) { ?>
-                    <img style="width: 50%;" src="<?php echo $usuario->archivo ?>"  alt="avatar">
-                <?php } else { ?>
+                    <a href="/usuario/perfil/<?php echo $usuario->alias; ?>" style="color: black !important;"> 
+						<img style="width: 50%;" src="<?php echo $usuario->archivo ?>"  alt="avatar">
+					</a> 
+				<?php } else { ?>
                     <img src="/site/images/faceless.jpg" alt="...">
                 <?php } ?>
                 <div class="form-group">
@@ -181,7 +183,9 @@ foreach($publi->getObjetivos() as $objetivo){
 					<div class="card-body" style="color:black">
 						<div class="row">
 							<div class="col-md-2">
-								<img src="<?php echo($comentario->getUsuario()->imagen);  ?>" alt="" width="60" height="60" class="img img-rounded img-fluid"/>
+							    <a href="/usuario/perfil/<?php echo $comentario->getUsuario()->alias; ?>" style="color: black !important;"> 
+									<img src="<?php echo($comentario->getUsuario()->imagen);  ?>" alt="" width="60" height="60" class="img img-rounded img-fluid"/>
+								</a>
 								<p class="text-secondary text-center"><?php echo date_format(date_create($comentario->fecha),"d/m/Y H:i:s"); ?></p>
 							</div>
 							<div class="col-md-10">
@@ -224,7 +228,9 @@ foreach($publi->getObjetivos() as $objetivo){
 								<div class="card-body">
 									<div class="row">
 										<div class="col-md-2">
-											<img src="<?php echo($respuesta->getUsuario()->imagen);  ?>" width="60" height="60" class="img img-rounded img-fluid"/>
+										    <a href="/usuario/perfil/<?php echo $respuesta->getUsuario()->alias; ?>" style="color: black !important;"> 
+												<img src="<?php echo($respuesta->getUsuario()->imagen);  ?>" width="60" height="60" class="img img-rounded img-fluid"/>
+											</a>
 											<p class="text-secondary text-center"><?php echo date_format(date_create($comentario->fecha),"d/m/Y H:i:s");  ?></p>
 										</div>
 										<div class="col-md-10 text-left respuestaComentario" style="color:black;">

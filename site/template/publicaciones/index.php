@@ -119,7 +119,7 @@ else
 							</div>
 						</div>					
 						<div class="card-footer">
-							<small class="text-muted">Creado por <?php echo $publicacion->getUsuario()->usuario; ?> el <?php echo date_format(date_create($publicacion->fecha),"d/m/Y"); ?> a las  <?php echo date_format(date_create($publicacion->fecha),"H:i"); ?><?php echo ($publicacion->fecha_modificado != null ? '. Modificado por última vez el ' . date_format(date_create($publicacion->fecha_modificado),"d/m/Y") . ' a las ' . date_format(date_create($publicacion->fecha_modificado),"H:i") : '')?></small>
+							<small class="text-muted">Creado por <a href="/usuario/perfil/<?php echo $publicacion->getUsuario()->alias; ?>" style="color: black !important;"><?php echo $publicacion->getUsuario()->usuario; ?></a> el <?php echo date_format(date_create($publicacion->fecha),"d/m/Y"); ?> a las  <?php echo date_format(date_create($publicacion->fecha),"H:i"); ?><?php echo ($publicacion->fecha_modificado != null ? '. Modificado por última vez el ' . date_format(date_create($publicacion->fecha_modificado),"d/m/Y") . ' a las ' . date_format(date_create($publicacion->fecha_modificado),"H:i") : '')?></small>
 						</div>
 					</div>
 				</div>

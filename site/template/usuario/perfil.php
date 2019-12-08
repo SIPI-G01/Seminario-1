@@ -62,7 +62,7 @@
 			  <?php if($publicacion->estado == 2){ ?>
 				   <div class="ribbon"><span>BORRADOR</span></div>
 			  <?php } ?>
-              <a href="#">
+              <a href="/publicaciones/ver/<?php echo $publicacion->alias; ?>">
                 <div id="carouselExampleIndicators_<?php echo $publicacion->id; ?>" class="carousel slide my-4" data-ride="carousel">
                     <ol class="carousel-indicators">
                       <?php  
@@ -156,7 +156,7 @@
 				   <div class="ribbon"><span>BORRADOR</span></div>
 			  <?php } ?>
 			
-              <a href="#">
+              <a href="/publicaciones/ver/<?php echo $publicacion->alias; ?>">
                 <div id="carouselExampleIndicators_<?php echo $publicacion->id; ?>" class="carousel slide my-4" data-ride="carousel">
                     <ol class="carousel-indicators">
                       <?php  
@@ -250,7 +250,7 @@
 				   <div class="ribbon"><span>BORRADOR</span></div>
 			  <?php } ?>
 			
-              <a href="#">
+              <a href="/publicaciones/ver/<?php echo $publicacion->alias; ?>">
                 <div id="carouselExampleIndicators_<?php echo $publicacion->id; ?>" class="carousel slide my-4" data-ride="carousel">
                       <ol class="carousel-indicators">
                       <?php  
@@ -288,7 +288,7 @@
               </a>
               <div class="card-body">
                 <h3 class="card-title">
-                  <a href="#"><?php echo $publicacion->titulo . $duracion; ?></a>
+                  <a href="/publicaciones/ver/<?php echo $publicacion->alias; ?>"><?php echo $publicacion->titulo . $duracion; ?></a>
                 </h3>
                 <?php 
                   foreach($publicacion->getObjetivos() as $objetivo){
