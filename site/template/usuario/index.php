@@ -72,7 +72,7 @@
           
           
             <ul class="list-group">
-                <li class="list-group-item text-muted">Actividad <i class="fa fa-dashboard fa-1x"></i></li>
+                <p class="list-group-item text-muted">Actividad <i class="fa fa-dashboard fa-1x"></i></li>
                 <!--<li class="list-group-item text-right"><span class="pull-left"><strong>Shares</strong></span> 125</li>-->
                 <?php 
                     
@@ -85,9 +85,9 @@
                         $cantDislikes += sizeof($publicacion->getDislikes());
                     }
                 ?>
-                <li class="list-group-item text-right"><span class="pull-left"><strong>Likes</strong></span><?php echo $cantLikes ?></li>
-                <li class="list-group-item text-right"><span class="pull-left"><strong>Dislikes</strong></span><?php echo $cantDislikes ?></li>  
-                <li class="list-group-item text-right"><span class="pull-left"><strong>Publicaciones</strong></span><?php echo $cantPubli ?></li>            <!--<li class="list-group-item text-right"><span class="pull-left"><strong>Seguidores</strong></span> 78</li>-->
+                <p class="list-group-item text-right"><span class="pull-left"><strong>Likes</strong></span><?php echo $cantLikes ?></li>
+                <p class="list-group-item text-right"><span class="pull-left"><strong>Dislikes</strong></span><?php echo $cantDislikes ?></li>  
+                <p class="list-group-item text-right"><span class="pull-left"><strong>Publicaciones</strong></span><?php echo $cantPubli ?></li>            <!--<li class="list-group-item text-right"><span class="pull-left"><strong>Seguidores</strong></span> 78</li>-->
             </ul> 
           
         </div><!--/col-3-->

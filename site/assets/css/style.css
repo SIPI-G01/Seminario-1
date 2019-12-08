@@ -45,6 +45,7 @@ th
 li {
  display: block;
  transition-duration: 0.5s;
+ font-family: 'Titillium Web', sans-serif !important;
 }
 
 li:hover {
@@ -128,13 +129,11 @@ hr
 	margin-bottom: 5px;
 }
 
-tr
-{
-	border: 1px solid black;
-}
 table
 {
   width: 100%;
+  border: 1px solid black;
+ 
 }
 
 .avatar img
