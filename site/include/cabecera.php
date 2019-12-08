@@ -43,7 +43,6 @@
     </ul>
 	
 				  <ul id="listOp" class="dropdown" style="display: none; margin-top: -10px; right: 0%; z-index: 999999; position: absolute;" onmouseover="$('#listOp').show();" onmouseout="$('#listOp').hide();">
-					<li><a href="/usuario">Inicio</a></li>
 					<li><a href="/usuario/objetivos">Mis objetivos</a></li>
 					<li><a href="/usuario/perfil/<?php echo Utiles::obtenerUsuarioLogueado()->alias; ?>">Mis publicaciones</a></li>	
 					<li><a href="/usuario/miPerfil/<?php echo Utiles::obtenerUsuarioLogueado()->alias; ?>">Mi perfil</a></li>
