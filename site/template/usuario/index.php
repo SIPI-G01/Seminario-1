@@ -212,13 +212,18 @@
 					  </a>
 					  <div class="card-body">
 						<h3 class="card-title">
-						  <a href="/publicaciones/ver/<?php echo $pubTop->alias; ?>"><?php echo $pubTop->titulo . $duracion; ?></a>
+						  <a href="/publicaciones/ver/<?php echo $pubTop->alias; ?>"><?php echo $pubTop->titulo; ?></a>
+						  <br>
+						  <span><?php if($pubTop->tiempo != null){ ?><i class="far fa-clock"></i> <?php echo $pubTop->tiempo . ' ' . $pubTop->getUnidadTiempo(); ?><?php } ?></span>
 						</h3>
 						<?php 
-						  foreach($pubTop->getObjetivos() as $objetivo){
+							$objetivos = '';
+							foreach($pubTop->getObjetivos() as $objetivo){			
+								
+								$objetivos .= '<span style="color:' . ($objetivo->getObjetivo()->color_texto != null ? $objetivo->getObjetivo()->color_texto : 'white') .'; background-color: ' . ($objetivo->getObjetivo()->color_fondo != null ? $objetivo->getObjetivo()->color_fondo : '#4da4da') .'; border-radius: 10px; padding: 2px; margin-top: 100px">' . $objetivo->getObjetivo()->nombre . '</span><br> ';
+							}
 						?>
-						<h5><?php //echo $objetivo->getObjetivo()->nombre ?></h5>
-					   <?php } ?>
+						<?php echo $objetivos ?>
 						<p style="color:black" class="card-text" id="<?php echo 'desc-ambas'.$pubTop->id ?>">
 						<?php 
 						  if(strlen($pubTop->descripcion )>100)
