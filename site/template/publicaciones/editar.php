@@ -304,7 +304,7 @@ function precargarObjetivosYTiempos()
 	//var tiempos = <?php //echo json_encode($view->publicacion->getTiempos()); ?>;
 	
 	objetivos.forEach(function(objetivo) {
-		objetivosSeleccionados.push(objetivo);
+		objetivosSeleccionados.push({id: objetivo.id});
 		var lineas = "<tr><td style='font-weight: bold;'>" + objetivo.nombre + "</td><td class='text-right'><button onclick='javascript:eliminarObjetivo("+ objetivo.id + ");' type='button' class='btn btn-danger btn-sm mr5'><i class='fa fa-trash'></i> Eliminar</button></td></tr>";
 		//var tiempos = traerTiempos(objetivo.id);
 		/*if(tiempos != null)
@@ -399,7 +399,7 @@ function agregarObjetivo()
 				objetivos.forEach(function(objetivo) {
 					if(objetivo.id == $('#selector_objetivo_receta').val())
 					{
-						objetivosSeleccionados.push(objetivo);
+						objetivosSeleccionados.push({id: objetivo.id});
 						lineas += "<tr><td style='font-weight: bold;'>" + objetivo.nombre + "</td><td class='text-right'><button onclick='javascript:eliminarObjetivo("+ objetivo.id + ");' type='button' class='btn btn-danger btn-sm mr5'><i class='fa fa-trash'></i> Eliminar</button></td></tr>";
 						/*var tiempos = traerTiempos(objetivo.id);
 						if(tiempos != null)
@@ -450,7 +450,7 @@ function agregarObjetivo()
 				objetivos.forEach(function(objetivo) {
 					if(objetivo.id == $('#selector_objetivo_actividad').val())
 					{
-						objetivosSeleccionados.push(objetivo);
+						objetivosSeleccionados.push({id: objetivo.id});
 						lineas += "<tr><td style='font-weight: bold;'>" + objetivo.nombre + "</td><td class='text-right'><button onclick='javascript:eliminarObjetivo("+ objetivo.id + ");' type='button' class='btn btn-danger btn-sm mr5'><i class='fa fa-trash'></i> Eliminar</button></td></tr>";
 						/*var tiempos = traerTiempos(objetivo.id);
 						if(tiempos != null)
