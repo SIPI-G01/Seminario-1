@@ -74,7 +74,6 @@ if (isset($token) && $token == Utiles::obtenerToken()) {
 			$errores = '<strong>Ocurrieron los siguientes errores:</strong>';
 
 			$objetivos = json_decode($_POST['objetivos']);
-
 			if (!isset($objetivos) || $objetivos == ''  || count($objetivos) == 0) {
 				$errores .= '<p>- Debe seleccionar al menos un objetivo.</p>';
 				$valido = false;

@@ -969,7 +969,7 @@ function agregarObjetivo()
 			objetivosListado.forEach(function(objetivo) {
 				if(objetivo.id == $('#selector_objetivo').val())
 				{
-					datosGuardados.push({id: objetivo.id, nombre: objetivo.nombre, fecha_inicio: null, fecha_fin: null});
+					datosGuardados.push({id: objetivo.id, fecha_inicio: null, fecha_fin: null});
 					objetivosSeleccionados.push(objetivo);
 					lineas = "<tr><td class='text-center' style='font-weight: bold;'>" + objetivo.nombre + "</td><td><input onchange='actualizarGuardarDatos(" + objetivo.id + ", 1)' type='date' name='fecha_inicio_"+ objetivo.id +"' id='fecha_inicio_"+ objetivo.id +"' value='" + objetivo.fecha_inicio + "'/></td><td><input onchange='actualizarGuardarDatos(" + objetivo.id + ", 2)' type='date' name='fecha_fin_"+ objetivo.id +"' id='fecha_fin_"+ objetivo.id +"' value='" + objetivo.fecha_fin + "'/></td><td class='text-right'><button onclick='javascript:eliminarObjetivo("+ objetivo.id + ");' type='button' class='btn btn-danger btn-sm mr5'><i class='fa fa-trash'></i> Eliminar</button></td></tr>";
 				}
