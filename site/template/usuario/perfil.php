@@ -109,7 +109,7 @@
                   $objetivos = '';
                   foreach($publicacion->getObjetivos() as $objetivo){			
                     
-                    $objetivos .= '<div class="col-md-12" style="margin: 5px 0px;"><span style="color:' . ($objetivo->getObjetivo()->color_texto != null ? $objetivo->getObjetivo()->color_texto : 'white') .'; background-color: ' . ($objetivo->getObjetivo()->color_fondo != null ? $objetivo->getObjetivo()->color_fondo : '#4da4da') .'; border-radius: 10px; padding: 2px; margin-top: 100px">' . $objetivo->getObjetivo()->nombre . '</span></div> ';
+                    $objetivos .= '<div class="col-md-12" style="margin: 5px 0px;"><span style="color:' . ($objetivo->getObjetivo()->color_texto != null ? $objetivo->getObjetivo()->color_texto : 'white') .'; background-color: ' . ($objetivo->getObjetivo()->color_fondo != null ? $objetivo->getObjetivo()->color_fondo : '#4da4da') .'; border-radius: 10px; padding: 2px;">' . $objetivo->getObjetivo()->nombre . '</span></div> ';
                   }
                 ?>
                 <?php echo $objetivos ?>
