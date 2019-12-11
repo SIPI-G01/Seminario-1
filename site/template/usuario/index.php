@@ -402,4 +402,10 @@ function buscar()
 	}
 
 }
+
+function verMas(texto, id_publi)
+{
+  var elemento = document.getElementById("desc-"+id_publi);
+  elemento.innerHTML = texto;
+}
 </script>
