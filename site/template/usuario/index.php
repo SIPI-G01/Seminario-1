@@ -213,14 +213,15 @@
 					  <div class="card-body">
 						<h3 class="card-title">
 						  <a href="/publicaciones/ver/<?php echo $pubTop->alias; ?>"><?php echo $pubTop->titulo; ?></a>
-						  <br>
-						  <span><?php if($pubTop->tiempo != null){ ?><i class="far fa-clock"></i> <?php echo $pubTop->tiempo . ' ' . $pubTop->getUnidadTiempo(); ?><?php } ?></span>
+						  <div class="col-md-12" style="margin: 5px 0px;">
+							<span><?php if($pubTop->tiempo != null){ ?><i class="far fa-clock"></i> <?php echo $pubTop->tiempo . ' ' . $pubTop->getUnidadTiempo(); ?><?php } ?></span>
+						  </div>
 						</h3>
 						<?php 
 							$objetivos = '';
 							foreach($pubTop->getObjetivos() as $objetivo){			
 								
-								$objetivos .= '<span style="color:' . ($objetivo->getObjetivo()->color_texto != null ? $objetivo->getObjetivo()->color_texto : 'white') .'; background-color: ' . ($objetivo->getObjetivo()->color_fondo != null ? $objetivo->getObjetivo()->color_fondo : '#4da4da') .'; border-radius: 10px; padding: 2px; margin-top: 100px">' . $objetivo->getObjetivo()->nombre . '</span><br> ';
+								$objetivos .= '<div class="col-md-12" style="margin: 5px 0px;"><span style="color:' . ($objetivo->getObjetivo()->color_texto != null ? $objetivo->getObjetivo()->color_texto : 'white') .'; background-color: ' . ($objetivo->getObjetivo()->color_fondo != null ? $objetivo->getObjetivo()->color_fondo : '#4da4da') .'; border-radius: 10px; padding: 2px;">' . $objetivo->getObjetivo()->nombre . '</span></div> ';
 							}
 						?>
 						<?php echo $objetivos ?>
@@ -230,14 +231,14 @@
 						  {
 							$pubTop->descripcion = substr($pubTop->descripcion, 0, 100) . '... <a href="javascript:void(0)" onclick="verMas('."'".$pubTop->descripcion."'".', '."'".'ambas'.$pubTop->id."'".');">Ver mas</a>';
 						  }
-						  echo $pubTop->descripcion ;
+						  echo $pubTop->descripcion;
 						?>
 						</p>
 					  </div>
 					  <div class="card-footer">
 						<small class="text-muted float-left"><i class="fas fa-thumbs-up"></i> Likes: <?php echo sizeof($pubTop->getLikes());?></small>
 						<small class="text-muted float-right"><i class="fas fa-thumbs-down"></i> Dislikes: <?php echo sizeof($pubTop->getDislikes());?></small>
-						<?php if(Utiles::obtenerIdUsuarioLogueado() ==  $usuario->id){ ?>
+						<?php if(Utiles::obtenerIdUsuarioLogueado() ==  $pubTop->getUsuario()->id){ ?>
 						  <div class="row-center" style="text-align:center;">
 							<button id="editarPublicacion" style="margin-top:10px;" onClick="editarPublicacion('<?php echo $pubTop->alias; ?>')" class="btn btn-info"><i class="fa fa-pencil"></i> Editar publicación</button>
 							<button id="eliminarPublicacion" style="margin-top:5px" onClick="eliminarPublicacion('<?php echo $pubTop->alias; ?>')" class="btn btn-danger"><i class="fa fa-trash"></i> Eliminar publicacion</button>

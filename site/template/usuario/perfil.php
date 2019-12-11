@@ -101,14 +101,15 @@
               <div class="card-body">
                 <h3 class="card-title">
                   <a href="/publicaciones/ver/<?php echo $publicacion->alias; ?>"><?php echo $publicacion->titulo; ?></a>
-                  <br>
-                  <span><?php if($publicacion->tiempo != null){ ?><i class="far fa-clock"></i> <?php echo $publicacion->tiempo . ' ' . $publicacion->getUnidadTiempo(); ?><?php } ?></span>
+				  <div class="col-md-12" style="margin: 5px 0px;">
+					<span><?php if($publicacion->tiempo != null){ ?><i class="far fa-clock"></i> <?php echo $publicacion->tiempo . ' ' . $publicacion->getUnidadTiempo(); ?><?php } ?></span>
+				  </div>
                 </h3>
                 <?php 
                   $objetivos = '';
                   foreach($publicacion->getObjetivos() as $objetivo){			
                     
-                    $objetivos .= '<span style="color:' . ($objetivo->getObjetivo()->color_texto != null ? $objetivo->getObjetivo()->color_texto : 'white') .'; background-color: ' . ($objetivo->getObjetivo()->color_fondo != null ? $objetivo->getObjetivo()->color_fondo : '#4da4da') .'; border-radius: 10px; padding: 2px; margin-top: 100px">' . $objetivo->getObjetivo()->nombre . '</span><br> ';
+                    $objetivos .= '<div class="col-md-12" style="margin: 5px 0px;"><span style="color:' . ($objetivo->getObjetivo()->color_texto != null ? $objetivo->getObjetivo()->color_texto : 'white') .'; background-color: ' . ($objetivo->getObjetivo()->color_fondo != null ? $objetivo->getObjetivo()->color_fondo : '#4da4da') .'; border-radius: 10px; padding: 2px;">' . $objetivo->getObjetivo()->nombre . '</span></div> ';
                   }
                 ?>
                 <?php echo $objetivos ?>
